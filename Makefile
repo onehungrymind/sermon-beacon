@@ -21,3 +21,9 @@ start: ## Start the containers
 
 start-clean: docker-clean start ## Clean the docker containers then start
 
+start-local-admin: ## Start admin app locally
+	@(cd client && yarn start --project=admin-portal)
+
+start-local-user: ## Start user app locally
+	@(cd client && yarn start --project=user-portal)
+

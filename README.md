@@ -16,6 +16,8 @@ Before you begin you need to make sure you have everything needed to get the pro
 
 ## Getting Started
 
+> Note: We are still currently working out some minor details. For now, you may get started on the UI by just manually running the frontend app with `make start-local-admin` or `make start-local-user` depending on the app you want to work on.
+
 Once all prerequisites are installed, run `make init` to download other necessary tools for development on MacOS.
 
 If the AWS CLI has never been installed on your machine before, make sure to [configure](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#configure-awscli) it.
