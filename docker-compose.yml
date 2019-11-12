@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  gql-engine:
+    image: hasura/graphql-engine:v1.0.0-beta.9.cli-migrations
+    volumes:
+      - ./server/migrations:/hasura-migrations
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    restart: always
+    links:
+      - postgres:postgres
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/sermonbeacon
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: sermonbeacon
+      POSTGRES_USER: postgres
+    ports:
+      - 5432:5432
+
+volumes:
+  db_data:
