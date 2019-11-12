@@ -1,0 +1,48 @@
+{
+  "npmScope": "app",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "user-portal-e2e": {
+      "tags": []
+    },
+    "user-portal": {
+      "tags": []
+    },
+    "admin-portal-e2e": {
+      "tags": []
+    },
+    "admin-portal": {
+      "tags": []
+    },
+    "ui-toolbar": {
+      "tags": []
+    },
+    "material": {
+      "tags": []
+    },
+    "searchbar": {
+      "tags": []
+    },
+    "core-data": {
+      "tags": []
+    },
+    "core-state": {
+      "tags": []
+    },
+    "sermon-list": {
+      "tags": []
+    },
+    "sermon-details": {
+      "tags": []
+    },
+    "ui-modal": {
+      "tags": []
+    }
+  }
+}
