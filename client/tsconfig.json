@@ -23,7 +23,8 @@
       "@app/core-state": ["libs/core-state/src/index.ts"],
       "@app/sermon-list": ["libs/sermon-list/src/index.ts"],
       "@app/sermon-details": ["libs/sermon-details/src/index.ts"],
-      "@app/ui-modal": ["libs/ui-modal/src/index.ts"]
+      "@app/ui-modal": ["libs/ui-modal/src/index.ts"],
+      "@app/sermons": ["libs/sermons/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

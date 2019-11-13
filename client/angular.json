@@ -25,7 +25,10 @@
               "apps/user-portal/src/favicon.ico",
               "apps/user-portal/src/assets"
             ],
-            "styles": ["apps/user-portal/src/styles.scss", "libs/theme/theme.scss"],
+            "styles": [
+              "apps/user-portal/src/styles.scss",
+              "libs/theme/theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -148,7 +151,10 @@
               "apps/admin-portal/src/favicon.ico",
               "apps/admin-portal/src/assets"
             ],
-            "styles": ["apps/admin-portal/src/styles.scss", "libs/theme/theme.scss"],
+            "styles": [
+              "apps/admin-portal/src/styles.scss",
+              "libs/theme/theme.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -402,68 +408,6 @@
         }
       }
     },
-    "sermon-list": {
-      "projectType": "library",
-      "root": "libs/sermon-list",
-      "sourceRoot": "libs/sermon-list/src",
-      "prefix": "app",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/sermon-list/tsconfig.lib.json",
-              "libs/sermon-list/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/sermon-list/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/sermon-list/jest.config.js",
-            "tsConfig": "libs/sermon-list/tsconfig.spec.json",
-            "setupFile": "libs/sermon-list/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
-    "sermon-details": {
-      "projectType": "library",
-      "root": "libs/sermon-details",
-      "sourceRoot": "libs/sermon-details/src",
-      "prefix": "app",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/sermon-details/tsconfig.lib.json",
-              "libs/sermon-details/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/sermon-details/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/sermon-details/jest.config.js",
-            "tsConfig": "libs/sermon-details/tsconfig.spec.json",
-            "setupFile": "libs/sermon-details/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "ui-modal": {
       "projectType": "library",
       "root": "libs/ui-modal",
@@ -486,6 +430,37 @@
             "jestConfig": "libs/ui-modal/jest.config.js",
             "tsConfig": "libs/ui-modal/tsconfig.spec.json",
             "setupFile": "libs/ui-modal/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "sermons": {
+      "projectType": "library",
+      "root": "libs/sermons",
+      "sourceRoot": "libs/sermons/src",
+      "prefix": "app",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/sermons/tsconfig.lib.json",
+              "libs/sermons/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/sermons/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/sermons/jest.config.js",
+            "tsConfig": "libs/sermons/tsconfig.spec.json",
+            "setupFile": "libs/sermons/src/test-setup.ts"
           }
         }
       },
