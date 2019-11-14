@@ -1,0 +1,8 @@
+- args:
+    name: speaker
+    table:
+      name: speaker_sermons
+      schema: public
+    using:
+      foreign_key_constraint_on: speaker_id
+  type: create_object_relationship
