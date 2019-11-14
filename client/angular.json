@@ -136,7 +136,7 @@
       },
       "root": "apps/admin-portal",
       "sourceRoot": "apps/admin-portal/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
