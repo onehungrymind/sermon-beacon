@@ -1,0 +1,5 @@
+- args:
+    sql: |-
+      DROP TRIGGER IF EXISTS "set_public_media_updated_at" ON "public"."media";
+      ALTER TABLE "public"."media" DROP COLUMN "updated_at";
+  type: run_sql

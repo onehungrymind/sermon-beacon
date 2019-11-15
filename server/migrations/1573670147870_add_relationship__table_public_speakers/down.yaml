@@ -1,0 +1,6 @@
+- args:
+    relationship: speaker_sermons
+    table:
+      name: speakers
+      schema: public
+  type: drop_relationship
