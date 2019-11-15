@@ -1,0 +1,12 @@
+- args:
+    name: media
+    table:
+      name: sermons
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: sermon_id
+        table:
+          name: media
+          schema: public
+  type: create_array_relationship
