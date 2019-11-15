@@ -1,0 +1,5 @@
+- args:
+    cascade: false
+    sql: |
+      INSERT INTO "public"."media_types" ("name", "description") VALUES('VIDEO', 'Video Format'), ('AUDIO', 'Audio Format')
+  type: run_sql
