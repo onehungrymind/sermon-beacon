@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SermonsComponent, SermonListComponent } from '@app/sermons';
+import { SermonsComponent } from './sermons/sermons.component';
+import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component';
 
 const routes: Routes = [
   { 
     path: '', component: SermonsComponent, children: [
-      { path: ':id', component: SermonListComponent }
+      { path: ':id', component: SermonViewComponent }
     ]
   }
 ];

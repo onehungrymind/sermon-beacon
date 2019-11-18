@@ -4,15 +4,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from '@app/material';
 import { UiModalModule } from '@app/ui-modal';
+import { SermonsModule } from '@app/sermons';
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SermonsModule } from '@app/sermons';
 import { AppRouterModule } from './router.module';
+import { SermonsComponent } from './sermons/sermons.component';
+import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, SermonsModule, AppRouterModule],
+  declarations: [AppComponent, SermonsComponent, SermonViewComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    SermonsModule,
+    MaterialModule,
+    UiModalModule,
+    AppRouterModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

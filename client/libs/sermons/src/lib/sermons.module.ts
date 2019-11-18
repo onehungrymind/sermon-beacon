@@ -6,6 +6,7 @@ import { SermonDetailsComponent } from './sermons/sermon-details/sermon-details.
 
 @NgModule({
   imports: [CommonModule],
+  exports: [SermonListComponent],
   declarations: [
     SermonsComponent,
     SermonListComponent,
