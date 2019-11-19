@@ -1,0 +1,8 @@
+- args:
+    name: media_type
+    table:
+      name: media
+      schema: public
+    using:
+      foreign_key_constraint_on: type
+  type: create_object_relationship
