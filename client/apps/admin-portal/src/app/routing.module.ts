@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { SermonsComponent } from '@app/sermons';
+import { SermonsComponent } from '@sb/sermons';
 import { ManageComponent } from './manage/manage.component';
-import { SearchbarComponent } from '@app/searchbar';
-
 
 const routes: Routes = [
   {
-    path: '',
-    component: SearchbarComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'Sermons',
+    path: 'sermons',
     component: SermonsComponent
   },
   {
-    path: 'Manage',
+    path: 'manage',
     component: ManageComponent
   }
 ];

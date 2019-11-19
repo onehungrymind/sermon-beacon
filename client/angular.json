@@ -10,7 +10,7 @@
       },
       "root": "apps/user-portal",
       "sourceRoot": "apps/user-portal/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -350,7 +350,7 @@
       "projectType": "library",
       "root": "libs/core-data",
       "sourceRoot": "libs/core-data/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -381,7 +381,7 @@
       "projectType": "library",
       "root": "libs/core-state",
       "sourceRoot": "libs/core-state/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -443,7 +443,7 @@
       "projectType": "library",
       "root": "libs/sermons",
       "sourceRoot": "libs/sermons/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

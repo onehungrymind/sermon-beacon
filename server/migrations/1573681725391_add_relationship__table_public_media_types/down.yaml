@@ -1,0 +1,6 @@
+- args:
+    relationship: media
+    table:
+      name: media_types
+      schema: public
+  type: drop_relationship
