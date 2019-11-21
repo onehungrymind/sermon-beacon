@@ -15,6 +15,7 @@
   &--filter-title {
     margin-top: 10px;
     min-width: max-content;
+    color: $text-grey;
   }
 
   &--btn-size {
@@ -38,6 +39,7 @@
       padding: 0px 0px 0px 25px;
       margin-top: 2px;
       display: flex;
+      color: $text-grey;
     }
 
     label {
