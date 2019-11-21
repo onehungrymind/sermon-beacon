@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage.component.scss']
 })
 export class ManageComponent implements OnInit {
-
+  title = 'Sermon Beacon';
   constructor() { }
 
   ngOnInit() {
