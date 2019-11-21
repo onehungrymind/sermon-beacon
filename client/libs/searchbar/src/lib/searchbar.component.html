@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center" class="search-wrapper">
+<div class="d-flex justify-content-center search-wrapper">
   <form class="w-100">
     <mat-form-field floatLabel="never" class="w-100">
       <mat-label>Search...</mat-label>
@@ -15,8 +15,6 @@
         </button>
 
         <mat-menu #menu="matMenu">
-          <!-- <button mat-menu-item *ngFor="let filteredItem of categoryOptions"
-            (click)="selectCustom(filteredItem.name)">Sermon {{filteredItem.name}}</button> -->
           <button mat-menu-item class="d-flex" *ngFor="let filteredItem of categoryOptions"
             (click)="selectCustom(filteredItem.name)">
             Sermon {{filteredItem.name}}
@@ -30,24 +28,3 @@
     </mat-form-field>
   </form>
 </div>
-
-<!-- <div class="d-flex justify-content-end">
-  <mat-label>Search...</mat-label>
-  <input matInput placeholder="Search..." class="search-actions-container--search-bar position-absolute">
-  <div class="position-relative d-flex justify-content-end search-actions-container w-25">
-    <button mat-button [matMenuTriggerFor]="menu" class="cursor-pointer search-actions-container--btn-size p-0">
-      <mat-icon>expand_more</mat-icon>
-    </button>
-    <button mat-button (click)="delete()" class="cursor-pointer search-actions-container--btn-size p-0">
-      <mat-icon >close</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Sermon Title</button>
-      <button mat-menu-item>Sermon Speaker</button>
-      <button mat-menu-item class="d-flex">
-        Sermon Date
-        <mat-icon class="material-icons-outlined pl-1 m-0 search-actions-container--icon-size">calendar_today</mat-icon>
-      </button>
-    </mat-menu>
-  </div>
-</div> -->
