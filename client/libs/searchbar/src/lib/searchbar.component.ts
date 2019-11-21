@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.scss']
 })
+
 export class SearchbarComponent implements OnInit {
   searchMode: string;
   categoryOptions = [
