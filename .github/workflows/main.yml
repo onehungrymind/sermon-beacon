@@ -1,0 +1,22 @@
+name: Deploy Website
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-admin:
+    runs-on: ubuntu-latest
+    name: Deploying to surge
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install surge and fire deployment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8
+      - run: npm install -g surge
+      - run: cd ./client && npm install
+      - run: cd ./client && npm run build --prod
+      - run: cp ./client/dist/apps/admin-portal/index.html ./client/dist/apps/admin-portal/200.html
+      - run: surge ./client/dist/apps/admin-portal/ sermon-beacon-${{ github.actor }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
