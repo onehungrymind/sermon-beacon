@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialModule } from '@app/material';
+import { MaterialModule } from '@sb/material';
 
 import { UiModalComponent } from './ui-modal/ui-modal.component';
 
