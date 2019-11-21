@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'sb-toolbar',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
   
 export class ToolbarComponent implements OnInit {
   @Input() title: string;
+  @Input() sidenav: MatSidenav;
 
   constructor() { }
 

@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'admin-portal';
+
+  links = [
+    { path: '/', title: 'Search' },
+    { path: '/sermons', title: 'Sermons' },
+    { path: '/management', title: 'Manage' },
+  ];
+  
 }

@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<sb-toolbar [sidenav]="sidenav"></sb-toolbar>
+
+<mat-sidenav-container class="vh-100">
+  <mat-sidenav #sidenav mode="side" closed class="app-sidenav">
+    <nav class="d-flex flex-column mt-3">
+      <a mat-button class="nav-link" 
+      *ngFor="let link of links" 
+      [routerLink]="link.path" 
+      routerLinkActive="active">
+        {{link.title}}
+      </a>
+    </nav>
+  </mat-sidenav>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
