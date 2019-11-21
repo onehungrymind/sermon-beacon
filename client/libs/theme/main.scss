@@ -2,5 +2,15 @@
 @import '~bootstrap-4-grid';
 @import 'libs/theme/fonts.scss';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Montserrat', "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Montserrat', "Helvetica Neue", sans-serif; 
+}
+
+.cursor-pointer {
+ cursor: pointer;
+}
