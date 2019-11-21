@@ -9,7 +9,7 @@ const routes: Routes = [
     component: SermonsComponent
   },
   {
-    path: '',
+    path: 'manage',
     component: ManageComponent
   }
 ];

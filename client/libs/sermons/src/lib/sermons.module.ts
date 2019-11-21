@@ -3,9 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SermonsComponent } from './sermons/sermons.component';
 import { SermonListComponent } from './sermons/sermon-list/sermon-list.component';
 import { SermonDetailsComponent } from './sermons/sermon-details/sermon-details.component';
+import { SearchbarModule } from '@sb/searchbar';
+
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    SearchbarModule
+  ],
   exports: [SermonListComponent],
   declarations: [
     SermonsComponent,
@@ -13,4 +18,4 @@ import { SermonDetailsComponent } from './sermons/sermon-details/sermon-details.
     SermonDetailsComponent
   ]
 })
-export class SermonsModule {}
+export class SermonsModule { }

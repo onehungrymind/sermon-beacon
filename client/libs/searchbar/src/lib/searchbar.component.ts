@@ -13,11 +13,10 @@ export class SearchbarComponent implements OnInit {
     { name: 'Date', icon: 'calendar_today' }
   ];
 
-  constructor() {
-    this.selectCustom();
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.selectCustom();
   }
 
   selectCustom(value = 'default') {
@@ -31,7 +30,7 @@ export class SearchbarComponent implements OnInit {
     return `Sermon ${this.searchMode}`;
   }
 
-  delete() {
+  clear() {
     console.log('this btn works')
   }
 }
