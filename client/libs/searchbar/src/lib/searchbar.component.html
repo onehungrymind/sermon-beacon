@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center search-wrapper">
-  <form class="w-100">
+  <form [formGroup]="form" class="w-100">
     <mat-form-field floatLabel="never" class="w-100">
       <mat-label>Search...</mat-label>
-      <input matInput [matDatepicker]="picker" class="search-container--search-bar position-absolute">
+      <input matInput formControlName="input" [matDatepicker]="picker" class="search-container--search-bar position-absolute">
       <mat-datepicker #picker></mat-datepicker>
       <div class="position-relative search-container d-flex justify-content-end align-self-start">
-        <span class="search-container--filter-title w-100">{{searchText()}}</span>
+        <span formControlName="filter" class="search-container--filter-title w-100">{{searchText()}}</span>
         <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
           class="cursor-pointer search-container--btn-size p-0">
           <mat-icon>expand_more</mat-icon>

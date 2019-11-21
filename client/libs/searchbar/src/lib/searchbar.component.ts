@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'sb-searchbar',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class SearchbarComponent implements OnInit {
+  form: FormGroup
   searchMode: string;
   categoryOptions = [
     { name: 'Title' },
@@ -14,9 +16,12 @@ export class SearchbarComponent implements OnInit {
     { name: 'Date', icon: 'calendar_today' }
   ];
 
-  constructor() {}
+  constructor(
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
+    this.initForm();
     this.selectCustom();
   }
 
@@ -32,6 +37,13 @@ export class SearchbarComponent implements OnInit {
   }
 
   clear() {
-    console.log('this btn works')
+    this.form.reset();
+  }
+
+  private initForm(): void {
+    this.form = this.fb.group({
+      input: ['', Validators.compose([Validators.required])],
+      filter: ['', Validators.compose([Validators.required])]
+    });
   }
 }
