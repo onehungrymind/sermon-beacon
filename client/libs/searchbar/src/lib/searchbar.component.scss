@@ -49,6 +49,10 @@
       font-size: 22px;
     }
 
+    .mat-input-element {
+      caret-color: $primary; 
+  }
+
     .mat-form-field-wrapper {
       border: solid 1px;
       height: 60px;

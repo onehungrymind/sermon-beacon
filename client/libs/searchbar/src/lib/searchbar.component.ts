@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,13 +8,13 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 
 export class SearchbarComponent implements OnInit {
-  form: FormGroup
-  searchMode: string;
+  form: FormGroup;
   categoryOptions = [
-    { name: 'Title' },
-    { name: 'Speaker' },
-    { name: 'Date', icon: 'calendar_today' }
+    { name: 'Sermon Title' },
+    { name: 'Sermon Speaker' },
+    { name: 'Sermon Date', icon: 'calendar_today' }
   ];
+  @ViewChild('picker', {static: false}) datePicker;
 
   constructor(
     private fb: FormBuilder
@@ -22,28 +22,25 @@ export class SearchbarComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.selectCustom();
   }
 
-  selectCustom(value = 'default') {
-    this.searchMode = value;
-  }
-
-  searchText() {
-    if (this.searchMode === 'default') {
-      return 'Advanced';
+  selectCustom(searchType: string, index = 0) {
+    this.form.patchValue({ searchType: searchType })
+    
+    if (index === 2) {
+      this.datePicker.open();
     }
-    return `Sermon ${this.searchMode}`;
   }
 
   clear() {
     this.form.reset();
+    this.form.patchValue({searchType: 'Advanced'})
   }
 
   private initForm(): void {
     this.form = this.fb.group({
-      input: ['', Validators.compose([Validators.required])],
-      filter: ['', Validators.compose([Validators.required])]
+      search: ['', Validators.compose([Validators.required])],
+      searchType: ['Advanced']
     });
   }
 }
