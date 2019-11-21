@@ -1,1 +1,30 @@
-<p>searchbar works!</p>
+<div class="d-flex justify-content-center search-wrapper">
+  <form class="w-100">
+    <mat-form-field floatLabel="never" class="w-100">
+      <mat-label>Search...</mat-label>
+      <input matInput class="search-container--search-bar position-absolute">
+
+      <div class="position-relative search-container d-flex justify-content-end align-self-start">
+        <span class="search-container--filter-title w-100">{{searchText()}}</span>
+        <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
+          class="cursor-pointer search-container--btn-size p-0">
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <button mat-button (click)="delete()" class="cursor-pointer search-container--btn-size p-0">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item class="d-flex" *ngFor="let filteredItem of categoryOptions"
+            (click)="selectCustom(filteredItem.name)">
+            Sermon {{filteredItem.name}}
+            <mat-icon class="material-icons-outlined pl-1 m-0 search-container--icon-size">
+              {{filteredItem.icon ? filteredItem.icon : ''}}
+            </mat-icon>
+          </button>
+        </mat-menu>
+
+      </div>
+    </mat-form-field>
+  </form>
+</div>

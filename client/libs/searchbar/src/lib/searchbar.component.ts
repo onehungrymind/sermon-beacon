@@ -1,15 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'search-searchbar',
+  selector: 'sb-searchbar',
   templateUrl: './searchbar.component.html',
   styleUrls: ['./searchbar.component.scss']
 })
 export class SearchbarComponent implements OnInit {
+  searchMode: string;
+  categoryOptions = [
+    { name: 'Title' },
+    { name: 'Speaker' },
+    { name: 'Date', icon: 'calendar_today' }
+  ];
 
-  constructor() { }
+  constructor() {
+    this.selectCustom();
+  }
 
   ngOnInit() {
   }
 
+  selectCustom(value = 'default') {
+    this.searchMode = value;
+  }
+
+  searchText() {
+    if (this.searchMode === 'default') {
+      return 'Advanced';
+    }
+    return `Sermon ${this.searchMode}`;
+  }
+
+  delete() {
+    console.log('this btn works')
+  }
 }

@@ -71,13 +71,6 @@ $sermon-accent: (
 $user-portal-primary: mat-palette($sermon-primary);
 $user-portal-accent: mat-palette($sermon-accent);
 
-// The warn palette is optional (defaults to red).
-// $user-portal-warn: mat-palette($mat-red);
-
-// Create the theme object (a Sass map containing all of the palettes).
 $user-portal-theme: mat-light-theme($sermon-primary, $sermon-accent);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 @include angular-material-theme($user-portal-theme);

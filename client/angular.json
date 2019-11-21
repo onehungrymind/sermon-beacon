@@ -319,7 +319,7 @@
       "projectType": "library",
       "root": "libs/searchbar",
       "sourceRoot": "libs/searchbar/src",
-      "prefix": "search",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
