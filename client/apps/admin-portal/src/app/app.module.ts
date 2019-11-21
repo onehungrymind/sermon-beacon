@@ -8,6 +8,8 @@ import { MaterialModule } from '@sb/material';
 import { SermonsModule } from '@sb/sermons';
 import { SearchbarModule } from '@sb/searchbar';
 import { UiToolbarModule } from '@sb/ui-toolbar';
+import { UiSidenavModule } from '@sb/ui-sidenav';
+
 
 
 
@@ -18,6 +20,7 @@ import { UiToolbarModule } from '@sb/ui-toolbar';
     SermonsModule,
     SearchbarModule,
     UiToolbarModule,
+    UiSidenavModule,
     RoutingModule,
   ],
   declarations: [

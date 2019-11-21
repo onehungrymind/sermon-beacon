@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ManageComponent implements OnInit {
-
+  links = [
+    { path: '/', icon: 'home', title: 'Home' },
+    { path: '/customers', icon: 'face', title: 'Customer' },
+    { path: '/projects', icon: 'work', title: 'Projects' },
+  ];
+  
   constructor() { }
 
   ngOnInit() {
