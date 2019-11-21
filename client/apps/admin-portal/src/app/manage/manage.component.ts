@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ManageComponent implements OnInit {
-  title = 'Sermon Beacon';
 
   constructor() { }
 
