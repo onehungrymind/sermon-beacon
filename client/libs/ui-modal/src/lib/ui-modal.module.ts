@@ -11,6 +11,7 @@ import { UiModalComponent } from './ui-modal/ui-modal.component';
     MaterialModule
   ],
   declarations: [UiModalComponent],
-  entryComponents: [UiModalComponent]
+  entryComponents: [UiModalComponent],
+  exports: [UiModalComponent]
 })
 export class UiModalModule {}

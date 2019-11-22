@@ -1,2 +1,11 @@
 @import 'libs/theme/main.scss';
-@import 'libs/theme/variables.scss';
+
+mat-sidenav {
+  width: 200px;
+}
+
+.mat-sidenav-container {
+  background: #F4F5FA;;
+  flex: 1;
+  height: calc(100vh - 64px);
+}

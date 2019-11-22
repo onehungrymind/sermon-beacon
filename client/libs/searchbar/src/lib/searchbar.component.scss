@@ -1,5 +1,4 @@
-@import '../../../theme/variables.scss';
-@import '../../../theme/main.scss';
+@import 'libs/theme/variables.scss';
 
 .search-container {
   left: 470px;
@@ -15,7 +14,7 @@
   &--filter-title {
     margin-top: 14px;
     min-width: max-content;
-    color: $text-grey;
+    color: $text-medium;
     font-size: 12px;
   }
 
@@ -42,7 +41,7 @@
       padding: 0px 0px 0px 25px;
       margin-top: 2px;
       display: flex;
-      color: $text-grey;
+      color: $text-medium;
       font-weight: 300;
     }
 
@@ -52,8 +51,8 @@
     }
     
     .mat-input-element {
-      caret-color: $primary; 
-    }
+      caret-color: $primary;
+  }
 
     .mat-form-field-wrapper {
       border: solid 1px;

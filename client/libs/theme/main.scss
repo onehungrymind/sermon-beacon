@@ -1,15 +1,20 @@
-@import '~bootstrap-utilities';
-@import '~bootstrap-4-grid';
-@import 'libs/theme/fonts.scss';
-@import 'libs/theme/utilities.scss';
+// Project Partials (Note: Be carefull to accidentally overwrite styles)
+@import "./fonts.scss";
+@import "./utilities.scss";
+@import "./variables.scss";
 
-html, body { 
-  height: 100%; 
+// Third Party Styles
+@import "~bootstrap-utilities";
+@import "~bootstrap-4-grid";
+
+html, body {
+  height: 100%;
 }
 
-body { 
-  margin: 0; 
-  font-family: 'Montserrat', "Helvetica Neue", sans-serif; 
+body {
+  margin: 0;
+  font-family: "Montserrat", "Helvetica Neue", sans-serif;
+  color: $text-base !important;
 }
 
 .cursor-pointer {

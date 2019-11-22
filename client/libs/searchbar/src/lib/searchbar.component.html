@@ -18,7 +18,7 @@
           <button mat-menu-item class="d-flex" *ngFor="let filteredItem of categoryOptions; let i = index"
           (click)="selectCustom(filteredItem.name, i)">
             {{filteredItem.name}}
-            <mat-icon *ngIf="filteredItem.icon" 
+            <mat-icon *ngIf="filteredItem.icon"
               class="material-icons-outlined pl-1 m-0 search-container--icon-size">
               {{filteredItem.icon ? filteredItem.icon : ''}}
             </mat-icon>

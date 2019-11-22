@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sermons',
+  selector: 'sb-sermons',
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss']
 })
