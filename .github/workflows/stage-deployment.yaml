@@ -20,7 +20,7 @@ jobs:
       - run: cd ./client && npm run build:admin
       - run: surge ./client/dist/apps/admin-portal/ https://sb-admin-${{ github.actor }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
 
-  build-admin:
+  build-user:
     runs-on: ubuntu-latest
     name: Deploying User to surge
     steps:
