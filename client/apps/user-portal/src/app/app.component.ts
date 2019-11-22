@@ -8,7 +8,7 @@ import { UiModalComponent } from '@sb/ui-modal';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'user-portal';
+  links = [];
 
   constructor(public dialog: MatDialog) { }
 
