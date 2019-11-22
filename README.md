@@ -37,7 +37,7 @@ make start
 make start-clean
 ```
 
-The frontend is available on [http://localhost:4200](http://localhost:4200) and the backend is available on [http://localhost:9695](http://localhost:9695).
+The frontend is available on [http://localhost:4200](http://localhost:4200) (admin) or [http://localhost:4300](http://localhost:4300) (user) and the backend is available on [http://localhost:9695](http://localhost:9695).
 
 ## Troubleshooting
 
