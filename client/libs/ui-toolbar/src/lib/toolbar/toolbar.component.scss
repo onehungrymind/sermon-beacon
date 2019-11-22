@@ -1,17 +1,16 @@
 @import 'libs/theme/variables.scss';
 
 .toolbar-wrapper {
-  &--toolbar-icon {
-    font-size: 40px;
-    vertical-align: top !important;
-  }
+  // &--toolbar-icon {
+  //   font-size: 40px;
+  //   vertical-align: top !important;
+  // }
 
   &--toolbar-title {
     letter-spacing: 3px;
   }
 
   &--nav-link {
-    // font-size: 20px;
     color: $grey-light;
   }
 }
