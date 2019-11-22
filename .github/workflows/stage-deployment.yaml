@@ -18,7 +18,7 @@ jobs:
       - run: npm install -g surge
       - run: cd ./client && npm install
       - run: cd ./client && npm run build:admin
-      - run: surge ./client/dist/apps/admin-portal/ https://sb-admin-${{ github.actor }}-${{ github.head_ref }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+      - run: surge ./client/dist/apps/admin-portal/ https://sb-admin-${{ github.actor }}-${{ github.head_ref.replace('/', '-') }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
 
   build-user:
     runs-on: ubuntu-latest
