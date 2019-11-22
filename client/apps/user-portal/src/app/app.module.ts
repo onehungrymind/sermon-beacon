@@ -1,13 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { CoreDataModule } from '@sb/core-data';
+import { CoreStateModule } from '@sb/core-state';
 import { MaterialModule } from '@sb/material';
-import { UiModalModule } from '@sb/ui-modal';
+import { SearchbarModule } from '@sb/searchbar';
 import { SermonsModule } from '@sb/sermons';
+import { UiModalModule } from '@sb/ui-modal';
+import { UiSidenavModule } from '@sb/ui-sidenav';
+import { UiToolbarModule } from '@sb/ui-toolbar';
+import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { AppRouterModule } from './router.module';
 import { SermonsComponent } from './sermons/sermons.component';
 import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component';
 
@@ -15,11 +19,15 @@ import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component
   declarations: [AppComponent, SermonsComponent, SermonViewComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    SermonsModule,
+    CoreDataModule,
+    CoreStateModule,
     MaterialModule,
+    SearchbarModule,
+    SermonsModule,
     UiModalModule,
-    AppRouterModule
+    UiSidenavModule,
+    UiToolbarModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
