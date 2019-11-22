@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchbarComponent } from './searchbar.component';
 import { MaterialModule } from '@sb/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule
   ],
   declarations: [SearchbarComponent],
-  exports: [SearchbarComponent]
+  exports: [SearchbarComponent],
+  providers: [  
+    MatDatepickerModule,  
+  ]
 })
 export class SearchbarModule { }

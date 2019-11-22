@@ -1,3 +1,9 @@
 @import '../../../../libs/theme/theme.scss';
 @import '../../../../libs/theme/main.scss';
 @import '../../../../libs/theme/variables.scss';
+
+.nav-link {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 300;
+}

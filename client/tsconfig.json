@@ -24,7 +24,8 @@
       "@sb/sermon-list": ["libs/sermon-list/src/index.ts"],
       "@sb/sermon-details": ["libs/sermon-details/src/index.ts"],
       "@sb/ui-modal": ["libs/ui-modal/src/index.ts"],
-      "@sb/sermons": ["libs/sermons/src/index.ts"]
+      "@sb/sermons": ["libs/sermons/src/index.ts"],
+      "@sb/ui-sidenav": ["libs/ui-sidenav/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

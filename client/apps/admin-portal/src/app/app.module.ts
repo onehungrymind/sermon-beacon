@@ -9,8 +9,6 @@ import { SermonsModule } from '@sb/sermons';
 import { SearchbarModule } from '@sb/searchbar';
 import { UiToolbarModule } from '@sb/ui-toolbar';
 
-
-
 @NgModule({
   imports: [
     BrowserModule,

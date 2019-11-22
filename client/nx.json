@@ -40,6 +40,9 @@
     },
     "sermons": {
       "tags": []
+    },
+    "ui-sidenav": {
+      "tags": []
     }
   }
 }
