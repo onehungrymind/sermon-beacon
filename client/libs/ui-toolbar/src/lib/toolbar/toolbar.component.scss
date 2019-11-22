@@ -1,29 +1,34 @@
 @import 'libs/theme/variables.scss';
 
+.toolbar-wrapper {
+  &--toolbar-icon {
+    font-size: 40px;
+    vertical-align: top !important;
+  }
+
+  &--toolbar-title {
+    font-size: 28px;
+    letter-spacing: 3px;
+    &--thin {
+      font-weight: 300;
+      font-size: 28px;
+      letter-spacing: 3px;
+    }
+  }
+
+  &--nav-link {
+    text-align: left;
+    font-size: 20px;
+    color: $grey-light;
+  }
+}
+
 mat-toolbar {
   z-index: 99;
+  border-bottom: 1px solid $accent !important;
 }
 
-.toolbar-icon {
-  font-size: 40px;
-  vertical-align: top !important;
-}
-
-.toolbar-title {
-  font-size: 28px;
-
-  &:before {
-    // content: $varOne;
-    font-weight: 300;
-    margin-left: 0.5em;
-    letter-spacing: 3px;
-    order: 1;
-  }
-
-  &:after {
-    // content: $varTwo;
-    font-style: 600;
-    letter-spacing: 3px;
-    order: 2;
-  }
+.mat-icon {
+  height: 40px;
+  width: 40px;
 }
