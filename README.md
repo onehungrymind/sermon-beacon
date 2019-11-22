@@ -56,5 +56,3 @@ install                        Install dependencies for frontend application
 start-clean                    Clean the docker containers then start
 start                          Start the containers
 ```
-
-`
