@@ -8,6 +8,6 @@ import { MatSidenav } from '@angular/material';
 })
 
 export class ToolbarComponent {
-  @Input() title: string;
-  @Input() sidenav: MatSidenav;
+  title = 'SermonBeacon';
+  @Input() links: any[];
 }

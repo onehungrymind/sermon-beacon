@@ -469,37 +469,6 @@
           "styleext": "scss"
         }
       }
-    },
-    "ui-sidenav": {
-      "projectType": "library",
-      "root": "libs/ui-sidenav",
-      "sourceRoot": "libs/ui-sidenav/src",
-      "prefix": "sb",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui-sidenav/tsconfig.lib.json",
-              "libs/ui-sidenav/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/ui-sidenav/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui-sidenav/jest.config.js",
-            "tsConfig": "libs/ui-sidenav/tsconfig.spec.json",
-            "setupFile": "libs/ui-sidenav/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
     }
   },
   "cli": {

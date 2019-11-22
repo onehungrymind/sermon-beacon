@@ -7,7 +7,6 @@ import { MaterialModule } from '@sb/material';
 import { SearchbarModule } from '@sb/searchbar';
 import { SermonsModule } from '@sb/sermons';
 import { UiModalModule } from '@sb/ui-modal';
-import { UiSidenavModule } from '@sb/ui-sidenav';
 import { UiToolbarModule } from '@sb/ui-toolbar';
 import { RoutingModule } from './routing.module';
 
@@ -25,7 +24,6 @@ import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component
     SearchbarModule,
     SermonsModule,
     UiModalModule,
-    UiSidenavModule,
     UiToolbarModule,
     RoutingModule
   ],
