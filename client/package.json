@@ -7,6 +7,7 @@
     "nx": "nx",
     "start": "ng serve",
     "build": "ng build",
+    "build:admin": "ng build --project admin-portal --prod && cp ./dist/apps/admin-portal/index.html ./dist/apps/admin-portal/200.html",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
