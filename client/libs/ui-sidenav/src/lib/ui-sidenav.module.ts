@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { MaterialModule } from '@sb/material';
+
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule
   ],
-  declarations: [ToolbarComponent],
-  exports: [ToolbarComponent]
+  declarations: [SidenavComponent],
+  exports: [SidenavComponent]
 })
-export class UiToolbarModule { }
+export class UiSidenavModule { }

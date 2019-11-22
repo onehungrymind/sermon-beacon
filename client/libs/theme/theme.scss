@@ -1,7 +1,7 @@
 @import './variables.scss';
 @import '~@angular/material/theming';
-
 @include mat-core();
+
 $sermon-primary: (
   50: #e7ebef,
   100: #c2cdd8,
@@ -69,8 +69,6 @@ $sermon-accent: (
 );
 
 $user-portal-primary: mat-palette($sermon-primary);
-$user-portal-accent: mat-palette($sermon-accent);
-
-$user-portal-theme: mat-light-theme($sermon-primary, $sermon-accent);
-
+$user-portal-accent: mat-palette($sermon-accent, 500, 900, A100);
+$user-portal-theme: mat-light-theme($user-portal-primary, $user-portal-accent);
 @include angular-material-theme($user-portal-theme);

@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+    <nav>
+      <a mat-button class="nav-link" *ngFor="let link of links" routerLinkActive="active">
+        <mat-icon>
+          {{link.icon}}
+        </mat-icon>
+        {{link.title}}
+      </a>
+    </nav>
+  </mat-sidenav>
+</mat-sidenav-container>

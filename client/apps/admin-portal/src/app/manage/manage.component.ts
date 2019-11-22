@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './manage.component.html',
   styleUrls: ['./manage.component.scss']
 })
+
 export class ManageComponent implements OnInit {
 
   constructor() { }

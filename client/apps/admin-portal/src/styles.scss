@@ -1,1 +1,11 @@
 @import 'libs/theme/main.scss';
+@import 'libs/theme/variables.scss';
+
+mat-sidenav {
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+  width: 200px;
+}
+
+mat-list-item:not(:first-of-type) {
+  border-top: 1px solid #efefef;
+}

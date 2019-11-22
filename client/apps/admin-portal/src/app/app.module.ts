@@ -7,6 +7,10 @@ import { RoutingModule } from './routing.module';
 import { MaterialModule } from '@sb/material';
 import { SermonsModule } from '@sb/sermons';
 import { SearchbarModule } from '@sb/searchbar';
+import { UiToolbarModule } from '@sb/ui-toolbar';
+import { UiSidenavModule } from '@sb/ui-sidenav';
+
+
 
 
 @NgModule({
@@ -15,6 +19,8 @@ import { SearchbarModule } from '@sb/searchbar';
     MaterialModule,
     SermonsModule,
     SearchbarModule,
+    UiToolbarModule,
+    UiSidenavModule,
     RoutingModule,
   ],
   declarations: [

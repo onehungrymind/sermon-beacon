@@ -1,0 +1,26 @@
+@import '../../../../theme/variables.scss';
+@import '../../../../theme/main.scss';
+
+.toolbar-icon {
+  font-size: 40px;
+  vertical-align: top !important;
+}
+
+.toolbar-title {
+  font-size: 28px;
+
+  &:before {
+    content: $varOne;
+    font-weight: 300;
+    margin-left: 0.5em;
+    letter-spacing: 3px;
+    order: 1;
+  }
+
+  &:after {
+    content: $varTwo;
+    font-style: 600;
+    letter-spacing: 3px;
+    order: 2;
+  }
+}
