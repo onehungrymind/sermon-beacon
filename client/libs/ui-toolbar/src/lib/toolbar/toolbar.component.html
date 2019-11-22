@@ -4,19 +4,19 @@
   </button>
 
   <div class="d-flex justify-content-center flex-grow-1">
-    <span class="toolbar-wrapper--toolbar-title--thin">
+    <span class="toolbar-wrapper--toolbar-title fs-28 font-weight-light">
       SERMON
     </span>
-    <span class="toolbar-wrapper--toolbar-title">
+    <span class="toolbar-wrapper--toolbar-title fs-28">
       BEACON
     </span>
   </div>
 </mat-toolbar>
 
 <mat-sidenav-container class="vh-100">
-  <mat-sidenav #sidenav mode="side" closed class="app-sidenav">
+  <mat-sidenav #sidenav mode="side" closed>
     <nav class="d-flex flex-column mt-3">
-      <a mat-button class="toolbar-wrapper--nav-link" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
+      <a mat-button class="toolbar-wrapper--nav-link fs-20 text-left" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
         {{link.title}}
       </a>
     </nav>
