@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from '@app/material';
-import { UiModalModule } from '@app/ui-modal';
-import { SermonsModule } from '@app/sermons';
+import { MaterialModule } from '@sb/material';
+import { UiModalModule } from '@sb/ui-modal';
+import { SermonsModule } from '@sb/sermons';
 
 import { AppComponent } from './app.component';
 import { AppRouterModule } from './router.module';

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { UiModalComponent } from '@app/ui-modal';
+import { UiModalComponent } from '@sb/ui-modal';
 
 @Component({
   selector: 'app-root',
