@@ -1,6 +1,7 @@
 @import '~bootstrap-utilities';
 @import '~bootstrap-4-grid';
 @import 'libs/theme/fonts.scss';
+@import 'libs/theme/utilities.scss';
 
 html, body { 
   height: 100%; 
@@ -9,8 +10,4 @@ html, body {
 body { 
   margin: 0; 
   font-family: 'Montserrat', "Helvetica Neue", sans-serif; 
-}
-
-.cursor-pointer {
- cursor: pointer;
 }

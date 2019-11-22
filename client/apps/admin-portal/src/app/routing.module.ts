@@ -5,15 +5,11 @@ import { ManageComponent } from './manage/manage.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: ManageComponent
-  },
-  {
     path: 'sermons',
     component: SermonsComponent
   },
   {
-    path: 'management',
+    path: 'manage',
     component: ManageComponent
   }
 ];
