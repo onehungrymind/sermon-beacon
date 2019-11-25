@@ -73,10 +73,8 @@ $sb-accent: mat-palette($sb-accent, 500, 900, A100);
 $sb-theme: mat-light-theme($sb-primary, $sb-accent);
 @include angular-material-theme($sb-theme);
 
-/* set components to use font-family used by entire site */
 $sb-typography: mat-typography-config(
   $font-family: 'Montserrat, Helvetica Neue, sans-serif'
 );
 
-// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
 @include angular-material-typography($sb-typography);
