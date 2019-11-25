@@ -2,7 +2,7 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$sermon-primary: (
+$sb-primary: (
   50: #e7ebef,
   100: #c2cdd8,
   200: #9aacbe,
@@ -35,7 +35,7 @@ $sermon-primary: (
   )
 );
 
-$sermon-accent: (
+$sb-accent: (
   50: #f0f6fd,
   100: #dae9fa,
   200: #c1dbf7,
@@ -68,7 +68,15 @@ $sermon-accent: (
   )
 );
 
-$user-portal-primary: mat-palette($sermon-primary);
-$user-portal-accent: mat-palette($sermon-accent, 500, 900, A100);
-$user-portal-theme: mat-light-theme($user-portal-primary, $user-portal-accent);
-@include angular-material-theme($user-portal-theme);
+$sb-primary: mat-palette($sb-primary);
+$sb-accent: mat-palette($sb-accent, 500, 900, A100);
+$sb-theme: mat-light-theme($sb-primary, $sb-accent);
+@include angular-material-theme($sb-theme);
+
+/* set components to use font-family used by entire site */
+$sb-typography: mat-typography-config(
+  $font-family: 'Montserrat, Helvetica Neue, sans-serif'
+);
+
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include angular-material-typography($sb-typography);
