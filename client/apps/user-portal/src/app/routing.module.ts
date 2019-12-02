@@ -6,7 +6,8 @@ import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component
 
 const routes: Routes = [
   {
-    path: '', component: SermonsComponent, children: [
+    path: '', children: [
+      { path: '', component: SermonsComponent },
       { path: ':id', component: SermonViewComponent }
     ]
   }

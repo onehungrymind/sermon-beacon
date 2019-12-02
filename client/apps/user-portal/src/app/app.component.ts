@@ -8,7 +8,6 @@ import { UiModalComponent } from '@sb/ui-modal';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  links = [];
 
   constructor(public dialog: MatDialog) { }
 
