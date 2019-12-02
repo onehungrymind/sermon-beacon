@@ -1,5 +1,5 @@
-<mat-toolbar color="primary" class="d-flex position-relative w-100 mat-elevation-z4 toolbar-wrapper">
-  <button mat-button class="d-flex flex-shrink-1" (click)="sidenav.toggle()">
+<mat-toolbar color="primary" class="d-flex position-relative toolbar-wrapper mat-elevation-z4 sb-border-bottom">
+  <button *ngIf="isAdmin" mat-button class="d-flex flex-shrink-1" (click)="sidenav.toggle()">
     <mat-icon color="accent" class="toolbar-wrapper--toolbar-icon align-top fs-40">dehaze</mat-icon>
   </button>
 
@@ -13,10 +13,11 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="vh-100">
-  <mat-sidenav #sidenav mode="side" closed>
-    <nav class="d-flex flex-column mt-3">
-      <a mat-button class="toolbar-wrapper--nav-link fs-20 text-left" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">
+<mat-sidenav-container class="sidenav-wrapper vh-100">
+  <mat-sidenav #sidenav mode="over" closed>
+    <nav class="d-flex flex-column">
+      <a mat-button class="toolbar-wrapper--nav-link fs-20 text-left"
+        *ngFor="let link of links" routerLinkActive="active" (click)="navigateToPath(link.path)">
         {{link.title}}
       </a>
     </nav>

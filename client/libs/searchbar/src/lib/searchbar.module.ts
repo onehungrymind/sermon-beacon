@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@sb/material';
-import { SearchbarComponent } from './searchbar.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
 
 @NgModule({
   imports: [
