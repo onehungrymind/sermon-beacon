@@ -4,22 +4,22 @@
   padding: 5px 15px;
   margin-bottom: 5px;
 
-  &--search-bar {
+  .search-bar {
     font-size: 22px;
   }
 
-  &--filter-title {
+  .filter-title {
     margin-top: 14px;
     min-width: max-content;
     color: $text-medium;
     font-size: 12px;
   }
 
-  &--btn-size {
+  .btn-size {
     min-width: 30px;
   }
 
-  &--icon-size {
+  .icon-size {
     transform: scale(0.7);
     padding-top: 15px;
   }
