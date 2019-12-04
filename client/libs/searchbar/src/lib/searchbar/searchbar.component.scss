@@ -1,12 +1,6 @@
 @import 'libs/theme/variables.scss';
 
 .search-container {
-  padding: 5px 15px;
-  margin-bottom: 5px;
-
-  .search-bar {
-    font-size: 22px;
-  }
 
   .filter-title {
     margin-top: 14px;
@@ -32,7 +26,6 @@
     .mat-form-field-infix {
       border: none !important;
       padding: 5px 0px 0px 10px;
-      // margin-left: 15px;
     }
 
     label {
@@ -48,7 +41,7 @@
       border: solid 1px;
       height: 60px;
       border-radius: 35px;
-      background-color: $white;
+      background-color: $bg-light;
     }
 
     .mat-form-field-underline {

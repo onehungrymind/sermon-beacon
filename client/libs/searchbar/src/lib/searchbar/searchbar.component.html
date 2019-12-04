@@ -7,7 +7,7 @@
         <mat-datepicker #picker></mat-datepicker>
       </div>
 
-      <div class="search-container d-flex justify-content-end align-self-start flex-shrink-1">
+      <div class="search-container d-flex justify-content-end align-self-start flex-shrink-1 py-1 px-4 mb-1">
         <span class="filter-title w-100">{{form.value.searchType}}</span>
         <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
           class="cursor-pointer btn-size p-0">
