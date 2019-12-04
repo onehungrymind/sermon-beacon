@@ -1,10 +1,13 @@
 <div class="d-flex justify-content-center search-wrapper">
-  <form [formGroup]="form" class="w-100">
+  <form [formGroup]="form" class="w-100 d-flex">
     <mat-form-field floatLabel="never" class="w-100">
-      <mat-label>Search...</mat-label>
-      <input matInput formControlName="search" [matDatepicker]="picker" class="search-container--search-bar position-absolute">
-      <mat-datepicker #picker></mat-datepicker>
-      <div class="position-relative search-container d-flex justify-content-end align-self-start">
+      <div class="flex-grow-1">
+        <input matInput formControlName="search" [matDatepicker]="picker"
+          class="search-container--search-bar h-100 pl-3 m-0" placeholder="Search...">
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+      <div class="search-container d-flex justify-content-end align-self-start flex-shrink-1">
         <span class="search-container--filter-title w-100">{{form.value.searchType}}</span>
         <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
           class="cursor-pointer search-container--btn-size p-0">
@@ -16,10 +19,9 @@
 
         <mat-menu #menu="matMenu">
           <button mat-menu-item class="d-flex" *ngFor="let filteredItem of categoryOptions; let i = index"
-          (click)="selectCustom(filteredItem.name, i)">
+            (click)="selectCustom(filteredItem.name, i)">
             {{filteredItem.name}}
-            <mat-icon *ngIf="filteredItem.icon"
-              class="material-icons-outlined pl-1 m-0 search-container--icon-size">
+            <mat-icon *ngIf="filteredItem.icon" class="material-icons-outlined pl-1 m-0 search-container--icon-size">
               {{filteredItem.icon ? filteredItem.icon : ''}}
             </mat-icon>
           </button>

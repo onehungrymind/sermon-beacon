@@ -1,14 +1,11 @@
 @import 'libs/theme/variables.scss';
 
 .search-container {
-  left: 470px;
-  max-width: 100px;
-  padding: 5px;
+  padding: 5px 15px;
   margin-bottom: 5px;
 
   &--search-bar {
     font-size: 22px;
-    padding: 13px 0px 0px 15px;
   }
 
   &--filter-title {
@@ -34,19 +31,12 @@
 
     .mat-form-field-infix {
       border: none !important;
-      padding: 5px 0px 0px 15px;
-    }
-
-    mat-label {
-      padding: 0px 0px 0px 25px;
-      margin-top: 2px;
-      display: flex;
-      color: $text-medium;
-      font-weight: 300;
+      padding: 5px 0px 0px 10px;
+      // margin-left: 15px;
     }
 
     label {
-      padding-left: 5px !important;
+      padding: 4px 1px 1px 25px !important;
       font-size: 22px;
     }
     
@@ -58,10 +48,16 @@
       border: solid 1px;
       height: 60px;
       border-radius: 35px;
+      background-color: $white;
     }
 
     .mat-form-field-underline {
       display: none;
+    }
+
+    .mat-form-field-infix {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
