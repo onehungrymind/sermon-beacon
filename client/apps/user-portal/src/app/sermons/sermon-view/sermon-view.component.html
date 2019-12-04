@@ -1,1 +1,39 @@
-<p>sermon-view works!</p>
+<!-- Video Feed Goes Hereish -->
+
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h3>Sermon Title</h3>
+      <p>Name | Date</p>
+    </div>
+
+    <div class="align-self-end">
+      <button mat-button>
+        <mat-icon>cloud_download</mat-icon>
+        SAVE
+      </button>
+      <button mat-button>
+        <mat-icon>graphic_eq</mat-icon>
+        LISTEN
+      </button>
+      <button mat-button>
+        <mat-icon>speaker_notes</mat-icon>
+        NOTES
+      </button>
+    </div>
+  </div>
+
+  <mat-divider class="mb-3"></mat-divider>
+
+  <mat-chip-list>
+    <mat-chip color="accent" selected class="primary-border">
+      TAG
+    </mat-chip>
+    <mat-chip color="accent" selected class="primary-border">
+      TAG
+    </mat-chip>
+    <mat-chip color="accent" selected class="primary-border">
+      TAG
+    </mat-chip>
+  </mat-chip-list>
+</div>
