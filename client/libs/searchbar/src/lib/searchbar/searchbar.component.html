@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center search-wrapper">
-  <form [formGroup]="form" class="w-100 d-flex">
+  <form [formGroup]="form" #formDirective="ngForm" (ngSubmit)="clear(formDirective)" class="w-100 d-flex">
     <mat-form-field floatLabel="never" class="w-100">
       <div class="flex-grow-1">
         <input matInput formControlName="search" [matDatepicker]="picker"

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, NgForm } from '@angular/forms';
 import { MatDatepicker } from '@angular/material';
 
 @Component({
@@ -33,8 +33,8 @@ export class SearchbarComponent implements OnInit {
     }
   }
 
-  clear() {
-    this.form.reset();
+  clear(formDirective: NgForm) {
+    formDirective.resetForm();
     this.form.patchValue({ searchType: 'Advanced' })
   }
 
