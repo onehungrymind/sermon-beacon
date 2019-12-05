@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { UiModalComponent } from '@sb/ui-modal';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +6,6 @@ import { UiModalComponent } from '@sb/ui-modal';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  links = [];
 
-  constructor(public dialog: MatDialog) { }
-
-  openDialog() {
-    const dialog = this.dialog.open(UiModalComponent);
-  }
+  constructor() { }
 }

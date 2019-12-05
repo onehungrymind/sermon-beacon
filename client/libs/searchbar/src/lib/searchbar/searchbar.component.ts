@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatDatepicker } from '@angular/material';
 
 @Component({
   selector: 'sb-searchbar',
   templateUrl: './searchbar.component.html',
-  styleUrls: ['./searchbar.component.scss']
+  styleUrls: [ './searchbar.component.scss' ]
 })
 
 export class SearchbarComponent implements OnInit {
@@ -14,11 +15,11 @@ export class SearchbarComponent implements OnInit {
     { name: 'Sermon Speaker' },
     { name: 'Sermon Date', icon: 'calendar_today' }
   ];
-  @ViewChild('picker', {static: false}) datePicker;
+  @ViewChild('picker', { static: false }) datePicker: MatDatepicker<any>;
 
-  constructor(
+  constructor (
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
@@ -26,7 +27,7 @@ export class SearchbarComponent implements OnInit {
 
   selectCustom(searchType: string, index = 0) {
     this.form.patchValue({ searchType: searchType })
-    
+
     if (index === 2) {
       this.datePicker.open();
     }
@@ -34,13 +35,13 @@ export class SearchbarComponent implements OnInit {
 
   clear() {
     this.form.reset();
-    this.form.patchValue({searchType: 'Advanced'})
+    this.form.patchValue({ searchType: 'Advanced' })
   }
 
   private initForm(): void {
     this.form = this.fb.group({
-      search: ['', Validators.compose([Validators.required])],
-      searchType: ['Advanced']
+      search: [ '', Validators.compose([ Validators.required ]) ],
+      searchType: [ 'Advanced' ]
     });
   }
 }

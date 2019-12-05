@@ -1,0 +1,9 @@
+@import './variables';
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.sb-border-bottom {
+  border-bottom: 2px solid $accent !important;
+}
