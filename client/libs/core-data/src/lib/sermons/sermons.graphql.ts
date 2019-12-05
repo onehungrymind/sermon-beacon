@@ -21,8 +21,8 @@ export const sermonQuery = gql`
 `;
 
 export const createSermonMutation = gql`
-  mutation createSermonMutation($objects: [sermon_insert_input!]!) {
-    insert_sermon(objects: $objects) {
+  mutation createSermonMutation($objects: [sermons_insert_input!]!) {
+    insert_sermons(objects: $objects) {
       returning {
         ...sermonFragment
       }
@@ -32,8 +32,8 @@ export const createSermonMutation = gql`
 `;
 
 export const updateSermonMutation = gql`
-  mutation updateSermonMutation($id: uuid!, $sermon: sermon_set_input) {
-    update_sermon(where: {id: {_eq: $id}}, _set: $sermon) {
+  mutation updateSermonMutation($id: uuid!, $sermon: sermons_set_input) {
+    update_sermons(where: {id: {_eq: $id}}, _set: $sermon) {
       returning {
         ...sermonFragment
       }
@@ -44,7 +44,7 @@ export const updateSermonMutation = gql`
 
 export const deleteSermonMutation = gql`
   mutation deleteSermonMutation($id: uuid!) {
-    delete_sermon(where: {id: {_eq: $id}}) {
+    delete_sermons(where: {id: {_eq: $id}}) {
       returning {
         ...sermonFragment
       }

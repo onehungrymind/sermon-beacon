@@ -15,5 +15,5 @@ export const emptySermon: Sermon = {
   date: '',
   created_at: '',
   updated_at: '',
-  media_id: null,
+  media_id: null
 }

@@ -30,22 +30,28 @@ export class SermonsService {
 
   create(sermon: Partial<Sermon>) {
     delete sermon.id;
+    delete sermon.date;
+    delete sermon.created_at;
+    delete sermon.updated_at;
+    
     return this.apollo.mutate({
       mutation: createSermonMutation,
       variables: {
         objects: sermon
       }
-    }).pipe(map((response: ApolloQueryResult<any>) => response.data.insert_sermon.returning[0]))
+    }).pipe(map((response: ApolloQueryResult<any>) => response.data.insert_sermons.returning[0]))
   }
 
   update(sermon: Partial<Sermon>) {
+    delete (sermon as any).__typename;
+    
     return this.apollo.mutate({
       mutation: updateSermonMutation,
       variables: {
         id: sermon.id,
         sermon
       }
-    }).pipe(map((response: ApolloQueryResult<any>) => response.data.update_sermon.returning[0]))
+    }).pipe(map((response: ApolloQueryResult<any>) => response.data.update_sermons.returning[0]))
   }
 
   delete(sermon: Partial<Sermon>) {
@@ -54,7 +60,6 @@ export class SermonsService {
       variables: {
         id: sermon.id
       }
-    }).pipe(map((response: ApolloQueryResult<any>) => response.data.delete_sermon.returning[0]))
+    }).pipe(map((response: ApolloQueryResult<any>) => response.data.delete_sermons.returning[0]))
   }
-
 }
