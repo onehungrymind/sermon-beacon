@@ -8,10 +8,6 @@ import { SermonsService } from './sermons/sermons.service';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-// import { createApollo } from './core-data.module';
-
-
-
 const uri = 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
