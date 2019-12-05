@@ -1,0 +1,37 @@
+@import 'libs/theme/variables.scss';
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.mat-sidenav-container {
+  background: #F4F5FA;;
+  flex: 1;
+  height: calc(100vh - 64px);
+}
+
+.toolbar-wrapper {
+  height: 50px !important;
+  z-index: 99;
+
+  &--toolbar-title {
+    letter-spacing: 3px;
+  }
+
+  &--nav-link {
+    color: $grey-light;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .mat-icon {
+    height: 40px;
+    width: 40px;
+  }
+}

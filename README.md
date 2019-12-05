@@ -16,8 +16,6 @@ Before you begin you need to make sure you have everything needed to get the pro
 
 ## Getting Started
 
-> Note: We are still currently working out some minor details. For now, you may get started on the UI by just manually running the frontend app with `make start-local-admin` or `make start-local-user` depending on the app you want to work on.
-
 Once all prerequisites are installed, run `make init` to download other necessary tools for development on MacOS.
 
 If the AWS CLI has never been installed on your machine before, make sure to [configure](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#configure-awscli) it.
@@ -30,14 +28,23 @@ For local development, run the following make commands:
 # Run this first and only once to install client dependencies.
 make install
 
-# Run this to start both client and server
-make start
+# Starting the server
+$ make start # starts up hasura and applies migrations
+# Open a new terminal
+$ cd server
+$ hasura console # if this is not opening up hasura, then please refer to the "Getting Started" section.
+
+# Starting the client applications
+$ make start-local-admin # This will start the admin app
+$ make start-local-user # This will start the user app
 
 # Run this to start clean versions of the applications
 make start-clean
 ```
 
-The frontend is available on [http://localhost:4200](http://localhost:4200) and the backend is available on [http://localhost:9695](http://localhost:9695).
+> Note: we are currently working on a better solution for starting the apps and the server. So, check back frequently in case anything has changed.
+
+The frontend is available on [http://localhost:4200](http://localhost:4200) (admin) or [http://localhost:4300](http://localhost:4300) (user) and the backend is available on [http://localhost:9695](http://localhost:9695).
 
 ## Troubleshooting
 
