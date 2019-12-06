@@ -12,6 +12,7 @@ import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import { ManageComponent } from './manage/manage.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { ManageComponent } from './manage/manage.component';
     SermonsModule,
     UiModalModule,
     UiToolbarModule,
+    FormsModule,
     RoutingModule,
   ],
   declarations: [
