@@ -40,7 +40,7 @@ export class SearchbarComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.fb.group({
-      search: [ '', Validators.compose([ Validators.required ]) ],
+      search: [''],
       searchType: [ 'Advanced' ]
     });
   }
