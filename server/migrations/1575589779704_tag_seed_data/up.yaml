@@ -1,0 +1,6 @@
+- args:
+    cascade: false
+    sql: INSERT INTO tags VALUES('20f2c646-1e22-44e9-b52d-7659a83db911','Time','Sunday
+      Morning'),('88eb803d-a925-4f68-be1b-f60792cc4b80','Scripture','Psalms 23:1'),('5f8f22ca-eede-4e31-9d8f-b7ab282be349','Time','Wednesday
+      Meeting');
+  type: run_sql

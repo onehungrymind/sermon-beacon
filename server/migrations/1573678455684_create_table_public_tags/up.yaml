@@ -1,5 +1,5 @@
 - args:
-    sql: CREATE TABLE "public"."tags"("id" uuid NOT NULL, "property" text, "value"
+    sql: CREATE TABLE "public"."tags"("id" uuid NOT NULL DEFAULT gen_random_uuid(), "property" text, "value"
       text NOT NULL, PRIMARY KEY ("id") );
   type: run_sql
 - args:
