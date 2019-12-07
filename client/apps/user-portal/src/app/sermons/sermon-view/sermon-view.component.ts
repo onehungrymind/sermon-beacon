@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Sermon } from '@sb/core-data';
 
 @Component({
   selector: 'app-sermon-view',
@@ -8,13 +9,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sermon-view.component.scss']
 })
 export class SermonViewComponent implements OnInit {
-  // sermon$: Observable<Sermon>;
+  sermon$: Observable<Sermon>;
 
-  constructor(
-    private router: Router
-  ) { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

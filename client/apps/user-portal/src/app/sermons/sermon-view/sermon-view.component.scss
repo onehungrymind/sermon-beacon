@@ -1,4 +1,24 @@
+@import 'libs/theme/main';
+
 .back-arrow {
-  font-size: 75px;
+  font-size: 65px;
+  font-weight: bold;
   margin: 40px 0 0 5px;
+}
+
+.title-text {
+  color: $primary;
+  font-weight: font-weight;
+}
+
+.dark-line {
+  color: $text-dark;
+}
+
+.icon-color {
+ color: $text-base;
+}
+
+mat-divider {
+  border-top-color: $text-dark;
 }
