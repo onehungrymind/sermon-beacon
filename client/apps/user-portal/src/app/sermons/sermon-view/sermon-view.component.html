@@ -1,12 +1,12 @@
 <div *ngIf="sermon$ | async as sermon">
-  <button mat-icon-button (click)="goBack()">
+  <button mat-icon-button (click)="goBack()" class="back-arrow-container">
     <mat-icon class="back-arrow" color="accent">arrow_back</mat-icon>
   </button>
 
   <div class="container-fluid">
     <div class="d-flex justify-content-center">
       <iframe
-        [src]="sanitizeUrl(sermon?.vimeoUrl)"
+        [src]="getVideoUrl(sermon?.media)"
         width="100%"
         height="625"
         frameborder="0"

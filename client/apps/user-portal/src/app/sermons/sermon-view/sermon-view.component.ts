@@ -7,26 +7,31 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-sermon-view',
   templateUrl: './sermon-view.component.html',
-  styleUrls: ['./sermon-view.component.scss']
+  styleUrls: [ './sermon-view.component.scss' ]
 })
 export class SermonViewComponent implements OnInit {
   sermon$: Observable<Sermon>;
   actionButtons = [
-    {title: 'SAVE', icon: 'cloud_download'},
-    {title: 'LISTEN', icon: 'graphic_eq'},
-    {title: 'NOTES', icon: 'notes'}
+    { title: 'SAVE', icon: 'cloud_download' },
+    { title: 'LISTEN', icon: 'graphic_eq' },
+    { title: 'NOTES', icon: 'notes' }
   ];
 
-  constructor(
+  constructor (
     private router: Router,
     private sanitizer: DomSanitizer
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.sermon$ = of({
       title: "First Sermon",
       date: "2018-05-01",
-      vimeoUrl: "https://player.vimeo.com/video/375272866", // NOTE: This is not part of real model.
+      media: [
+        {
+          type: "VIDEO",
+          url: "https://player.vimeo.com/video/375272866"
+        }
+      ],
       sermon_tags: [
         {
           tag: {
@@ -36,7 +41,6 @@ export class SermonViewComponent implements OnInit {
       ],
       sermon_speakers: [
         {
-          id: "8f85c0bb-f07b-4a93-8fcf-ee64d3e0704e",
           speaker: {
             first_name: "Ron",
             last_name: "Peterson",
@@ -46,6 +50,11 @@ export class SermonViewComponent implements OnInit {
         }
       ]
     } as any)
+  }
+
+  getVideoUrl(media: any[]) {
+    const videoMedia = media.find(m => m.type === 'VIDEO');
+    return this.sanitizeUrl(videoMedia.url);
   }
 
   sanitizeUrl(url: string) {
