@@ -4,6 +4,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
@@ -27,6 +28,7 @@ const MODULES = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
@@ -49,4 +51,4 @@ const MODULES = [
   imports: MODULES,
   exports: MODULES
 })
-export class MaterialModule { }
+export class MaterialModule {}

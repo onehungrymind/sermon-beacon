@@ -1,6 +1,9 @@
+@import "./variables";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i&display=swap');
 
 // Font-Size
+.fs-8 { font-size: 8px !important; }
+.fs-10 { font-size: 10px !important; }
 .fs-12 { font-size: 12px !important; }
 .fs-14 { font-size: 14px !important; }
 .fs-16 { font-size: 16px !important; }
@@ -10,3 +13,13 @@
 .fs-24 { font-size: 24px !important; }
 .fs-28 { font-size: 28px !important; }
 .fs-40 { font-size: 40px !important; }
+
+// Text Color
+.primary-text { color: $primary !important; }
+.accent-text { color: $accent !important; }
+.secondary-text { color: $secondary !important; }
+.warn-text { color: $warn !important; }
+.base-text { color: $text-base !important; }
+.light-text { color: $text-light !important; }
+.medium-text { color: $text-medium !important; }
+.dark-text { color: $text-dark !important; }
