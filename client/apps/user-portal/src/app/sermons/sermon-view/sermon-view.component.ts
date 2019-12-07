@@ -14,4 +14,8 @@ export class SermonViewComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
+
+  goBack() {
+    this.router.navigateByUrl('/');
+  }
 }
