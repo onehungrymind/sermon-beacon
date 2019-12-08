@@ -16,14 +16,17 @@ init: ## Install required tools for local environment on macOS
 install: ## Install dependencies for frontend application
 	@(cd client && yarn)
 
-start: ## Start the containers
+start-server: ## Start the containers
 	@(COMPOSE_HTTP_TIMEOUT=$$COMPOSE_HTTP_TIMEOUT docker-compose up --remove-orphans --build)
 
 start-clean: docker-clean start ## Clean the docker containers then start
 
-start-local-admin: ## Start admin app locally (http://localhost:4200)
+start-all: ## Start admin and user apps locally (http://localhost:4200 | http://localhost:4300)
+	@(cd client && yarn start:all)
+
+start-admin: ## Start admin app locally (http://localhost:4200)
 	@(cd client && yarn start:admin)
 
-start-local-user: ## Start user app locally (http://localhost:4300)
+start-user: ## Start user app locally (http://localhost:4300)
 	@(cd client && yarn start:user)
 
