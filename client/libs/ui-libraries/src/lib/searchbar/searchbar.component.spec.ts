@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SermonsComponent } from './sermons.component';
+import { SearchbarComponent } from './searchbar.component';
 
-describe('SermonsComponent', () => {
-  let component: SermonsComponent;
-  let fixture: ComponentFixture<SermonsComponent>;
+describe('SearchbarComponent', () => {
+  let component: SearchbarComponent;
+  let fixture: ComponentFixture<SearchbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SermonsComponent ]
+      declarations: [ SearchbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SermonsComponent);
+    fixture = TestBed.createComponent(SearchbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

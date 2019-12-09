@@ -1,7 +1,7 @@
 module.exports = {
-  name: 'searchbar',
+  name: 'ui-libraries',
   preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/libs/searchbar',
+  coverageDirectory: '../../coverage/libs/ui-libraries',
   snapshotSerializers: [
     'jest-preset-angular/AngularSnapshotSerializer.js',
     'jest-preset-angular/HTMLCommentSerializer.js'
