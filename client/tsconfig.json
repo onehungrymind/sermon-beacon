@@ -17,7 +17,6 @@
     "baseUrl": ".",
     "paths": {
       "@sb/material": ["libs/material/src/index.ts"],
-      "@sb/searchbar": ["libs/searchbar/src/index.ts"],
       "@sb/core-data": ["libs/core-data/src/index.ts"],
       "@sb/core-state": ["libs/core-state/src/index.ts"],
       "@sb/sermons": ["libs/sermons/src/index.ts"],
