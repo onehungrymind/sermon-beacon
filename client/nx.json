@@ -35,10 +35,10 @@
     "core-state": {
       "tags": []
     },
-    "ui-modal": {
+    "sermons": {
       "tags": []
     },
-    "sermons": {
+    "ui-libraries": {
       "tags": []
     }
   }
