@@ -21,8 +21,6 @@
       "@sb/searchbar": ["libs/searchbar/src/index.ts"],
       "@sb/core-data": ["libs/core-data/src/index.ts"],
       "@sb/core-state": ["libs/core-state/src/index.ts"],
-      "@sb/sermon-list": ["libs/sermon-list/src/index.ts"],
-      "@sb/sermon-details": ["libs/sermon-details/src/index.ts"],
       "@sb/ui-modal": ["libs/ui-modal/src/index.ts"],
       "@sb/sermons": ["libs/sermons/src/index.ts"]
     }
