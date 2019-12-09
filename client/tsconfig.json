@@ -16,7 +16,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@sb/ui-toolbar": ["libs/ui-toolbar/src/index.ts"],
       "@sb/material": ["libs/material/src/index.ts"],
       "@sb/searchbar": ["libs/searchbar/src/index.ts"],
       "@sb/core-data": ["libs/core-data/src/index.ts"],
