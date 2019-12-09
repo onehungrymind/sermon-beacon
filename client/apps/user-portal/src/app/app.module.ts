@@ -11,11 +11,10 @@ import { UiToolbarModule } from '@sb/ui-toolbar';
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
-import { SermonsComponent } from './sermons/sermons.component';
-import { SermonViewComponent } from './sermons/sermon-view/sermon-view.component';
+import { SermonViewComponent } from './sermon-view/sermon-view.component';
 
 @NgModule({
-  declarations: [AppComponent, SermonsComponent, SermonViewComponent],
+  declarations: [AppComponent, SermonViewComponent],
   imports: [
     BrowserModule,
     CoreDataModule,
