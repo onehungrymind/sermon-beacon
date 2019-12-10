@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { createEffect, Actions } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
+import { iif, of, EMPTY } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SermonsActions from './sermons.actions';
 import { SermonsPartialState } from './sermons.reducer';
-import { Sermon, SermonsService, DialogService } from '@sb/core-data';
-import { iif, of, EMPTY } from 'rxjs';
+import { Sermon, SermonsService, DialogService, NotifyService } from '@sb/core-data';
 
 @Injectable()
 export class SermonsEffects {
@@ -24,7 +24,7 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         error
       ) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -41,7 +41,7 @@ export class SermonsEffects {
       },
 
       onError: (action: ReturnType<typeof SermonsActions.createSermon>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
     );
@@ -58,7 +58,7 @@ export class SermonsEffects {
       },
 
       onError: (action: ReturnType<typeof SermonsActions.updateSermon>, error) => {
-        console.error('Error', error)
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -79,7 +79,7 @@ export class SermonsEffects {
       },
 
       onError: (action: ReturnType<typeof SermonsActions.deleteSermon>, error) => {
-        console.error('Error', error)
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -88,6 +88,7 @@ export class SermonsEffects {
     private actions$: Actions,
     private dataPersistence: DataPersistence<SermonsPartialState>,
     private sermonsService: SermonsService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private notifyService: NotifyService
   ) {}
 }
