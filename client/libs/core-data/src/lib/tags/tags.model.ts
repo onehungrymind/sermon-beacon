@@ -9,7 +9,7 @@ export interface Tag {
   sermon_tags?: SermonTag[];
 }
 
-interface SermonTag {
+export interface SermonTag {
   id?: string;
   tag_id?: string;
   sermon_id?: string;

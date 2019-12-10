@@ -11,7 +11,7 @@ export interface Speaker {
   speaker_sermons?: SpeakerSermon[];
 }
 
-interface SpeakerSermon {
+export interface SpeakerSermon {
   id?: string;
   speaker_id?: string;
   sermon_id?: string;
