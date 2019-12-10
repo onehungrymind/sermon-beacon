@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { Tags } from './tags.model';
+import { Tag } from './tags.model';
 import { tagsQuery, updateTagsMutation, createTagsMutation, deleteTagsMutation } from './tags.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';
@@ -13,14 +13,14 @@ export class TagsService {
 
   constructor(private apollo: Apollo) { }
 
-  all(): Observable<Tags[]> {
+  all(): Observable<Tag[]> {
     return this.apollo.query({
       query: tagsQuery,
       fetchPolicy: 'network-only'
     }).pipe(map((res: ApolloQueryResult<any>) => res.data.tags))
   }
 
-  create(tags: Partial<Tags>) {
+  create(tags: Partial<Tag>) {
     delete tags.id;
     delete tags.created_at;
     delete tags.updated_at;
@@ -30,11 +30,11 @@ export class TagsService {
       variables: {
         objects: tags
       }
-    }).pipe(map((res: ApolloQueryResult<any>) => 
+    }).pipe(map((res: ApolloQueryResult<any>) =>
     res.data.insert_tags.returning[0]))
   }
 
-  update(tags: Partial<Tags>) {
+  update(tags: Partial<Tag>) {
     delete (tags as any).__typename;
 
     return this.apollo.mutate({
@@ -47,7 +47,7 @@ export class TagsService {
     res.data.update_tags.returning[0]))
   }
 
-  delete(tags: Partial<Tags>) {
+  delete(tags: Partial<Tag>) {
     return this.apollo.mutate({
       mutation: deleteTagsMutation,
       variables: {
@@ -56,5 +56,4 @@ export class TagsService {
     }).pipe(map((res: ApolloQueryResult<any>) =>
       res.data.delete_tags.returning[0]))
   }
-
 }
