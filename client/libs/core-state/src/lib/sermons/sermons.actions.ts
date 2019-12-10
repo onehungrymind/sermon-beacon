@@ -3,7 +3,7 @@ import { Sermon } from '@sb/core-data';
 
 export const sermonSelected = createAction(
   '[Sermons] Sermon Selected',
-  props<{selectedSermonId: string}>()
+  props<{ selectedSermonId: string }>()
   );
 
   // Load Actions 

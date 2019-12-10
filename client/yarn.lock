@@ -1066,6 +1066,7 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+<<<<<<< HEAD
 "@ngrx/effects@^8.5.2":
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-8.5.2.tgz#c4f81947f4028a0d678ed2641101481cdbe11b59"
@@ -1099,6 +1100,12 @@
 "@ngtools/webpack@8.3.19":
   version "8.3.19"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.19.tgz#9ed3123a9c3d79c49f73fd9a30cbe283ddde9d47"
+=======
+"@ngtools/webpack@8.3.20":
+  version "8.3.20"
+  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.20.tgz#a5288171b67c96e8d3b219f5108f1d6cd962d6a3"
+  integrity sha512-2e9Kat6PQEzqtNsZZpnOIvoDzyGwMELiuBYBa9keZeaXOD6TxjSyCRzHHXAldAXqvh4Uj2qjTid54Sy14CxtsQ==
+>>>>>>> 654312291487165bb7a6f01000aad16d10ecf976
   dependencies:
     "@angular-devkit/core" "8.3.20"
     enhanced-resolve "4.1.0"
