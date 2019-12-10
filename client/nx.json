@@ -20,13 +20,7 @@
     "admin-portal": {
       "tags": []
     },
-    "ui-toolbar": {
-      "tags": []
-    },
     "material": {
-      "tags": []
-    },
-    "searchbar": {
       "tags": []
     },
     "core-data": {
@@ -35,10 +29,10 @@
     "core-state": {
       "tags": []
     },
-    "ui-modal": {
+    "sermons": {
       "tags": []
     },
-    "sermons": {
+    "ui-libraries": {
       "tags": []
     }
   }

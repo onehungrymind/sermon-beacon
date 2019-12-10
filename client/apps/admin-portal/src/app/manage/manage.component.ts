@@ -9,8 +9,8 @@ import { Tags, TagsService, emptyTags } from '@sb/core-data';
 
 export class ManageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
-  
+  ngOnInit() {}
+
 }
