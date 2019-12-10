@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MediaService } from '@sb/core-data';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,5 @@ export class AppComponent {
     { path: '/manage', title: 'Manage' },
   ];
   
-  constructor(private mediaService: MediaService) { 
-    this.mediaService.update({ id: '35d2dba4-1855-11ea-8d71-362b9e155667' }).subscribe();
-  }
+  constructor() { }
 }
