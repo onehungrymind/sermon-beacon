@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Tags, TagsService, emptyTags } from '@sb/core-data';
 
 @Component({
   selector: 'sb-manage',
