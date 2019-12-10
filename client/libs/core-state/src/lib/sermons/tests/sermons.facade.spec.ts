@@ -8,17 +8,17 @@ import { StoreModule, Store } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
 
 import { SermonsEntity } from './sermons.models';
-import { SermonsEffects } from './sermons.effects';
-import { SermonsFacade } from './sermons.facade';
+import { SermonsEffects } from '../sermons.effects';
+import { SermonsFacade } from '../sermons.facade';
 
-import * as SermonsSelectors from './sermons.selectors';
-import * as SermonsActions from './sermons.actions';
+import * as SermonsSelectors from '../sermons.selectors';
+import * as SermonsActions from '../sermons.actions';
 import {
   SERMONS_FEATURE_KEY,
   SermonsState,
   initialState,
   reducer
-} from './sermons.reducer';
+} from '../sermons.reducer';
 
 interface TestSchema {
   sermons: SermonsState;
