@@ -4,8 +4,14 @@ export interface Media {
   embedCode: string;
   created_at: string;
   updated_at: string;
-  type: string;
+  type: MediaTypes;
   sermon_id: string;
+}
+
+export enum MediaTypes {
+  VIDEO = 'Video',
+  AUDIO = 'AUDIO',
+  PDF   = 'PDF'
 }
 
 export const emptyMedia = {

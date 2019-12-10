@@ -21,6 +21,7 @@ export class MediaService {
   }
 
   create(media: Partial<Media>) {
+    delete (media as any).__typename;
     delete media.id;
     delete media.created_at;
     delete media.updated_at;
