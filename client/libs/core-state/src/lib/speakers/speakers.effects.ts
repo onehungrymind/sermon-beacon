@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
+import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
+import { DialogService, NotifyService, SpeakersService, Speaker } from '@sb/core-data';
 import { SpeakersPartialState } from './speakers.reducer';
-import { SpeakersService, Speaker, DialogService, NotifyService } from '@sb/core-data';
-import { iif, of, EMPTY } from 'rxjs';
 
 @Injectable()
 export class SpeakersEffects {

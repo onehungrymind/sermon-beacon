@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { iif, of, EMPTY } from 'rxjs';
+import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SermonsActions from './sermons.actions';
+import { DialogService, NotifyService, Sermon, SermonsService } from '@sb/core-data';
 import { SermonsPartialState } from './sermons.reducer';
-import { Sermon, SermonsService, DialogService, NotifyService } from '@sb/core-data';
 
 @Injectable()
 export class SermonsEffects {
