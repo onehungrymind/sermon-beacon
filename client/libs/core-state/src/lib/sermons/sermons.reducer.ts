@@ -7,7 +7,7 @@ import { Sermon } from '@sb/core-data';
 export const SERMONS_FEATURE_KEY = 'sermons';
 
 export interface State extends EntityState<Sermon> {
-  selectedId?: string | number; // which Sermons record has been selected
+  selectedSermonId?: string | number; // which Sermons record has been selected
   isLoading: boolean; // has the Sermons list been loaded
 }
 
@@ -25,8 +25,8 @@ export const initialState: State = sermonsAdapter.getInitialState({
 
 const sermonsReducer = createReducer(
   initialState,
-  on(SermonsActions.sermonSelected, (state, { sermonId }) => 
-    Object.assign({}, state, { sermonId })
+  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) => 
+    Object.assign({}, state, { selectedSermonId })
   ), 
   on(
     SermonsActions.loadSermons,

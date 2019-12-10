@@ -1,10 +1,11 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
+
 import { createEffect, Actions } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-
-import { SermonsPartialState } from './sermons.reducer';
-import * as SermonsActions from './sermons.actions';
 import { map } from 'rxjs/operators';
+
+import * as SermonsActions from './sermons.actions';
+import { SermonsPartialState } from './sermons.reducer';
 import { Sermon, SermonsService } from '@sb/core-data';
 
 @Injectable()

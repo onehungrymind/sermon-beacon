@@ -1,6 +1,5 @@
-import { SermonsEntity } from './sermons.models';
-import { SermonsState, sermonsAdapter, initialState } from './sermons.reducer';
-import * as SermonsSelectors from './sermons.selectors';
+import { SermonsState, sermonsAdapter, initialState } from '../sermons.reducer';
+import * as SermonsSelectors from '../sermons.selectors';
 
 describe('Sermons Selectors', () => {
   const ERROR_MSG = 'No Error Available';

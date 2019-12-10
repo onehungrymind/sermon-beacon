@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import {
   SERMONS_FEATURE_KEY,
   State,
@@ -31,7 +32,7 @@ export const getSermonsEntities = createSelector(
 
 export const getSelectedId = createSelector(
   getSermonsState,
-  (state: State) => state.selectedId
+  (state: State) => state.selectedSermonId
 );
 
 export const getSelected = createSelector(

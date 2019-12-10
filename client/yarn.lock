@@ -1066,7 +1066,6 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-<<<<<<< HEAD
 "@ngrx/effects@^8.5.2":
   version "8.5.2"
   resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-8.5.2.tgz#c4f81947f4028a0d678ed2641101481cdbe11b59"
@@ -1077,15 +1076,10 @@
   resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-8.5.2.tgz#548228bbe4ec993dc5d0fa100bd0fe28e38518ed"
   integrity sha512-9eP6DNbMG0EGTwMbUzSnxAvHdid/D/APmjPn1GPj6AKjsOfLEwhtxB5SF3re1Le0H2JrdhcbEEKaBjJS9JRZRg==
 
-"@ngrx/router-store@8.3.0":
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-8.3.0.tgz#18462b7901843b3ab212459ffbd6cfe2b71e87e4"
-  integrity sha512-wIWGW3ZyT9+lJEBXVsPx1/NLFQ8KoCbhlEmpmQHniXE3iIMnK25Or2JCNXfgrndQA9SSVlKIPP3uaDJMyoBotQ==
-
-"@ngrx/schematics@8.3.0":
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-8.3.0.tgz#0a8dab6ed859e28a9acd06399040e6ac54f04701"
-  integrity sha512-18wyj0bOudF+RW6SCuPBVjMNeUgY9uWD+d481xCQ43VttamRAIsmNPmb9e1N/96Kte/HaotF5LNjw3mj/dU7QQ==
+"@ngrx/schematics@^8.5.2":
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-8.5.2.tgz#59088709f6e2a59ff978380bd30acad2e9930030"
+  integrity sha512-5WcuMpd1pHESqn/Ym7SFG13Kj2yfYUGKHP7Yq/DU3jHWVmaiqn52bbAmuzzUYLrucA94Pvi1CAhbVeMbdXcYCw==
 
 "@ngrx/store-devtools@^8.5.2":
   version "8.5.2"
@@ -1097,15 +1091,10 @@
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-8.5.2.tgz#18e4a39f3e7ac2ec8307653837ec3c4153bde04f"
   integrity sha512-JPlc23Aw3rlEKt6LCkg3a0zlo0tEgkohH3CDHVbUIYSgg3DWOnmNfwztbz4pa2u2wua5PfFCovC7HKTNmapx/w==
 
-"@ngtools/webpack@8.3.19":
-  version "8.3.19"
-  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.19.tgz#9ed3123a9c3d79c49f73fd9a30cbe283ddde9d47"
-=======
 "@ngtools/webpack@8.3.20":
   version "8.3.20"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.20.tgz#a5288171b67c96e8d3b219f5108f1d6cd962d6a3"
   integrity sha512-2e9Kat6PQEzqtNsZZpnOIvoDzyGwMELiuBYBa9keZeaXOD6TxjSyCRzHHXAldAXqvh4Uj2qjTid54Sy14CxtsQ==
->>>>>>> 654312291487165bb7a6f01000aad16d10ecf976
   dependencies:
     "@angular-devkit/core" "8.3.20"
     enhanced-resolve "4.1.0"

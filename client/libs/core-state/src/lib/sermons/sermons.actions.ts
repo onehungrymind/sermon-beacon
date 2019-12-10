@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { Sermon } from '@sb/core-data';
 
 export const sermonSelected = createAction(
