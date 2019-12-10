@@ -8,8 +8,8 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { NxModule, DataPersistence } from '@nrwl/angular';
 import { hot } from '@nrwl/angular/testing';
 
-import { SpeakersEffects } from './speakers.effects';
-import * as SpeakersActions from './speakers.actions';
+import { SpeakersEffects } from '../speakers.effects';
+import * as SpeakersActions from '../speakers.actions';
 
 describe('SpeakersEffects', () => {
   let actions: Observable<any>;

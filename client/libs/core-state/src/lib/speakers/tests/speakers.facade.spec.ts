@@ -7,18 +7,17 @@ import { StoreModule, Store } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
-import { SpeakersEntity } from './speakers.models';
-import { SpeakersEffects } from './speakers.effects';
-import { SpeakersFacade } from './speakers.facade';
+import { SpeakersEffects } from '../speakers.effects';
+import { SpeakersFacade } from '../speakers.facade';
 
-import * as SpeakersSelectors from './speakers.selectors';
-import * as SpeakersActions from './speakers.actions';
+import * as SpeakersSelectors from '../speakers.selectors';
+import * as SpeakersActions from '../speakers.actions';
 import {
   SPEAKERS_FEATURE_KEY,
   SpeakersState,
   initialState,
   reducer
-} from './speakers.reducer';
+} from '../speakers.reducer';
 
 interface TestSchema {
   speakers: SpeakersState;

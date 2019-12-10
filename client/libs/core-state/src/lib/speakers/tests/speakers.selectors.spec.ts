@@ -1,10 +1,9 @@
-import { SpeakersEntity } from './speakers.models';
 import {
   SpeakersState,
   speakersAdapter,
   initialState
-} from './speakers.reducer';
-import * as SpeakersSelectors from './speakers.selectors';
+} from '../speakers.reducer';
+import * as SpeakersSelectors from '../speakers.selectors';
 
 describe('Speakers Selectors', () => {
   const ERROR_MSG = 'No Error Available';
