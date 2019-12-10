@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { Media } from './media';
+import { Media } from './media.model';
 import { mediaQuery, createMediaMutation, updateMediaMutation, deleteMediaMutation } from './media.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';
