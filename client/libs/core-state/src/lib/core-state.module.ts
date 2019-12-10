@@ -24,11 +24,7 @@ const storeConfig: RootStoreConfig<any> = {
     CommonModule,
     CoreDataModule,
     StoreModule.forRoot(reducers, storeConfig),
-    EffectsModule.forRoot([
-      SermonsEffects,
-      SpeakersEffects,
-      TagsEffects
-    ]),
+    EffectsModule.forRoot([SermonsEffects, SpeakersEffects, TagsEffects]),
     StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' }),
   ],
   providers: [DataPersistence]
