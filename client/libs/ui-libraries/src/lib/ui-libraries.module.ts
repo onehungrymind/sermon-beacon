@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     MaterialModule
   ],
+  entryComponents: [UiModalComponent],
   declarations: [UiModalComponent, ToolbarComponent, SearchbarComponent],
   exports: [UiModalComponent, ToolbarComponent, SearchbarComponent]
 })

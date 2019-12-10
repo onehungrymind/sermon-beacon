@@ -1,5 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+
+import { Sermon, Speaker } from '@sb/core-data';
 
 @Component({
   selector: 'sb-ui-modal',
@@ -8,15 +10,22 @@ import { MatDialogRef } from '@angular/material/dialog';
   encapsulation: ViewEncapsulation.None // All modals should have all the same styles.
 })
 export class UiModalComponent {
+  @Input() type: string;
+  @Input() sermon: Sermon;
+  @Input() speaker: Speaker;
 
-  constructor(public dialogRef: MatDialogRef<UiModalComponent>) { }
+  constructor(private dialogRef: MatDialogRef<UiModalComponent>) { }
 
-  // TODO: connect functionality.
+  composeMessage() {
+    if (this.type === 'sermon') return `Remove ${this.type} <br/> "${this.sermon.title}" ?`;
+    if (this.type === 'speaker') return `Remove ${this.type} <br/> "${this.speaker.first_name} ${this.speaker.last_name}" ?`;
+  }
+
   confirmDelete() {
-    this.dialogRef.close()
+    this.dialogRef.close(true)
   }
 
   cancel() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }
