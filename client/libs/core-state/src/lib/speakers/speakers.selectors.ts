@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import {
   SPEAKERS_FEATURE_KEY,
   SpeakersState,
@@ -14,14 +15,9 @@ export const getSpeakersState = createFeatureSelector<
 
 const { selectAll, selectEntities } = speakersAdapter.getSelectors();
 
-export const getSpeakersLoaded = createSelector(
+export const getSpeakersLoading = createSelector(
   getSpeakersState,
-  (state: SpeakersState) => state.loaded
-);
-
-export const getSpeakersError = createSelector(
-  getSpeakersState,
-  (state: SpeakersState) => state.error
+  (state: SpeakersState) => state.isLoading
 );
 
 export const getAllSpeakers = createSelector(

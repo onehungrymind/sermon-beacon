@@ -1,43 +1,56 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, State } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SpeakersActions from './speakers.actions';
-import { SpeakersEntity } from './speakers.models';
+import { Speaker } from '@sb/core-data';
 
 export const SPEAKERS_FEATURE_KEY = 'speakers';
 
-export interface SpeakersState extends EntityState<SpeakersEntity> {
+export interface SpeakersState extends EntityState<Speaker> {
   selectedId?: string | number; // which Speakers record has been selected
-  loaded: boolean; // has the Speakers list been loaded
-  error?: string | null; // last none error (if any)
+  isLoading: boolean; // has the Speakers list been loaded
 }
 
 export interface SpeakersPartialState {
   readonly [SPEAKERS_FEATURE_KEY]: SpeakersState;
 }
 
-export const speakersAdapter: EntityAdapter<
-  SpeakersEntity
-> = createEntityAdapter<SpeakersEntity>();
+export const speakersAdapter: EntityAdapter<Speaker> = createEntityAdapter<Speaker>();
 
 export const initialState: SpeakersState = speakersAdapter.getInitialState({
   // set initial required properties
-  loaded: false
+  selected: null,
+  isLoading: false
 });
 
 const speakersReducer = createReducer(
   initialState,
-  on(SpeakersActions.loadSpeakers, state => ({
+  on(
+    SpeakersActions.loadSpeakers,
+    SpeakersActions.createSpeaker,
+    SpeakersActions.updateSpeaker,
+    SpeakersActions.deleteSpeaker,
+    state => ({
     ...state,
-    loaded: false,
-    error: null
+    isLoading: false
   })),
   on(SpeakersActions.loadSpeakersSuccess, (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, loaded: true })
   ),
-  on(SpeakersActions.loadSpeakersFailure, (state, { error }) => ({
+  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) => ({
+    speaker,
     ...state,
-    error
+    isLoading: false
+  })),
+  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) => ({
+    speaker,
+    ...state,
+    isLoading: false
+  })),
+  on(SpeakersActions.deleteSpeaker, (state, { speaker }) => ({
+    speaker,
+    ...state,
+    isLoading: false
   }))
 );
 
