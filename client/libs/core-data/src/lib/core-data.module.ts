@@ -22,6 +22,7 @@ export function createApollo(httpLink: HttpLink) {
 @NgModule({
   imports: [HttpClientModule],
   providers: [
+    SermonsService,
     MediaService,
     SpeakersService,
   {
