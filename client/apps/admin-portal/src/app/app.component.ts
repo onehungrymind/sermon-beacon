@@ -13,7 +13,5 @@ export class AppComponent {
     { path: '/manage', title: 'Manage' },
   ];
   
-  constructor(private ms: MediaService) { 
-    this.ms.create({ url: 'abc.com', type: MediaTypes.AUDIO}).subscribe();
-  }
+  constructor() {}
 }
