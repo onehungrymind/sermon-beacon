@@ -3,7 +3,7 @@ export interface MediaTypes {
   description: string
 }
 
-export const emptyMedia = {
+export const emptyMediaTypes = {
   name: '',
   description: '',
 }

@@ -22,9 +22,6 @@ export class MediaTypesService {
 
   create(mediaTypes: Partial<MediaTypes>) {
     delete (mediaTypes as any).__typename;
-    // delete media.id;
-    // delete media.created_at;
-    // delete media.updated_at;
 
     return this.apollo.mutate({
       mutation: createMediaTypesMutation,
