@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { EMPTY, iif, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import * as fromTags from './tags.reducer';
 import * as TagsActions from './tags.actions';
-import { TagsService, Tag } from '@sb/core-data';
+import { DialogService, Tag, TagsService, NotifyService } from '@sb/core-data';
 
 @Injectable()
 export class TagsEffects {
@@ -20,7 +21,7 @@ export class TagsEffects {
       },
 
       onError: (action: ReturnType<typeof TagsActions.loadTags>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -35,7 +36,7 @@ export class TagsEffects {
       },
 
       onError: (action: ReturnType<typeof TagsActions.createTag>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -50,7 +51,7 @@ export class TagsEffects {
       },
 
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -61,11 +62,17 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.deleteTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService.delete(action.tag).pipe(map((_: Tag) => TagsActions.deleteTagSuccess({ tag: action.tag })));
+        return this.dialogService.deleteDialog(action.tag, 'tag').pipe(
+          switchMap((deleteConfirmed: boolean) => iif(
+            () => deleteConfirmed,
+            of(TagsActions.deleteTagSuccess({tag: action.tag})),
+            EMPTY
+          ))
+        );
       },
 
       onError: (action: ReturnType<typeof TagsActions.deleteTag>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -73,6 +80,8 @@ export class TagsEffects {
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromTags.TagsPartialState>,
-    private tagsService: TagsService
+    private tagsService: TagsService,
+    private dialogService: DialogService,
+    private notifyService: NotifyService
   ) {}
 }
