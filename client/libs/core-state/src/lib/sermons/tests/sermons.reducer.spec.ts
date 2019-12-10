@@ -1,4 +1,3 @@
-import { SermonsEntity } from './sermons.models';
 import * as SermonsActions from '../sermons.actions';
 import { SermonsState, initialState, reducer } from '../sermons.reducer';
 
