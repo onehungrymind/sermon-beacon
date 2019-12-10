@@ -10,4 +10,6 @@ export class AppComponent {
     { path: '/', title: 'Sermons' },
     { path: '/manage', title: 'Manage' },
   ];
+  
+  constructor() {}
 }
