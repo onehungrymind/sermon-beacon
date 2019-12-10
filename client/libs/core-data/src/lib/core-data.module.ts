@@ -7,6 +7,7 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { SermonsService } from './sermons/sermons.service';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { MediaService } from './media/media.service';
 
 const uri = 'http://0.0.0.0:8080/v1/graphql';
 
@@ -20,7 +21,8 @@ export function createApollo(httpLink: HttpLink) {
 @NgModule({
   imports: [HttpClientModule],
   providers: [
-  SermonsService,
+    SermonsService,
+    MediaService,
   {
     provide: APOLLO_OPTIONS,
     useFactory: createApollo,
