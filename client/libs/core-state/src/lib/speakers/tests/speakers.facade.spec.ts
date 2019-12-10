@@ -7,31 +7,30 @@ import { StoreModule, Store } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
+import { SpeakersEffects } from '../speakers.effects';
+import { SpeakersFacade } from '../speakers.facade';
 
-import { SermonsEffects } from '../sermons.effects';
-import { SermonsFacade } from '../sermons.facade';
-
-import * as SermonsSelectors from '../sermons.selectors';
-import * as SermonsActions from '../sermons.actions';
+import * as SpeakersSelectors from '../speakers.selectors';
+import * as SpeakersActions from '../speakers.actions';
 import {
-  SERMONS_FEATURE_KEY,
-  State,
+  SPEAKERS_FEATURE_KEY,
+  SpeakersState,
   initialState,
   reducer
-} from '../sermons.reducer';
+} from '../speakers.reducer';
 
 interface TestSchema {
-  sermons: SermonsState;
+  speakers: SpeakersState;
 }
 
-describe('SermonsFacade', () => {
-  let facade: SermonsFacade;
+describe('SpeakersFacade', () => {
+  let facade: SpeakersFacade;
   let store: Store<TestSchema>;
-  const createSermonsEntity = (id: string, name = '') =>
+  const createSpeakersEntity = (id: string, name = '') =>
     ({
       id,
       name: name || `name-${id}`
-    } as SermonsEntity);
+    } as SpeakersEntity);
 
   beforeEach(() => {});
 
@@ -39,10 +38,10 @@ describe('SermonsFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
-          StoreModule.forFeature(SERMONS_FEATURE_KEY, reducer),
-          EffectsModule.forFeature([SermonsEffects])
+          StoreModule.forFeature(SPEAKERS_FEATURE_KEY, reducer),
+          EffectsModule.forFeature([SpeakersEffects])
         ],
-        providers: [SermonsFacade]
+        providers: [SpeakersFacade]
       })
       class CustomFeatureModule {}
 
@@ -58,7 +57,7 @@ describe('SermonsFacade', () => {
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.get(Store);
-      facade = TestBed.get(SermonsFacade);
+      facade = TestBed.get(SpeakersFacade);
     });
 
     /**
@@ -66,7 +65,7 @@ describe('SermonsFacade', () => {
      */
     it('loadAll() should return empty list with loaded == true', async done => {
       try {
-        let list = await readFirst(facade.allSermons$);
+        let list = await readFirst(facade.allSpeakers$);
         let isLoaded = await readFirst(facade.loaded$);
 
         expect(list.length).toBe(0);
@@ -74,7 +73,7 @@ describe('SermonsFacade', () => {
 
         facade.loadAll();
 
-        list = await readFirst(facade.allSermons$);
+        list = await readFirst(facade.allSpeakers$);
         isLoaded = await readFirst(facade.loaded$);
 
         expect(list.length).toBe(0);
@@ -87,23 +86,23 @@ describe('SermonsFacade', () => {
     });
 
     /**
-     * Use `loadSermonsSuccess` to manually update list
+     * Use `loadSpeakersSuccess` to manually update list
      */
-    it('allSermons$ should return the loaded list; and loaded flag == true', async done => {
+    it('allSpeakers$ should return the loaded list; and loaded flag == true', async done => {
       try {
-        let list = await readFirst(facade.allSermons$);
+        let list = await readFirst(facade.allSpeakers$);
         let isLoaded = await readFirst(facade.loaded$);
 
         expect(list.length).toBe(0);
         expect(isLoaded).toBe(false);
 
         store.dispatch(
-          SermonsActions.loadSermonsSuccess({
-            sermons: [createSermonsEntity('AAA'), createSermonsEntity('BBB')]
+          SpeakersActions.loadSpeakersSuccess({
+            speakers: [createSpeakersEntity('AAA'), createSpeakersEntity('BBB')]
           })
         );
 
-        list = await readFirst(facade.allSermons$);
+        list = await readFirst(facade.allSpeakers$);
         isLoaded = await readFirst(facade.loaded$);
 
         expect(list.length).toBe(2);
