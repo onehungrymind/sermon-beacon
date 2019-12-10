@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MediaService } from '@sb/core-data';
-import { MediaTypes } from 'libs/core-data/src/lib/media/media';
 
 @Component({
   selector: 'app-root',
