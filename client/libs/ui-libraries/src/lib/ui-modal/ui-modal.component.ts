@@ -11,8 +11,8 @@ import { Sermon, Speaker } from '@sb/core-data';
 })
 export class UiModalComponent {
   @Input() type: string;
-  @Input() sermon: Sermon;
-  @Input() speaker: Speaker;
+  @Input() sermon?: Sermon;
+  @Input() speaker?: Speaker;
 
   constructor(private dialogRef: MatDialogRef<UiModalComponent>) { }
 
