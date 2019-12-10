@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { SermonsFacade } from '@sb/core-state';
-import { Sermon } from '@sb/core-data';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +7,5 @@ import { Sermon } from '@sb/core-data';
 })
 export class AppComponent {
 
-  constructor(private sermonF: SermonsFacade) { this.sermonF.deleteSermon({title: 'TESTING'} as Sermon) }
+  constructor() { }
 }
