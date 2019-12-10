@@ -20,8 +20,11 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatMenuModule,
+  MatPaginatorModule,
+  MatSortModule,
   MatDialogModule
 } from '@angular/material';
+import { SbTableComponent } from './sb-table/sb-table.component';
 
 const MODULES = [
   BrowserAnimationsModule,
@@ -44,11 +47,17 @@ const MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatMenuModule,
+  MatSortModule,
+  MatPaginatorModule,
   MatDialogModule
 ];
 
 @NgModule({
   imports: MODULES,
-  exports: MODULES
+  exports: [
+    MODULES,
+    SbTableComponent
+  ],
+  declarations: [SbTableComponent]
 })
 export class MaterialModule {}
