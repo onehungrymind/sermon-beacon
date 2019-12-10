@@ -11,4 +11,5 @@ export class ManageComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
 }
