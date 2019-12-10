@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoreDataModule } from "@sb/core-data";
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -11,11 +13,13 @@ import { TagsEffects } from './tags/tags.effects';
 import { TagsFacade } from './tags/tags.facade';
 import { MediaEffects } from './media/media.effects';
 import { MediaFacade } from './media/media.facade';
+import { reducers } from '.';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forRoot(),
+    CoreDataModule,
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([
       SermonsEffects,
       SpeakersEffects,

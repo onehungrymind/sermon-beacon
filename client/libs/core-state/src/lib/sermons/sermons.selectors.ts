@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   SERMONS_FEATURE_KEY,
-  SermonsState,
+  State,
   SermonsPartialState,
   sermonsAdapter
 } from './sermons.reducer';
@@ -9,34 +9,29 @@ import {
 // Lookup the 'Sermons' feature state managed by NgRx
 export const getSermonsState = createFeatureSelector<
   SermonsPartialState,
-  SermonsState
+  State
 >(SERMONS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = sermonsAdapter.getSelectors();
 
-export const getSermonsLoaded = createSelector(
+export const getSermonsLoading = createSelector(
   getSermonsState,
-  (state: SermonsState) => state.loaded
-);
-
-export const getSermonsError = createSelector(
-  getSermonsState,
-  (state: SermonsState) => state.error
+  (state: State) => state.isLoading
 );
 
 export const getAllSermons = createSelector(
   getSermonsState,
-  (state: SermonsState) => selectAll(state)
+  (state: State) => selectAll(state)
 );
 
 export const getSermonsEntities = createSelector(
   getSermonsState,
-  (state: SermonsState) => selectEntities(state)
+  (state: State) => selectEntities(state)
 );
 
 export const getSelectedId = createSelector(
   getSermonsState,
-  (state: SermonsState) => state.selectedId
+  (state: State) => state.selectedId
 );
 
 export const getSelected = createSelector(
