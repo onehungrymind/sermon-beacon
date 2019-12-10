@@ -22,7 +22,7 @@ export const createMedia = createAction(
 );
 
 export const createMediaSuccess = createAction(
-  '[Media] New Media Created Successfully',
+  '[Media] New Media Successfully Created',
   props<{ media: Media }>()
 );
 
