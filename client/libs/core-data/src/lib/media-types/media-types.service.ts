@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { MediaTypes } from './media-types';
+import { MediaType } from './media-type.model';
 import {
   mediaTypeQuery,
   createMediaTypesMutation,
@@ -17,7 +17,7 @@ import { ApolloQueryResult } from 'apollo-client';
 export class MediaTypesService {
   constructor(private apollo: Apollo) {}
 
-  all(): Observable<MediaTypes[]> {
+  all(): Observable<MediaType[]> {
     return this.apollo
       .query({
         query: mediaTypeQuery,
@@ -62,7 +62,7 @@ export class MediaTypesService {
       );
   }
 
-  delete(mediaType: Partial<MediaTypes>) {
+  delete(mediaType: Partial<MediaType>) {
     return this.apollo
       .mutate({
         mutation: deleteMediaTypesMutation,
