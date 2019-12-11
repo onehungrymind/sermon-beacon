@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { UiModalComponent } from '@sb/ui-libraries';
+import { UiModalComponent } from '../../ui-modal/ui-modal.component';
 import { Sermon, Speaker, Tag } from '@sb/core-data';
 
 @Injectable({

@@ -6,7 +6,8 @@ import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SermonsActions from './sermons.actions';
-import { DialogService, NotifyService, Sermon, SermonsService } from '@sb/core-data';
+import { Sermon, SermonsService } from '@sb/core-data';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SermonsPartialState } from './sermons.reducer';
 
 @Injectable()
@@ -17,7 +18,13 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.all().pipe(map((res: Sermon[]) => SermonsActions.loadSermonsSuccess({ sermons: res })));
+        return this.sermonsService
+          .all()
+          .pipe(
+            map((res: Sermon[]) =>
+              SermonsActions.loadSermonsSuccess({ sermons: res })
+            )
+          );
       },
 
       onError: (
@@ -35,16 +42,23 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.createSermon>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.create(action.sermon).pipe(
-          map((res: Sermon) => SermonsActions.createSermonSuccess({ sermon: res }))
-        );
+        return this.sermonsService
+          .create(action.sermon)
+          .pipe(
+            map((res: Sermon) =>
+              SermonsActions.createSermonSuccess({ sermon: res })
+            )
+          );
       },
 
-      onError: (action: ReturnType<typeof SermonsActions.createSermon>, error) => {
+      onError: (
+        action: ReturnType<typeof SermonsActions.createSermon>,
+        error
+      ) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
-    );
+  );
 
   updateSermon$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SermonsActions.updateSermon, {
@@ -52,12 +66,19 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.updateSermon>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.update(action.sermon).pipe(
-          map((res: Sermon) => SermonsActions.updateSermonSuccess({ sermon: res}))
-        );
+        return this.sermonsService
+          .update(action.sermon)
+          .pipe(
+            map((res: Sermon) =>
+              SermonsActions.updateSermonSuccess({ sermon: res })
+            )
+          );
       },
 
-      onError: (action: ReturnType<typeof SermonsActions.updateSermon>, error) => {
+      onError: (
+        action: ReturnType<typeof SermonsActions.updateSermon>,
+        error
+      ) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -69,16 +90,25 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.deleteSermon>,
         state: SermonsPartialState
       ) => {
-        return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
-          switchMap((deleteConfirmed: boolean) => iif(
-            () => deleteConfirmed,
-            of(SermonsActions.deleteSermonSuccess({sermon: action.sermon})),
-            EMPTY
-          ))
-        )
+        return this.dialogService
+          .deleteDialog(action.sermon, 'sermon')
+          .pipe(
+            switchMap((deleteConfirmed: boolean) =>
+              iif(
+                () => deleteConfirmed,
+                of(
+                  SermonsActions.deleteSermonSuccess({ sermon: action.sermon })
+                ),
+                EMPTY
+              )
+            )
+          );
       },
 
-      onError: (action: ReturnType<typeof SermonsActions.deleteSermon>, error) => {
+      onError: (
+        action: ReturnType<typeof SermonsActions.deleteSermon>,
+        error
+      ) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
