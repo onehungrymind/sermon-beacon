@@ -37,21 +37,15 @@ const speakersReducer = createReducer(
   on(SpeakersActions.loadSpeakersSuccess, (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, loaded: true })
   ),
-  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  })),
-  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  })),
-  on(SpeakersActions.deleteSpeaker, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  }))
+  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) =>
+    speakersAdapter.addOne(speaker, { ...state, isLoading: false })
+  ),
+  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) =>
+    speakersAdapter.upsertOne(speaker, { ...state, isLoading: false })
+  ),
+  on(SpeakersActions.deleteSpeaker, (state, { speaker }) =>
+    speakersAdapter.removeOne(speaker.id, { ...state, isLoading: false })
+  )
 );
 
 export function reducer(state: SpeakersState | undefined, action: Action) {
