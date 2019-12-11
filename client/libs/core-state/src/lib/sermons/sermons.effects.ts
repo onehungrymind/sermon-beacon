@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { EMPTY, iif, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import * as SermonsActions from './sermons.actions';
+import { DialogService, NotifyService, Sermon, SermonsService } from '@sb/core-data';
 import { SermonsPartialState } from './sermons.reducer';
-import { Sermon, SermonsService } from '@sb/core-data';
 
 @Injectable()
 export class SermonsEffects {
@@ -23,12 +24,12 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         error
       ) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
 
-  addSermon$ = createEffect(() => 
+  addSermon$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SermonsActions.createSermon, {
       run: (
         action: ReturnType<typeof SermonsActions.createSermon>,
@@ -38,9 +39,9 @@ export class SermonsEffects {
           map((res: Sermon) => SermonsActions.createSermonSuccess({ sermon: res }))
         );
       },
-    
+
       onError: (action: ReturnType<typeof SermonsActions.createSermon>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
     );
@@ -57,7 +58,7 @@ export class SermonsEffects {
       },
 
       onError: (action: ReturnType<typeof SermonsActions.updateSermon>, error) => {
-        console.error('Error', error)
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -68,13 +69,17 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.deleteSermon>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.delete(action.sermon).pipe(
-          map(_ => SermonsActions.deleteSermonSuccess({ sermon: action.sermon}))
-        );
+        return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
+          switchMap((deleteConfirmed: boolean) => iif(
+            () => deleteConfirmed,
+            of(SermonsActions.deleteSermonSuccess({sermon: action.sermon})),
+            EMPTY
+          ))
+        )
       },
 
       onError: (action: ReturnType<typeof SermonsActions.deleteSermon>, error) => {
-        console.error('Error', error)
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -82,6 +87,8 @@ export class SermonsEffects {
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<SermonsPartialState>,
-    private sermonsService: SermonsService
+    private sermonsService: SermonsService,
+    private dialogService: DialogService,
+    private notifyService: NotifyService
   ) {}
 }

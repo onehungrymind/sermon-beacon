@@ -22,7 +22,7 @@ export class SermonsFacade {
   loadSermons() {
     this.dispatch(SermonsActions.loadSermons());
   }
-  
+
   createSermon(sermon: Sermon) {
     this.dispatch(SermonsActions.createSermon({ sermon }));
   }

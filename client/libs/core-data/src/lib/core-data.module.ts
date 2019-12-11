@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
-// GraphQL
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import { DialogService } from './shared/dialog/dialog.service';
+import { NotifyService } from './shared/notify/notify.service';
 import { SermonsService } from './sermons/sermons.service';
 import { MediaService } from './media/media.service';
 import { SpeakersService } from './speakers/speakers.service';
@@ -22,6 +23,8 @@ export function createApollo(httpLink: HttpLink) {
 @NgModule({
   imports: [HttpClientModule],
   providers: [
+    DialogService,
+    NotifyService,
     SermonsService,
     MediaService,
     SpeakersService,
