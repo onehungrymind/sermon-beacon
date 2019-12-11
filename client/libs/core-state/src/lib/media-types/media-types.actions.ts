@@ -17,12 +17,12 @@ export const loadMediaTypesSuccess = createAction(
 
 // Create Actions
 export const createMediaType = createAction(
-  '[MediaTypes] Create New MediaType',
+  '[MediaTypes] Create MediaType',
   props<{ mediaType: MediaType }>()
 );
 
 export const createMediaTypeSuccess = createAction(
-  '[MediaTypes] New MediaType Successfully Created',
+  '[MediaTypes] MediaType Successfully Created',
   props<{ mediaType: MediaType }>()
 );
 
