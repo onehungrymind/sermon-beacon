@@ -5,5 +5,5 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "htmlWhitespaceSensitivity": "ignore",
-  "printWidth": 100
+  "printWidth": 80
 }
