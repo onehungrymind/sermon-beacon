@@ -26,7 +26,7 @@ export class MediaEffects {
   );
 
   addMedia$ = createEffect(() =>
-    this.dataPersistence.fetch(MediaActions.createMedia, {
+    this.dataPersistence.pessimisticUpdate(MediaActions.createMedia, {
       run: (
         action: ReturnType<typeof MediaActions.createMedia>,
         state: fromMedia.MediaPartialState
@@ -41,7 +41,7 @@ export class MediaEffects {
   );
 
   updateMedia$ = createEffect(() =>
-    this.dataPersistence.fetch(MediaActions.updateMedia, {
+    this.dataPersistence.pessimisticUpdate(MediaActions.updateMedia, {
       run: (
         action: ReturnType<typeof MediaActions.updateMedia>,
         state: fromMedia.MediaPartialState
@@ -56,12 +56,12 @@ export class MediaEffects {
   );
 
   deleteMedia$ = createEffect(() =>
-    this.dataPersistence.fetch(MediaActions.deleteMedia, {
+    this.dataPersistence.pessimisticUpdate(MediaActions.deleteMedia, {
       run: (
         action: ReturnType<typeof MediaActions.deleteMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.delete(action.media).pipe(map((res: Media) => MediaActions.deleteMediaSuccess({ media: res})));
+        return this.mediaService.delete(action.media).pipe(map((res: Media) => MediaActions.deleteMediaSuccess({ media: res })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {

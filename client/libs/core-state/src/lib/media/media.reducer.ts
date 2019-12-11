@@ -28,28 +28,27 @@ const mediaReducer = createReducer(
   on(MediaActions.selectedMedia, (state, { selectedMediaId }) =>
     Object.assign({}, state, { selectedMediaId })
   ),
-  on(MediaActions.loadMedia, state => ({
+  on(
+    MediaActions.loadMedia,
+    MediaActions.createMedia,
+    MediaActions.updateMedia,
+    MediaActions.deleteMedia,
+    state => ({
     ...state,
-    isLoading: false
+    isLoading: true
   })),
   on(MediaActions.loadMediaSuccess, (state, { media }) =>
-    mediaAdapter.addAll(media, { ...state, loaded: true })
+    mediaAdapter.addAll(media, { ...state, loaded: false })
   ),
-  on(MediaActions.createMediaSuccess, (state, { media }) => ({
-    media,
-    ...state,
-    isLoading: false
-  })),
-  on(MediaActions.updateMediaSuccess, (state, { media }) => ({
-    media,
-    ...state,
-    isLoading: false
-  })),
-  on(MediaActions.deleteMediaSuccess, (state, { media }) => ({
-    media,
-    ...state,
-    isLoading: false
-  }))
+  on(MediaActions.createMediaSuccess, (state, { media }) =>
+    mediaAdapter.addOne(media, { ...state, isLoading: false })
+  ),
+  on(MediaActions.updateMediaSuccess, (state, { media }) =>
+    mediaAdapter.upsertOne(media, { ...state, isLoading: false })
+  ),
+  on(MediaActions.deleteMediaSuccess, (state, { media }) =>
+    mediaAdapter.removeOne(media.id, { ...state, isLoading: false })
+  )
 );
 
 export function reducer(state: MediaState | undefined, action: Action) {
