@@ -32,7 +32,7 @@ export class TagsEffects {
   );
 
   addTag$ = createEffect(() =>
-    this.dataPersistence.fetch(TagsActions.createTag, {
+    this.dataPersistence.pessimisticUpdate(TagsActions.createTag, {
       run: (
         action: ReturnType<typeof TagsActions.createTag>,
         state: fromTags.TagsPartialState
@@ -49,7 +49,7 @@ export class TagsEffects {
   );
 
   updateTag$ = createEffect(() =>
-    this.dataPersistence.fetch(TagsActions.updateTag, {
+    this.dataPersistence.pessimisticUpdate(TagsActions.updateTag, {
       run: (
         action: ReturnType<typeof TagsActions.updateTag>,
         state: fromTags.TagsPartialState
@@ -66,7 +66,7 @@ export class TagsEffects {
   );
 
   deleteTag$ = createEffect(() =>
-    this.dataPersistence.fetch(TagsActions.deleteTag, {
+    this.dataPersistence.pessimisticUpdate(TagsActions.deleteTag, {
       run: (
         action: ReturnType<typeof TagsActions.deleteTag>,
         state: fromTags.TagsPartialState
