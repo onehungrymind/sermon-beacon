@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { MediaTypes } from './media-types';
+import { MediaType } from './media-type.model';
 import { mediaTypeQuery, createMediaTypesMutation, updateMediaTypesMutation, deleteMediaTypesMutation } from './media-types.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';
@@ -13,14 +13,14 @@ export class MediaTypesService {
 
   constructor(private apollo: Apollo) { }
 
-  all(): Observable<MediaTypes[]> {
+  all(): Observable<MediaType[]> {
     return this.apollo.query({
       query: mediaTypeQuery,
       fetchPolicy: 'network-only'
     }).pipe(map((res: ApolloQueryResult<any>) => res.data.media_types))
   }
 
-  create(mediaTypes: Partial<MediaTypes>) {
+  create(mediaTypes: Partial<MediaType>) {
     delete (mediaTypes as any).__typename;
 
     return this.apollo.mutate({
@@ -28,11 +28,11 @@ export class MediaTypesService {
       variables: {
         objects: mediaTypes
       }
-    }).pipe(map((res: ApolloQueryResult<any>) => 
+    }).pipe(map((res: ApolloQueryResult<any>) =>
     res.data.insert_media_type.returning[0]))
   }
 
-  update(mediaTypes: Partial<MediaTypes>) {
+  update(mediaTypes: Partial<MediaType>) {
     delete (mediaTypes as any).__typename;
 
     return this.apollo.mutate({
@@ -43,8 +43,8 @@ export class MediaTypesService {
     }).pipe(map((res: ApolloQueryResult<any>) =>
     res.data.update_media_type.returning[0]))
   }
-  
-  delete(mediaType: Partial<MediaTypes>) {
+
+  delete(mediaType: Partial<MediaType>) {
     return this.apollo.mutate({
       mutation: deleteMediaTypesMutation,
       variables: {

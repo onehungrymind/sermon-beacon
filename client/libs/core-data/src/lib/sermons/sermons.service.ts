@@ -9,7 +9,7 @@ import {
   updateSermonMutation,
   deleteSermonMutation
 } from './sermons.graphql';
-import { Sermon } from './sermons.model';
+import { Sermon } from './sermon.model';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -33,7 +33,7 @@ export class SermonsService {
     delete sermon.date;
     delete sermon.created_at;
     delete sermon.updated_at;
-    
+
     return this.apollo.mutate({
       mutation: createSermonMutation,
       variables: {
@@ -44,7 +44,7 @@ export class SermonsService {
 
   update(sermon: Partial<Sermon>) {
     delete (sermon as any).__typename;
-    
+
     return this.apollo.mutate({
       mutation: updateSermonMutation,
       variables: {

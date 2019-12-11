@@ -2,9 +2,9 @@ import { Injectable, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UiModalComponent } from '@sb/ui-libraries';
-import { Sermon } from '../../sermons/sermons.model';
-import { Speaker } from '../../speakers/speakers.model';
-import { Tag } from '../../tags/tags.model';
+import { Sermon } from '../../sermons/sermon.model';
+import { Speaker } from '../../speakers/speaker.model';
+import { Tag } from '../../tags/tag.model';
 
 @Injectable({
   providedIn: 'root'

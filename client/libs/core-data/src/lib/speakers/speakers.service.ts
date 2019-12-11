@@ -6,7 +6,7 @@ import { ApolloQueryResult } from 'apollo-client';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Speaker } from './speakers.model';
+import { Speaker } from './speaker.model';
 import { speakerQuery, createSpeakerMutation, updateSpeakerMutation, deleteSpeakerMutation } from './speakers.graphql';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class SpeakersService {
       variables: {
         objects: speaker
       }
-    }).pipe(map((res: ApolloQueryResult<any>) => 
+    }).pipe(map((res: ApolloQueryResult<any>) =>
     res.data.insert_speakers.returning[0]))
   }
 
@@ -49,7 +49,7 @@ export class SpeakersService {
     }).pipe(map((res: ApolloQueryResult<any>) =>
     res.data.update_speakers.returning[0]))
   }
-  
+
   delete(speaker: Partial<Speaker>) {
     return this.apollo.mutate({
       mutation: deleteSpeakerMutation,
