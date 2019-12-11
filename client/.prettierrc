@@ -4,6 +4,5 @@
   "quoteProps": "as-needed",
   "bracketSpacing": true,
   "arrowParens": "always",
-  "htmlWhitespaceSensitivity": "ignore",
-  "printWidth": 80
+  "htmlWhitespaceSensitivity": "ignore"
 }
