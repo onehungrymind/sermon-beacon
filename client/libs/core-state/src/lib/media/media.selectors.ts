@@ -8,9 +8,10 @@ import {
 } from './media.reducer';
 
 // Lookup the 'Media' feature state managed by NgRx
-export const getMediaState = createFeatureSelector<MediaPartialState, MediaState>(
-  MEDIA_FEATURE_KEY
-);
+export const getMediaState = createFeatureSelector<
+  MediaPartialState,
+  MediaState
+>(MEDIA_FEATURE_KEY);
 
 const { selectAll, selectEntities } = mediaAdapter.getSelectors();
 

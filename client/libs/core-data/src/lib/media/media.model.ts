@@ -1,11 +1,12 @@
-export interface Media {
-  id: string;
-  url: string;
-  embedCode: string;
-  created_at: string;
-  updated_at: string;
-  type: MediaTypes;
+import { Base } from '../base.model';
+import { Sermon } from '../sermons/sermon.model';
+
+export interface Media extends Base {
   sermon_id: string;
+  type: MediaTypes;
+  embedCode?: string;
+  url?: string;
+  sermon?: Sermon
 }
 
 export enum MediaTypes {
@@ -21,5 +22,6 @@ export const emptyMedia = {
   created_at: '',
   updated_at: '',
   type: '',
-  sermon_id: ''
+  sermon_id: '',
+  sermon: {}
 }

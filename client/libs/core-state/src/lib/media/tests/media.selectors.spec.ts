@@ -4,7 +4,7 @@ import * as MediaSelectors from '../media.selectors';
 
 describe('Media Selectors', () => {
   const ERROR_MSG = 'No Error Available';
-  const getMediaId = it => it['id'];
+  const getMediaId = (it) => it['id'];
   const createMediaEntity = (id: string, name = '') =>
     ({
       id,

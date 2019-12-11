@@ -48,7 +48,7 @@ const tagsReducer = createReducer(
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
   on(TagsActions.deleteTag, (state, { tag }) =>
-    tagsAdapter.removeOne(tag.id ,{ ...state, isLoading: false })
+    tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
   )
 );
 

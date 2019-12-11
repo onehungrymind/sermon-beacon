@@ -31,7 +31,7 @@ const storeConfig: RootStoreConfig<any> = {
       TagsEffects,
       MediaEffects
     ]),
-    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' }),
+    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' })
   ],
   providers: [DataPersistence]
 })

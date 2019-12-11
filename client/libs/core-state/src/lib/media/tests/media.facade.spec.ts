@@ -64,7 +64,7 @@ describe('MediaFacade', () => {
     /**
      * The initially generated facade::loadAll() returns empty array
      */
-    it('loadAll() should return empty list with loaded == true', async done => {
+    it('loadAll() should return empty list with loaded == true', async (done) => {
       try {
         let list = await readFirst(facade.allMedia$);
         let isLoaded = await readFirst(facade.loaded$);
@@ -89,7 +89,7 @@ describe('MediaFacade', () => {
     /**
      * Use `loadMediaSuccess` to manually update list
      */
-    it('allMedia$ should return the loaded list; and loaded flag == true', async done => {
+    it('allMedia$ should return the loaded list; and loaded flag == true', async (done) => {
       try {
         let list = await readFirst(facade.allMedia$);
         let isLoaded = await readFirst(facade.loaded$);

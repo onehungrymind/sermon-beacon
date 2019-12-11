@@ -1,22 +1,20 @@
-import { Sermon } from '../sermons/sermons.model';
+import { Base } from '../base.model';
+import { Sermon } from '../sermons/sermon.model';
 
-export interface Speaker {
-  id: string;
+export interface Speaker extends Base {
   first_name: string;
   last_name: string;
-  position?: string;
   church_name?: string;
-  created_at?: string;
-  updated_at?: string;
   speaker_sermons?: SpeakerSermon[];
+  position?: string;
 }
 
 export interface SpeakerSermon {
   id?: string;
-  speaker_id?: string;
+  sermon?: Sermon;
   sermon_id?: string;
-  sermon: Sermon;
-  speaker: Speaker;
+  speaker?: Speaker;
+  speaker_id?: string;
 }
 
 export const emptySpeaker: Speaker = {

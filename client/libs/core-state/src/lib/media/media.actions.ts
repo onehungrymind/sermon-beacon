@@ -8,9 +8,7 @@ export const selectedMedia = createAction(
 );
 
 // Load Actions
-export const loadMedia = createAction(
-  '[Media] Load Media'
-);
+export const loadMedia = createAction('[Media] Load Media');
 
 export const loadMediaSuccess = createAction(
   '[Media] Load Media Success',
@@ -42,7 +40,7 @@ export const updateMediaSuccess = createAction(
 // Delete Actions
 export const deleteMedia = createAction(
   '[Media] Delete Media',
-  props<{ media: Media}>()
+  props<{ media: Media }>()
 );
 
 export const deleteMediaSuccess = createAction(

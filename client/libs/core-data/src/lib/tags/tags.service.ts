@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
-import { Tag } from './tags.model';
+import { Tag } from './tag.model';
 import { tagsQuery, updateTagsMutation, createTagsMutation, deleteTagsMutation } from './tags.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';

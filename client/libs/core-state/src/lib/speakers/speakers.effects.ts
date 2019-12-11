@@ -78,21 +78,19 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.deleteSpeaker>,
         state: SpeakersPartialState
       ) => {
-        return this.dialogService
-          .deleteDialog(action.speaker, 'speaker')
-          .pipe(
-            switchMap((deleteConfirmed: boolean) =>
-              iif(
-                () => deleteConfirmed,
-                of(
-                  SpeakersActions.deleteSpeakerSuccess({
-                    speaker: action.speaker
-                  })
-                ),
-                EMPTY
-              )
+        return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(
+              () => deleteConfirmed,
+              of(
+                SpeakersActions.deleteSpeakerSuccess({
+                  speaker: action.speaker
+                })
+              ),
+              EMPTY
             )
-          );
+          )
+        );
       },
 
       onError: (

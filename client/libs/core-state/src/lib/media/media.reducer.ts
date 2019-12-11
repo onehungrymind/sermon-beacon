@@ -33,10 +33,11 @@ const mediaReducer = createReducer(
     MediaActions.createMedia,
     MediaActions.updateMedia,
     MediaActions.deleteMedia,
-    state => ({
-    ...state,
-    isLoading: true
-  })),
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
   on(MediaActions.loadMediaSuccess, (state, { media }) =>
     mediaAdapter.addAll(media, { ...state, isLoading: false })
   ),

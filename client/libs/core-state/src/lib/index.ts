@@ -17,4 +17,4 @@ export const reducers: ActionReducerMap<AppState> = {
   speakers: fromSpeakers.reducer,
   tags: fromTags.reducer,
   media: fromMedia.reducer
-}
+};

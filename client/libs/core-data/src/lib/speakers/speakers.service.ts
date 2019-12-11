@@ -5,7 +5,7 @@ import { ApolloQueryResult } from 'apollo-client';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Speaker } from './speakers.model';
+import { Speaker } from './speaker.model';
 import {
   speakerQuery,
   createSpeakerMutation,

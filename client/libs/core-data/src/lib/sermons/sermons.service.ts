@@ -9,7 +9,7 @@ import {
   updateSermonMutation,
   deleteSermonMutation
 } from './sermons.graphql';
-import { Sermon } from './sermons.model';
+import { Sermon } from './sermon.model';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

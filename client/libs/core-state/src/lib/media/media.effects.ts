@@ -16,7 +16,11 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.loadMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.all().pipe(map((res: Media[]) => MediaActions.loadMediaSuccess({ media: res})));
+        return this.mediaService
+          .all()
+          .pipe(
+            map((res: Media[]) => MediaActions.loadMediaSuccess({ media: res }))
+          );
       },
 
       onError: (action: ReturnType<typeof MediaActions.loadMedia>, error) => {
@@ -31,7 +35,11 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.createMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.create(action.media).pipe(map((res: Media) => MediaActions.createMediaSuccess({ media: res})));
+        return this.mediaService
+          .create(action.media)
+          .pipe(
+            map((res: Media) => MediaActions.createMediaSuccess({ media: res }))
+          );
       },
 
       onError: (action: ReturnType<typeof MediaActions.createMedia>, error) => {
@@ -46,7 +54,11 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.updateMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.update(action.media).pipe(map((res: Media) => MediaActions.updateMediaSuccess({ media: res})));
+        return this.mediaService
+          .update(action.media)
+          .pipe(
+            map((res: Media) => MediaActions.updateMediaSuccess({ media: res }))
+          );
       },
 
       onError: (action: ReturnType<typeof MediaActions.updateMedia>, error) => {
@@ -61,7 +73,11 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.deleteMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.delete(action.media).pipe(map((res: Media) => MediaActions.deleteMediaSuccess({ media: res })));
+        return this.mediaService
+          .delete(action.media)
+          .pipe(
+            map((res: Media) => MediaActions.deleteMediaSuccess({ media: res }))
+          );
       },
 
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
