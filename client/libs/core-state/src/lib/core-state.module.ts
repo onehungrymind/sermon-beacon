@@ -12,6 +12,9 @@ import { reducers } from '.';
 import { SermonsEffects } from './sermons/sermons.effects';
 import { SpeakersEffects } from './speakers/speakers.effects';
 import { TagsEffects } from './tags/tags.effects';
+import * as fromMediaTypes from './media-types/media-types.reducer';
+import { MediaTypesEffects } from './media-types/media-types.effects';
+import { MediaTypesFacade } from './media-types/media-types.facade';
 
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
@@ -31,7 +34,12 @@ const storeConfig: RootStoreConfig<any> = {
       TagsEffects,
       MediaEffects
     ]),
-    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' })
+    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' }),
+    StoreModule.forFeature(
+      fromMediaTypes.MEDIATYPES_FEATURE_KEY,
+      fromMediaTypes.reducer
+    ),
+    EffectsModule.forFeature([MediaTypesEffects])
   ],
   providers: [DataPersistence]
 })
