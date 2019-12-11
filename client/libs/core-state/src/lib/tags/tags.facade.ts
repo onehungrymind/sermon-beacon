@@ -7,7 +7,6 @@ import * as TagsSelectors from './tags.selectors';
 import * as TagsActions from './tags.actions';
 import { Tag } from '@sb/core-data';
 
-
 @Injectable()
 export class TagsFacade {
   loaded$ = this.store.pipe(select(TagsSelectors.getTagsLoading));
@@ -35,7 +34,7 @@ export class TagsFacade {
   deleteTag(tag: Tag) {
     this.dispatch(TagsActions.deleteTag({ tag }));
   }
-  
+
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }

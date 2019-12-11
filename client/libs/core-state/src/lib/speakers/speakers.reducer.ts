@@ -15,7 +15,9 @@ export interface SpeakersPartialState {
   readonly [SPEAKERS_FEATURE_KEY]: SpeakersState;
 }
 
-export const speakersAdapter: EntityAdapter<Speaker> = createEntityAdapter<Speaker>();
+export const speakersAdapter: EntityAdapter<Speaker> = createEntityAdapter<
+  Speaker
+>();
 
 export const initialState: SpeakersState = speakersAdapter.getInitialState({
   // set initial required properties
@@ -30,28 +32,23 @@ const speakersReducer = createReducer(
     SpeakersActions.createSpeaker,
     SpeakersActions.updateSpeaker,
     SpeakersActions.deleteSpeaker,
-    state => ({
-    ...state,
-    isLoading: false
-  })),
+    (state) => ({
+      ...state,
+      isLoading: false
+    })
+  ),
   on(SpeakersActions.loadSpeakersSuccess, (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, loaded: true })
   ),
-  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  })),
-  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  })),
-  on(SpeakersActions.deleteSpeaker, (state, { speaker }) => ({
-    speaker,
-    ...state,
-    isLoading: false
-  }))
+  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) =>
+    speakersAdapter.addOne(speaker, { ...state, isLoading: false })
+  ),
+  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) =>
+    speakersAdapter.upsertOne(speaker, { ...state, isLoading: false })
+  ),
+  on(SpeakersActions.deleteSpeaker, (state, { speaker }) =>
+    speakersAdapter.removeOne(speaker.id, { ...state, isLoading: false })
+  )
 );
 
 export function reducer(state: SpeakersState | undefined, action: Action) {
