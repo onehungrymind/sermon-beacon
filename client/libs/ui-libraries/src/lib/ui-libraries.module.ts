@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '@sb/material';
@@ -7,7 +8,6 @@ import { MaterialModule } from '@sb/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { UiModalComponent } from './ui-modal/ui-modal.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

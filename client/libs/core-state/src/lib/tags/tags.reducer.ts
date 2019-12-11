@@ -33,7 +33,7 @@ const tagsReducer = createReducer(
     TagsActions.createTag,
     TagsActions.updateTag,
     TagsActions.deleteTag,
-    state => ({ 
+    (state) => ({
       ...state,
       isLoading: false
     })

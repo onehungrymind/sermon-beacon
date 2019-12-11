@@ -15,7 +15,9 @@ export interface SermonsPartialState {
   readonly [SERMONS_FEATURE_KEY]: SermonsState;
 }
 
-export const sermonsAdapter: EntityAdapter<Sermon> = createEntityAdapter<Sermon>();
+export const sermonsAdapter: EntityAdapter<Sermon> = createEntityAdapter<
+  Sermon
+>();
 
 export const initialState: SermonsState = sermonsAdapter.getInitialState({
   // set initial required properties
@@ -25,18 +27,19 @@ export const initialState: SermonsState = sermonsAdapter.getInitialState({
 
 const sermonsReducer = createReducer(
   initialState,
-  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) => 
+  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) =>
     Object.assign({}, state, { selectedSermonId })
-  ), 
+  ),
   on(
     SermonsActions.loadSermons,
     SermonsActions.createSermon,
     SermonsActions.updateSermon,
     SermonsActions.deleteSermon,
-    state => ({
-    ...state,
-    isLoading: true
-  })),
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
   on(SermonsActions.loadSermonsSuccess, (state, { sermons }) =>
     sermonsAdapter.addAll(sermons, { ...state, isLoading: false })
   ),

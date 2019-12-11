@@ -7,7 +7,8 @@ import { map, switchMap } from 'rxjs/operators';
 
 import * as fromTags from './tags.reducer';
 import * as TagsActions from './tags.actions';
-import { DialogService, Tag, TagsService, NotifyService } from '@sb/core-data';
+import { Tag, TagsService } from '@sb/core-data';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
 
 @Injectable()
 export class TagsEffects {
@@ -17,7 +18,11 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.loadTags>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService.all().pipe(map((res: Tag[]) => TagsActions.loadTagsSuccess({ tags: res })));
+        return this.tagsService
+          .all()
+          .pipe(
+            map((res: Tag[]) => TagsActions.loadTagsSuccess({ tags: res }))
+          );
       },
 
       onError: (action: ReturnType<typeof TagsActions.loadTags>, error) => {
@@ -32,7 +37,9 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.createTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService.create(action.tag).pipe(map((res: Tag) => TagsActions.createTagSuccess({ tag: res })));
+        return this.tagsService
+          .create(action.tag)
+          .pipe(map((res: Tag) => TagsActions.createTagSuccess({ tag: res })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.createTag>, error) => {
@@ -47,7 +54,9 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.updateTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService.update(action.tag).pipe(map((res: Tag) => TagsActions.updateTagSuccess({ tag: res })));
+        return this.tagsService
+          .update(action.tag)
+          .pipe(map((res: Tag) => TagsActions.updateTagSuccess({ tag: res })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
@@ -62,13 +71,17 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.deleteTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.dialogService.deleteDialog(action.tag, 'tag').pipe(
-          switchMap((deleteConfirmed: boolean) => iif(
-            () => deleteConfirmed,
-            of(TagsActions.deleteTagSuccess({tag: action.tag})),
-            EMPTY
-          ))
-        );
+        return this.dialogService
+          .deleteDialog(action.tag, 'tag')
+          .pipe(
+            switchMap((deleteConfirmed: boolean) =>
+              iif(
+                () => deleteConfirmed,
+                of(TagsActions.deleteTagSuccess({ tag: action.tag })),
+                EMPTY
+              )
+            )
+          );
       },
 
       onError: (action: ReturnType<typeof TagsActions.deleteTag>, error) => {
