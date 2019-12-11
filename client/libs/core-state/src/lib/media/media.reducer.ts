@@ -19,7 +19,7 @@ export const mediaAdapter: EntityAdapter<Media> = createEntityAdapter<Media>();
 
 export const initialState: MediaState = mediaAdapter.getInitialState({
   // set initial required properties
-  selectedMediaId?: null,
+  selectedMediaId: null,
   isLoading: false
 });
 
