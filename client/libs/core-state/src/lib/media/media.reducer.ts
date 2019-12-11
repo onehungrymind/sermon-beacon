@@ -19,7 +19,7 @@ export const mediaAdapter: EntityAdapter<Media> = createEntityAdapter<Media>();
 
 export const initialState: MediaState = mediaAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedMediaId?: null,
   isLoading: false
 });
 
@@ -38,7 +38,7 @@ const mediaReducer = createReducer(
     isLoading: true
   })),
   on(MediaActions.loadMediaSuccess, (state, { media }) =>
-    mediaAdapter.addAll(media, { ...state, loaded: false })
+    mediaAdapter.addAll(media, { ...state, isLoading: false })
   ),
   on(MediaActions.createMediaSuccess, (state, { media }) =>
     mediaAdapter.addOne(media, { ...state, isLoading: false })

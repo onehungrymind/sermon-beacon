@@ -6,7 +6,7 @@ import * as fromTags from './tags/tags.reducer';
 import * as fromMedia from './media/media.reducer';
 
 export interface AppState {
-  sermons: fromSermons.State;
+  sermons: fromSermons.SermonsState;
   speakers: fromSpeakers.SpeakersState;
   tags: fromTags.TagsState;
   media: fromMedia.MediaState;
