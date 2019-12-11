@@ -3,7 +3,7 @@ import { SermonTag } from '../tags/tag.model';
 import { SpeakerSermon } from '../speakers/speaker.model';
 
 export interface Sermon extends Base {
-  media_id: number;
+  media_id: string;
   title: string;
   date?: string;
   sermon_speakers?: SpeakerSermon[];
