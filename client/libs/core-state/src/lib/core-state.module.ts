@@ -12,6 +12,7 @@ import { reducers } from '.';
 import { SermonsEffects } from './sermons/sermons.effects';
 import { SpeakersEffects } from './speakers/speakers.effects';
 import { TagsEffects } from './tags/tags.effects';
+import { MediaTypesEffects } from './media-types/media-types.effects';
 
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
@@ -29,7 +30,8 @@ const storeConfig: RootStoreConfig<any> = {
       SermonsEffects,
       SpeakersEffects,
       TagsEffects,
-      MediaEffects
+      MediaEffects,
+      MediaTypesEffects
     ]),
     StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' })
   ],
