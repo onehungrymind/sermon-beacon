@@ -1,3 +1,10 @@
+@import 'libs/theme/variables.scss';
+@import 'libs/theme/main.scss';
+
 .full-width-table {
   width: 100%;
+}
+
+.bg-color-primary {
+  background-color: $primary;
 }

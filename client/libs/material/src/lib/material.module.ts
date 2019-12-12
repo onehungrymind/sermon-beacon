@@ -53,7 +53,11 @@ const MODULES = [
 ];
 
 @NgModule({
-  imports: MODULES,
+  imports: [
+    MODULES,
+    MatSortModule,
+    MatTableModule,
+  ],
   exports: [
     MODULES,
     SbTableComponent
