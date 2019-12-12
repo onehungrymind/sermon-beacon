@@ -7,7 +7,7 @@ import * as TagsSelectors from './tags.selectors';
 import * as TagsActions from './tags.actions';
 import { Tag } from '@sb/core-data';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TagsFacade {
   loaded$ = this.store.pipe(select(TagsSelectors.getTagsLoading));
   allTags$ = this.store.pipe(select(TagsSelectors.getAllTags));
