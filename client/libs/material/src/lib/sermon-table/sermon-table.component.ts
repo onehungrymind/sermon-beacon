@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SbTableDataSource } from './sb-table-datasource';
+import { SermonTableDataSource } from './sermon-table-datasource';
 import { Sermon } from '@sb/core-data';
 
 @Component({
-  selector: 'material-sb-table',
-  templateUrl: './sb-table.component.html',
-  styleUrls: ['./sb-table.component.scss']
+  selector: 'material-sermon-table',
+  templateUrl: './sermon-table.component.html',
+  styleUrls: ['./sermon-table.component.scss']
 })
-export class SbTableComponent implements OnChanges {
+export class SermonTableComponent implements OnChanges {
   @Input() sermonData;
   @Output() deleted = new EventEmitter();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  dataSource: SbTableDataSource;
+  dataSource: SermonTableDataSource;
   primary = 'primary';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -32,7 +32,7 @@ export class SbTableComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.sort && this.sermonData) {
-      this.dataSource = new SbTableDataSource(this.sermonData, this.sort, this.paginator);
+      this.dataSource = new SermonTableDataSource(this.sermonData, this.sort, this.paginator);
     }
 
 

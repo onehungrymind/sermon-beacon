@@ -9,7 +9,7 @@ import { Sermon, Media, Speaker } from '@sb/core-data';
 
 type TableTypes = Media[] | Sermon[] | Speaker[] | any;
 
-export class SbTableDataSource extends DataSource<TableTypes | any> {
+export class SermonTableDataSource extends DataSource<TableTypes | any> {
 
   constructor(public data: TableTypes = [], private sort: MatSort, private paginator?: MatPaginator) {
     super();

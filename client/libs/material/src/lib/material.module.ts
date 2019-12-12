@@ -24,7 +24,7 @@ import {
   MatSortModule,
   MatDialogModule
 } from '@angular/material';
-import { SbTableComponent } from './sb-table/sb-table.component';
+import { SermonTableComponent } from './sermon-table/sermon-table.component';
 
 const MODULES = [
   BrowserAnimationsModule,
@@ -60,8 +60,8 @@ const MODULES = [
   ],
   exports: [
     MODULES,
-    SbTableComponent
+    SermonTableComponent
   ],
-  declarations: [SbTableComponent]
+  declarations: [SermonTableComponent]
 })
 export class MaterialModule {}
