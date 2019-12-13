@@ -1,10 +1,10 @@
 import { TagsEntity } from '../tags.models';
-import { State, tagsAdapter, initialState } from '../tags.reducer';
+import { initialState, State, tagsAdapter } from '../tags.reducer';
 import * as TagsSelectors from '../tags.selectors';
 
 describe('Tags Selectors', () => {
   const ERROR_MSG = 'No Error Available';
-  const getTagsId = it => it['id'];
+  const getTagsId = (it) => it['id'];
   const createTagsEntity = (id: string, name = '') =>
     ({
       id,

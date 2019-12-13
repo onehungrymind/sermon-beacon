@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
 
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
@@ -13,7 +13,12 @@ import { TagsFacade } from '../tags.facade';
 
 import * as TagsSelectors from '../tags.selectors';
 import * as TagsActions from '../tags.actions';
-import { TAGS_FEATURE_KEY, State, initialState, reducer } from '../tags.reducer';
+import {
+  initialState,
+  reducer,
+  State,
+  TAGS_FEATURE_KEY
+} from '../tags.reducer';
 
 interface TestSchema {
   tags: State;
@@ -59,7 +64,7 @@ describe('TagsFacade', () => {
     /**
      * The initially generated facade::loadAll() returns empty array
      */
-    it('loadAll() should return empty list with loaded == true', async done => {
+    it('loadAll() should return empty list with loaded == true', async (done) => {
       try {
         let list = await readFirst(facade.allTags$);
         let isLoaded = await readFirst(facade.loaded$);
@@ -84,7 +89,7 @@ describe('TagsFacade', () => {
     /**
      * Use `loadTagsSuccess` to manually update list
      */
-    it('allTags$ should return the loaded list; and loaded flag == true', async done => {
+    it('allTags$ should return the loaded list; and loaded flag == true', async (done) => {
       try {
         let list = await readFirst(facade.allTags$);
         let isLoaded = await readFirst(facade.loaded$);

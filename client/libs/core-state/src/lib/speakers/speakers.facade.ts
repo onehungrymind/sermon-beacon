@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromSpeakers from './speakers.reducer';
 import * as SpeakersSelectors from './speakers.selectors';
 import * as SpeakersActions from './speakers.actions';
 import { Speaker } from '@sb/core-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
   loaded$ = this.store.pipe(select(SpeakersSelectors.getSpeakersLoading));
   allSpeakers$ = this.store.pipe(select(SpeakersSelectors.getAllSpeakers));

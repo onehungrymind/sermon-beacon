@@ -7,10 +7,10 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Speaker } from './speaker.model';
 import {
-  speakerQuery,
   createSpeakerMutation,
-  updateSpeakerMutation,
-  deleteSpeakerMutation
+  deleteSpeakerMutation,
+  speakerQuery,
+  updateSpeakerMutation
 } from './speakers.graphql';
 
 @Injectable({

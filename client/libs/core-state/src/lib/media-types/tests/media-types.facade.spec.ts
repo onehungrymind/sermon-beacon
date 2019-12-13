@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
 
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
@@ -14,10 +14,10 @@ import { MediaTypesFacade } from '../media-types.facade';
 import * as MediaTypesSelectors from '../media-types.selectors';
 import * as MediaTypesActions from '../media-types.actions';
 import {
-  MEDIATYPES_FEATURE_KEY,
-  State,
   initialState,
-  reducer
+  MEDIATYPES_FEATURE_KEY,
+  reducer,
+  State
 } from '../media-types.reducer';
 
 interface TestSchema {

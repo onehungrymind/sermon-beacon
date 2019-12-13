@@ -4,10 +4,10 @@ import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 
 import {
-  sermonQuery,
   createSermonMutation,
-  updateSermonMutation,
-  deleteSermonMutation
+  deleteSermonMutation,
+  sermonQuery,
+  updateSermonMutation
 } from './sermons.graphql';
 import { Sermon } from './sermon.model';
 

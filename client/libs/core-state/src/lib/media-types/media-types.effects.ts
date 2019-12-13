@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
 import { map } from 'rxjs/operators';
 
 import * as fromMediaTypes from './media-types.reducer';
 import * as MediaTypesActions from './media-types.actions';
-import { MediaTypesService, MediaType } from '@sb/core-data';
+import { MediaType, MediaTypesService } from '@sb/core-data';
 import { NotifyService } from '@sb/ui-libraries';
 
 @Injectable()

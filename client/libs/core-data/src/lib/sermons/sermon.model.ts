@@ -21,4 +21,4 @@ export const emptySermon: Sermon = {
   updated_at: '',
   sermon_speakers: [],
   sermon_tags: []
-}
+};

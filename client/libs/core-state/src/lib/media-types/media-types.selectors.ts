@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   MEDIATYPES_FEATURE_KEY,
-  MediaTypeState,
+  mediaTypesAdapter,
   MediaTypesPartialState,
-  mediaTypesAdapter
+  MediaTypeState
 } from './media-types.reducer';
 
 // Lookup the 'MediaTypes' feature state managed by NgRx
