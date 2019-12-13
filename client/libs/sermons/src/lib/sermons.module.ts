@@ -5,7 +5,6 @@ import { UiLibrariesModule } from '@sb/ui-libraries';
 
 import { SermonsComponent } from './sermons/sermons.component';
 import { SermonListComponent } from './sermons/sermon-list/sermon-list.component';
-import { SermonDetailsComponent } from './sermons/sermon-details/sermon-details.component';
 import { MaterialModule } from '@sb/material';
 
 @NgModule({
@@ -16,13 +15,11 @@ import { MaterialModule } from '@sb/material';
   ],
   declarations: [
     SermonsComponent,
-    SermonListComponent,
-    SermonDetailsComponent
+    SermonListComponent
   ],
   exports: [
     SermonsComponent,
-    SermonListComponent,
-    SermonDetailsComponent
+    SermonListComponent
   ],
 })
 export class SermonsModule { }
