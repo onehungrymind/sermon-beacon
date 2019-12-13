@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import * as fromMedia from './media.reducer';
 import * as MediaActions from './media.actions';
 import { MediaService, Media } from '@sb/core-data';
+import { NotifyService } from '@sb/ui-libraries';
 
 @Injectable()
 export class MediaEffects {
@@ -19,12 +20,12 @@ export class MediaEffects {
         return this.mediaService
           .all()
           .pipe(
-            map((res: Media[]) => MediaActions.loadMediaSuccess({ media: res }))
+            map((res: Media[]) => MediaActions.mediaLoaded({ media: res }))
           );
       },
 
       onError: (action: ReturnType<typeof MediaActions.loadMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -37,13 +38,11 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .create(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.createMediaSuccess({ media: res }))
-          );
+          .pipe(map((res: Media) => MediaActions.mediaCreated({ media: res })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.createMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -56,13 +55,11 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .update(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.updateMediaSuccess({ media: res }))
-          );
+          .pipe(map((res: Media) => MediaActions.mediaUpdated({ media: res })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.updateMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -75,13 +72,11 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .delete(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.deleteMediaSuccess({ media: res }))
-          );
+          .pipe(map((res: Media) => MediaActions.mediaDeleted({ media: res })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -89,6 +84,7 @@ export class MediaEffects {
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromMedia.MediaPartialState>,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private notifyService: NotifyService
   ) {}
 }

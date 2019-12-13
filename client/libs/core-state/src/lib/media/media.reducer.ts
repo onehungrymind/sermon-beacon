@@ -38,16 +38,16 @@ const mediaReducer = createReducer(
       isLoading: true
     })
   ),
-  on(MediaActions.loadMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaLoaded, (state, { media }) =>
     mediaAdapter.addAll(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.createMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaCreated, (state, { media }) =>
     mediaAdapter.addOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.updateMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaUpdated, (state, { media }) =>
     mediaAdapter.upsertOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.deleteMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaDeleted, (state, { media }) =>
     mediaAdapter.removeOne(media.id, { ...state, isLoading: false })
   )
 );

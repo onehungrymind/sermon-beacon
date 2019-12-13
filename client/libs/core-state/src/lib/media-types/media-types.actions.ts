@@ -3,47 +3,47 @@ import { createAction, props } from '@ngrx/store';
 import { MediaType } from '@sb/core-data';
 
 export const selectedMedia = createAction(
-  '[MediaTypes] Selected MediaType',
+  '[MEDIATYPE] Selected MediaType',
   props<{ selectedMediaTypeId: string }>()
 );
 
 // Load Actions
 export const loadMediaTypes = createAction('[MediaTypes] Load MediaTypes');
 
-export const loadMediaTypesSuccess = createAction(
-  '[MediaTypes] MediaTypes Successfully Loaded',
+export const mediaTypeLoaded = createAction(
+  '[MEDIATYPE] MediaTypes Successfully Loaded',
   props<{ mediaTypes: MediaType[] }>()
 );
 
 // Create Actions
 export const createMediaType = createAction(
-  '[MediaTypes] Create MediaType',
+  '[MEDIATYPE] Create New MediaType',
   props<{ mediaType: MediaType }>()
 );
 
-export const createMediaTypeSuccess = createAction(
-  '[MediaTypes] MediaType Successfully Created',
+export const mediaTypeCreated = createAction(
+  '[MEDIATYPE] New MediaType Successfully Created',
   props<{ mediaType: MediaType }>()
 );
 
 // Update Actions
 export const updateMediaType = createAction(
-  '[MediaTypes] Update MediaType',
+  '[MEDIATYPE] Update MediaType',
   props<{ mediaType: MediaType }>()
 );
 
-export const updateMediaTypeSuccess = createAction(
-  '[MediaTypes] MediaType Successfully Updated',
+export const mediaTypeUpdated = createAction(
+  '[MEDIATYPE] MediaType Successfully Updated',
   props<{ mediaType: MediaType }>()
 );
 
 // Delete Actions
 export const deleteMediaType = createAction(
-  '[MediaTypes] Delete MediaType',
+  '[MEDIATYPE] Delete MediaType',
   props<{ mediaType: MediaType }>()
 );
 
-export const deleteMediaTypeSuccess = createAction(
-  '[MediaTypes] MediaType Successfully Deleted',
+export const mediaTypeDeleted = createAction(
+  '[MEDIATYPE] MediaType Successfully Deleted',
   props<{ mediaType: MediaType }>()
 );

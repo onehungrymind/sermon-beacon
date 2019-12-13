@@ -21,7 +21,7 @@ export class MediaTypesEffects {
           .all()
           .pipe(
             map((res: MediaType[]) =>
-              MediaTypesActions.loadMediaTypesSuccess({ mediaTypes: res })
+              MediaTypesActions.mediaTypeLoaded({ mediaTypes: res })
             )
           );
       },
@@ -45,7 +45,7 @@ export class MediaTypesEffects {
           .create(action.mediaType)
           .pipe(
             map((res: MediaType) =>
-              MediaTypesActions.createMediaTypeSuccess({ mediaType: res })
+              MediaTypesActions.mediaTypeCreated({ mediaType: res })
             )
           );
       },
@@ -69,7 +69,7 @@ export class MediaTypesEffects {
           .update(action.mediaType)
           .pipe(
             map((res: MediaType) =>
-              MediaTypesActions.updateMediaTypeSuccess({ mediaType: res })
+              MediaTypesActions.mediaTypeUpdated({ mediaType: res })
             )
           );
       },
@@ -93,7 +93,7 @@ export class MediaTypesEffects {
           .delete(action.mediaType)
           .pipe(
             map((res: MediaType) =>
-              MediaTypesActions.deleteMediaTypeSuccess({ mediaType: res })
+              MediaTypesActions.mediaTypeDeleted({ mediaType: res })
             )
           );
       },

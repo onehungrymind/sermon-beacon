@@ -3,47 +3,47 @@ import { createAction, props } from '@ngrx/store';
 import { Sermon } from '@sb/core-data';
 
 export const sermonSelected = createAction(
-  '[Sermons] Sermon Selected',
+  '[SERMON] Sermon Selected',
   props<{ selectedSermonId: string }>()
 );
 
 // Load Actions
 export const loadSermons = createAction('[Sermons] Load Sermons');
 
-export const loadSermonsSuccess = createAction(
-  '[Sermons] Sermons Successfully Loaded',
+export const sermonsLoaded = createAction(
+  '[SERMON] Sermons Successfully Loaded',
   props<{ sermons: Sermon[] }>()
 );
 
 // Create Actions
 export const createSermon = createAction(
-  '[Sermons] Create New Sermon',
+  '[SERMON] Create New Sermon',
   props<{ sermon: Sermon }>()
 );
 
-export const createSermonSuccess = createAction(
-  '[Sermons] New Sermon Successfully Created',
+export const sermonCreated = createAction(
+  '[SERMON] New Sermon Successfully Created',
   props<{ sermon: Sermon }>()
 );
 
 // Update Actions
 export const updateSermon = createAction(
-  '[Sermons] Update Sermon',
+  '[SERMON] Update Sermon',
   props<{ sermon: Sermon }>()
 );
 
-export const updateSermonSuccess = createAction(
-  '[Sermons] Sermon Successfully Updated',
+export const sermonUpdated = createAction(
+  '[SERMON] Sermon Successfully Updated',
   props<{ sermon: Sermon }>()
 );
 
 // Delete Actions
 export const deleteSermon = createAction(
-  '[Source] Delete Sermon',
+  '[SERMON] Delete Sermon',
   props<{ sermon: Sermon }>()
 );
 
-export const deleteSermonSuccess = createAction(
-  '[Source] Sermon Successfully Deleted',
+export const sermonDeleted = createAction(
+  '[SERMON] Sermon Successfully Deleted',
   props<{ sermon: Sermon }>()
 );

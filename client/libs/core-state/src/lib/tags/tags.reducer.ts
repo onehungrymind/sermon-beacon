@@ -38,16 +38,16 @@ const tagsReducer = createReducer(
       isLoading: false
     })
   ),
-  on(TagsActions.loadTagsSuccess, (state, { tags }) =>
+  on(TagsActions.tagsLoaded, (state, { tags }) =>
     tagsAdapter.addAll(tags, { ...state, isLoading: true })
   ),
-  on(TagsActions.createTagSuccess, (state, { tag }) =>
+  on(TagsActions.tagsCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.updateTagSuccess, (state, { tag }) =>
+  on(TagsActions.tagsUpdated, (state, { tag }) =>
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.deleteTag, (state, { tag }) =>
+  on(TagsActions.tagsDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
   )
 );

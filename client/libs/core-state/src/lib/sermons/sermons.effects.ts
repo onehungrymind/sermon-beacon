@@ -22,7 +22,7 @@ export class SermonsEffects {
           .all()
           .pipe(
             map((res: Sermon[]) =>
-              SermonsActions.loadSermonsSuccess({ sermons: res })
+              SermonsActions.sermonsLoaded({ sermons: res })
             )
           );
       },
@@ -45,9 +45,7 @@ export class SermonsEffects {
         return this.sermonsService
           .create(action.sermon)
           .pipe(
-            map((res: Sermon) =>
-              SermonsActions.createSermonSuccess({ sermon: res })
-            )
+            map((res: Sermon) => SermonsActions.sermonCreated({ sermon: res }))
           );
       },
 
@@ -69,9 +67,7 @@ export class SermonsEffects {
         return this.sermonsService
           .update(action.sermon)
           .pipe(
-            map((res: Sermon) =>
-              SermonsActions.updateSermonSuccess({ sermon: res })
-            )
+            map((res: Sermon) => SermonsActions.sermonUpdated({ sermon: res }))
           );
       },
 
@@ -96,9 +92,7 @@ export class SermonsEffects {
             switchMap((deleteConfirmed: boolean) =>
               iif(
                 () => deleteConfirmed,
-                of(
-                  SermonsActions.deleteSermonSuccess({ sermon: action.sermon })
-                ),
+                of(SermonsActions.sermonDeleted({ sermon: action.sermon })),
                 EMPTY
               )
             )
