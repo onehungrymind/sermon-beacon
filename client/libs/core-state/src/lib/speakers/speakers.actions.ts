@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Speaker } from '@sb/core-data';
 
-export const selectSpeaker = createAction(
+export const selectedSpeaker = createAction(
   '[SPEAKER] Speaker Selected',
   props<{ selectedSpeakerId: string }>()
 );

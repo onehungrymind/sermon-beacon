@@ -21,13 +21,13 @@ export const sermonsAdapter: EntityAdapter<Sermon> = createEntityAdapter<
 
 export const initialState: SermonsState = sermonsAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedSermonId: null,
   isLoading: false
 });
 
 const sermonsReducer = createReducer(
   initialState,
-  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) =>
+  on(SermonsActions.selectedSermon, (state, { selectedSermonId }) =>
     Object.assign({}, state, { selectedSermonId })
   ),
   on(

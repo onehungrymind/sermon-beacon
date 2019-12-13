@@ -19,7 +19,7 @@ export const tagsAdapter: EntityAdapter<Tag> = createEntityAdapter<Tag>();
 
 export const initialState: TagsState = tagsAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedTagId: null,
   isLoading: false
 });
 

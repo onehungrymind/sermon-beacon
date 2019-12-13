@@ -1,4 +1,4 @@
-import { createReducer, on, Action, State } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SpeakersActions from './speakers.actions';
@@ -7,7 +7,7 @@ import { Speaker } from '@sb/core-data';
 export const SPEAKERS_FEATURE_KEY = 'speakers';
 
 export interface SpeakersState extends EntityState<Speaker> {
-  selectedId?: string | number; // which Speakers record has been selected
+  selectedSpeakerId?: string | number; // which Speakers record has been selected
   isLoading: boolean; // has the Speakers list been loaded
 }
 
@@ -21,12 +21,13 @@ export const speakersAdapter: EntityAdapter<Speaker> = createEntityAdapter<
 
 export const initialState: SpeakersState = speakersAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedSpeakerId: null,
   isLoading: false
 });
 
 const speakersReducer = createReducer(
   initialState,
+  on(SpeakersActions.selectedSpeaker),
   on(
     SpeakersActions.loadSpeakers,
     SpeakersActions.createSpeaker,

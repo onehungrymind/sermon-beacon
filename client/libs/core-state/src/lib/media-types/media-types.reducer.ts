@@ -27,6 +27,9 @@ export const initialState: MediaTypeState = mediaTypesAdapter.getInitialState({
 
 const mediaTypesReducer = createReducer(
   initialState,
+  on(MediaTypesActions.selectedMediaType, (state, { selectedMediaTypeId }) =>
+    Object.assign({}, state, { selectedMediaTypeId })
+  ),
   on(
     MediaTypesActions.loadMediaTypes,
     MediaTypesActions.createMediaType,

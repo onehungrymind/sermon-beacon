@@ -7,7 +7,7 @@ import { Media } from '@sb/core-data';
 export const MEDIA_FEATURE_KEY = 'media';
 
 export interface MediaState extends EntityState<Media> {
-  selectedId?: string | number; // which Media record has been selected
+  selectedMediaId?: string | number; // which Media record has been selected
   isLoading: boolean; // has the Media list been loaded
 }
 
