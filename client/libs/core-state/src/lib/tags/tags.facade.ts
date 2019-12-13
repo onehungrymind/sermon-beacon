@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromTags from './tags.reducer';
 import * as TagsSelectors from './tags.selectors';
 import * as TagsActions from './tags.actions';
 import { Tag } from '@sb/core-data';
 
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TagsFacade {
   loaded$ = this.store.pipe(select(TagsSelectors.getTagsLoading));
   allTags$ = this.store.pipe(select(TagsSelectors.getAllTags));
@@ -35,7 +34,7 @@ export class TagsFacade {
   deleteTag(tag: Tag) {
     this.dispatch(TagsActions.deleteTag({ tag }));
   }
-  
+
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }

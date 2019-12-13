@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { Sermon, Speaker, Tag } from '@sb/core-data';
@@ -15,16 +15,19 @@ export class UiModalComponent {
   @Input() speaker?: Speaker;
   @Input() tag?: Tag;
 
-  constructor(private dialogRef: MatDialogRef<UiModalComponent>) { }
+  constructor(private dialogRef: MatDialogRef<UiModalComponent>) {}
 
   composeMessage() {
-    if (this.type === 'sermon') return `Remove ${this.type} <br/> "${this.sermon.title}" ?`;
-    if (this.type === 'speaker') return `Remove ${this.type} <br/> "${this.speaker.first_name} ${this.speaker.last_name}" ?`;
-    if (this.type === 'tag') return `Remove ${this.type} <br/> "${this.tag.property}" ?`;
+    if (this.type === 'sermon')
+      return `Remove ${this.type} <br/> "${this.sermon.title}" ?`;
+    if (this.type === 'speaker')
+      return `Remove ${this.type} <br/> "${this.speaker.first_name} ${this.speaker.last_name}" ?`;
+    if (this.type === 'tag')
+      return `Remove ${this.type} <br/> "${this.tag.property}" ?`;
   }
 
   confirmDelete() {
-    this.dialogRef.close(true)
+    this.dialogRef.close(true);
   }
 
   cancel() {

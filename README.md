@@ -8,11 +8,11 @@ Sermon Beacon is an open source project meant for church archives at its core, b
 
 Before you begin you need to make sure you have everything needed to get the project up and running.
 
-* Make sure you are on the latest [node](https://nodejs.org/en/)
-* We are using [yarn](https://yarnpkg.com/lang/en/) as the package manager for the frontend application.
-* It will be best if you are on a MacOS machine, otherwise, there may be extra configurations needed on your end.
-* Depending on your role on this project, reach out for specific permissions.
-* Familiarize yourself with this README
+- Make sure you are on the latest [node](https://nodejs.org/en/)
+- We are using [yarn](https://yarnpkg.com/lang/en/) as the package manager for the frontend application.
+- It will be best if you are on a MacOS machine, otherwise, there may be extra configurations needed on your end.
+- Depending on your role on this project, reach out for specific permissions.
+- Familiarize yourself with this README
 
 ## Getting Started
 

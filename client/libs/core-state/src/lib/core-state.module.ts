@@ -7,10 +7,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootStoreConfig, StoreModule } from '@ngrx/store';
 
 import { CoreDataModule } from '@sb/core-data';
+import { MediaEffects } from './media/media.effects';
 import { reducers } from '.';
 import { SermonsEffects } from './sermons/sermons.effects';
 import { SpeakersEffects } from './speakers/speakers.effects';
 import { TagsEffects } from './tags/tags.effects';
+import { MediaTypesEffects } from './media-types/media-types.effects';
 
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
@@ -24,8 +26,14 @@ const storeConfig: RootStoreConfig<any> = {
     CommonModule,
     CoreDataModule,
     StoreModule.forRoot(reducers, storeConfig),
-    EffectsModule.forRoot([SermonsEffects, SpeakersEffects, TagsEffects]),
-    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' }),
+    EffectsModule.forRoot([
+      SermonsEffects,
+      SpeakersEffects,
+      TagsEffects,
+      MediaEffects,
+      MediaTypesEffects
+    ]),
+    StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' })
   ],
   providers: [DataPersistence]
 })

@@ -17,7 +17,8 @@ export const loadTagsSuccess = createAction(
 
 // Create Actions
 export const createTag = createAction(
-  '[Tags] Create New Tag', props<{ tag: Tag }>()
+  '[Tags] Create New Tag',
+  props<{ tag: Tag }>()
 );
 
 export const createTagSuccess = createAction(
@@ -25,7 +26,7 @@ export const createTagSuccess = createAction(
   props<{ tag: Tag }>()
 );
 
-// Update Actions 
+// Update Actions
 export const updateTag = createAction(
   '[Tags] Update Tag',
   props<{ tag: Tag }>()
@@ -36,7 +37,7 @@ export const updateTagSuccess = createAction(
   props<{ tag: Tag }>()
 );
 
-// Delete Actions 
+// Delete Actions
 export const deleteTag = createAction(
   '[Tags] Delete Tag',
   props<{ tag: Tag }>()
@@ -44,4 +45,5 @@ export const deleteTag = createAction(
 
 export const deleteTagSuccess = createAction(
   '[Tags] Tag Successfully Deleted',
-  props<{ tag: Tag }>());
+  props<{ tag: Tag }>()
+);

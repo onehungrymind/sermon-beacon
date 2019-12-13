@@ -20,7 +20,8 @@
       "@sb/core-data": ["libs/core-data/src/index.ts"],
       "@sb/core-state": ["libs/core-state/src/index.ts"],
       "@sb/sermons": ["libs/sermons/src/index.ts"],
-      "@sb/ui-libraries": ["libs/ui-libraries/src/index.ts"]
+      "@sb/ui-libraries": ["libs/ui-libraries/src/index.ts"],
+      "@sb/ui-libraries/services": ["libs/ui-libraries/src/lib/ui-services/"]
     }
   },
   "exclude": ["node_modules", "tmp"]

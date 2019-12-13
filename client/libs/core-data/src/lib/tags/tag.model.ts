@@ -1,20 +1,18 @@
-import { Sermon } from '../sermons/sermons.model';
+import { Base } from '../base.model';
+import { Sermon } from '../sermons/sermon.model';
 
-export interface Tag {
-  id: string;
-  property: string;
+export interface Tag extends Base {
   value: string;
-  created_at: string;
-  updated_at: string;
+  property?: string;
   sermon_tags?: SermonTag[];
 }
 
 export interface SermonTag {
   id?: string;
-  tag_id?: string;
-  sermon_id?: string;
   sermon?: Sermon;
+  sermon_id?: string;
   tag?: Tag;
+  tag_id?: string;
 }
 
 export const emptyTag: Tag = {
@@ -24,4 +22,4 @@ export const emptyTag: Tag = {
   created_at: '',
   updated_at: '',
   sermon_tags: []
-}
+};

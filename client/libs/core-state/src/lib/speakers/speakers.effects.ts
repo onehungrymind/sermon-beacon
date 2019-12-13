@@ -6,7 +6,8 @@ import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
-import { DialogService, NotifyService, SpeakersService, Speaker } from '@sb/core-data';
+import { Speaker, SpeakersService } from '@sb/core-data';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SpeakersPartialState } from './speakers.reducer';
 
 @Injectable()
@@ -17,7 +18,13 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.loadSpeakers>,
         state: SpeakersPartialState
       ) => {
-        this.speakersService.all().pipe(map((res: Speaker[]) => SpeakersActions.loadSpeakersSuccess({ speakers: res })));
+        this.speakersService
+          .all()
+          .pipe(
+            map((res: Speaker[]) =>
+              SpeakersActions.loadSpeakersSuccess({ speakers: res })
+            )
+          );
       },
 
       onError: (
@@ -72,11 +79,17 @@ export class SpeakersEffects {
         state: SpeakersPartialState
       ) => {
         return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
-          switchMap((deleteConfirmed: boolean) => iif(
-            () => deleteConfirmed,
-            of(SpeakersActions.deleteSpeakerSuccess({speaker: action.speaker})),
-            EMPTY
-          ))
+          switchMap((deleteConfirmed: boolean) =>
+            iif(
+              () => deleteConfirmed,
+              of(
+                SpeakersActions.deleteSpeakerSuccess({
+                  speaker: action.speaker
+                })
+              ),
+              EMPTY
+            )
+          )
         );
       },
 

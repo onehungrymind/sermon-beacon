@@ -1,23 +1,25 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as SermonsActions from './sermons.actions';
 import { Sermon } from '@sb/core-data';
 
 export const SERMONS_FEATURE_KEY = 'sermons';
 
-export interface State extends EntityState<Sermon> {
+export interface SermonsState extends EntityState<Sermon> {
   selectedSermonId?: string | number; // which Sermons record has been selected
   isLoading: boolean; // has the Sermons list been loaded
 }
 
 export interface SermonsPartialState {
-  readonly [SERMONS_FEATURE_KEY]: State;
+  readonly [SERMONS_FEATURE_KEY]: SermonsState;
 }
 
-export const sermonsAdapter: EntityAdapter<Sermon> = createEntityAdapter<Sermon>();
+export const sermonsAdapter: EntityAdapter<Sermon> = createEntityAdapter<
+  Sermon
+>();
 
-export const initialState: State = sermonsAdapter.getInitialState({
+export const initialState: SermonsState = sermonsAdapter.getInitialState({
   // set initial required properties
   selected: null,
   isLoading: false
@@ -25,38 +27,33 @@ export const initialState: State = sermonsAdapter.getInitialState({
 
 const sermonsReducer = createReducer(
   initialState,
-  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) => 
+  on(SermonsActions.sermonSelected, (state, { selectedSermonId }) =>
     Object.assign({}, state, { selectedSermonId })
-  ), 
+  ),
   on(
     SermonsActions.loadSermons,
     SermonsActions.createSermon,
     SermonsActions.updateSermon,
     SermonsActions.deleteSermon,
-    state => ({
-    ...state,
-    isLoading: true
-  })),
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
   on(SermonsActions.loadSermonsSuccess, (state, { sermons }) =>
     sermonsAdapter.addAll(sermons, { ...state, isLoading: false })
   ),
-  on(SermonsActions.createSermonSuccess, (state, { sermon }) => ({
-    sermon,
-    ...state,
-    isLoading: false
-  })),
-  on(SermonsActions.updateSermonSuccess, (state, { sermon }) => ({
-    sermon,
-    ...state,
-    isLoading: false
-  })),
-  on(SermonsActions.deleteSermonSuccess, (state, { sermon }) => ({
-    sermon,
-    ...state,
-    isLoading: false
-  }))
+  on(SermonsActions.createSermonSuccess, (state, { sermon }) =>
+    sermonsAdapter.addOne(sermon, { ...state, isLoading: false })
+  ),
+  on(SermonsActions.updateSermonSuccess, (state, { sermon }) =>
+    sermonsAdapter.upsertOne(sermon, { ...state, isLoading: false })
+  ),
+  on(SermonsActions.deleteSermonSuccess, (state, { sermon }) =>
+    sermonsAdapter.removeOne(sermon.id, { ...state, isLoading: false })
+  )
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: SermonsState | undefined, action: Action) {
   return sermonsReducer(state, action);
 }

@@ -1,13 +1,13 @@
 import {
-  SpeakersState,
+  initialState,
   speakersAdapter,
-  initialState
+  SpeakersState
 } from '../speakers.reducer';
 import * as SpeakersSelectors from '../speakers.selectors';
 
 describe('Speakers Selectors', () => {
   const ERROR_MSG = 'No Error Available';
-  const getSpeakersId = it => it['id'];
+  const getSpeakersId = (it) => it['id'];
   const createSpeakersEntity = (id: string, name = '') =>
     ({
       id,
