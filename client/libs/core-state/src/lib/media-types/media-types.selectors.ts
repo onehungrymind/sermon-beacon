@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import {
   MEDIATYPES_FEATURE_KEY,
   MediaTypeState,
@@ -7,35 +8,35 @@ import {
 } from './media-types.reducer';
 
 // Lookup the 'MediaTypes' feature state managed by NgRx
-export const getMediaTypesState = createFeatureSelector<
+export const selectMediaTypesState = createFeatureSelector<
   MediaTypesPartialState,
   MediaTypeState
 >(MEDIATYPES_FEATURE_KEY);
 
 const { selectAll, selectEntities } = mediaTypesAdapter.getSelectors();
 
-export const getMediaTypesLoading = createSelector(
-  getMediaTypesState,
+export const selectMediaTypesLoading = createSelector(
+  selectMediaTypesState,
   (state: MediaTypeState) => state.isLoading
 );
 
-export const getAllMediaTypes = createSelector(
-  getMediaTypesState,
+export const selectAllMediaTypes = createSelector(
+  selectMediaTypesState,
   (state: MediaTypeState) => selectAll(state)
 );
 
-export const getMediaTypesEntities = createSelector(
-  getMediaTypesState,
+export const selectMediaTypesEntities = createSelector(
+  selectMediaTypesState,
   (state: MediaTypeState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
-  getMediaTypesState,
+export const selectMediaTypeId = createSelector(
+  selectMediaTypesState,
   (state: MediaTypeState) => state.selectedMediaTypeId
 );
 
-export const getSelected = createSelector(
-  getMediaTypesEntities,
-  getSelectedId,
+export const selectMediaType = createSelector(
+  selectMediaTypesEntities,
+  selectMediaTypeId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
