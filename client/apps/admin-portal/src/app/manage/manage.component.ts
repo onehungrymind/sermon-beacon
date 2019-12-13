@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
+
 import { Observable } from 'rxjs';
+
+import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
 
 @Component({

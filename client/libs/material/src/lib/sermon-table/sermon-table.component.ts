@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SermonTableDataSource } from './sermon-table-datasource';
+
 import { Sermon } from '@sb/core-data';
+
+import { SermonTableDataSource } from './sermon-table-datasource';
 
 @Component({
   selector: 'material-sermon-table',
@@ -10,7 +12,7 @@ import { Sermon } from '@sb/core-data';
   styleUrls: ['./sermon-table.component.scss']
 })
 export class SermonTableComponent implements OnChanges {
-  @Input() sermonData: Sermon;
+  @Input() sermons: Sermon[];
   @Output() deleted = new EventEmitter();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -28,8 +30,8 @@ export class SermonTableComponent implements OnChanges {
   ];
 
   ngOnChanges() {
-    if (this.sort && this.sermonData) {
-      this.dataSource = new SermonTableDataSource(this.sermonData, this.sort, this.paginator);
+    if (this.sort && this.sermons) {
+      this.dataSource = new SermonTableDataSource(this.sermons, this.sort, this.paginator);
     }
 
   }

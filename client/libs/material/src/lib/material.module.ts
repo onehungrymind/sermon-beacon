@@ -55,7 +55,7 @@ const MODULES = [
 @NgModule({
   imports: MODULES,
   exports: [
-    MODULES,
+    ...MODULES,
     SermonTableComponent
   ],
   declarations: [SermonTableComponent]
