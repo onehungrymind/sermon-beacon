@@ -15,19 +15,14 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
   MatSnackBarModule,
+  MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatButtonToggleModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatMenuModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatDialogModule
 } from '@angular/material';
 import { SermonTableComponent } from './sermon-table/sermon-table.component';
 
@@ -58,15 +53,11 @@ const MODULES = [
 ];
 
 @NgModule({
-  imports: [
-    MODULES,
-    MatSortModule,
-    MatTableModule,
-  ],
+  imports: MODULES,
   exports: [
     MODULES,
     SermonTableComponent
   ],
   declarations: [SermonTableComponent]
 })
-export class MaterialModule {}
+export class MaterialModule { }

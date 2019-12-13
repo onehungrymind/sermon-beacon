@@ -1,12 +1,9 @@
 @import 'libs/theme/variables.scss';
 @import 'libs/theme/main.scss';
+@import 'libs/theme/_fonts.scss';
 
 .full-width-table {
   width: 100%;
-}
-
-.bg-color-primary {
-  background-color: $primary;
 }
 
 .create-btn {
@@ -14,7 +11,6 @@
 }
 
 .create-icon {
-  color: $accent;
   width: 25px;
   height: 25px;
   font-size: 25px;
@@ -24,24 +20,10 @@
   max-width: 50px !important;
 }
 
-.edit-btn {
-  min-width: 25px !important;
+.flex-auto {
+  flex: 0 0 100px;
 }
 
-.edit-icon {
-  color: $accent;
+.mw-25 {
   min-width: 25px !important;
-}
-
-.delete-btn {
-  min-width: 25px !important;
-}
-
-.delete-icon {
-  color: $secondary;
-  min-width: 25px !important;
-}
-
-.text-disabled {
-  color: $text-medium;
 }

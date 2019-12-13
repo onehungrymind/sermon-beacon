@@ -12,8 +12,6 @@ import { Sermon, Speaker } from '@sb/core-data';
 export class ManageComponent implements OnInit {
   sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
   speaker$: Observable<Speaker[]> = this.speakerFacade.allSpeakers$;
-  // currentSermon$: Observable<Sermon> = this.sermonFacade.currentSermon$;
-  // isLoading$: Observable<boolean> = this.sermonFacade.isLoading$;
 
   constructor(private sermonFacade: SermonsFacade, private speakerFacade: SpeakersFacade) {}
 
@@ -35,6 +33,5 @@ export class ManageComponent implements OnInit {
   deleteSermon(sermon: Sermon) {
     this.sermonFacade.deleteSermon(sermon);
   }
-
 
 }

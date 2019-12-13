@@ -2,10 +2,8 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
-import { Observable, of, merge } from 'rxjs';
-
-// tslint:disable-next-line: nx-enforce-module-boundaries
-import { Sermon, Media, Speaker } from '@sb/core-data';
+import { merge, Observable, of } from 'rxjs';
+import { Media, Sermon, Speaker } from '@sb/core-data';
 
 type TableTypes = Media[] | Sermon[] | Speaker[] | any;
 
@@ -31,21 +29,23 @@ export class SermonTableDataSource extends DataSource<TableTypes | any> {
     }
 
     return merge(...dataMutations).pipe(map(() => {
-      return this.paginator ? this.getPagedData(this.getSortedData([...this.data])) : this.getSortedData([...this.data])
+      return this.paginator ? this.getPagedData(this.getSortedData([...this.data])) : this.getSortedData([...this.data]);
     }));
   }
   disconnect() { }
 
   private getPagedData(data: any[]) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+
     return data.splice(startIndex, this.paginator.pageSize);
   }
 
   private getSortedData(data: TableTypes[]) {
     if (!this.sort.active || this.sort.direction === '') {
-      const sortByDate = this.data.map(res => res).sort((a, b) => {
+      const sortByDate = this.data.map((res) => res).sort((a, b) => {
         return (a.created_at < b.created_at ? 1 : -1);
       });
+
       return sortByDate;
     }
 

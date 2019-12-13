@@ -17,8 +17,11 @@
 
 // Text Color
 .primary-text { color: $primary !important; }
+.bg-primary { background-color: $primary !important; }
 .accent-text { color: $accent !important; }
+.accent-icon { color: $accent !important; }
 .secondary-text { color: $secondary !important; }
+.secondary-icon { color: $secondary !important; }
 .warn-text { color: $warn !important; }
 .base-text { color: $text-base !important; }
 .light-text { color: $text-light !important; }
