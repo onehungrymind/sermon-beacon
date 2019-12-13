@@ -6,9 +6,14 @@ import { UiLibrariesModule } from '@sb/ui-libraries';
 import { SermonsComponent } from './sermons/sermons.component';
 import { SermonListComponent } from './sermons/sermon-list/sermon-list.component';
 import { SermonDetailsComponent } from './sermons/sermon-details/sermon-details.component';
+import { MaterialModule } from '@sb/material';
 
 @NgModule({
-  imports: [CommonModule, UiLibrariesModule],
+  imports: [
+    CommonModule,
+    UiLibrariesModule,
+    MaterialModule
+  ],
   declarations: [
     SermonsComponent,
     SermonListComponent,

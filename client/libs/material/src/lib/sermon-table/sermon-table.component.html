@@ -30,8 +30,8 @@
 
     <!-- Table data for Sermons -->
 
-    <ng-container *ngFor="let data of dynamicColumns; let i = index" [matColumnDef]="data.column" class="py-0">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 py-0 sb-border-bottom">{{data.title}}
+    <ng-container *ngFor="let data of dynamicColumns; let i = index" [matColumnDef]="data.column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">{{data.title}}
       </th>
       <td mat-cell *matCellDef="let row" class="fs-20">
         {{data.cell(row)}}
@@ -43,7 +43,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary sb-border-bottom"></th>
       <td mat-cell *matCellDef="let row" class="pr-0">
-        <div class="d-flex action-container mr-0 justify-content-end mr-2">
+        <div class="d-flex action-container mr-0 justify-content-end mx-4">
           <button mat-button class="px-0 mw-25">
             <mat-icon class="material-icons-outlined mw-25 accent-text px-0">create</mat-icon>
           </button>
