@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
-import { SermonTableDataSource } from '@sb/material';
+import { TableDataSource } from '@sb/material';
 
   @Component({
   selector: 'sb-sermons',
@@ -19,7 +19,7 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() deleted = new EventEmitter();
   sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
   speaker$: Observable<Speaker[]> = this.speakerFacade.allSpeakers$;
-  dataSource: SermonTableDataSource;
+  dataSource: TableDataSource;
   destroy$ = new Subject();
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -43,7 +43,7 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.sermons$.pipe(
         takeUntil(this.destroy$),
       ).subscribe((sermons: Sermon[]) =>
-        this.dataSource = new SermonTableDataSource(sermons, this.sort, this.paginator)
+        this.dataSource = new TableDataSource(sermons, this.sort, this.paginator)
       );
     }
   }
