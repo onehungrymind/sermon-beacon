@@ -9,7 +9,7 @@ import { Media } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class MediaFacade {
-  loaded$ = this.store.pipe(select(MediaSelectors.getMediaLoading));
+  mediaLoading$ = this.store.pipe(select(MediaSelectors.getMediaLoading));
   allMedia$ = this.store.pipe(select(MediaSelectors.getAllMedia));
   selectedMedia$ = this.store.pipe(select(MediaSelectors.getSelected));
 

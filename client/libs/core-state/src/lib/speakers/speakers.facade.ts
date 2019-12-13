@@ -7,11 +7,13 @@ import * as SpeakersSelectors from './speakers.selectors';
 import * as SpeakersActions from './speakers.actions';
 import { Speaker } from '@sb/core-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
-  loaded$ = this.store.pipe(select(SpeakersSelectors.getSpeakersLoading));
+  speakerLoading$ = this.store.pipe(
+    select(SpeakersSelectors.getSpeakersLoading)
+  );
   allSpeakers$ = this.store.pipe(select(SpeakersSelectors.getAllSpeakers));
-  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.getSelected));
+  selectedSpeaker$ = this.store.pipe(select(SpeakersSelectors.getSelected));
 
   constructor(private store: Store<fromSpeakers.SpeakersPartialState>) {}
 
