@@ -8,3 +8,40 @@
 .bg-color-primary {
   background-color: $primary;
 }
+
+.create-btn {
+  min-width: 40px !important;
+}
+
+.create-icon {
+  color: $accent;
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+}
+
+.actions-container {
+  max-width: 50px !important;
+}
+
+.edit-btn {
+  min-width: 25px !important;
+}
+
+.edit-icon {
+  color: $accent;
+  min-width: 25px !important;
+}
+
+.delete-btn {
+  min-width: 25px !important;
+}
+
+.delete-icon {
+  color: $secondary;
+  min-width: 25px !important;
+}
+
+.text-disabled {
+  color: $text-medium;
+}

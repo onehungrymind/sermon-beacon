@@ -56,7 +56,7 @@ export class SermonTableDataSource extends DataSource<TableTypes | any> {
         case 'subject': return compare(+a.subject, +b.subject, isAsc);
         case 'speakers': return compare(+a.speakers, +b.speakers, isAsc);
         case 'date': return compare(+a.date, +b.date, isAsc);
-        // case 'lol': return compare(+a.lol, +b.lol, isAsc);
+        case 'actions': return;
         default: return 0;
       }
     });

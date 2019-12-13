@@ -1,22 +1,69 @@
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort>
 
-    <ng-container *ngFor="let data of dynamicColumns" [matColumnDef]="data.column">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-color-primary text-white fs-28">{{data.title}}</th>
-   
-      <td mat-cell *matCellDef="let row">
+    <!-- Create Action Header -->
+    <ng-container matColumnDef="create-action">
+      <th mat-header-cell *matHeaderCellDef class="p-0">
+        <div class="d-flex">
+          <button mat-button class="px-1 create-btn">
+            <mat-icon class="create-icon">add</mat-icon>
+          </button>
+          <p class="text-grey fs-16">Click here to add a new Sermon...</p>
+        </div>
+      </th>
+    </ng-container>
+
+    <!-- spacing for Create Action -->
+
+    <ng-container matColumnDef="space1">
+      <th mat-header-cell *matHeaderCellDef></th>
+    </ng-container>
+    <ng-container matColumnDef="space2">
+      <th mat-header-cell *matHeaderCellDef></th>
+    </ng-container>
+    <ng-container matColumnDef="space3">
+      <th mat-header-cell *matHeaderCellDef></th>
+    </ng-container>
+
+    <ng-container matColumnDef="space4">
+      <th mat-header-cell *matHeaderCellDef></th>
+    </ng-container>
+
+    <!-- Table data for Sermons -->
+
+    <ng-container *ngFor="let data of dynamicColumns; let i = index" [matColumnDef]="data.column" class="py-0">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-color-primary text-white fs-28 py-0">{{data.title}}
+      </th>
+      <td mat-cell *matCellDef="let row" class="fs-20">
         {{data.cell(row)}}
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Create and Delete Column -->
+
+    <ng-container matColumnDef="actions" class="action-container">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-color-primary"></th>
+      <td mat-cell *matCellDef="let row" class="pr-0 action-container">
+        <div class="d-flex action-container mr-0 justify-content-end mr-2">
+          <button mat-button class="px-0 edit-btn">
+            <mat-icon class="material-icons-outlined edit-icon px-0">create</mat-icon>
+          </button>
+
+          <button mat-button class="px-0 delete-btn">
+            <mat-icon class="material-icons-outlined delete-icon px-0">close</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"
+      class="example-second-header-row">
+    </tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator #paginator
-      [length]="dataSource?.data.length"
-      [pageIndex]="0"
-      [pageSize]="5"
-      [pageSizeOptions]="[25, 50, 100, 250]">
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="5"
+    [pageSizeOptions]="[25, 50, 100, 250]">
   </mat-paginator>
 </div>

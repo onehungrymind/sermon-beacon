@@ -18,7 +18,8 @@ export class SermonTableComponent implements OnChanges {
   primary = 'primary';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['title', 'subject', 'speakers', 'date'];
+  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
+  spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
 
   dynamicColumns = [
     { column: 'title', title: 'Title', cell: (sermon: Sermon) => `${sermon.title}` },
@@ -26,9 +27,6 @@ export class SermonTableComponent implements OnChanges {
     { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => `${sermon.sermon_speakers}` },
     { column: 'date', title: 'Date', cell: (sermon: Sermon) => `${sermon.date}` },
   ];
-
-
-
 
   ngOnChanges() {
     if (this.sort && this.sermonData) {
