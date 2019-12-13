@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
 import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
@@ -41,6 +41,7 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     if (this.sort) {
       this.sermons$.pipe(
+        filter((sermons: Sermon[]) => !!sermons.length),
         takeUntil(this.destroy$),
       ).subscribe((sermons: Sermon[]) =>
         this.dataSource = new TableDataSource(sermons, this.sort, this.paginator)
