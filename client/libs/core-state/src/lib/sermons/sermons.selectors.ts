@@ -2,9 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import {
   SERMONS_FEATURE_KEY,
-  SermonsState,
+  sermonsAdapter,
   SermonsPartialState,
-  sermonsAdapter
+  SermonsState
 } from './sermons.reducer';
 
 // Lookup the 'Sermons' feature state managed by NgRx

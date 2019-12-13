@@ -1,5 +1,5 @@
 import * as MediaActions from '../media.actions';
-import { State, initialState, reducer } from '../media.reducer';
+import { initialState, reducer, State } from '../media.reducer';
 
 describe('Media Reducer', () => {
   const createMediaEntity = (id: string, name = '') =>

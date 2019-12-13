@@ -22,4 +22,4 @@ export const emptyTag: Tag = {
   created_at: '',
   updated_at: '',
   sermon_tags: []
-}
+};

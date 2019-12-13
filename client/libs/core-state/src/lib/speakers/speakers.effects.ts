@@ -6,7 +6,7 @@ import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
-import { SpeakersService, Speaker } from '@sb/core-data';
+import { Speaker, SpeakersService } from '@sb/core-data';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SpeakersPartialState } from './speakers.reducer';
 

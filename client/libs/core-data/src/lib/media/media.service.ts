@@ -3,10 +3,10 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { Media } from './media.model';
 import {
-  mediaQuery,
   createMediaMutation,
-  updateMediaMutation,
-  deleteMediaMutation
+  deleteMediaMutation,
+  mediaQuery,
+  updateMediaMutation
 } from './media.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';

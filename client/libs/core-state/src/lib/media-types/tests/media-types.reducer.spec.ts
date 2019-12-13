@@ -1,6 +1,6 @@
 import { MediaTypesEntity } from './media-types.models';
 import * as MediaTypesActions from '../media-types.actions';
-import { State, initialState, reducer } from '../media-types.reducer';
+import { initialState, reducer, State } from '../media-types.reducer';
 
 describe('MediaTypes Reducer', () => {
   const createMediaTypesEntity = (id: string, name = '') =>

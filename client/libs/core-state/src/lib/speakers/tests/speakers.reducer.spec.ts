@@ -1,5 +1,5 @@
 import * as SpeakersActions from '../speakers.actions';
-import { SpeakersState, initialState, reducer } from '../speakers.reducer';
+import { initialState, reducer, SpeakersState } from '../speakers.reducer';
 
 describe('Speakers Reducer', () => {
   const createSpeakersEntity = (id: string, name = '') =>
