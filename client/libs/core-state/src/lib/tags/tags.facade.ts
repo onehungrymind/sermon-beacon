@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromTags from './tags.reducer';
 import * as TagsSelectors from './tags.selectors';

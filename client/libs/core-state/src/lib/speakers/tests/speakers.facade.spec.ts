@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
 
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
@@ -13,10 +13,10 @@ import { SpeakersFacade } from '../speakers.facade';
 import * as SpeakersSelectors from '../speakers.selectors';
 import * as SpeakersActions from '../speakers.actions';
 import {
-  SPEAKERS_FEATURE_KEY,
-  SpeakersState,
   initialState,
-  reducer
+  reducer,
+  SPEAKERS_FEATURE_KEY,
+  SpeakersState
 } from '../speakers.reducer';
 
 interface TestSchema {
@@ -63,7 +63,7 @@ describe('SpeakersFacade', () => {
     /**
      * The initially generated facade::loadAll() returns empty array
      */
-    it('loadAll() should return empty list with loaded == true', async done => {
+    it('loadAll() should return empty list with loaded == true', async (done) => {
       try {
         let list = await readFirst(facade.allSpeakers$);
         let isLoaded = await readFirst(facade.loaded$);
@@ -88,7 +88,7 @@ describe('SpeakersFacade', () => {
     /**
      * Use `loadSpeakersSuccess` to manually update list
      */
-    it('allSpeakers$ should return the loaded list; and loaded flag == true', async done => {
+    it('allSpeakers$ should return the loaded list; and loaded flag == true', async (done) => {
       try {
         let list = await readFirst(facade.allSpeakers$);
         let isLoaded = await readFirst(facade.loaded$);

@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-sermon-view',
   templateUrl: './sermon-view.component.html',
-  styleUrls: [ './sermon-view.component.scss' ]
+  styleUrls: ['./sermon-view.component.scss']
 })
 export class SermonViewComponent implements OnInit {
   sermon$: Observable<Sermon>;
@@ -17,43 +17,41 @@ export class SermonViewComponent implements OnInit {
     { title: 'NOTES', icon: 'notes' }
   ];
 
-  constructor (
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) { }
+  constructor(private router: Router, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.sermon$ = of({
-      title: "First Sermon",
-      date: "2018-05-01",
+      title: 'First Sermon',
+      date: '2018-05-01',
       media: [
         {
-          type: "VIDEO",
-          url: "https://player.vimeo.com/video/375272866"
+          type: 'VIDEO',
+          url: 'https://player.vimeo.com/video/375272866'
         }
       ],
       sermon_tags: [
         {
           tag: {
-            value: "Sunday Morning"
+            value: 'Sunday Morning'
           }
         }
       ],
       sermon_speakers: [
         {
           speaker: {
-            first_name: "Ron",
-            last_name: "Peterson",
-            position: "Pastor",
-            church_name: "Evening Light Fellowship"
+            first_name: 'Ron',
+            last_name: 'Peterson',
+            position: 'Pastor',
+            church_name: 'Evening Light Fellowship'
           }
         }
       ]
-    } as any)
+    } as any);
   }
 
   getVideoUrl(media: any[]) {
-    const videoMedia = media.find(m => m.type === 'VIDEO');
+    const videoMedia = media.find((m) => m.type === 'VIDEO');
+
     return this.sanitizeUrl(videoMedia.url);
   }
 

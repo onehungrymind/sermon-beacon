@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromSpeakers from './speakers.reducer';
 import * as SpeakersSelectors from './speakers.selectors';

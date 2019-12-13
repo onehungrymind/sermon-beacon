@@ -2,9 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import {
   TAGS_FEATURE_KEY,
-  TagsState,
+  tagsAdapter,
   TagsPartialState,
-  tagsAdapter
+  TagsState
 } from './tags.reducer';
 
 // Lookup the 'Tags' feature state managed by NgRx

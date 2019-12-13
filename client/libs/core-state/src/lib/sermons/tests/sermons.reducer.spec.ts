@@ -1,5 +1,5 @@
 import * as SermonsActions from '../sermons.actions';
-import { SermonsState, initialState, reducer } from '../sermons.reducer';
+import { initialState, reducer, SermonsState } from '../sermons.reducer';
 
 describe('Sermons Reducer', () => {
   const createSermonsEntity = (id: string, name = '') =>

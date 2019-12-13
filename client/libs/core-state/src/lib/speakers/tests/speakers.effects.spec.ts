@@ -1,11 +1,11 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
 import { Observable } from 'rxjs';
 
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { NxModule, DataPersistence } from '@nrwl/angular';
+import { DataPersistence, NxModule } from '@nrwl/angular';
 import { hot } from '@nrwl/angular/testing';
 
 import { SpeakersEffects } from '../speakers.effects';

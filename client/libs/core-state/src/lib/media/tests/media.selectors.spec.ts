@@ -1,5 +1,5 @@
 import { MediaEntity } from './media.models';
-import { State, mediaAdapter, initialState } from '../media.reducer';
+import { initialState, mediaAdapter, State } from '../media.reducer';
 import * as MediaSelectors from '../media.selectors';
 
 describe('Media Selectors', () => {

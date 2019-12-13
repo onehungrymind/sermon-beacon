@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UiModalComponent } from '../../ui-modal/ui-modal.component';

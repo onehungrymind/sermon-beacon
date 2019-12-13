@@ -26,4 +26,4 @@ export const emptySpeaker: Speaker = {
   position: '',
   updated_at: '',
   speaker_sermons: []
-}
+};

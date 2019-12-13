@@ -2,9 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import {
   SPEAKERS_FEATURE_KEY,
-  SpeakersState,
+  speakersAdapter,
   SpeakersPartialState,
-  speakersAdapter
+  SpeakersState
 } from './speakers.reducer';
 
 // Lookup the 'Speakers' feature state managed by NgRx
