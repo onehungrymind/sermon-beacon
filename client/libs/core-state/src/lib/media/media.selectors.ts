@@ -30,13 +30,13 @@ export const selectMediaEntities = createSelector(
   (state: MediaState) => selectEntities(state)
 );
 
-export const selectSelectedId = createSelector(
+export const selectMediaId = createSelector(
   selectMediaState,
   (state: MediaState) => state.selectedMediaId
 );
 
-export const selectSelected = createSelector(
+export const selectMedia = createSelector(
   selectMediaEntities,
-  selectSelectedId,
+  selectMediaId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );

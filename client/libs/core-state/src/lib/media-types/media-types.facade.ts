@@ -10,17 +10,19 @@ import { MediaType } from '@sb/core-data';
 @Injectable({ providedIn: 'root' })
 export class MediaTypesFacade {
   mediaTypeLoading$ = this.store.pipe(
-    select(MediaTypesSelectors.getMediaTypesLoading)
+    select(MediaTypesSelectors.selectMediaTypesLoading)
   );
   allMediaTypes$ = this.store.pipe(
-    select(MediaTypesSelectors.getAllMediaTypes)
+    select(MediaTypesSelectors.selectAllMediaTypes)
   );
-  selectedMediaType$ = this.store.pipe(select(MediaTypesSelectors.getSelected));
+  selectedMediaType$ = this.store.pipe(
+    select(MediaTypesSelectors.selectMediaType)
+  );
 
   constructor(private store: Store<fromMediaTypes.MediaTypesPartialState>) {}
 
   selectMediaType(selectedMediaTypeId: string) {
-    this.dispatch(MediaTypesActions.selectedMedia({ selectedMediaTypeId }));
+    this.dispatch(MediaTypesActions.selectedMediaType({ selectedMediaTypeId }));
   }
 
   loadMediaTypes() {

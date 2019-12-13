@@ -9,9 +9,9 @@ import { Tag } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class TagsFacade {
-  tagLoading$ = this.store.pipe(select(TagsSelectors.getTagsLoading));
-  allTags$ = this.store.pipe(select(TagsSelectors.getAllTags));
-  selectedTag$ = this.store.pipe(select(TagsSelectors.getSelected));
+  tagLoading$ = this.store.pipe(select(TagsSelectors.selectTagsLoading));
+  allTags$ = this.store.pipe(select(TagsSelectors.selectAllTags));
+  selectedTag$ = this.store.pipe(select(TagsSelectors.selectTag));
 
   constructor(private store: Store<fromTags.TagsPartialState>) {}
 
