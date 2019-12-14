@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { MediaType } from '@sb/core-data';
 
 export const mediaTypeSelected = createAction(
-  '[MEDIATYPE] Selected MediaType',
+  '[MEDIATYPE] MediaType Selected',
   props<{ selectedMediaTypeId: string }>()
 );
 

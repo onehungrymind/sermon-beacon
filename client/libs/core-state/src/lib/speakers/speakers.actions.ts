@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Speaker } from '@sb/core-data';
 
-export const selectedSpeaker = createAction(
+export const speakerSelected = createAction(
   '[SPEAKER] Speaker Selected',
   props<{ selectedSpeakerId: string }>()
 );
@@ -11,18 +11,18 @@ export const selectedSpeaker = createAction(
 export const loadSpeakers = createAction('[Speakers] Load Speakers');
 
 export const speakersLoaded = createAction(
-  '[SPEAKER] Speakers Successfully Loaded',
+  '[SPEAKER] Speakers Loaded',
   props<{ speakers: Speaker[] }>()
 );
 
 // Create Actions
 export const createSpeaker = createAction(
-  '[SPEAKER] Create New Speaker',
+  '[SPEAKER] Create Speaker',
   props<{ speaker: Speaker }>()
 );
 
 export const speakerCreated = createAction(
-  '[SPEAKER] New Speaker Successfully Created',
+  '[SPEAKER] Speaker Created',
   props<{ speaker: Speaker }>()
 );
 
@@ -33,7 +33,7 @@ export const updateSpeaker = createAction(
 );
 
 export const speakerUpdated = createAction(
-  '[SPEAKER] Speaker Successfully Updated',
+  '[SPEAKER] Speaker Updated',
   props<{ speaker: Speaker }>()
 );
 
@@ -44,6 +44,6 @@ export const deleteSpeaker = createAction(
 );
 
 export const speakerDeleted = createAction(
-  '[SPEAKER] Speaker Successfully Deleted',
+  '[SPEAKER] Speaker Deleted',
   props<{ speaker: Speaker }>()
 );

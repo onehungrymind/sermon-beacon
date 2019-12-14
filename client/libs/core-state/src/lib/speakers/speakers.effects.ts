@@ -21,8 +21,8 @@ export class SpeakersEffects {
         this.speakersService
           .all()
           .pipe(
-            map((res: Speaker[]) =>
-              SpeakersActions.speakersLoaded({ speakers: res })
+            map((speakers: Speaker[]) =>
+              SpeakersActions.speakersLoaded({ speakers })
             )
           );
       },
@@ -45,8 +45,8 @@ export class SpeakersEffects {
         return this.speakersService
           .create(action.speaker)
           .pipe(
-            map((res: Speaker) =>
-              SpeakersActions.speakerUpdated({ speaker: res })
+            map((speaker: Speaker) =>
+              SpeakersActions.speakerUpdated({ speaker })
             )
           );
       },

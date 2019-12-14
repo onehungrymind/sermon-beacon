@@ -20,7 +20,7 @@ export class MediaEffects {
         return this.mediaService
           .all()
           .pipe(
-            map((res: Media[]) => MediaActions.mediaLoaded({ media: res }))
+            map((media: Media[]) => MediaActions.mediaLoaded({ media }))
           );
       },
 
@@ -38,7 +38,7 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .create(action.media)
-          .pipe(map((res: Media) => MediaActions.mediaCreated({ media: res })));
+          .pipe(map((media: Media) => MediaActions.mediaCreated({ media })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.createMedia>, error) => {
@@ -55,7 +55,7 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .update(action.media)
-          .pipe(map((res: Media) => MediaActions.mediaUpdated({ media: res })));
+          .pipe(map((media: Media) => MediaActions.mediaUpdated({ media })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.updateMedia>, error) => {
@@ -72,7 +72,7 @@ export class MediaEffects {
       ) => {
         return this.mediaService
           .delete(action.media)
-          .pipe(map((res: Media) => MediaActions.mediaDeleted({ media: res })));
+          .pipe(map((media: Media) => MediaActions.mediaDeleted({ media })));
       },
 
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {

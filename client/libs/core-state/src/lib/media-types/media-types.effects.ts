@@ -20,8 +20,8 @@ export class MediaTypesEffects {
         this.mediaTypeService
           .all()
           .pipe(
-            map((res: MediaType[]) =>
-              MediaTypesActions.mediaTypeLoaded({ mediaTypes: res })
+            map((mediaTypes: MediaType[]) =>
+              MediaTypesActions.mediaTypeLoaded({ mediaTypes })
             )
           );
       },
@@ -44,8 +44,8 @@ export class MediaTypesEffects {
         this.mediaTypeService
           .create(action.mediaType)
           .pipe(
-            map((res: MediaType) =>
-              MediaTypesActions.mediaTypeCreated({ mediaType: res })
+            map((mediaType: MediaType) =>
+              MediaTypesActions.mediaTypeCreated({ mediaType })
             )
           );
       },
@@ -68,8 +68,8 @@ export class MediaTypesEffects {
         this.mediaTypeService
           .update(action.mediaType)
           .pipe(
-            map((res: MediaType) =>
-              MediaTypesActions.mediaTypeUpdated({ mediaType: res })
+            map((mediaType: MediaType) =>
+              MediaTypesActions.mediaTypeUpdated({ mediaType })
             )
           );
       },
@@ -92,8 +92,8 @@ export class MediaTypesEffects {
         this.mediaTypeService
           .delete(action.mediaType)
           .pipe(
-            map((res: MediaType) =>
-              MediaTypesActions.mediaTypeDeleted({ mediaType: res })
+            map((mediaType: MediaType) =>
+              MediaTypesActions.mediaTypeDeleted({ mediaType })
             )
           );
       },

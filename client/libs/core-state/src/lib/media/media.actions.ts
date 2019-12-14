@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Media } from '@sb/core-data';
 
-export const selectedMedia = createAction(
+export const mediaSelected = createAction(
   '[MEDIA] Media Selected',
   props<{ selectedMediaId: string }>()
 );
@@ -22,7 +22,7 @@ export const createMedia = createAction(
 );
 
 export const mediaCreated = createAction(
-  '[MEDIA] New Media Successfully Created',
+  '[MEDIA] Media Created',
   props<{ media: Media }>()
 );
 
@@ -33,7 +33,7 @@ export const updateMedia = createAction(
 );
 
 export const mediaUpdated = createAction(
-  '[MEDIA] Media Successfully Updated',
+  '[MEDIA] Media Updated',
   props<{ media: Media }>()
 );
 
@@ -44,6 +44,6 @@ export const deleteMedia = createAction(
 );
 
 export const mediaDeleted = createAction(
-  '[MEDIA] Media Successfully Deleted',
+  '[MEDIA] Media Deleted',
   props<{ media: Media }>()
 );

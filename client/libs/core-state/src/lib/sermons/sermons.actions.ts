@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { Sermon } from '@sb/core-data';
 
-export const selectedSermon = createAction(
+export const sermonSelected = createAction(
   '[SERMON] Sermon Selected',
   props<{ selectedSermonId: string }>()
 );
@@ -11,18 +11,18 @@ export const selectedSermon = createAction(
 export const loadSermons = createAction('[Sermons] Load Sermons');
 
 export const sermonsLoaded = createAction(
-  '[SERMON] Sermons Successfully Loaded',
+  '[SERMON] Sermons Loaded',
   props<{ sermons: Sermon[] }>()
 );
 
 // Create Actions
 export const createSermon = createAction(
-  '[SERMON] Create New Sermon',
+  '[SERMON] Create Sermon',
   props<{ sermon: Sermon }>()
 );
 
 export const sermonCreated = createAction(
-  '[SERMON] New Sermon Successfully Created',
+  '[SERMON] Sermon Created',
   props<{ sermon: Sermon }>()
 );
 
@@ -33,7 +33,7 @@ export const updateSermon = createAction(
 );
 
 export const sermonUpdated = createAction(
-  '[SERMON] Sermon Successfully Updated',
+  '[SERMON] Sermon Updated',
   props<{ sermon: Sermon }>()
 );
 
@@ -44,6 +44,6 @@ export const deleteSermon = createAction(
 );
 
 export const sermonDeleted = createAction(
-  '[SERMON] Sermon Successfully Deleted',
+  '[SERMON] Sermon Deleted',
   props<{ sermon: Sermon }>()
 );
