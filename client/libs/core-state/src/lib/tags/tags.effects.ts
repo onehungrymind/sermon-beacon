@@ -54,7 +54,7 @@ export class TagsEffects {
       ) => {
         return this.tagsService
           .update(action.tag)
-          .pipe(map((res: Tag) => TagsActions.tagsUpdated({ tag: res })));
+          .pipe(map((tag: Tag) => TagsActions.tagsUpdated({ tag })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
