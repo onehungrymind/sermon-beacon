@@ -101,5 +101,9 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "ng lint"
     }
+  },
+  "resolutions": {
+    "braces": "^2.3.1",
+    "serialize-javascript": "^2.1.1"
   }
 }
