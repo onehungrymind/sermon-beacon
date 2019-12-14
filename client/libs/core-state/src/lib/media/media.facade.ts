@@ -16,7 +16,7 @@ export class MediaFacade {
   constructor(private store: Store<fromMedia.MediaPartialState>) {}
 
   selectMedia(selectedMediaId: string) {
-    this.dispatch(MediaActions.selectedMedia({ selectedMediaId }));
+    this.dispatch(MediaActions.mediaSelected({ selectedMediaId }));
   }
 
   loadMedia() {

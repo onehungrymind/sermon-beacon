@@ -22,7 +22,7 @@ export class MediaTypesFacade {
   constructor(private store: Store<fromMediaTypes.MediaTypesPartialState>) {}
 
   selectMediaType(selectedMediaTypeId: string) {
-    this.dispatch(MediaTypesActions.selectedMediaType({ selectedMediaTypeId }));
+    this.dispatch(MediaTypesActions.mediaTypeSelected({ selectedMediaTypeId }));
   }
 
   loadMediaTypes() {

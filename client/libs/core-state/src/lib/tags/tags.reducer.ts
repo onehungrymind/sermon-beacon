@@ -41,13 +41,13 @@ const tagsReducer = createReducer(
   on(TagsActions.tagsLoaded, (state, { tags }) =>
     tagsAdapter.addAll(tags, { ...state, isLoading: true })
   ),
-  on(TagsActions.tagsCreated, (state, { tag }) =>
+  on(TagsActions.tagCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.tagsUpdated, (state, { tag }) =>
+  on(TagsActions.tagUpdated, (state, { tag }) =>
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.tagsDeleted, (state, { tag }) =>
+  on(TagsActions.tagDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
   )
 );

@@ -18,7 +18,7 @@ export class SermonsFacade {
   constructor(private store: Store<fromSermons.SermonsPartialState>) {}
 
   selectSermon(selectedSermonId: string) {
-    this.dispatch(SermonsActions.selectedSermon({ selectedSermonId }));
+    this.dispatch(SermonsActions.sermonSelected({ selectedSermonId }));
   }
 
   loadSermons() {

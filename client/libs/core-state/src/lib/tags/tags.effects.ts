@@ -37,7 +37,7 @@ export class TagsEffects {
       ) => {
         return this.tagsService
           .create(action.tag)
-          .pipe(map((tag: Tag) => TagsActions.tagsCreated({ tag })));
+          .pipe(map((tag: Tag) => TagsActions.tagCreated({ tag })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.createTag>, error) => {
@@ -54,7 +54,7 @@ export class TagsEffects {
       ) => {
         return this.tagsService
           .update(action.tag)
-          .pipe(map((tag: Tag) => TagsActions.tagsUpdated({ tag })));
+          .pipe(map((tag: Tag) => TagsActions.tagUpdated({ tag })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
@@ -75,7 +75,7 @@ export class TagsEffects {
             switchMap((deleteConfirmed: boolean) =>
               iif(
                 () => deleteConfirmed,
-                of(TagsActions.tagsDeleted({ tag: action.tag })),
+                of(TagsActions.tagDeleted({ tag: action.tag })),
                 EMPTY
               )
             )

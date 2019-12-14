@@ -18,7 +18,7 @@ export class SpeakersFacade {
   constructor(private store: Store<fromSpeakers.SpeakersPartialState>) {}
 
   selectSpeaker(selectedSpeakerId: string) {
-    this.dispatch(SpeakersActions.selectedSpeaker({ selectedSpeakerId }));
+    this.dispatch(SpeakersActions.speakerSelected({ selectedSpeakerId }));
   }
 
   loadAll() {

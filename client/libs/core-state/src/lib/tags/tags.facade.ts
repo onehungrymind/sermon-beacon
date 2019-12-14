@@ -16,7 +16,7 @@ export class TagsFacade {
   constructor(private store: Store<fromTags.TagsPartialState>) {}
 
   selectTag(selectedTagId: string) {
-    this.dispatch(TagsActions.selectedTag({ selectedTagId }));
+    this.dispatch(TagsActions.tagSelected({ selectedTagId }));
   }
 
   loadTags() {
