@@ -76,7 +76,6 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@ngrx/schematics": "^8.5.2",
-    "@ngrx/store-devtools": "8.5.0",
     "@nrwl/cypress": "8.9.0",
     "@nrwl/jest": "8.9.0",
     "@nrwl/workspace": "8.9.0",
