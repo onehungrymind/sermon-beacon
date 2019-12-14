@@ -22,7 +22,7 @@ export const createMediaType = createAction(
 );
 
 export const mediaTypeCreated = createAction(
-  '[MEDIATYPE] New MediaType Successfully Created',
+  '[MEDIATYPE] MediaType Created',
   props<{ mediaType: MediaType }>()
 );
 
