@@ -27,7 +27,9 @@ export const initialState: SpeakersState = speakersAdapter.getInitialState({
 
 const speakersReducer = createReducer(
   initialState,
-  on(SpeakersActions.selectedSpeaker),
+  on(SpeakersActions.speakerSelected, (state, { selectedSpeakerId }) =>
+    Object.assign({}, state, { selectedSpeakerId })
+  ),
   on(
     SpeakersActions.loadSpeakers,
     SpeakersActions.createSpeaker,

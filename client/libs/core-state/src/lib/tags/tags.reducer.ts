@@ -25,7 +25,7 @@ export const initialState: TagsState = tagsAdapter.getInitialState({
 
 const tagsReducer = createReducer(
   initialState,
-  on(TagsActions.selectedTag, (state, { selectedTagId }) =>
+  on(TagsActions.tagSelected, (state, { selectedTagId }) =>
     Object.assign({}, state, { selectedTagId })
   ),
   on(
