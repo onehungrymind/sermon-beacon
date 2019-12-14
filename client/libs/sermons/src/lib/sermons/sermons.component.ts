@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 
+import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
@@ -26,10 +27,10 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
   spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
   dynamicColumns = [
-    { column: 'title', title: 'Title', cell: (sermon: Sermon) => `${sermon.title}` },
-    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => `${sermon.subject}` },
-    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => `${sermon.sermon_speakers}` },
-    { column: 'date', title: 'Date', cell: (sermon: Sermon) => `${sermon.date}` },
+    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
+    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
+    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => 'FIX API!' },
+    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
   ];
 
   constructor(private sermonFacade: SermonsFacade, private speakerFacade: SpeakersFacade) { }
