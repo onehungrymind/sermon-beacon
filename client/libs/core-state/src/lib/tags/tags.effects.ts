@@ -20,7 +20,7 @@ export class TagsEffects {
       ) => {
         return this.tagsService
           .all()
-          .pipe(map((res: Tag[]) => TagsActions.tagsLoaded({ tags: res })));
+          .pipe(map((tags: Tag[]) => TagsActions.tagsLoaded({ tags })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.loadTags>, error) => {
