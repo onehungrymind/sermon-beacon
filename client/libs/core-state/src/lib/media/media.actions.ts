@@ -11,7 +11,7 @@ export const selectedMedia = createAction(
 export const loadMedia = createAction('[Media] Load Media');
 
 export const mediaLoaded = createAction(
-  '[MEDIA] Media Successfully Loaded',
+  '[MEDIA] Media Loaded',
   props<{ media: Media[] }>()
 );
 
