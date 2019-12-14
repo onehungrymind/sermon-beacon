@@ -11,7 +11,7 @@ export const selectedMediaType = createAction(
 export const loadMediaTypes = createAction('[MediaTypes] Load MediaTypes');
 
 export const mediaTypeLoaded = createAction(
-  '[MEDIATYPE] MediaTypes Successfully Loaded',
+  '[MEDIATYPE] MediaTypes Loaded',
   props<{ mediaTypes: MediaType[] }>()
 );
 
