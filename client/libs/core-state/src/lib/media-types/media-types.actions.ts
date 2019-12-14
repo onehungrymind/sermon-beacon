@@ -33,7 +33,7 @@ export const updateMediaType = createAction(
 );
 
 export const mediaTypeUpdated = createAction(
-  '[MEDIATYPE] MediaType Successfully Updated',
+  '[MEDIATYPE] MediaType Updated',
   props<{ mediaType: MediaType }>()
 );
 
