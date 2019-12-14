@@ -26,7 +26,7 @@ export class SermonsService {
         query: sermonQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((response: ApolloQueryResult<any>) => response.data.sermons));
+      .pipe(map((response: ApolloQueryResult<any>) => response.data.speaker_sermons_view));
   }
 
   create(sermon: Partial<Sermon>) {
