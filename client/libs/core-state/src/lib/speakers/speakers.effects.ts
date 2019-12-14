@@ -21,8 +21,8 @@ export class SpeakersEffects {
         this.speakersService
           .all()
           .pipe(
-            map((res: Speaker[]) =>
-              SpeakersActions.loadSpeakersSuccess({ speakers: res })
+            map((speakers: Speaker[]) =>
+              SpeakersActions.speakersLoaded({ speakers })
             )
           );
       },
@@ -42,7 +42,13 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.createSpeaker>,
         state: SpeakersPartialState
       ) => {
-        return this.speakersService.create(action.speaker);
+        return this.speakersService
+          .create(action.speaker)
+          .pipe(
+            map((speaker: Speaker) =>
+              SpeakersActions.speakerUpdated({ speaker })
+            )
+          );
       },
 
       onError: (
@@ -60,7 +66,13 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.updateSpeaker>,
         state: SpeakersPartialState
       ) => {
-        return this.speakersService.update(action.speaker);
+        return this.speakersService
+          .update(action.speaker)
+          .pipe(
+            map((speaker: Speaker) =>
+              SpeakersActions.speakerUpdated({ speaker })
+            )
+          );
       },
 
       onError: (
@@ -83,7 +95,7 @@ export class SpeakersEffects {
             iif(
               () => deleteConfirmed,
               of(
-                SpeakersActions.deleteSpeakerSuccess({
+                SpeakersActions.speakerDeleted({
                   speaker: action.speaker
                 })
               ),

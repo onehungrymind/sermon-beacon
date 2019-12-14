@@ -9,9 +9,11 @@ import { Sermon } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class SermonsFacade {
-  loading$ = this.store.pipe(select(SermonsSelectors.getSermonsLoading));
-  allSermons$ = this.store.pipe(select(SermonsSelectors.getAllSermons));
-  selectedSermons$ = this.store.pipe(select(SermonsSelectors.getSelected));
+  sermonLoading$ = this.store.pipe(
+    select(SermonsSelectors.selectSermonsLoading)
+  );
+  allSermons$ = this.store.pipe(select(SermonsSelectors.selectAllSermons));
+  selectedSermon$ = this.store.pipe(select(SermonsSelectors.selectSermon));
 
   constructor(private store: Store<fromSermons.SermonsPartialState>) {}
 
