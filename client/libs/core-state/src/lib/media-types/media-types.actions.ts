@@ -17,7 +17,7 @@ export const mediaTypeLoaded = createAction(
 
 // Create Actions
 export const createMediaType = createAction(
-  '[MEDIATYPE] Create New MediaType',
+  '[MEDIATYPE] Create MediaType',
   props<{ mediaType: MediaType }>()
 );
 
