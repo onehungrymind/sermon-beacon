@@ -69,7 +69,7 @@ export class SpeakersEffects {
         return this.speakersService
           .update(action.speaker)
           .pipe(
-            map((res: Speaker) =>
+            map((speaker: Speaker) =>
               SpeakersActions.speakerUpdated({ speaker: res })
             )
           );
