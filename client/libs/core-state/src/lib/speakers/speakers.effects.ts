@@ -70,7 +70,7 @@ export class SpeakersEffects {
           .update(action.speaker)
           .pipe(
             map((speaker: Speaker) =>
-              SpeakersActions.speakerUpdated({ speaker: res })
+              SpeakersActions.speakerUpdated({ speaker })
             )
           );
       },
