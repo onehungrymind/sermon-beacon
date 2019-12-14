@@ -90,19 +90,17 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.deleteSermon>,
         state: SermonsPartialState
       ) => {
-        return this.dialogService
-          .deleteDialog(action.sermon, 'sermon')
-          .pipe(
-            switchMap((deleteConfirmed: boolean) =>
-              iif(
-                () => deleteConfirmed,
-                of(
-                  SermonsActions.deleteSermonSuccess({ sermon: action.sermon })
-                ),
-                EMPTY
-              )
+        return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(
+              () => deleteConfirmed,
+              this.sermonsService.delete(action.sermon).pipe(
+                map((sermon: Sermon) => SermonsActions.deleteSermonSuccess({ sermon: action.sermon }))
+              ),
+              EMPTY
             )
-          );
+          )
+        );
       },
 
       onError: (
