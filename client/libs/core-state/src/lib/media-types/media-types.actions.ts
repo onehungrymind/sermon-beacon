@@ -44,6 +44,6 @@ export const deleteMediaType = createAction(
 );
 
 export const mediaTypeDeleted = createAction(
-  '[MEDIATYPE] MediaType Successfully Deleted',
+  '[MEDIATYPE] MediaType Deleted',
   props<{ mediaType: MediaType }>()
 );
