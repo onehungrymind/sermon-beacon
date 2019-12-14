@@ -37,7 +37,7 @@ export class TagsEffects {
       ) => {
         return this.tagsService
           .create(action.tag)
-          .pipe(map((res: Tag) => TagsActions.tagsCreated({ tag: res })));
+          .pipe(map((tag: Tag) => TagsActions.tagsCreated({ tag })));
       },
 
       onError: (action: ReturnType<typeof TagsActions.createTag>, error) => {
