@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-import { Sermon, Speaker, Tag } from '@sb/core-data';
+import { Media, MediaType, Sermon, Speaker, Tag } from '@sb/core-data';
 
 @Component({
   selector: 'sb-ui-modal',
@@ -11,19 +11,20 @@ import { Sermon, Speaker, Tag } from '@sb/core-data';
 })
 export class UiModalComponent {
   @Input() type: string;
+  @Input() media?: Media;
+  @Input() mediaType?: MediaType;
   @Input() sermon?: Sermon;
   @Input() speaker?: Speaker;
   @Input() tag?: Tag;
 
   constructor(private dialogRef: MatDialogRef<UiModalComponent>) {}
 
-  composeMessage() {
-    if (this.type === 'sermon')
-      return `Remove ${this.type} <br/> "${this.sermon.title}" ?`;
-    if (this.type === 'speaker')
-      return `Remove ${this.type} <br/> "${this.speaker.first_name} ${this.speaker.last_name}" ?`;
-    if (this.type === 'tag')
-      return `Remove ${this.type} <br/> "${this.tag.property}" ?`;
+  composeTitle() {
+    if (this.type === 'media') return `"${this.media.type}"`;
+    if (this.type === 'mediaType') return `"${this.mediaType.name}"`;
+    if (this.type === 'sermon') return `"${this.sermon.title}" ?`;
+    if (this.type === 'speaker') return `"${this.speaker.first_name} ${this.speaker.last_name}" ?`;
+    if (this.type === 'tag') return `"${this.tag.property}" ?`;
   }
 
   confirmDelete() {
