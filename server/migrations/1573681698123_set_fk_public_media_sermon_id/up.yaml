@@ -1,0 +1,6 @@
+- args:
+    sql: "\n           alter table \"public\".\"media\"\n           add constraint
+      \"media_sermon_id_fkey\" \n           foreign key (\"sermon_id\") \n           references
+      \"public\".\"sermons\"\n           (\"id\") on update cascade on delete cascade;\n
+      \     "
+  type: run_sql

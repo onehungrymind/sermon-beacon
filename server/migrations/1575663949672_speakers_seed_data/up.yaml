@@ -1,0 +1,8 @@
+- args:
+    cascade: false
+    sql: INSERT INTO speakers VALUES('f4e5e77c-1862-11ea-8d71-362b9e155667', 'Ron',
+      'Peterson', 'Pastor', 'Evening Light Fellowship', DEFAULT, DEFAULT),('f4e5ecea-1862-11ea-8d71-362b9e155667',
+      'Steven', 'McNeilly', 'Associate Minister', 'Evening Light Fellowship', DEFAULT,
+      DEFAULT),('f4e5e9d4-1862-11ea-8d71-362b9e155667', 'Daniel', 'Fraijo', 'Associate
+      Minister', 'Evening Light Fellowship', DEFAULT, DEFAULT);
+  type: run_sql

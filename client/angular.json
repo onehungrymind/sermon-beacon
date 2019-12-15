@@ -10,7 +10,7 @@
       },
       "root": "apps/user-portal",
       "sourceRoot": "apps/user-portal/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -136,7 +136,7 @@
       },
       "root": "apps/admin-portal",
       "sourceRoot": "apps/admin-portal/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -253,37 +253,6 @@
         }
       }
     },
-    "ui-toolbar": {
-      "projectType": "library",
-      "root": "libs/ui-toolbar",
-      "sourceRoot": "libs/ui-toolbar/src",
-      "prefix": "toolbar",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui-toolbar/tsconfig.lib.json",
-              "libs/ui-toolbar/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/ui-toolbar/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui-toolbar/jest.config.js",
-            "tsConfig": "libs/ui-toolbar/tsconfig.spec.json",
-            "setupFile": "libs/ui-toolbar/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "material": {
       "projectType": "library",
       "root": "libs/material",
@@ -315,42 +284,11 @@
         }
       }
     },
-    "searchbar": {
-      "projectType": "library",
-      "root": "libs/searchbar",
-      "sourceRoot": "libs/searchbar/src",
-      "prefix": "search",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/searchbar/tsconfig.lib.json",
-              "libs/searchbar/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/searchbar/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/searchbar/jest.config.js",
-            "tsConfig": "libs/searchbar/tsconfig.spec.json",
-            "setupFile": "libs/searchbar/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "core-data": {
       "projectType": "library",
       "root": "libs/core-data",
       "sourceRoot": "libs/core-data/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -381,7 +319,7 @@
       "projectType": "library",
       "root": "libs/core-state",
       "sourceRoot": "libs/core-state/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -390,7 +328,11 @@
               "libs/core-state/tsconfig.lib.json",
               "libs/core-state/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core-state/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core-state/**",
+              "libs/core-state/src/lib/**/tests/**"
+            ]
           }
         },
         "test": {
@@ -408,42 +350,11 @@
         }
       }
     },
-    "ui-modal": {
-      "projectType": "library",
-      "root": "libs/ui-modal",
-      "sourceRoot": "libs/ui-modal/src",
-      "prefix": "modal",
-      "architect": {
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/ui-modal/tsconfig.lib.json",
-              "libs/ui-modal/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!libs/ui-modal/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/ui-modal/jest.config.js",
-            "tsConfig": "libs/ui-modal/tsconfig.spec.json",
-            "setupFile": "libs/ui-modal/src/test-setup.ts"
-          }
-        }
-      },
-      "schematics": {
-        "@nrwl/angular:component": {
-          "styleext": "scss"
-        }
-      }
-    },
     "sermons": {
       "projectType": "library",
       "root": "libs/sermons",
       "sourceRoot": "libs/sermons/src",
-      "prefix": "app",
+      "prefix": "sb",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -461,6 +372,37 @@
             "jestConfig": "libs/sermons/jest.config.js",
             "tsConfig": "libs/sermons/tsconfig.spec.json",
             "setupFile": "libs/sermons/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "ui-libraries": {
+      "projectType": "library",
+      "root": "libs/ui-libraries",
+      "sourceRoot": "libs/ui-libraries/src",
+      "prefix": "sb",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-libraries/tsconfig.lib.json",
+              "libs/ui-libraries/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui-libraries/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui-libraries/jest.config.js",
+            "tsConfig": "libs/ui-libraries/tsconfig.spec.json",
+            "setupFile": "libs/ui-libraries/src/test-setup.ts"
           }
         }
       },

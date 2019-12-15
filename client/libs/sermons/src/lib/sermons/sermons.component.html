@@ -1,1 +1,7 @@
-<p>sermons works!</p>
+<div class="d-flex justify-content-center my-3">
+  <sb-searchbar></sb-searchbar>
+</div>
+
+<div class="d-flex container justify-content-center">
+  <material-sermon-table [sermons]="sermons$ | async"></material-sermon-table>
+</div>

@@ -1,0 +1,12 @@
+- args:
+    name: speaker_sermons
+    table:
+      name: speakers
+      schema: public
+    using:
+      foreign_key_constraint_on:
+        column: speaker_id
+        table:
+          name: speaker_sermons
+          schema: public
+  type: create_array_relationship

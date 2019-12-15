@@ -8,15 +8,13 @@ Sermon Beacon is an open source project meant for church archives at its core, b
 
 Before you begin you need to make sure you have everything needed to get the project up and running.
 
-* Make sure you are on the latest [node](https://nodejs.org/en/)
-* We are using [yarn](https://yarnpkg.com/lang/en/) as the package manager for the frontend application.
-* It will be best if you are on a MacOS machine, otherwise, there may be extra configurations needed on your end.
-* Depending on your role on this project, reach out for specific permissions.
-* Familiarize yourself with this README
+- Make sure you are on the latest [node](https://nodejs.org/en/)
+- We are using [yarn](https://yarnpkg.com/lang/en/) as the package manager for the frontend application.
+- It will be best if you are on a MacOS machine, otherwise, there may be extra configurations needed on your end.
+- Depending on your role on this project, reach out for specific permissions.
+- Familiarize yourself with this README
 
 ## Getting Started
-
-> Note: We are still currently working out some minor details. For now, you may get started on the UI by just manually running the frontend app with `make start-local-admin` or `make start-local-user` depending on the app you want to work on.
 
 Once all prerequisites are installed, run `make init` to download other necessary tools for development on MacOS.
 
@@ -30,14 +28,24 @@ For local development, run the following make commands:
 # Run this first and only once to install client dependencies.
 make install
 
-# Run this to start both client and server
-make start
+# Starting the server
+$ make start-server # starts up hasura and applies migrations
+# Open a new terminal
+$ cd server
+$ hasura console # if this is not opening up hasura, then please refer to the "Getting Started" section.
+
+# Starting the client applications
+$ make start-all # This will start the admin app
+$ make start-admin # This will start the admin app
+$ make start-user # This will start the user app
 
 # Run this to start clean versions of the applications
 make start-clean
 ```
 
-The frontend is available on [http://localhost:4200](http://localhost:4200) and the backend is available on [http://localhost:9695](http://localhost:9695).
+> Note: we are frequently working on a better solution for starting the apps and the server. So, check back frequently in case anything has changed.
+
+The frontend is available on [http://localhost:4200](http://localhost:4200) (admin) or [http://localhost:4300](http://localhost:4300) (user) and the backend is available on [http://localhost:9695](http://localhost:9695).
 
 ## Troubleshooting
 
@@ -53,6 +61,9 @@ docker-clean                   Clean up the last containers for this project
 help                           Help documentation
 init                           Install required tools for local environment on macOS
 install                        Install dependencies for frontend application
+start-admin                    Start admin app locally (http://localhost:4200)
+start-all                      Start admin and user apps locally (http://localhost:4200 | http://localhost:4300)
 start-clean                    Clean the docker containers then start
-start                          Start the containers
+start-server                   Start the containers
+start-user                     Start user app locally (http://localhost:4300)
 ```

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'admin-portal';
+  links = [
+    { path: '/', title: 'Sermons' },
+    { path: '/manage', title: 'Manage' }
+  ];
+
+  constructor() {}
 }

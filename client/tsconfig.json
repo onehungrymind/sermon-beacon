@@ -16,15 +16,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@app/ui-toolbar": ["libs/ui-toolbar/src/index.ts"],
-      "@app/material": ["libs/material/src/index.ts"],
-      "@app/searchbar": ["libs/searchbar/src/index.ts"],
-      "@app/core-data": ["libs/core-data/src/index.ts"],
-      "@app/core-state": ["libs/core-state/src/index.ts"],
-      "@app/sermon-list": ["libs/sermon-list/src/index.ts"],
-      "@app/sermon-details": ["libs/sermon-details/src/index.ts"],
-      "@app/ui-modal": ["libs/ui-modal/src/index.ts"],
-      "@app/sermons": ["libs/sermons/src/index.ts"]
+      "@sb/material": ["libs/material/src/index.ts"],
+      "@sb/core-data": [
+        "libs/core-data/src/lib/",
+        "libs/core-data/src/index.ts"
+      ],
+      "@sb/core-state": ["libs/core-state/src/index.ts"],
+      "@sb/sermons": ["libs/sermons/src/index.ts"],
+      "@sb/ui-libraries": ["libs/ui-libraries/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

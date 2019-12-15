@@ -1,0 +1,3 @@
+- args:
+    sql: ALTER TABLE "public"."media" ADD COLUMN "sermon_id" uuid NOT NULL;
+  type: run_sql

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="d-flex position-relative toolbar-wrapper sb-border-bottom">
+  <button *ngIf="isAdmin" mat-button class="d-flex flex-shrink-1" (click)="sidenav.toggle()">
+    <mat-icon color="accent" class="toolbar-wrapper--toolbar-icon align-top fs-40">dehaze</mat-icon>
+  </button>
+
+  <div class="d-flex justify-content-center flex-grow-1">
+    <span class="toolbar-wrapper--toolbar-title fs-28 font-weight-light">
+      SERMON
+    </span>
+    <span class="toolbar-wrapper--toolbar-title fs-28 mr-5">
+      BEACON
+    </span>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-wrapper vh-100">
+  <mat-sidenav #sidenav mode="over" closed>
+    <nav class="d-flex flex-column">
+      <a mat-button class="toolbar-wrapper--nav-link fs-20 text-left"
+        *ngFor="let link of links" routerLinkActive="active" (click)="navigateToPath(link.path)">
+        {{link.title}}
+      </a>
+    </nav>
+  </mat-sidenav>
+
+  <router-outlet></router-outlet>
+</mat-sidenav-container>

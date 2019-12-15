@@ -1,5 +1,19 @@
-@import '~bootstap-utilities';
-@import '~bootstap-4-grid';
+// Project Partials (Note: Be carefull to accidentally overwrite styles)
+@import './fonts';
+@import './utilities';
+@import './variables';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// Third Party Styles
+@import '~bootstrap-utilities';
+@import '~bootstrap-4-grid';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+  color: $text-base !important;
+}

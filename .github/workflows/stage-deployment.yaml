@@ -1,0 +1,38 @@
+name: Deploy Staging Websites
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+  build-admin:
+    runs-on: ubuntu-latest
+    name: Deploying Admin to Surge
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install surge
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm install -g surge yarn
+      - run: cd ./client && yarn
+      - run: cd ./client && yarn lint
+      - run: cd ./client && yarn build:admin
+      - run: surge ./client/dist/apps/admin-portal/ https://sb-admin-${{ github.actor }}-${{ github.head_ref }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+
+  build-user:
+    runs-on: ubuntu-latest
+    name: Deploying User to surge
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install surge
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: npm install -g surge yarn
+      - run: cd ./client && yarn
+      - run: cd ./client && yarn lint
+      - run: cd ./client && npm run build:user
+      - run: surge ./client/dist/apps/user-portal/ https://sb-user-${{ github.actor }}-${{ github.head_ref }}.surge.sh --token ${{ secrets.SURGE_TOKEN }}
