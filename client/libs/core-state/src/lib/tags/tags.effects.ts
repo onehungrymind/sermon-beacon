@@ -18,11 +18,10 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.loadTags>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService
-          .all()
-          .pipe(map((tags: Tag[]) => TagsActions.tagsLoaded({ tags })));
+        return this.tagsService.all().pipe(
+          map((tags: Tag[]) => TagsActions.tagsLoaded({ tags }))
+        );
       },
-
       onError: (action: ReturnType<typeof TagsActions.loadTags>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -35,11 +34,10 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.createTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService
-          .create(action.tag)
-          .pipe(map((tag: Tag) => TagsActions.tagCreated({ tag })));
+        return this.tagsService.create(action.tag).pipe(
+          map((tag: Tag) => TagsActions.tagCreated({ tag }))
+        );
       },
-
       onError: (action: ReturnType<typeof TagsActions.createTag>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -52,11 +50,10 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.updateTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.tagsService
-          .update(action.tag)
-          .pipe(map((tag: Tag) => TagsActions.tagUpdated({ tag })));
+        return this.tagsService.update(action.tag).pipe(
+          map((tag: Tag) => TagsActions.tagUpdated({ tag }))
+        );
       },
-
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -69,19 +66,17 @@ export class TagsEffects {
         action: ReturnType<typeof TagsActions.deleteTag>,
         state: fromTags.TagsPartialState
       ) => {
-        return this.dialogService
-          .deleteDialog(action.tag, 'tag')
-          .pipe(
-            switchMap((deleteConfirmed: boolean) =>
-              iif(
-                () => deleteConfirmed,
-                of(TagsActions.tagDeleted({ tag: action.tag })),
-                EMPTY
-              )
+        return this.dialogService.deleteDialog(action.tag, 'tag').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(() => deleteConfirmed,
+              this.tagsService.delete(action.tag).pipe(
+                map((tag: Tag) => TagsActions.tagDeleted({ tag }))
+              ),
+              EMPTY
             )
-          );
+          )
+        );
       },
-
       onError: (action: ReturnType<typeof TagsActions.deleteTag>, error) => {
         this.notifyService.openSnackBar(error.message);
       }

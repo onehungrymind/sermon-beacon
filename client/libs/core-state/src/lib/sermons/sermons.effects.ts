@@ -18,19 +18,11 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService
-          .all()
-          .pipe(
-            map((sermons: Sermon[]) =>
-              SermonsActions.sermonsLoaded({ sermons })
-            )
-          );
+        return this.sermonsService.all().pipe(
+          map((sermons: Sermon[]) => SermonsActions.sermonsLoaded({ sermons }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SermonsActions.loadSermons>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SermonsActions.loadSermons>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -42,17 +34,11 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.createSermon>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService
-          .create(action.sermon)
-          .pipe(
-            map((sermon: Sermon) => SermonsActions.sermonCreated({ sermon }))
-          );
+        return this.sermonsService.create(action.sermon).pipe(
+          map((sermon: Sermon) => SermonsActions.sermonCreated({ sermon }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SermonsActions.createSermon>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SermonsActions.createSermon>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -64,17 +50,11 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.updateSermon>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService
-          .update(action.sermon)
-          .pipe(
-            map((sermon: Sermon) => SermonsActions.sermonUpdated({ sermon }))
-          );
+        return this.sermonsService.update(action.sermon).pipe(
+          map((sermon: Sermon) => SermonsActions.sermonUpdated({ sermon }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SermonsActions.updateSermon>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SermonsActions.updateSermon>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -86,23 +66,18 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.deleteSermon>,
         state: SermonsPartialState
       ) => {
-        return this.dialogService
-          .deleteDialog(action.sermon, 'sermon')
-          .pipe(
-            switchMap((deleteConfirmed: boolean) =>
-              iif(
-                () => deleteConfirmed,
-                of(SermonsActions.sermonDeleted({ sermon: action.sermon })),
-                EMPTY
-              )
+        return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(() => deleteConfirmed,
+              this.sermonsService.delete(action.sermon).pipe(
+                map((sermon: Sermon) => SermonsActions.sermonDeleted({ sermon }))
+              ),
+              EMPTY
             )
-          );
+          )
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SermonsActions.deleteSermon>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SermonsActions.deleteSermon>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
