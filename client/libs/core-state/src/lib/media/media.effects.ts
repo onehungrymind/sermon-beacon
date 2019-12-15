@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import * as fromMedia from './media.reducer';
 import * as MediaActions from './media.actions';
 import { Media, MediaService } from '@sb/core-data';
-import { NotifyService } from '@sb/ui-libraries';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
+import { EMPTY, iif } from 'rxjs';
 
 @Injectable()
 export class MediaEffects {
@@ -65,8 +66,15 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.deleteMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService.delete(action.media).pipe(
-          map((media: Media) => MediaActions.mediaDeleted({ media }))
+        return this.dialogService.deleteDialog(action.media, 'media').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(() => deleteConfirmed,
+              this.mediaService.delete(action.media).pipe(
+                map((media: Media) => MediaActions.mediaDeleted({ media }))
+              ),
+              EMPTY
+            )
+          )
         );
       },
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
@@ -79,6 +87,7 @@ export class MediaEffects {
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromMedia.MediaPartialState>,
     private mediaService: MediaService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private dialogService: DialogService
   ) {}
 }

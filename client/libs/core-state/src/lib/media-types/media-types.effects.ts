@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import * as fromMediaTypes from './media-types.reducer';
 import * as MediaTypesActions from './media-types.actions';
 import { MediaType, MediaTypesService } from '@sb/core-data';
-import { NotifyService } from '@sb/ui-libraries';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
+import { EMPTY, iif } from 'rxjs';
 
 @Injectable()
 export class MediaTypesEffects {
@@ -17,7 +18,7 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.loadMediaTypes>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService.all().pipe(
+        return this.mediaTypeService.all().pipe(
           map((mediaTypes: MediaType[]) => MediaTypesActions.mediaTypeLoaded({ mediaTypes }))
         );
       },
@@ -33,7 +34,7 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.createMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService.create(action.mediaType).pipe(
+        return this.mediaTypeService.create(action.mediaType).pipe(
           map((mediaType: MediaType) => MediaTypesActions.mediaTypeCreated({ mediaType }))
         );
       },
@@ -49,7 +50,7 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.updateMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService.update(action.mediaType).pipe(
+        return this.mediaTypeService.update(action.mediaType).pipe(
           map((mediaType: MediaType) => MediaTypesActions.mediaTypeUpdated({ mediaType }))
         );
       },
@@ -65,8 +66,15 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.deleteMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService.delete(action.mediaType).pipe(
-          map((mediaType: MediaType) => MediaTypesActions.mediaTypeDeleted({ mediaType }))
+        return this.dialogService.deleteDialog(action.mediaType, 'mediaType').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(() => deleteConfirmed,
+              this.mediaTypeService.delete(action.mediaType).pipe(
+                map((mediaType: MediaType) => MediaTypesActions.mediaTypeDeleted({ mediaType }))
+              ),
+              EMPTY
+            )
+          )
         );
       },
       onError: (action: ReturnType<typeof MediaTypesActions.deleteMediaType>, error) => {
@@ -79,6 +87,7 @@ export class MediaTypesEffects {
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromMediaTypes.MediaTypesPartialState>,
     private mediaTypeService: MediaTypesService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private dialogService: DialogService
   ) {}
 }
