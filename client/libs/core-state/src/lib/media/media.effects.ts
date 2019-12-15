@@ -17,13 +17,10 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.loadMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .all()
-          .pipe(
-            map((media: Media[]) => MediaActions.mediaLoaded({ media }))
-          );
+        return this.mediaService.all().pipe(
+          map((media: Media[]) => MediaActions.mediaLoaded({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.loadMedia>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -36,11 +33,10 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.createMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .create(action.media)
-          .pipe(map((media: Media) => MediaActions.mediaCreated({ media })));
+        return this.mediaService.create(action.media).pipe(
+          map((media: Media) => MediaActions.mediaCreated({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.createMedia>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -53,11 +49,10 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.updateMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .update(action.media)
-          .pipe(map((media: Media) => MediaActions.mediaUpdated({ media })));
+        return this.mediaService.update(action.media).pipe(
+          map((media: Media) => MediaActions.mediaUpdated({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.updateMedia>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
@@ -70,11 +65,10 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.deleteMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .delete(action.media)
-          .pipe(map((media: Media) => MediaActions.mediaDeleted({ media })));
+        return this.mediaService.delete(action.media).pipe(
+          map((media: Media) => MediaActions.mediaDeleted({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
         this.notifyService.openSnackBar(error.message);
       }

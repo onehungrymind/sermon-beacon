@@ -17,19 +17,11 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.loadMediaTypes>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService
-          .all()
-          .pipe(
-            map((mediaTypes: MediaType[]) =>
-              MediaTypesActions.mediaTypeLoaded({ mediaTypes })
-            )
-          );
+        this.mediaTypeService.all().pipe(
+          map((mediaTypes: MediaType[]) => MediaTypesActions.mediaTypeLoaded({ mediaTypes }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof MediaTypesActions.loadMediaTypes>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof MediaTypesActions.loadMediaTypes>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -41,19 +33,11 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.createMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService
-          .create(action.mediaType)
-          .pipe(
-            map((mediaType: MediaType) =>
-              MediaTypesActions.mediaTypeCreated({ mediaType })
-            )
-          );
+        this.mediaTypeService.create(action.mediaType).pipe(
+          map((mediaType: MediaType) => MediaTypesActions.mediaTypeCreated({ mediaType }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof MediaTypesActions.createMediaType>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof MediaTypesActions.createMediaType>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -65,19 +49,11 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.updateMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService
-          .update(action.mediaType)
-          .pipe(
-            map((mediaType: MediaType) =>
-              MediaTypesActions.mediaTypeUpdated({ mediaType })
-            )
-          );
+        this.mediaTypeService.update(action.mediaType).pipe(
+          map((mediaType: MediaType) => MediaTypesActions.mediaTypeUpdated({ mediaType }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof MediaTypesActions.updateMediaType>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof MediaTypesActions.updateMediaType>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -89,19 +65,11 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.deleteMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        this.mediaTypeService
-          .delete(action.mediaType)
-          .pipe(
-            map((mediaType: MediaType) =>
-              MediaTypesActions.mediaTypeDeleted({ mediaType })
-            )
-          );
+        this.mediaTypeService.delete(action.mediaType).pipe(
+          map((mediaType: MediaType) => MediaTypesActions.mediaTypeDeleted({ mediaType }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof MediaTypesActions.deleteMediaType>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof MediaTypesActions.deleteMediaType>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -109,9 +77,7 @@ export class MediaTypesEffects {
 
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<
-      fromMediaTypes.MediaTypesPartialState
-    >,
+    private dataPersistence: DataPersistence<fromMediaTypes.MediaTypesPartialState>,
     private mediaTypeService: MediaTypesService,
     private notifyService: NotifyService
   ) {}
