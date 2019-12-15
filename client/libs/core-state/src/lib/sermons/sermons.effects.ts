@@ -69,7 +69,9 @@ export class SermonsEffects {
         return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
           switchMap((deleteConfirmed: boolean) =>
             iif(() => deleteConfirmed,
-              of(SermonsActions.sermonDeleted({ sermon: action.sermon })),
+              this.sermonsService.delete(action.sermon).pipe(
+                map((sermon: Sermon) => SermonsActions.sermonDeleted({ sermon }))
+              ),
               EMPTY
             )
           )

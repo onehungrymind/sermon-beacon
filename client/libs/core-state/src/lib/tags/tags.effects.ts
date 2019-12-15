@@ -69,7 +69,9 @@ export class TagsEffects {
         return this.dialogService.deleteDialog(action.tag, 'tag').pipe(
           switchMap((deleteConfirmed: boolean) =>
             iif(() => deleteConfirmed,
-              of(TagsActions.tagDeleted({ tag: action.tag })),
+              this.tagsService.delete(action.tag).pipe(
+                map((tag: Tag) => TagsActions.tagDeleted({ tag }))
+              ),
               EMPTY
             )
           )

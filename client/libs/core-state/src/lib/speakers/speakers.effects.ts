@@ -69,7 +69,9 @@ export class SpeakersEffects {
         return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
           switchMap((deleteConfirmed: boolean) =>
             iif(() => deleteConfirmed,
-              of(SpeakersActions.speakerDeleted({ speaker: action.speaker })),
+              this.speakersService.delete(action.speaker).pipe(
+                map((speaker: Speaker) => SpeakersActions.speakerDeleted({ speaker }))
+              ),
               EMPTY
             )
           )
