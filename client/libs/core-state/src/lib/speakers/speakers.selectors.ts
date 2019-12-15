@@ -8,35 +8,35 @@ import {
 } from './speakers.reducer';
 
 // Lookup the 'Speakers' feature state managed by NgRx
-export const getSpeakersState = createFeatureSelector<
+export const selectSpeakersState = createFeatureSelector<
   SpeakersPartialState,
   SpeakersState
 >(SPEAKERS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = speakersAdapter.getSelectors();
 
-export const getSpeakersLoading = createSelector(
-  getSpeakersState,
+export const selectSpeakersLoading = createSelector(
+  selectSpeakersState,
   (state: SpeakersState) => state.isLoading
 );
 
-export const getAllSpeakers = createSelector(
-  getSpeakersState,
+export const selectAllSpeakers = createSelector(
+  selectSpeakersState,
   (state: SpeakersState) => selectAll(state)
 );
 
-export const getSpeakersEntities = createSelector(
-  getSpeakersState,
+export const selectSpeakersEntities = createSelector(
+  selectSpeakersState,
   (state: SpeakersState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
-  getSpeakersState,
-  (state: SpeakersState) => state.selectedId
+export const selectSpeakerId = createSelector(
+  selectSpeakersState,
+  (state: SpeakersState) => state.selectedSpeakerId
 );
 
-export const getSelected = createSelector(
-  getSpeakersEntities,
-  getSelectedId,
+export const selectSpeaker = createSelector(
+  selectSpeakersEntities,
+  selectSpeakerId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
