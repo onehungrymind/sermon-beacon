@@ -5,6 +5,10 @@ import { MaterialModule } from '@sb/material';
 import { UiLibrariesModule } from '@sb/ui-libraries';
 
 import { SermonsComponent } from './sermons/sermons.component';
+import { SermonsDialogComponent } from './sermons-dialog/sermons-dialog.component';
+import { SermonsDetailsComponent } from './sermons-dialog/sermons-details/sermons-details.component';
+import { SermonsMediaComponent } from './sermons-dialog/sermons-media/sermons-media.component';
+import { SermonsTagsComponent } from './sermons-dialog/sermons-tags/sermons-tags.component';
 
 @NgModule({
   imports: [
@@ -12,7 +16,7 @@ import { SermonsComponent } from './sermons/sermons.component';
     UiLibrariesModule,
     MaterialModule
   ],
-  declarations: [SermonsComponent],
+  declarations: [SermonsComponent, SermonsDialogComponent, SermonsDetailsComponent, SermonsMediaComponent, SermonsTagsComponent],
   exports: [SermonsComponent],
 })
 export class SermonsModule { }
