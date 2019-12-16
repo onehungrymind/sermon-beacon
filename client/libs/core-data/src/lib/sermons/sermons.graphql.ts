@@ -6,6 +6,20 @@ export const sermonFragment = gql`
     title
     subject
     date
+    media_id
+    created_at
+    updated_at
+  }
+`;
+
+export const speakerSermonFragment = gql`
+  fragment speakerSermonFragment on speaker_sermons_view {
+    id
+    title
+    subject
+    date
+    speaker_id
+    media_id
     created_at
     updated_at
   }
@@ -13,11 +27,11 @@ export const sermonFragment = gql`
 
 export const sermonQuery = gql`
   query sermonQuery {
-    sermons {
-      ...sermonFragment
+    speaker_sermons_view {
+      ...speakerSermonFragment
     }
   }
-  ${sermonFragment}
+  ${speakerSermonFragment}
 `;
 
 export const createSermonMutation = gql`
