@@ -10,13 +10,22 @@ import { SermonsDetailsComponent } from './sermons-dialog/sermons-details/sermon
 import { SermonsMediaComponent } from './sermons-dialog/sermons-media/sermons-media.component';
 import { SermonsTagsComponent } from './sermons-dialog/sermons-tags/sermons-tags.component';
 
+const COMPONENTS = [
+  SermonsComponent,
+  SermonsDialogComponent,
+  SermonsDetailsComponent,
+  SermonsMediaComponent,
+  SermonsTagsComponent
+];
+
 @NgModule({
   imports: [
     CommonModule,
     UiLibrariesModule,
     MaterialModule
   ],
-  declarations: [SermonsComponent, SermonsDialogComponent, SermonsDetailsComponent, SermonsMediaComponent, SermonsTagsComponent],
-  exports: [SermonsComponent],
+  declarations: COMPONENTS,
+  entryComponents: [SermonsDialogComponent],
+  exports: COMPONENTS,
 })
 export class SermonsModule { }
