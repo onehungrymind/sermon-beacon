@@ -1,0 +1,20 @@
+- args:
+    cascade: false
+    sql: |-
+      CREATE VIEW sermon_tags_view AS
+        SELECT sermon_id, tags.*
+          FROM sermon_tags LEFT JOIN tags
+            ON sermon_tags.tag_id = tags.id;
+      CREATE VIEW tag_sermons_view AS
+        SELECT tag_id, sermons.*
+          FROM sermon_tags LEFT JOIN sermons
+            ON sermon_tags.sermon_id = sermons.id;
+  type: run_sql
+- args:
+    name: sermon_tags_view
+    schema: public
+  type: add_existing_table_or_view
+- args:
+    name: tag_sermons_view
+    schema: public
+  type: add_existing_table_or_view

@@ -15,40 +15,44 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
   MatSnackBarModule,
+  MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 
 const MODULES = [
   BrowserAnimationsModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
   MatSnackBarModule,
+  MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatButtonToggleModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatMenuModule,
-  MatDialogModule
 ];
 
 @NgModule({
   imports: MODULES,
   exports: MODULES
 })
-export class MaterialModule {}
+export class MaterialModule { }

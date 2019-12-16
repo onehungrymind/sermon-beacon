@@ -14,7 +14,7 @@
     "build:admin": "ng build --project admin-portal --prod && cp ./dist/apps/admin-portal/index.html ./dist/apps/admin-portal/200.html",
     "build:user": "ng build --project user-portal --prod && cp ./dist/apps/user-portal/index.html ./dist/apps/user-portal/200.html",
     "test": "ng test",
-    "lint": "nx workspace-lint && ng lint",
+    "lint": "ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -76,7 +76,6 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@ngrx/schematics": "^8.5.2",
-    "@ngrx/store-devtools": "8.5.0",
     "@nrwl/cypress": "8.9.0",
     "@nrwl/jest": "8.9.0",
     "@nrwl/workspace": "8.9.0",
@@ -102,5 +101,9 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "ng lint"
     }
+  },
+  "resolutions": {
+    "braces": "^2.3.1",
+    "serialize-javascript": "^2.1.1"
   }
 }
