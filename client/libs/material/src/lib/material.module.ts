@@ -24,40 +24,35 @@ import {
   MatTableModule,
   MatToolbarModule,
 } from '@angular/material';
-import { SermonTableComponent } from './sermon-table/sermon-table.component';
 
 const MODULES = [
   BrowserAnimationsModule,
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
   MatSnackBarModule,
+  MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatButtonToggleModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatMenuModule,
-  MatSortModule,
-  MatPaginatorModule,
-  MatDialogModule
 ];
 
 @NgModule({
   imports: MODULES,
-  exports: [
-    ...MODULES,
-    SermonTableComponent
-  ],
-  declarations: [SermonTableComponent]
+  exports: MODULES
 })
 export class MaterialModule { }
