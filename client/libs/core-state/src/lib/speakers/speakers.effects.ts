@@ -18,7 +18,7 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.loadSpeakers>,
         state: SpeakersPartialState
       ) => {
-        this.speakersService.all().pipe(
+        return this.speakersService.all().pipe(
           map((speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
         );
       },
