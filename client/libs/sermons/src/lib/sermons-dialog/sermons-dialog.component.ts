@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
 import { Sermon } from '@sb/core-data';
@@ -32,13 +32,9 @@ export class SermonsDialogComponent implements OnInit {
     this.tabs.selectedIndex = --this.tabs.selectedIndex;
   }
 
-  private mediaGroup() {
-    return this.formBuilder.group({
-      id: null,
-      type: ['', Validators.compose([Validators.required])],
-      url: [''],
-      embedCode: ['']
-    });
+  addMediaGroup() {
+    const media = this.form.get('media') as FormArray;
+    media.push(this.mediaGroup());
   }
 
   private initForm() {
@@ -52,6 +48,15 @@ export class SermonsDialogComponent implements OnInit {
       }),
       media: this.formBuilder.array([this.mediaGroup()]),
       tags: this.formBuilder.group({})
+    });
+  }
+
+  private mediaGroup() {
+    return this.formBuilder.group({
+      id: null,
+      type: ['', Validators.compose([Validators.required])],
+      url: [''],
+      embedCode: ['']
     });
   }
 

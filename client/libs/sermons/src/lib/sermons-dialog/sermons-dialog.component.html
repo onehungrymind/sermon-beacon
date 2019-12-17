@@ -16,8 +16,17 @@
       </mat-tab>
       <mat-tab label="Sermon Media">
         <div formArrayName="media">
-          <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls" [mediaGroup]="mediaGroup">
+          <!-- Sermon Media Inputs -->
+          <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls"
+                            [mediaGroup]="mediaGroup">
           </sb-sermons-media>
+          <!-- Add media section -->
+          <div class="d-flex flex-row-reverse">
+            <button mat-icon-button color="primary" (click)="addMediaGroup()">
+              <mat-icon>add</mat-icon>
+            </button>
+            <span class="base-text font-weight-light align-self-center">Add more Media Types.</span>
+          </div>
         </div>
       </mat-tab>
       <mat-tab label="Sermon Tags (optional)">
