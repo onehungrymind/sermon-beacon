@@ -62,6 +62,7 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openSermonDialog(sermon?: Sermon) {
     const ref = this.dialog.open(SermonsDialogComponent, {
+      minHeight: '400px',
       data: {...sermon}
     });
 

@@ -11,7 +11,7 @@ export const tagsFragment = gql`
 `;
 
 export const sermonTagsFragment = gql`
-  fragment tagsFragment on sermon_tags_view {
+  fragment sermonTagsFragment on sermon_tags_view {
     id
     property
     value

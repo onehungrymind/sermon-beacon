@@ -1,5 +1,5 @@
 <span mat-dialog-title>
-  <h6 *ngIf="data.id; else updateSermonTitle"  class="font-weight-normal base-text fs-24">
+  <h6 *ngIf="data.id; else updateSermonTitle" class="font-weight-normal base-text fs-24">
     Updating "{{data.title}}"
   </h6>
   <ng-template #updateSermonTitle>
@@ -7,7 +7,7 @@
   </ng-template>
 </span>
 
-<mat-dialog-content>
+<mat-dialog-content class="mat-typography">
   <mat-tab-group mat-align-tabs="start">
     <mat-tab label="Sermon Details">
       <sb-sermons-details></sb-sermons-details>
@@ -21,10 +21,10 @@
   </mat-tab-group>
 </mat-dialog-content>
 
-<mat-dialog-actions class="d-flex flex-row-reverse">
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" mat-dialog-close>Cancel</button>
+  <button *ngIf="tabs?.selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
   <button mat-button color="primary" (click)="next()">
     {{ tabs?.selectedIndex === 2 ? 'Submit' : 'Next' }}
   </button>
-  <button *ngIf="tabs?.selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
-  <button mat-button color="warn" (click)="cancel()">Cancel</button>
 </mat-dialog-actions>

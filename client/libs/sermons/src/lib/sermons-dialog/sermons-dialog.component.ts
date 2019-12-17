@@ -31,10 +31,6 @@ export class SermonsDialogComponent implements OnInit {
     this.tabs.selectedIndex = --this.tabs.selectedIndex;
   }
 
-  cancel() {
-    this.dialogRef.close();
-  }
-
   private initForm() {
     this.form = this.formBuilder.group({
       details: this.formBuilder.group({
