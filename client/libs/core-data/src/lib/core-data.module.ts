@@ -9,7 +9,7 @@ import { SermonsService } from './sermons/sermons.service';
 import { MediaService } from './media/media.service';
 import { SpeakersService } from './speakers/speakers.service';
 
-const uri = 'http://0.0.0.0:8080/v1/graphql';
+const uri = 'http://127.0.0.1:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
   return {

@@ -1,4 +1,4 @@
-<div *ngIf="sermon$ | async as sermon">
+<div *ngIf="sermon$ | async as sermon"> {{sermon | json}}
   <button mat-icon-button (click)="goBack()" class="back-arrow-container">
     <mat-icon class="back-arrow" color="accent">arrow_back</mat-icon>
   </button>
@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="d-flex justify-content-center">
       <iframe
-        [src]="getVideoUrl(sermon?.media)"
+        [src]=""
         width="100%"
         height="625"
         frameborder="0"

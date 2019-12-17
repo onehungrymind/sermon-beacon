@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
+import { Router } from '@angular/router';
 
   @Component({
   selector: 'sb-sermons',
@@ -33,7 +34,11 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
     { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
   ];
 
-  constructor(private sermonFacade: SermonsFacade, private speakerFacade: SpeakersFacade) { }
+  constructor(
+    private sermonFacade: SermonsFacade,
+    private speakerFacade: SpeakersFacade,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.sermonFacade.loadSermons();
@@ -53,6 +58,10 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  goToSermonView(sermon) {
+    this.router.navigateByUrl(sermon.id);
   }
 
   selectSermon(sermon: Sermon) {
