@@ -30,7 +30,8 @@
         </div>
       </mat-tab>
       <mat-tab label="Sermon Tags (optional)">
-        <sb-sermons-tags></sb-sermons-tags>
+        <sb-sermons-tags [tagsGroup]="form.get('tags')">
+        </sb-sermons-tags>
       </mat-tab>
     </mat-tab-group>
   </mat-dialog-content>
