@@ -17,7 +17,7 @@ export interface MediaTypesPartialState {
 
 export const mediaTypesAdapter: EntityAdapter<MediaType> = createEntityAdapter<
   MediaType
->();
+>({ selectId: (mediaType: MediaType) => mediaType.name });
 
 export const initialState: MediaTypeState = mediaTypesAdapter.getInitialState({
   // set initial required properties
