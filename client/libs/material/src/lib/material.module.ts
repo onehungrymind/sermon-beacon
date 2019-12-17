@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
@@ -8,6 +9,7 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatFormFieldDefaultOptions,
   MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
@@ -23,7 +25,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 
 const MODULES = [
@@ -53,8 +55,18 @@ const MODULES = [
   MatToolbarModule
 ];
 
+const matFormFieldOptions: MatFormFieldDefaultOptions = {
+  appearance: 'outline'
+};
+
 @NgModule({
   imports: MODULES,
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: matFormFieldOptions
+    }
+  ],
   exports: MODULES
 })
 export class MaterialModule { }
