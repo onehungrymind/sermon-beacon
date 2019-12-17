@@ -22,7 +22,16 @@ export const sermonTagsFragment = gql`
 `;
 
 export const tagsQuery = gql`
-  query tagQuery {
+  query tagsQuery {
+    tags {
+      ...tagsFragment
+    }
+  }
+  ${tagsFragment}
+`;
+
+export const sermonTagsQuery = gql`
+  query sermonTagsQuery {
     sermon_tags_view {
       ...sermonTagsFragment
     }
