@@ -1,5 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as TagsActions from './tags.actions';
 import { Tag } from '@sb/core-data';
@@ -19,13 +19,13 @@ export const tagsAdapter: EntityAdapter<Tag> = createEntityAdapter<Tag>();
 
 export const initialState: TagsState = tagsAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedTagId: null,
   isLoading: false
 });
 
 const tagsReducer = createReducer(
   initialState,
-  on(TagsActions.selectedTag, (state, { selectedTagId }) =>
+  on(TagsActions.tagSelected, (state, { selectedTagId }) =>
     Object.assign({}, state, { selectedTagId })
   ),
   on(
@@ -38,16 +38,16 @@ const tagsReducer = createReducer(
       isLoading: false
     })
   ),
-  on(TagsActions.loadTagsSuccess, (state, { tags }) =>
+  on(TagsActions.tagsLoaded, (state, { tags }) =>
     tagsAdapter.addAll(tags, { ...state, isLoading: true })
   ),
-  on(TagsActions.createTagSuccess, (state, { tag }) =>
+  on(TagsActions.tagCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.updateTagSuccess, (state, { tag }) =>
+  on(TagsActions.tagUpdated, (state, { tag }) =>
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.deleteTag, (state, { tag }) =>
+  on(TagsActions.tagDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
   )
 );

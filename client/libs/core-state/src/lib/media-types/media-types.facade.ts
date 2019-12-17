@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromMediaTypes from './media-types.reducer';
 import * as MediaTypesSelectors from './media-types.selectors';
@@ -9,18 +9,20 @@ import { MediaType } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class MediaTypesFacade {
-  loaded$ = this.store.pipe(select(MediaTypesSelectors.getMediaTypesLoading));
-  allMediaTypes$ = this.store.pipe(
-    select(MediaTypesSelectors.getAllMediaTypes)
+  mediaTypeLoading$ = this.store.pipe(
+    select(MediaTypesSelectors.selectMediaTypesLoading)
   );
-  selectedMediaTypes$ = this.store.pipe(
-    select(MediaTypesSelectors.getSelected)
+  allMediaTypes$ = this.store.pipe(
+    select(MediaTypesSelectors.selectAllMediaTypes)
+  );
+  selectedMediaType$ = this.store.pipe(
+    select(MediaTypesSelectors.selectMediaType)
   );
 
   constructor(private store: Store<fromMediaTypes.MediaTypesPartialState>) {}
 
   selectMediaType(selectedMediaTypeId: string) {
-    this.dispatch(MediaTypesActions.selectedMedia({ selectedMediaTypeId }));
+    this.dispatch(MediaTypesActions.mediaTypeSelected({ selectedMediaTypeId }));
   }
 
   loadMediaTypes() {

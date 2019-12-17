@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromSermons from './sermons.reducer';
 import * as SermonsSelectors from './sermons.selectors';
 import * as SermonsActions from './sermons.actions';
 import { Sermon } from '@sb/core-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SermonsFacade {
-  loading$ = this.store.pipe(select(SermonsSelectors.getSermonsLoading));
-  allSermons$ = this.store.pipe(select(SermonsSelectors.getAllSermons));
-  selectedSermons$ = this.store.pipe(select(SermonsSelectors.getSelected));
+  sermonLoading$ = this.store.pipe(
+    select(SermonsSelectors.selectSermonsLoading)
+  );
+  allSermons$ = this.store.pipe(select(SermonsSelectors.selectAllSermons));
+  selectedSermon$ = this.store.pipe(select(SermonsSelectors.selectSermon));
 
   constructor(private store: Store<fromSermons.SermonsPartialState>) {}
 

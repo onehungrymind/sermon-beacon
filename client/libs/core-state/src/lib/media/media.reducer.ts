@@ -1,5 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as MediaActions from './media.actions';
 import { Media } from '@sb/core-data';
@@ -7,7 +7,7 @@ import { Media } from '@sb/core-data';
 export const MEDIA_FEATURE_KEY = 'media';
 
 export interface MediaState extends EntityState<Media> {
-  selectedId?: string | number; // which Media record has been selected
+  selectedMediaId?: string | number; // which Media record has been selected
   isLoading: boolean; // has the Media list been loaded
 }
 
@@ -25,7 +25,7 @@ export const initialState: MediaState = mediaAdapter.getInitialState({
 
 const mediaReducer = createReducer(
   initialState,
-  on(MediaActions.selectedMedia, (state, { selectedMediaId }) =>
+  on(MediaActions.mediaSelected, (state, { selectedMediaId }) =>
     Object.assign({}, state, { selectedMediaId })
   ),
   on(
@@ -38,16 +38,16 @@ const mediaReducer = createReducer(
       isLoading: true
     })
   ),
-  on(MediaActions.loadMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaLoaded, (state, { media }) =>
     mediaAdapter.addAll(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.createMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaCreated, (state, { media }) =>
     mediaAdapter.addOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.updateMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaUpdated, (state, { media }) =>
     mediaAdapter.upsertOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.deleteMediaSuccess, (state, { media }) =>
+  on(MediaActions.mediaDeleted, (state, { media }) =>
     mediaAdapter.removeOne(media.id, { ...state, isLoading: false })
   )
 );

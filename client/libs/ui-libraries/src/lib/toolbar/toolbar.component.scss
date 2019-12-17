@@ -1,21 +1,17 @@
-@import 'libs/theme/variables.scss';
-
-.mat-drawer-backdrop.mat-drawer-shown {
-  background-color: transparent;
-}
+@import 'libs/theme/variables';
 
 mat-sidenav {
-  width: 200px;
+  width: $sidenav-width;
 }
 
 .mat-sidenav-container {
   background: #F4F5FA;;
   flex: 1;
-  height: calc(100vh - 64px);
+  height: calc(100vh - $toolbar-height);
 }
 
 .toolbar-wrapper {
-  height: 50px !important;
+  height: $toolbar-height !important;
   z-index: 99;
 
   &--toolbar-title {

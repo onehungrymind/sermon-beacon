@@ -4,10 +4,10 @@ import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 
 import {
-  sermonQuery,
   createSermonMutation,
-  updateSermonMutation,
-  deleteSermonMutation
+  deleteSermonMutation,
+  sermonQuery,
+  updateSermonMutation
 } from './sermons.graphql';
 import { Sermon } from './sermon.model';
 
@@ -26,7 +26,7 @@ export class SermonsService {
         query: sermonQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((response: ApolloQueryResult<any>) => response.data.sermons));
+      .pipe(map((response: ApolloQueryResult<any>) => response.data.speaker_sermons_view));
   }
 
   create(sermon: Partial<Sermon>) {

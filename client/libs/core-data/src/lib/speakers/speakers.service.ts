@@ -7,10 +7,10 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Speaker } from './speaker.model';
 import {
-  speakerQuery,
   createSpeakerMutation,
-  updateSpeakerMutation,
-  deleteSpeakerMutation
+  deleteSpeakerMutation,
+  speakerQuery,
+  updateSpeakerMutation
 } from './speakers.graphql';
 
 @Injectable({
@@ -25,7 +25,7 @@ export class SpeakersService {
         query: speakerQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.speakers));
+      .pipe(map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view));
   }
 
   create(speaker: Partial<Speaker>) {

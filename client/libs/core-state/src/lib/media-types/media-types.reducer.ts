@@ -1,5 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as MediaTypesActions from './media-types.actions';
 import { MediaType } from '@sb/core-data';
@@ -27,6 +27,9 @@ export const initialState: MediaTypeState = mediaTypesAdapter.getInitialState({
 
 const mediaTypesReducer = createReducer(
   initialState,
+  on(MediaTypesActions.mediaTypeSelected, (state, { selectedMediaTypeId }) =>
+    Object.assign({}, state, { selectedMediaTypeId })
+  ),
   on(
     MediaTypesActions.loadMediaTypes,
     MediaTypesActions.createMediaType,
@@ -37,16 +40,16 @@ const mediaTypesReducer = createReducer(
       isLoading: true
     })
   ),
-  on(MediaTypesActions.loadMediaTypesSuccess, (state, { mediaTypes }) =>
+  on(MediaTypesActions.mediaTypeLoaded, (state, { mediaTypes }) =>
     mediaTypesAdapter.addAll(mediaTypes, { ...state, isLoading: false })
   ),
-  on(MediaTypesActions.createMediaType, (state, { mediaType }) =>
+  on(MediaTypesActions.mediaTypeCreated, (state, { mediaType }) =>
     mediaTypesAdapter.addOne(mediaType, { ...state, isLoading: false })
   ),
-  on(MediaTypesActions.updateMediaType, (state, { mediaType }) =>
+  on(MediaTypesActions.mediaTypeUpdated, (state, { mediaType }) =>
     mediaTypesAdapter.upsertOne(mediaType, { ...state, isLoading: false })
   ),
-  on(MediaTypesActions.deleteMediaType, (state, { mediaType }) =>
+  on(MediaTypesActions.mediaTypeDeleted, (state, { mediaType }) =>
     mediaTypesAdapter.removeOne(mediaType.name, { ...state, isLoading: false })
   )
 );

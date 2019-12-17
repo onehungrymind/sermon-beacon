@@ -3,10 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
 
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
-
 
 import { SermonsEffects } from '../sermons.effects';
 import { SermonsFacade } from '../sermons.facade';
@@ -14,10 +13,10 @@ import { SermonsFacade } from '../sermons.facade';
 import * as SermonsSelectors from '../sermons.selectors';
 import * as SermonsActions from '../sermons.actions';
 import {
-  SERMONS_FEATURE_KEY,
-  State,
   initialState,
-  reducer
+  reducer,
+  SERMONS_FEATURE_KEY,
+  State
 } from '../sermons.reducer';
 
 interface TestSchema {
@@ -64,7 +63,7 @@ describe('SermonsFacade', () => {
     /**
      * The initially generated facade::loadAll() returns empty array
      */
-    it('loadAll() should return empty list with loaded == true', async done => {
+    it('loadAll() should return empty list with loaded == true', async (done) => {
       try {
         let list = await readFirst(facade.allSermons$);
         let isLoaded = await readFirst(facade.loaded$);
@@ -89,7 +88,7 @@ describe('SermonsFacade', () => {
     /**
      * Use `loadSermonsSuccess` to manually update list
      */
-    it('allSermons$ should return the loaded list; and loaded flag == true', async done => {
+    it('allSermons$ should return the loaded list; and loaded flag == true', async (done) => {
       try {
         let list = await readFirst(facade.allSermons$);
         let isLoaded = await readFirst(facade.loaded$);
