@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -11,6 +12,7 @@ import { MediaTypesFacade } from '@sb/core-state';
   styleUrls: ['./sermons-media.component.scss']
 })
 export class SermonsMediaComponent implements OnInit {
+  @Input() mediaGroup: FormGroup;
   mediaTypes$: Observable<MediaType[]> = this.mediaTypesFacade.allMediaTypes$;
 
   constructor(private mediaTypesFacade: MediaTypesFacade) { }

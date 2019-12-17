@@ -15,7 +15,10 @@
         </sb-sermons-details>
       </mat-tab>
       <mat-tab label="Sermon Media">
-        <sb-sermons-media></sb-sermons-media>
+        <div formArrayName="media">
+          <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls" [mediaGroup]="mediaGroup">
+          </sb-sermons-media>
+        </div>
       </mat-tab>
       <mat-tab label="Sermon Tags (optional)">
         <sb-sermons-tags></sb-sermons-tags>

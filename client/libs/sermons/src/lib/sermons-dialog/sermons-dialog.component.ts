@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
+
 import { Sermon } from '@sb/core-data';
 import { SermonsComponent } from '../sermons/sermons.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'sb-sermons-dialog',
@@ -31,15 +32,25 @@ export class SermonsDialogComponent implements OnInit {
     this.tabs.selectedIndex = --this.tabs.selectedIndex;
   }
 
+  private mediaGroup() {
+    return this.formBuilder.group({
+      id: null,
+      type: ['', Validators.compose([Validators.required])],
+      url: [''],
+      embedCode: ['']
+    });
+  }
+
   private initForm() {
     this.form = this.formBuilder.group({
       details: this.formBuilder.group({
+        id: null,
         title: ['', Validators.compose([Validators.required])],
         subject: [''],
         speakers: [''],
         date: ['']
       }),
-      media: this.formBuilder.group({}),
+      media: this.formBuilder.array([this.mediaGroup()]),
       tags: this.formBuilder.group({})
     });
   }
