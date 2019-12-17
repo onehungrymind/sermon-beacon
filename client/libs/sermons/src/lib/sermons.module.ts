@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@sb/material';
 import { UiLibrariesModule } from '@sb/ui-libraries';
@@ -21,6 +22,8 @@ const COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     UiLibrariesModule,
     MaterialModule
   ],
