@@ -8,7 +8,7 @@ export const speakerSelected = createAction(
 );
 
 // Load Actions
-export const loadSpeakers = createAction('[Speakers] Load Speakers');
+export const loadSpeakers = createAction('[SPEAKER] Load Speakers');
 
 export const speakersLoaded = createAction(
   '[SPEAKER] Speakers Loaded',
