@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatDatepicker } from '@angular/material';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'sb-searchbar',
@@ -10,6 +11,7 @@ import { MatDatepicker } from '@angular/material';
 
 export class SearchbarComponent implements OnInit {
   form: FormGroup;
+  webView: boolean;
   categoryOptions = [
     { name: 'Sermon Title' },
     { name: 'Sermon Speaker' },
@@ -18,11 +20,17 @@ export class SearchbarComponent implements OnInit {
   @ViewChild('picker', { static: false }) datePicker: MatDatepicker<any>;
 
   constructor (
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit() {
     this.initForm();
+    this.initMobileView();
+  }
+
+  search(formValue) {
+    console.log(formValue);
   }
 
   selectCustom(searchType: string, index = 0) {
@@ -36,6 +44,18 @@ export class SearchbarComponent implements OnInit {
   clear(formDirective: NgForm) {
     formDirective.resetForm();
     this.form.patchValue({ searchType: 'Advanced' })
+  }
+
+  private initMobileView() {
+    this.breakpointObserver
+      .observe(['(min-width: 650px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.webView = true;
+        } else {
+          this.webView = false;
+        }
+      });
   }
 
   private initForm(): void {

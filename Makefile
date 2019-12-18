@@ -19,7 +19,7 @@ install: ## Install dependencies for frontend application
 start-server: ## Start the containers
 	@(COMPOSE_HTTP_TIMEOUT=$$COMPOSE_HTTP_TIMEOUT docker-compose up --remove-orphans --build)
 
-start-clean: docker-clean start ## Clean the docker containers then start
+start-clean: docker-clean start-server ## Clean the docker containers then start
 
 start-all: ## Start admin and user apps locally (http://localhost:4200 | http://localhost:4300)
 	@(cd client && yarn start:all)
