@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { UiModalComponent } from '../../ui-modal/ui-modal.component';
-import { Sermon, Speaker, Tag } from '@sb/core-data';
+import { Media, MediaType, Sermon, Speaker, Tag } from '@sb/core-data';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,14 @@ export class DialogService {
 
   deleteDialog(feature: any, type: string) {
     const ref = this.dialog.open(UiModalComponent);
-    ref.componentInstance.type = type;
+    const { componentInstance } = ref;
 
-    if (feature as Sermon) {
-      ref.componentInstance.sermon = { ...feature };
-    }
-    if (feature as Speaker) {
-      ref.componentInstance.speaker = { ...feature };
-    }
-    if (feature as Tag) {
-      ref.componentInstance.tag = { ...feature };
-    }
+    componentInstance.type = type;
+    if (feature as Media) componentInstance.media = { ...feature };
+    if (feature as MediaType) componentInstance.mediaType = { ...feature };
+    if (feature as Sermon) componentInstance.sermon = { ...feature };
+    if (feature as Speaker) componentInstance.speaker = { ...feature };
+    if (feature as Tag) componentInstance.tag = { ...feature };
 
     return ref.afterClosed();
   }

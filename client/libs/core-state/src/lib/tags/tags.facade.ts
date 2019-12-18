@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromTags from './tags.reducer';
 import * as TagsSelectors from './tags.selectors';
 import * as TagsActions from './tags.actions';
 import { Tag } from '@sb/core-data';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TagsFacade {
-  loaded$ = this.store.pipe(select(TagsSelectors.getTagsLoading));
-  allTags$ = this.store.pipe(select(TagsSelectors.getAllTags));
-  selectedTags$ = this.store.pipe(select(TagsSelectors.getSelected));
+  tagLoading$ = this.store.pipe(select(TagsSelectors.selectTagsLoading));
+  allTags$ = this.store.pipe(select(TagsSelectors.selectAllTags));
+  selectedTag$ = this.store.pipe(select(TagsSelectors.selectTag));
 
   constructor(private store: Store<fromTags.TagsPartialState>) {}
 
   selectTag(selectedTagId: string) {
-    this.dispatch(TagsActions.selectedTag({ selectedTagId }));
+    this.dispatch(TagsActions.tagSelected({ selectedTagId }));
   }
 
   loadTags() {

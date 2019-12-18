@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { createEffect, Actions } from '@ngrx/effects';
+import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import * as fromMedia from './media.reducer';
 import * as MediaActions from './media.actions';
-import { MediaService, Media } from '@sb/core-data';
+import { Media, MediaService } from '@sb/core-data';
+import { DialogService, NotifyService } from '@sb/ui-libraries';
+import { EMPTY, iif } from 'rxjs';
 
 @Injectable()
 export class MediaEffects {
@@ -16,15 +18,12 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.loadMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .all()
-          .pipe(
-            map((res: Media[]) => MediaActions.loadMediaSuccess({ media: res }))
-          );
+        return this.mediaService.all().pipe(
+          map((media: Media[]) => MediaActions.mediaLoaded({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.loadMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -35,15 +34,12 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.createMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .create(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.createMediaSuccess({ media: res }))
-          );
+        return this.mediaService.create(action.media).pipe(
+          map((media: Media) => MediaActions.mediaCreated({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.createMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -54,15 +50,12 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.updateMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .update(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.updateMediaSuccess({ media: res }))
-          );
+        return this.mediaService.update(action.media).pipe(
+          map((media: Media) => MediaActions.mediaUpdated({ media }))
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.updateMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -73,15 +66,19 @@ export class MediaEffects {
         action: ReturnType<typeof MediaActions.deleteMedia>,
         state: fromMedia.MediaPartialState
       ) => {
-        return this.mediaService
-          .delete(action.media)
-          .pipe(
-            map((res: Media) => MediaActions.deleteMediaSuccess({ media: res }))
-          );
+        return this.dialogService.deleteDialog(action.media, 'media').pipe(
+          switchMap((deleteConfirmed: boolean) =>
+            iif(() => deleteConfirmed,
+              this.mediaService.delete(action.media).pipe(
+                map((media: Media) => MediaActions.mediaDeleted({ media }))
+              ),
+              EMPTY
+            )
+          )
+        );
       },
-
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
-        console.error('Error', error);
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -89,6 +86,8 @@ export class MediaEffects {
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromMedia.MediaPartialState>,
-    private mediaService: MediaService
+    private mediaService: MediaService,
+    private notifyService: NotifyService,
+    private dialogService: DialogService
   ) {}
 }

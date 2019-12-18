@@ -6,7 +6,7 @@ import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
-import { SpeakersService, Speaker } from '@sb/core-data';
+import { Speaker, SpeakersService } from '@sb/core-data';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SpeakersPartialState } from './speakers.reducer';
 
@@ -18,19 +18,11 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.loadSpeakers>,
         state: SpeakersPartialState
       ) => {
-        this.speakersService
-          .all()
-          .pipe(
-            map((res: Speaker[]) =>
-              SpeakersActions.loadSpeakersSuccess({ speakers: res })
-            )
-          );
+        return this.speakersService.all().pipe(
+          map((speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SpeakersActions.loadSpeakers>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SpeakersActions.loadSpeakers>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -42,13 +34,11 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.createSpeaker>,
         state: SpeakersPartialState
       ) => {
-        return this.speakersService.create(action.speaker);
+        return this.speakersService.create(action.speaker).pipe(
+          map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SpeakersActions.createSpeaker>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SpeakersActions.createSpeaker>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -60,13 +50,11 @@ export class SpeakersEffects {
         action: ReturnType<typeof SpeakersActions.updateSpeaker>,
         state: SpeakersPartialState
       ) => {
-        return this.speakersService.update(action.speaker);
+        return this.speakersService.update(action.speaker).pipe(
+          map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
+        );
       },
-
-      onError: (
-        action: ReturnType<typeof SpeakersActions.updateSpeaker>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SpeakersActions.updateSpeaker>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -80,23 +68,16 @@ export class SpeakersEffects {
       ) => {
         return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
           switchMap((deleteConfirmed: boolean) =>
-            iif(
-              () => deleteConfirmed,
-              of(
-                SpeakersActions.deleteSpeakerSuccess({
-                  speaker: action.speaker
-                })
+            iif(() => deleteConfirmed,
+              this.speakersService.delete(action.speaker).pipe(
+                map((speaker: Speaker) => SpeakersActions.speakerDeleted({ speaker }))
               ),
               EMPTY
             )
           )
         );
       },
-
-      onError: (
-        action: ReturnType<typeof SpeakersActions.deleteSpeaker>,
-        error
-      ) => {
+      onError: (action: ReturnType<typeof SpeakersActions.deleteSpeaker>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })

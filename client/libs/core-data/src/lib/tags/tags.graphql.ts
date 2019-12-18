@@ -10,13 +10,33 @@ export const tagsFragment = gql`
   }
 `;
 
+export const sermonTagsFragment = gql`
+  fragment sermonTagsFragment on sermon_tags_view {
+    id
+    property
+    value
+    sermon_id
+    created_at
+    updated_at
+  }
+`;
+
 export const tagsQuery = gql`
-  query tagQuery {
+  query tagsQuery {
     tags {
       ...tagsFragment
     }
   }
   ${tagsFragment}
+`;
+
+export const sermonTagsQuery = gql`
+  query sermonTagsQuery {
+    sermon_tags_view {
+      ...sermonTagsFragment
+    }
+  }
+  ${sermonTagsFragment}
 `;
 
 export const createTagsMutation = gql`

@@ -24,3 +24,9 @@
 .light-text { color: $text-light !important; }
 .medium-text { color: $text-medium !important; }
 .dark-text { color: $text-dark !important; }
+
+// Background Color
+.bg-primary { background-color: $primary !important; }
+.bg-accent { background-color: $accent !important; }
+.bg-secondary { background-color: $secondary !important; }
+.bg-warn { background-color: $warn !important; }

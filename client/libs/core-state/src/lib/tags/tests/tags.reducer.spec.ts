@@ -1,5 +1,5 @@
 import * as TagsActions from '../tags.actions';
-import { State, initialState, reducer } from '../tags.reducer';
+import { initialState, reducer, State } from '../tags.reducer';
 
 describe('Tags Reducer', () => {
   const createTagsEntity = (id: string, name = '') =>

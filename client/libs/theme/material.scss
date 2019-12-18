@@ -1,0 +1,20 @@
+// --------------------------------------
+// Global Material styles.
+// --------------------------------------
+
+@import 'variables';
+
+// This keeps the toolbar from being covered by the backdrop.
+.cdk-overlay-backdrop {
+  top: $toolbar-height;
+}
+
+// All Dialogs should have double the padding left and right.
+.mat-dialog-container {
+  padding: 24px 48px !important;
+}
+
+// Sidenavs should have no backdrop.
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparent;
+}

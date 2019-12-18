@@ -328,7 +328,11 @@
               "libs/core-state/tsconfig.lib.json",
               "libs/core-state/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core-state/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core-state/**",
+              "libs/core-state/src/lib/**/tests/**"
+            ]
           }
         },
         "test": {

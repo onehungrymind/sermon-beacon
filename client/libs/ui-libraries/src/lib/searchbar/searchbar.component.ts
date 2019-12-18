@@ -6,9 +6,8 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 @Component({
   selector: 'sb-searchbar',
   templateUrl: './searchbar.component.html',
-  styleUrls: [ './searchbar.component.scss' ]
+  styleUrls: ['./searchbar.component.scss']
 })
-
 export class SearchbarComponent implements OnInit {
   form: FormGroup;
   webView: boolean;
@@ -34,16 +33,17 @@ export class SearchbarComponent implements OnInit {
   }
 
   selectCustom(searchType: string, index = 0) {
-    this.form.patchValue({ searchType: searchType })
+    const datepickerOption = 2;
+    this.form.patchValue({ searchType: searchType });
 
-    if (index === 2) {
+    if (index === datepickerOption) {
       this.datePicker.open();
     }
   }
 
   clear(formDirective: NgForm) {
     formDirective.resetForm();
-    this.form.patchValue({ searchType: 'Advanced' })
+    this.form.patchValue({ searchType: 'Advanced' });
   }
 
   private initMobileView() {
@@ -61,7 +61,7 @@ export class SearchbarComponent implements OnInit {
   private initForm(): void {
     this.form = this.fb.group({
       search: [''],
-      searchType: [ 'Advanced' ]
+      searchType: ['Advanced']
     });
   }
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SermonListComponent } from './sermon-list.component';
+import { SermonsTagsComponent } from './sermons-tags.component';
 
-describe('SermonListComponent', () => {
-  let component: SermonListComponent;
-  let fixture: ComponentFixture<SermonListComponent>;
+describe('SermonsTagsComponent', () => {
+  let component: SermonsTagsComponent;
+  let fixture: ComponentFixture<SermonsTagsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SermonListComponent ]
+      declarations: [ SermonsTagsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SermonListComponent);
+    fixture = TestBed.createComponent(SermonsTagsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

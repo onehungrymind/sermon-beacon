@@ -2,48 +2,48 @@ import { createAction, props } from '@ngrx/store';
 
 import { Tag } from '@sb/core-data';
 
-export const selectedTag = createAction(
-  '[Tags] Tag Selected',
+export const tagSelected = createAction(
+  '[TAG] Tag Selected',
   props<{ selectedTagId: string }>()
 );
 
 // Load Actions
-export const loadTags = createAction('[Tags] Load Tags');
+export const loadTags = createAction('[TAG] Load Tags');
 
-export const loadTagsSuccess = createAction(
-  '[Tags] Load Tags Success',
+export const tagsLoaded = createAction(
+  '[TAG] Tags Loaded',
   props<{ tags: Tag[] }>()
 );
 
 // Create Actions
 export const createTag = createAction(
-  '[Tags] Create New Tag',
+  '[TAG] Create Tag',
   props<{ tag: Tag }>()
 );
 
-export const createTagSuccess = createAction(
-  '[Tags] New Tag Successfully Created',
+export const tagCreated = createAction(
+  '[TAG] Tag Created',
   props<{ tag: Tag }>()
 );
 
 // Update Actions
 export const updateTag = createAction(
-  '[Tags] Update Tag',
+  '[TAG] Update Tag',
   props<{ tag: Tag }>()
 );
 
-export const updateTagSuccess = createAction(
-  '[Tags] Tag Successfully Updated',
+export const tagUpdated = createAction(
+  '[TAG] Tag Updated',
   props<{ tag: Tag }>()
 );
 
 // Delete Actions
 export const deleteTag = createAction(
-  '[Tags] Delete Tag',
+  '[TAG] Delete Tag',
   props<{ tag: Tag }>()
 );
 
-export const deleteTagSuccess = createAction(
-  '[Tags] Tag Successfully Deleted',
+export const tagDeleted = createAction(
+  '[TAG] Tag Deleted',
   props<{ tag: Tag }>()
 );

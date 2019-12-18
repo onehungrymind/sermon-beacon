@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromMedia from './media.reducer';
 import * as MediaSelectors from './media.selectors';
 import * as MediaActions from './media.actions';
 import { Media } from '@sb/core-data';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MediaFacade {
-  loaded$ = this.store.pipe(select(MediaSelectors.getMediaLoading));
-  allMedia$ = this.store.pipe(select(MediaSelectors.getAllMedia));
-  selectedMedia$ = this.store.pipe(select(MediaSelectors.getSelected));
+  mediaLoading$ = this.store.pipe(select(MediaSelectors.selectMediaLoading));
+  allMedia$ = this.store.pipe(select(MediaSelectors.selectAllMedia));
+  selectedMedia$ = this.store.pipe(select(MediaSelectors.selectMedia));
 
   constructor(private store: Store<fromMedia.MediaPartialState>) {}
 
   selectMedia(selectedMediaId: string) {
-    this.dispatch(MediaActions.selectedMedia({ selectedMediaId }));
+    this.dispatch(MediaActions.mediaSelected({ selectedMediaId }));
   }
 
   loadMedia() {

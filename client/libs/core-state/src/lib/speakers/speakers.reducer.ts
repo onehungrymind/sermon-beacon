@@ -1,5 +1,5 @@
-import { createReducer, on, Action, State } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { Action, createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as SpeakersActions from './speakers.actions';
 import { Speaker } from '@sb/core-data';
@@ -7,7 +7,7 @@ import { Speaker } from '@sb/core-data';
 export const SPEAKERS_FEATURE_KEY = 'speakers';
 
 export interface SpeakersState extends EntityState<Speaker> {
-  selectedId?: string | number; // which Speakers record has been selected
+  selectedSpeakerId?: string | number; // which Speakers record has been selected
   isLoading: boolean; // has the Speakers list been loaded
 }
 
@@ -21,12 +21,15 @@ export const speakersAdapter: EntityAdapter<Speaker> = createEntityAdapter<
 
 export const initialState: SpeakersState = speakersAdapter.getInitialState({
   // set initial required properties
-  selected: null,
+  selectedSpeakerId: null,
   isLoading: false
 });
 
 const speakersReducer = createReducer(
   initialState,
+  on(SpeakersActions.speakerSelected, (state, { selectedSpeakerId }) =>
+    Object.assign({}, state, { selectedSpeakerId })
+  ),
   on(
     SpeakersActions.loadSpeakers,
     SpeakersActions.createSpeaker,
@@ -37,16 +40,16 @@ const speakersReducer = createReducer(
       isLoading: false
     })
   ),
-  on(SpeakersActions.loadSpeakersSuccess, (state, { speakers }) =>
+  on(SpeakersActions.speakersLoaded, (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, loaded: true })
   ),
-  on(SpeakersActions.createSpeakerSuccess, (state, { speaker }) =>
+  on(SpeakersActions.speakerCreated, (state, { speaker }) =>
     speakersAdapter.addOne(speaker, { ...state, isLoading: false })
   ),
-  on(SpeakersActions.updateSpeakerSuccess, (state, { speaker }) =>
+  on(SpeakersActions.speakerUpdated, (state, { speaker }) =>
     speakersAdapter.upsertOne(speaker, { ...state, isLoading: false })
   ),
-  on(SpeakersActions.deleteSpeaker, (state, { speaker }) =>
+  on(SpeakersActions.speakerDeleted, (state, { speaker }) =>
     speakersAdapter.removeOne(speaker.id, { ...state, isLoading: false })
   )
 );

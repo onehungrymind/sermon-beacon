@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { select, Store, Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 
 import * as fromSpeakers from './speakers.reducer';
 import * as SpeakersSelectors from './speakers.selectors';
 import * as SpeakersActions from './speakers.actions';
 import { Speaker } from '@sb/core-data';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
-  loaded$ = this.store.pipe(select(SpeakersSelectors.getSpeakersLoading));
-  allSpeakers$ = this.store.pipe(select(SpeakersSelectors.getAllSpeakers));
-  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.getSelected));
+  speakerLoading$ = this.store.pipe(select(SpeakersSelectors.selectSpeakersLoading));
+  allSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectAllSpeakers));
+  selectedSpeaker$ = this.store.pipe(select(SpeakersSelectors.selectSpeaker));
 
   constructor(private store: Store<fromSpeakers.SpeakersPartialState>) {}
 
   selectSpeaker(selectedSpeakerId: string) {
-    this.dispatch(SpeakersActions.selectSpeaker({ selectedSpeakerId }));
+    this.dispatch(SpeakersActions.speakerSelected({ selectedSpeakerId }));
   }
 
   loadAll() {

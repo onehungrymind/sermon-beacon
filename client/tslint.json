@@ -45,7 +45,7 @@
     "no-unused-expression": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
-    "prefer-const": true,
+    "prefer-const": [true, { "destructuring": "all" }],
     "radix": true,
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
@@ -76,6 +76,22 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "no-trailing-whitespace": true
+    "no-trailing-whitespace": true,
+    "semicolon": [true, "always"],
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "no-consecutive-blank-lines": true,
+    "newline-before-return": true,
+    "arrow-parens": true,
+    "unnecessary-else": true,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "case-insensitive"
+      }
+    ],
+    "no-require-imports": true,
+    "switch-default": true,
+    "no-magic-numbers": true
   }
 }

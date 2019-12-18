@@ -6,13 +6,13 @@ export interface Media extends Base {
   type: MediaTypes;
   embedCode?: string;
   url?: string;
-  sermon?: Sermon
+  sermon?: Sermon;
 }
 
 export enum MediaTypes {
   VIDEO = 'Video',
   AUDIO = 'AUDIO',
-  PDF   = 'PDF'
+  PDF = 'PDF'
 }
 
 export const emptyMedia = {
@@ -24,4 +24,4 @@ export const emptyMedia = {
   type: '',
   sermon_id: '',
   sermon: {}
-}
+};
