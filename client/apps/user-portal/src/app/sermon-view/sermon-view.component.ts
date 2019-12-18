@@ -43,7 +43,7 @@ export class SermonViewComponent implements OnInit {
     this.tagsFacade.loadTags();
     this.grabSermon();
     this.media = this.mediaFacade.selectMedia(this.currentSermonId);
-    console.log(this.media);
+    console.log(this.media$);
     this.speakersFacade.selectSpeaker(this.currentSermonId);
     this.tagsFacade.selectTag(this.currentSermonId);
   }
@@ -51,7 +51,6 @@ export class SermonViewComponent implements OnInit {
   grabSermon() {
     this.currentSermonId = this.route.snapshot.params.id;
     this.sermonsFacade.selectSermon(this.currentSermonId);
-    console.log(this.sermon$);
   }
 
   sanitizeUrl(url: string) {
