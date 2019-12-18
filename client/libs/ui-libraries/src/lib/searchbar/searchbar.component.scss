@@ -1,24 +1,9 @@
 @import "libs/theme/variables.scss";
 
-.filter-title {
-  margin-top: 12px;
-  color: $text-medium;
-  font-size: 12px;
-}
-
-.btn-size {
-  min-width: 30px;
-}
-
-::ng-deep {
+.searchbar-component {
   .mat-form-field-infix {
-    border: none !important;
-    padding: 5px 0px 0px 10px;
-  }
-
-  input {
-    padding: 10px 1px 1px 5px !important;
-    font-size: 22px !important;
+    border: none;
+    padding: 0px 0px;
   }
 
   label {
@@ -26,20 +11,9 @@
     font-size: 22px !important;
   }
 
-  .web-view {
-    .mat-form-field {
-      width: 600px !important;
-    }
-  }
-
-  .mobile-view {
-    mat-form-field {
-      width: 400px;
-    }
-  }
-
   .mat-input-element {
     caret-color: $primary;
+    margin-top: 0.1em;
   }
 
   .mat-form-field-wrapper {
@@ -47,10 +21,12 @@
     height: 60px;
     border-radius: 35px;
     background-color: $bg-light;
+
     .mat-form-field-flex {
       padding-left: 20px;
       padding-right: 20px;
       align-items: center;
+
       .mat-form-field-suffix {
         margin-top: 6px;
       }

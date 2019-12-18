@@ -1,64 +1,26 @@
-<div *ngIf="webView; else mobileView">
-  <div class="d-flex justify-content-center web-view">
-    <form [formGroup]="form" #formDirective="ngForm" (submit)="search(form.value)">
-      <mat-form-field floatLabel="never">
-        <input matInput formControlName="search" [matDatepicker]="picker" placeholder="Search...">
-        <mat-datepicker #picker></mat-datepicker>
-
-        <div matSuffix class="d-flex m-1">
-          <span class="filter-title">{{form.value.searchType}}</span>
-          <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
-            class="cursor-pointer btn-size p-0">
-            <mat-icon class="fs-22">expand_more</mat-icon>
+<div class="searchbar-component">
+  <form [formGroup]="form" #formDirective="ngForm" class="d-flex justify-content-center w-100 mt-3">
+    <mat-form-field appearance="legacy" floatLabel="never" class="w-50">
+      <!-- Input -->
+      <input matInput type="text" placeholder="Search..." class="fs-22 py-3 pr-2" formControlName="searchQuery" />
+      <!-- Date Picker -->
+      <input [matDatepicker]="picker" type="hidden">
+      <mat-datepicker #picker></mat-datepicker>
+      <!-- Menu -->
+      <div matSuffix class="d-flex base-text cursor-pointer">
+        <span [matMenuTriggerFor]="menu" class="fs-14 medium-text mt-1">{{form.get('searchType').value}}</span>
+        <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let category of categoryOptions; index as i;"
+            (click)="selectCustom(category.name, i)">
+            {{category.name | titlecase}}
+            <mat-icon *ngIf="category.icon">
+              {{category.icon}}
+            </mat-icon>
           </button>
-
-          <button mat-button (click)="clear(formDirective)" class="cursor-pointer btn-size p-0">
-            <mat-icon class="fs-22">close</mat-icon>
-          </button>
-
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let filteredItem of categoryOptions; let i = index"
-              (click)="selectCustom(filteredItem.name, i)">
-              {{filteredItem.name}}
-              <mat-icon *ngIf="filteredItem.icon">
-                {{filteredItem.icon ? filteredItem.icon : ''}}
-              </mat-icon>
-            </button>
-          </mat-menu>
-        </div>
-      </mat-form-field>
-    </form>
-  </div>
+        </mat-menu>
+        <mat-icon (click)="clear(formDirective)">clear</mat-icon>
+      </div>
+    </mat-form-field>
+  </form>
 </div>
-<ng-template #mobileView>
-  <div class="d-flex justify-content-center mobile-view">
-    <form [formGroup]="form" #formDirective="ngForm" (submit)="search(form.value)">
-      <mat-form-field floatLabel="never">
-        <input matInput formControlName="search" [matDatepicker]="picker" class="fs-22" placeholder="Search...">
-        <mat-datepicker #picker></mat-datepicker>
-
-        <div matSuffix class="d-flex">
-          <span class="filter-title">{{form.value.searchType}}</span>
-          <button (click)="$event.stopImmediatePropagation()" mat-button [matMenuTriggerFor]="menu"
-            class="cursor-pointer btn-size p-0">
-            <mat-icon>expand_more</mat-icon>
-          </button>
-
-          <button mat-button (click)="clear(formDirective)" class="cursor-pointer btn-size p-0">
-            <mat-icon>close</mat-icon>
-          </button>
-
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let filteredItem of categoryOptions; let i = index"
-              (click)="selectCustom(filteredItem.name, i)">
-              {{filteredItem.name}}
-              <mat-icon *ngIf="filteredItem.icon">
-                {{filteredItem.icon ? filteredItem.icon : ''}}
-              </mat-icon>
-            </button>
-          </mat-menu>
-        </div>
-      </mat-form-field>
-    </form>
-  </div>
-</ng-template>
