@@ -8,7 +8,7 @@ export const sermonSelected = createAction(
 );
 
 // Load Actions
-export const loadSermons = createAction('[Sermons] Load Sermons');
+export const loadSermons = createAction('[SERMON] Load Sermons');
 
 export const sermonsLoaded = createAction(
   '[SERMON] Sermons Loaded',

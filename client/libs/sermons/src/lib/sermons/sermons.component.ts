@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+
+import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -9,6 +10,7 @@ import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
 import { Router } from '@angular/router';
+import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 
   @Component({
   selector: 'sb-sermons',
@@ -37,7 +39,8 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private sermonFacade: SermonsFacade,
     private speakerFacade: SpeakersFacade,
-    private router: Router
+    private router: Router,
+    @Inject(MatDialog) private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -68,10 +71,13 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sermonFacade.selectSermon(sermon.id);
   }
 
-  saveSermon(sermon: Sermon) {
-    sermon.id ?
-      this.sermonFacade.updateSermon(sermon) :
-      this.sermonFacade.createSermon(sermon);
+  openSermonDialog(sermon?: Sermon) {
+    const ref = this.dialog.open(SermonsDialogComponent, {
+      minHeight: '400px',
+      data: {...sermon}
+    });
+
+    return ref.afterClosed();
   }
 
   deleteSermon(sermon: Sermon) {
