@@ -1,12 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 
-import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
-import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
-import { Sermon, Speaker } from '@sb/core-data';
+import { MediaTypesFacade, SpeakersFacade } from '@sb/core-state';
+import { MediaType, Speaker, MediaTypesService } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
 
 @Component({
@@ -14,39 +13,41 @@ import { TableDataSource } from '@sb/material';
   templateUrl: './ui-table.component.html',
   styleUrls: ['./ui-table.component.scss']
 })
+
 export class UiTableComponent implements AfterViewInit, OnInit, OnDestroy  {
+  @Input() tableColumns;
+  @Input() mediaColumns;
+  @Input() dynamicColumns;
+  @Output() deleted = new EventEmitter();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @Output() deleted = new EventEmitter();
-  sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
   speaker$: Observable<Speaker[]> = this.speakerFacade.allSpeakers$;
+  mediaTypes$: Observable<MediaType[]> = this.mediaTypeFacade.allMediaTypes$;
   dataSource: TableDataSource;
   destroy$ = new Subject();
+  spacerColumns = ['create-action', 'space1', 'space2', 'space3'];
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
-  spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
-  dynamicColumns = [
-    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
-    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
-    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => 'FIX API!' },
-    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
-  ];
 
-  constructor(private sermonFacade: SermonsFacade, private speakerFacade: SpeakersFacade) { }
+  constructor(private speakerFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade, private media: MediaTypesService) { }
 
   ngOnInit() {
-    this.sermonFacade.loadSermons();
+    this.speakerFacade.loadAll();
+    // this.media.all();
+    this.mediaTypeFacade.loadMediaTypes();
   }
 
   ngAfterViewInit() {
-    if (this.sort) {
-      this.sermons$.pipe(
-        filter((sermons: Sermon[]) => !!sermons.length),
+    if (this.sort && this.speaker$) {
+      this.speaker$.pipe(
+        filter((speaker: Speaker[]) => !!speaker.length),
         takeUntil(this.destroy$),
-      ).subscribe((sermons: Sermon[]) =>
-        this.dataSource = new TableDataSource(sermons, this.sort, this.paginator)
-      );
+      ).subscribe((speaker: Speaker[]) => this.dataSource = new TableDataSource(speaker, this.sort, this.paginator));
+    } else if (this.sort && this.mediaTypes$) {
+      this.mediaTypes$.pipe(
+        filter((mediaType: MediaType[]) => !!mediaType.length),
+        takeUntil(this.destroy$),
+      ).subscribe((mediaType: MediaType[]) => this.dataSource = new TableDataSource(mediaType, this.sort, this.paginator));
     }
   }
 
