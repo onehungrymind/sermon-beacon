@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const mediaTypesFragment = gql`
-  fragment mediaTypesFragment on media {
+  fragment mediaTypesFragment on media_types {
     name
     description
   }

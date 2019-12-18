@@ -1,3 +1,9 @@
-<div class="container d-flex justify-content-center mt-5">
-  <sb-ui-table></sb-ui-table>
+<div class="container d-flex justify-content-around mt-5">
+  <div class="table">
+    <sb-ui-table [tableColumns]="speakerColumns" [dynamicColumns]="dynamicColumns"></sb-ui-table>
+  </div>
+
+  <div class="table">
+    <sb-ui-table [tableColumns]="mediaColumns" [dynamicColumns]="dynamicMediaColumns"></sb-ui-table>
+  </div>
 </div>
