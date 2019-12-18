@@ -12,7 +12,7 @@ import { SermonsComponent } from '../sermons/sermons.component';
 })
 export class SermonsDialogComponent implements OnInit {
   form: FormGroup;
-  @ViewChild(MatTabGroup, { static: true }) tabs: MatTabGroup;
+  @ViewChild(MatTabGroup, { static: true }) tabGroup: MatTabGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,11 +25,11 @@ export class SermonsDialogComponent implements OnInit {
   }
 
   next() {
-    this.tabs.selectedIndex = ++this.tabs.selectedIndex;
+    this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
   }
 
   back() {
-    this.tabs.selectedIndex = --this.tabs.selectedIndex;
+    this.tabGroup.selectedIndex = --this.tabGroup.selectedIndex;
   }
 
   addMediaGroup() {

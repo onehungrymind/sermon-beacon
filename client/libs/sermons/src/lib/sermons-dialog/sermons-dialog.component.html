@@ -38,9 +38,9 @@
 
   <mat-dialog-actions align="end">
     <button mat-button color="warn" mat-dialog-close>Cancel</button>
-    <button *ngIf="tabs?.selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
+    <button *ngIf="tabGroup?.selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
     <button mat-button color="primary" (click)="next()">
-      {{ tabs?.selectedIndex === 2 ? 'Submit' : 'Next' }}
+      {{ tabGroup?.selectedIndex === 2 ? 'Submit' : 'Next' }}
     </button>
   </mat-dialog-actions>
 </form>
