@@ -4,8 +4,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 
-import { Sermon } from '@sb/core-data';
-import { SermonsFacade } from '@sb/core-state';
+import { Media, Sermon, Speaker, Tag } from '@sb/core-data';
+import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
 
 @Component({
   selector: 'app-sermon-view',
@@ -14,28 +14,43 @@ import { SermonsFacade } from '@sb/core-state';
 })
 export class SermonViewComponent implements OnInit {
   sermon$: Observable<Sermon> = this.sermonsFacade.selectedSermon$;
+  speaker$: Observable<Speaker> = this.speakersFacade.selectedSpeaker$;
+  media$: Observable<Media> = this.mediaFacade.selectedMedia$;
+  tags$: Observable<Tag> = this.tagsFacade.selectedTag$;
+
   actionButtons = [
     { title: 'SAVE', icon: 'cloud_download' },
     { title: 'LISTEN', icon: 'graphic_eq' },
     { title: 'NOTES', icon: 'notes' }
   ];
-  currentSermon;
+  currentSermonId;
+  media;
 
   constructor(
     private router: Router,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private sermonsFacade: SermonsFacade
+    private sermonsFacade: SermonsFacade,
+    private speakersFacade: SpeakersFacade,
+    private mediaFacade: MediaFacade,
+    private tagsFacade: TagsFacade
   ) {}
 
   ngOnInit() {
     this.sermonsFacade.loadSermons();
+    this.speakersFacade.loadAll();
+    this.mediaFacade.loadMedia();
+    this.tagsFacade.loadTags();
     this.grabSermon();
+    this.media = this.mediaFacade.selectMedia(this.currentSermonId);
+    console.log(this.media);
+    this.speakersFacade.selectSpeaker(this.currentSermonId);
+    this.tagsFacade.selectTag(this.currentSermonId);
   }
 
   grabSermon() {
-    this.currentSermon = this.route.snapshot.params.id;
-    this.sermonsFacade.selectSermon(this.currentSermon);
+    this.currentSermonId = this.route.snapshot.params.id;
+    this.sermonsFacade.selectSermon(this.currentSermonId);
     console.log(this.sermon$);
   }
 

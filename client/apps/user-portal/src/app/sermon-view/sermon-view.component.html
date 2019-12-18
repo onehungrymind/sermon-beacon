@@ -4,17 +4,10 @@
   </button>
 
   <div class="container-fluid">
-    <div class="d-flex justify-content-center">
-      <iframe
-        [src]=""
-        width="100%"
-        height="625"
-        frameborder="0"
-        [title]="sermon.title"
-        webkitallowfullscreen
-        mozallowfullscreen
-        allowfullscreen>
-      </iframe>
+    <div class="d-flex justify-content-center" 
+      *ngIf="media$ | async as media"
+    >
+      <embed src="sanitizeUrl(media.url)"
     </div>
   </div>
 
@@ -31,8 +24,8 @@
       <div class="align-self-center">
         <mat-card-subtitle class="d-flex justify-content-between fs-20 m-0 base-text mb-2">
 
-          <span *ngFor="let speaker of sermon.sermon_speakers">
-            {{speaker.speaker.first_name}} {{speaker.speaker.last_name}}
+          <span *ngIf="speaker$ | async as speaker">
+            {{speaker.first_name}} {{speaker.last_name}}
           </span>
 
           <span class="font-weight-lighter">&nbsp;|&nbsp;</span> {{sermon.date | date: 'MMM dd, yyyy'}}
