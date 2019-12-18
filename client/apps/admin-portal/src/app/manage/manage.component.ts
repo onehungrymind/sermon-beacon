@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SpeakersFacade, MediaTypesFacade } from '@sb/core-state';
+import { MediaTypesFacade, SpeakersFacade } from '@sb/core-state';
 import { Observable } from 'rxjs';
-import { Speaker, MediaType } from '@sb/core-data';
+import { MediaType, Speaker } from '@sb/core-data';
 
 @Component({
   selector: 'sb-manage',
@@ -10,6 +10,8 @@ import { Speaker, MediaType } from '@sb/core-data';
 })
 
 export class ManageComponent implements OnInit {
+  speaker$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
+  mediaTypes$: Observable<MediaType[]> = this.mediaTypeFacade.allMediaTypes$;
   speakerColumns = ['name', 'position', 'church', 'actions'];
   mediaColumns = ['name', 'description', 'actions'];
   dynamicColumns = [
@@ -22,8 +24,11 @@ export class ManageComponent implements OnInit {
     { column: 'description', title: 'Description', cell: (mediaType: MediaType) => mediaType.description }
   ];
 
-  constructor() {}
+  constructor(private speakersFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.speakersFacade.loadAll();
+    this.mediaTypeFacade.loadMediaTypes();
+  }
 
 }

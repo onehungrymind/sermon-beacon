@@ -2,14 +2,6 @@
 @import 'libs/theme/fonts';
 @import 'libs/theme/variables';
 
-// TODO: Update to use ViewEncapsulation.None - Vic
-::ng-deep.mat-column-date {
-  text-align: right !important;
-  > .mat-sort-header-container {
-    justify-content: flex-end !important;
-  }
-}
-
 .actions-container {
   max-width: 3.1rem !important;
 }
