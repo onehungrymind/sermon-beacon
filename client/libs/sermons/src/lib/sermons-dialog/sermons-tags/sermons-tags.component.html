@@ -3,26 +3,27 @@
     <mat-label>Tags</mat-label>
 
     <mat-chip-list #chipList>
-      <mat-chip *ngFor="let selectedTag of selectedTags"
-                selectable="true"
-                removable="true" (removed)="remove(selectedTag)">
-        {{selectedTag.value}}
+      <mat-chip *ngFor="let selectedTag of tagsGroup.get('tags').value"
+                [selectable]="true"
+                [removable]="true"
+                (removed)="remove(selectedTag)">
+          {{selectedTag.property}} : {{selectedTag.value}}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
 
-      <input matInput type="text" placeholder="Please select a tag or create"
+      <input matInput placeholder="Please select a tag or create"
               #tagsInput
               formControlName="value"
+              [multiple]="true"
               [matAutocomplete]="auto"
               [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true"
+              [matChipInputAddOnBlur]="false"
               (matChipInputTokenEnd)="add($event)" />
     </mat-chip-list>
 
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let tag of filteredTags | async" [value]="tag.value">
-        {{tag.value}}
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="add($event)">
+      <mat-option *ngFor="let tag of tags$ | async" [value]="tag">
+        <strong class="primary-text">{{tag.property}}</strong>: {{tag.value}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
+  MAT_CHIPS_DEFAULT_OPTIONS,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
+  MatChipsDefaultOptions,
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
@@ -26,7 +29,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 
 const MODULES = [
@@ -57,6 +60,10 @@ const MODULES = [
   MatToolbarModule
 ];
 
+const matChipsOptions: MatChipsDefaultOptions = {
+  separatorKeyCodes: [ENTER, COMMA]
+};
+
 const matFormFieldOptions: MatFormFieldDefaultOptions = {
   appearance: 'outline'
 };
@@ -64,6 +71,10 @@ const matFormFieldOptions: MatFormFieldDefaultOptions = {
 @NgModule({
   imports: MODULES,
   providers: [
+    {
+      provide: MAT_CHIPS_DEFAULT_OPTIONS,
+      useValue: matChipsOptions
+    },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: matFormFieldOptions

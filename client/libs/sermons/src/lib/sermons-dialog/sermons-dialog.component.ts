@@ -43,14 +43,12 @@ export class SermonsDialogComponent implements OnInit {
         id: null,
         title: ['', Validators.compose([Validators.required])],
         subject: [''],
-        speakers: [''],
-        date: ['']
+        speakers: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
+        date: ['', Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
       }),
-      media: this.formBuilder.array([this.mediaGroup()]),
+      media: this.formBuilder.array([this.mediaGroup()], Validators.required),
       tags: this.formBuilder.group({
-        id: null,
-        property: [''],
-        value: ['', Validators.compose([Validators.required])]
+        tags: [[], Validators.compose([Validators.required])]
       })
     });
   }
