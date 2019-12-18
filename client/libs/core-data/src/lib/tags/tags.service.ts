@@ -5,8 +5,9 @@ import { Tag } from './tag.model';
 import {
   createTagsMutation,
   deleteTagsMutation,
+  sermonTagsQuery,
   tagsQuery,
-  updateTagsMutation
+  updateTagsMutation,
 } from './tags.graphql';
 import { map } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';
@@ -23,7 +24,16 @@ export class TagsService {
         query: tagsQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view));
+      .pipe(map((res: ApolloQueryResult<any>) => res.data.tags));
+  }
+
+  allAttachedToSermons() {
+    return this.apollo.query({
+      query: sermonTagsQuery,
+      fetchPolicy: 'network-only'
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view)
+    );
   }
 
   create(tags: Partial<Tag>) {

@@ -8,7 +8,7 @@ export const tagSelected = createAction(
 );
 
 // Load Actions
-export const loadTags = createAction('[Tags] Load Tags');
+export const loadTags = createAction('[TAG] Load Tags');
 
 export const tagsLoaded = createAction(
   '[TAG] Tags Loaded',
