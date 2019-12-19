@@ -8,9 +8,10 @@
       <mat-datepicker #picker></mat-datepicker>
       <!-- Menu -->
       <div matSuffix class="d-flex base-text cursor-pointer">
-        <span [matMenuTriggerFor]="menu" class="align-self-center fs-14 medium-text">Sermon {{form.get('searchType').value | titlecase}}</span>
-        <button mat-icon-button type="button" class="fs-22">
-          <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+        <span class="align-self-center fs-14 medium-text">Sermon {{form.get('searchType').value | titlecase}}</span>
+        <button mat-icon-button type="button" class="fs-22" #matMenuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="menu" (click)="matMenuTrigger.openMenu()">
+          <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item *ngFor="let category of categoryOptions; index as i;"
