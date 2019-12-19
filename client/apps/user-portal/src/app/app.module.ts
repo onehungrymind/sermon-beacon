@@ -10,6 +10,7 @@ import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import { SermonViewComponent } from './sermon-view/sermon-view.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [AppComponent, SermonViewComponent],
@@ -20,7 +21,8 @@ import { SermonViewComponent } from './sermon-view/sermon-view.component';
     MaterialModule,
     SermonsModule,
     UiLibrariesModule,
-    RoutingModule
+    RoutingModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

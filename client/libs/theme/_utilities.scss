@@ -1,7 +1,10 @@
 @import './variables';
 
+// All utilities should have "!important"
+
 .cursor-pointer {
-  cursor: pointer;
+  pointer-events: all !important;
+  cursor: pointer !important;
 }
 
 .primary-border {
@@ -13,5 +16,5 @@
 }
 
 .flex-auto {
-  flex: 0 0 auto
+  flex: 0 0 auto !important;
 }
