@@ -32,7 +32,7 @@ export class SearchbarComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.sermonsFacade.loadSermons(this.form.value);
+    this.sermonsFacade.loadSermons();
   }
 
   ngOnDestroy() {
@@ -41,13 +41,13 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   }
 
   search() {
-    this.sermonsFacade.loadSermons(this.form.value);
+    this.sermonsFacade.searchSermons(this.form.value);
   }
 
   selectCustom(searchType: string, index = 0) {
     const datepickerOption = 2;
 
-    this.form.patchValue({ searchType: searchType });
+    this.form.patchValue({ searchType });
 
     if (index === datepickerOption) {
       this.patchSelectedDate();
@@ -55,7 +55,8 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   }
 
   clear(formDirective: NgForm) {
-    this.form.patchValue({ searchType: 'title' });
+    this.form.patchValue({ searchType: 'title', searchQuery: '' });
+    this.searchSermons();
     formDirective.resetForm();
   }
 
@@ -72,7 +73,12 @@ export class SearchbarComponent implements OnDestroy, OnInit {
       map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
       map((formattedDate: string) => ({formattedDate, searchQueryGroup: this.form.get('searchQuery')})),
       tap(({formattedDate, searchQueryGroup}) => searchQueryGroup.patchValue(formattedDate)),
+      tap(() => this.searchSermons()),
       takeUntil(this.destroy$)
     ).subscribe();
+  }
+
+  private searchSermons() {
+    this.sermonsFacade.searchSermons(this.form.value);
   }
 }

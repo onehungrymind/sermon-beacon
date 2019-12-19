@@ -19,11 +19,27 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.all(action.query).pipe(
+        return this.sermonsService.all().pipe(
           map((sermons: Sermon[]) => SermonsActions.sermonsLoaded({ sermons }))
         );
       },
       onError: (action: ReturnType<typeof SermonsActions.loadSermons>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  loadSearchedSermons$ = createEffect(() =>
+    this.dataPersistence.fetch(SermonsActions.loadSearchedSermons, {
+      run: (
+        action: ReturnType<typeof SermonsActions.loadSearchedSermons>,
+        state: SermonsPartialState
+      ) => {
+        return this.sermonsService.all(action.query).pipe(
+          map((sermons: Sermon[]) => SermonsActions.searchedSermonsLoaded({ sermons }))
+        );
+      },
+      onError: (action: ReturnType<typeof SermonsActions.loadSearchedSermons>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
