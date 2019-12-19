@@ -28,7 +28,9 @@
       align-items: center;
 
       .mat-form-field-suffix {
-        margin-top: 6px;
+        .mat-icon-button {
+          width: 1em;
+        }
       }
     }
   }

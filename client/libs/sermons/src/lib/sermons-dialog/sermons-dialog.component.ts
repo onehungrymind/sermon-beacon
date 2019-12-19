@@ -1,9 +1,8 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
+import { MAT_DIALOG_DATA, MatTabGroup } from '@angular/material';
 
 import { Sermon } from '@sb/core-data';
-import { SermonsComponent } from '../sermons/sermons.component';
 
 @Component({
   selector: 'sb-sermons-dialog',
@@ -16,7 +15,6 @@ export class SermonsDialogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<SermonsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Sermon
   ) {}
 

@@ -1,5 +1,5 @@
 <div class="searchbar-component">
-  <form [formGroup]="form" #formDirective="ngForm" class="d-flex justify-content-center w-100 mt-3">
+  <form [formGroup]="form" #formDirective="ngForm" (submit)="search()" class="d-flex justify-content-center w-100 mt-3">
     <mat-form-field appearance="legacy" floatLabel="never" class="w-50">
       <!-- Input -->
       <input matInput type="text" placeholder="Search..." class="fs-22 py-3 pr-2" formControlName="searchQuery" />
@@ -8,8 +8,11 @@
       <mat-datepicker #picker></mat-datepicker>
       <!-- Menu -->
       <div matSuffix class="d-flex base-text cursor-pointer">
-        <span [matMenuTriggerFor]="menu" class="fs-14 medium-text mt-1">{{form.get('searchType').value}}</span>
-        <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+        <span class="align-self-center fs-14 medium-text">Sermon {{form.get('searchType').value | titlecase}}</span>
+        <button mat-icon-button type="button" class="fs-22" #matMenuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="menu" (click)="matMenuTrigger.openMenu()">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item *ngFor="let category of categoryOptions; index as i;"
             (click)="selectCustom(category.name, i)">
@@ -19,7 +22,12 @@
             </mat-icon>
           </button>
         </mat-menu>
-        <mat-icon (click)="clear(formDirective)">clear</mat-icon>
+        <button mat-icon-button type="submit" class="fs-22" (click)="$event.stopImmediatePropagation()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-icon-button class="fs-22" (click)="clear(formDirective); $event.stopImmediatePropagation()">
+          <mat-icon>clear</mat-icon>
+        </button>
       </div>
     </mat-form-field>
   </form>
