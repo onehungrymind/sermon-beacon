@@ -7,7 +7,6 @@ import { map, switchMap } from 'rxjs/operators';
 import * as fromMediaTypes from './media-types.reducer';
 import * as MediaTypesActions from './media-types.actions';
 import { MediaType, MediaTypesService } from '@sb/core-data';
-// tslint:disable-next-line: nx-enforce-module-boundaries
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { EMPTY, iif } from 'rxjs';
 

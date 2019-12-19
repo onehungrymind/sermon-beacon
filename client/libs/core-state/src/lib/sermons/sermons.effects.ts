@@ -7,7 +7,6 @@ import { map, switchMap } from 'rxjs/operators';
 
 import * as SermonsActions from './sermons.actions';
 import { Sermon, SermonsService } from '@sb/core-data';
-// tslint:disable-next-line: nx-enforce-module-boundaries
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SermonsPartialState } from './sermons.reducer';
 

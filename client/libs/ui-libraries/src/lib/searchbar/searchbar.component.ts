@@ -6,8 +6,7 @@ import * as moment from 'moment';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-// tslint:disable-next-line: nx-enforce-module-boundaries
-import { SermonsFacade } from '@sb/core-state';
+import { SermonsFacade } from '@sb/facades/sermons/sermons.facade';
 
 @Component({
   selector: 'sb-searchbar',
