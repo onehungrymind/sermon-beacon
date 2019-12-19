@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
+import * as moment from 'moment';
 import { Apollo } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import {
   createSermonMutation,
@@ -11,22 +14,24 @@ import {
 } from './sermons.graphql';
 import { Sermon } from './sermon.model';
 
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
 export class SermonsService {
   constructor(private apollo: Apollo) {}
 
-  all(): Observable<Sermon[]> {
+  all(query?: {searchQuery: string, searchType: string}): Observable<Sermon[]> {
     return this.apollo
       .query({
         query: sermonQuery,
-        fetchPolicy: 'network-only'
+        fetchPolicy: 'network-only',
+        variables: {
+          titleQuery: {_ilike: query.searchType === 'title' ? `%${query.searchQuery}%` : '%%'},
+          speakerNameQuery: {_ilike: query.searchType === 'speaker' ? `%${query.searchQuery}%` : '%%'},
+          dateQuery: {_lte: query.searchType === 'date' ? moment(query.searchQuery).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD')},
+        }
       })
-      .pipe(map((response: ApolloQueryResult<any>) => response.data.speaker_sermons_view));
+      .pipe(map((response: ApolloQueryResult<any>) => response.data.sermons));
   }
 
   create(sermon: Partial<Sermon>) {

@@ -21,8 +21,8 @@ export class SermonsFacade {
     this.dispatch(SermonsActions.sermonSelected({ selectedSermonId }));
   }
 
-  loadSermons() {
-    this.dispatch(SermonsActions.loadSermons());
+  loadSermons(query?: {searchQuery: string, searchType: string}) {
+    this.dispatch(SermonsActions.loadSermons({ query }));
   }
 
   createSermon(sermon: Sermon) {

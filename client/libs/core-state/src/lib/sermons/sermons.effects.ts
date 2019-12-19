@@ -18,7 +18,7 @@ export class SermonsEffects {
         action: ReturnType<typeof SermonsActions.loadSermons>,
         state: SermonsPartialState
       ) => {
-        return this.sermonsService.all().pipe(
+        return this.sermonsService.all(action.query).pipe(
           map((sermons: Sermon[]) => SermonsActions.sermonsLoaded({ sermons }))
         );
       },

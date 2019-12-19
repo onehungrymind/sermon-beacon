@@ -6,6 +6,9 @@ import * as moment from 'moment';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+// tslint:disable-next-line: nx-enforce-module-boundaries
+import { SermonsFacade } from '@sb/core-state';
+
 @Component({
   selector: 'sb-searchbar',
   templateUrl: './searchbar.component.html',
@@ -17,15 +20,19 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   form: FormGroup;
   destroy$ = new Subject;
   categoryOptions = [
-    { name: 'Sermon Title' },
-    { name: 'Sermon Speaker' },
-    { name: 'Sermon Date', icon: 'calendar_today' }
+    { name: 'title' },
+    { name: 'speaker' },
+    { name: 'date', icon: 'calendar_today' }
   ];
 
-  constructor (private formBuilder: FormBuilder) { }
+  constructor (
+    private formBuilder: FormBuilder,
+    private sermonsFacade: SermonsFacade
+  ) { }
 
   ngOnInit() {
     this.initForm();
+    this.sermonsFacade.loadSermons(this.form.value);
   }
 
   ngOnDestroy() {
@@ -33,8 +40,8 @@ export class SearchbarComponent implements OnDestroy, OnInit {
     this.destroy$.unsubscribe();
   }
 
-  search(formValue) {
-    console.log(formValue);
+  search() {
+    this.sermonsFacade.loadSermons(this.form.value);
   }
 
   selectCustom(searchType: string, index = 0) {
@@ -43,24 +50,29 @@ export class SearchbarComponent implements OnDestroy, OnInit {
     this.form.patchValue({ searchType: searchType });
 
     if (index === datepickerOption) {
-      this.datePicker.open();
-      this.datePicker.closedStream.pipe(
-        map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
-        tap((formattedDate: string) => this.form.get('searchQuery').patchValue(formattedDate)),
-        takeUntil(this.destroy$)
-      ).subscribe();
+      this.patchSelectedDate();
     }
   }
 
   clear(formDirective: NgForm) {
-    formDirective.resetForm();
-    this.form.patchValue({ searchType: 'Advanced' });
+    this.form.patchValue({ searchType: 'title' });
+    // formDirective.resetForm();
   }
 
   private initForm() {
     this.form = this.formBuilder.group({
       searchQuery: [''],
-      searchType: ['Advanced']
+      searchType: ['title']
     });
+  }
+
+  private patchSelectedDate() {
+    this.datePicker.open();
+    this.datePicker.closedStream.pipe(
+      map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
+      map((formattedDate: string) => ({formattedDate, searchQueryGroup: this.form.get('searchQuery')})),
+      tap(({formattedDate, searchQueryGroup}) => searchQueryGroup.patchValue(formattedDate)),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 }
