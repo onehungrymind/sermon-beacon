@@ -7,6 +7,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
 import { Speaker, SpeakersService } from '@sb/core-data';
+// tslint:disable-next-line: nx-enforce-module-boundaries
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 import { SpeakersPartialState } from './speakers.reducer';
 

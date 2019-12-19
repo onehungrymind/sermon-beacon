@@ -8,6 +8,7 @@ import { map, switchMap } from 'rxjs/operators';
 import * as fromTags from './tags.reducer';
 import * as TagsActions from './tags.actions';
 import { Tag, TagsService } from '@sb/core-data';
+// tslint:disable-next-line: nx-enforce-module-boundaries
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 
 @Injectable()
