@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { MediaType, Speaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'sb-ui-table',
@@ -18,19 +19,25 @@ export class UiTableComponent implements OnChanges, OnInit, OnDestroy {
   @Input() tableColumns;
   @Input() mediaColumns;
   @Input() dynamicColumns;
+  @Output() editing = new EventEmitter();
   @Output() deleted = new EventEmitter();
+  @Output() rename = new EventEmitter();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+  form: FormGroup;
   dataSource: TableDataSource;
   destroy$ = new Subject();
   spacerColumns = ['create-action', 'space1', 'space2'];
+  enableEdit = false;
+  enableEditIndex = null;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     if (this.speakers) {
       this.spacerColumns.push('space3');
     }
+    this.initForm();
   }
 
   ngOnChanges() {
@@ -45,5 +52,27 @@ export class UiTableComponent implements OnChanges, OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  enableEditMethod(i) {
+    this.enableEdit = true;
+    this.enableEditIndex = i;
+    console.log(i);
+  }
+
+  cancel() {
+    console.log('cancel');
+    this.enableEditIndex = null;
+  }
+
+  saveSegment() {
+    this.enableEditIndex = null;
+    console.log(this.form.value);
+  }
+
+  private initForm(): void {
+    this.form = this.fb.group({
+      name: ['']
+    });
   }
 }

@@ -1,7 +1,7 @@
 <div class="container w-100">
   <div class="mat-elevation-z1">
-    <table mat-table class="w-100" [dataSource]="dataSource" matSort
-      matSortActive="title" matSortDirection="asc" matSortDisableClear>
+    <table mat-table class="w-100" [dataSource]="dataSource" matSort matSortActive="title" matSortDirection="asc"
+      matSortDisableClear>
 
       <!-- Create Action Header -->
       <ng-container [matColumnDef]="spacer" *ngFor="let spacer of spacerColumns; index as i">
@@ -15,27 +15,47 @@
         </th>
       </ng-container>
 
-      <!-- Table data for Sermons -->
-      <ng-container *ngFor="let data of dynamicColumns; let i = index" [matColumnDef]="data.column">
+      <!-- Table data for dataSource -->
+      <ng-container *ngFor="let data of dynamicColumns; let i = index; let last = last" [matColumnDef]="data.column">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
           {{data.title}}
         </th>
-        <td mat-cell *matCellDef="let row" class="fs-20 px-2">
-          {{data.cell(row)}}
+        <td mat-cell *matCellDef="let row; let i = index" [ngClass]="{'pl-3': i === 0, 'pr-3': last}"
+          class="fs-20 px-3">
+          <span *ngIf="enableEditIndex !== i; else lol">
+            {{data.cell(row)}}
+          </span>
+
+          <ng-template #lol>
+            <form [formGroup]="form">
+              <input formControlName="name" *ngIf="enableEdit && enableEditIndex === i" class="editing" placeholder={{data.cell(row)}}>
+            </form>
+          </ng-template>
+
         </td>
+
       </ng-container>
 
       <!-- Create and Delete Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary sb-border-bottom"></th>
-        <td mat-cell *matCellDef="let row" class="pr-0">
-          <div class="d-flex action-container justify-content-between mr-0 mx-4">
-            <button mat-button class="px-0 mw-25">
-              <mat-icon class="material-icons-outlined mw-25 accent-text px-0">create</mat-icon>
+        <td mat-cell *matCellDef="let row; let i = index" class="pr-0">
+          <div class="d-flex action-container justify-content-end mr-0 mx-4">
+
+            <button mat-button class="px-0 mw-25" (click)="enableEditMethod(i, row)"
+              *ngIf="i != enableEditIndex || enableEditIndex == null">
+              <mat-icon class="material-icons-outlined mw-25 accent-text px-0">
+                {{enableEdit && row === i ? 'create' : 'create'}}</mat-icon>
             </button>
-            <button mat-button class="px-0 delete-btn mw-25">
+
+            <button mat-button class="px-0 mw-25" *ngIf="enableEdit && enableEditIndex == i" (click)="saveSegment()">
+              <mat-icon class="material-icons-outlined mw-25 accent-text px-0">save</mat-icon>
+            </button>
+
+            <button mat-button class="px-0 delete-btn mw-25" (click)="enableEdit=false; cancel()">
               <mat-icon class="material-icons-outlined mw-25 secondary-text px-0">close</mat-icon>
             </button>
+
           </div>
         </td>
       </ng-container>
@@ -45,10 +65,7 @@
       <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
     </table>
 
-    <mat-paginator #paginator
-      [length]="dataSource?.data.length"
-      [pageIndex]="0"
-      [pageSize]="10"
+    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
       [pageSizeOptions]="[25, 50, 100, 250]">
     </mat-paginator>
   </div>

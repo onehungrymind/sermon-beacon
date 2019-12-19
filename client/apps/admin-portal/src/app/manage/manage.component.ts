@@ -24,11 +24,10 @@ export class ManageComponent implements OnInit {
     { column: 'description', title: 'Description', cell: (mediaType: MediaType) => mediaType.description }
   ];
 
-  constructor(private speakersFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade) {}
+  constructor(private speakersFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade) { }
 
   ngOnInit() {
     this.speakersFacade.loadAll();
     this.mediaTypeFacade.loadMediaTypes();
   }
-
 }
