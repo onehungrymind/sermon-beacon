@@ -1,13 +1,16 @@
-<div *ngIf="sermon$ | async as sermon"> {{sermon | json}}
+<div *ngIf="sermon$ | async as sermon"> 
+  <!-- {{sermon | json}} -->
   <button mat-icon-button (click)="goBack()" class="back-arrow-container">
     <mat-icon class="back-arrow" color="accent">arrow_back</mat-icon>
   </button>
 
   <div class="container-fluid">
     <div class="d-flex justify-content-center" 
-      *ngIf="media$ | async as media"
+      
     >
-      <embed src="sanitizeUrl(media.url)"
+      <ng-container>
+        <div [innerHtml]="sanitizeHtml(embed)"></div>
+      </ng-container>
     </div>
   </div>
 
@@ -22,9 +25,10 @@
   <div class="container">
     <div class="d-flex justify-content-between">
       <div class="align-self-center">
-        <mat-card-subtitle class="d-flex justify-content-between fs-20 m-0 base-text mb-2">
+        <mat-card-subtitle class="d-flex justify-content-between fs-20 m-0 base-text mb-2"
+          *ngIf="speaker$ | async as speakers">
 
-          <span *ngIf="speaker$ | async as speaker">
+          <span *ngFor="let speaker of speakers">
             {{speaker.first_name}} {{speaker.last_name}}
           </span>
 
@@ -32,19 +36,25 @@
         </mat-card-subtitle>
       </div>
 
-      <div class="align-self-end base-text">
-        <button mat-button class="fs-10" *ngFor="let action of actionButtons">
-          <mat-icon class="fs-24 mr-1">{{action.icon}}</mat-icon>
-          {{action.title}}
-        </button>
+      <div class="align-self-end base-text" *ngIf="media$ | async as media">
+        <span *ngFor="let media of media">
+          <!-- <button mat-button class="fs-10" *ngIf="checkMediaType(media.type)">
+            <mat-icon>cloud_download</mat-icon>
+            SAVE
+          </button> -->
+          <!-- <button mat-button class="fs-10" *ngFor="let media of media">
+            <mat-icon *ngIf="checkMediaType(media.type)" class="fs-24 mr-1">{{media.type !== 'AUDIO' ? 'graphic_eq': 'notes'}}</mat-icon>
+            {{media.type}}
+          </button> -->
+        </span>
       </div>
     </div>
 
     <mat-divider class="mb-3"></mat-divider>
 
-    <mat-chip-list>
-      <mat-chip color="accent" selected class="primary-border" *ngFor="let sermonTag of sermon?.sermon_tags">
-        {{sermonTag.tag.value}}
+    <mat-chip-list *ngIf="tags$ | async as tags">
+      <mat-chip color="accent" selected class="primary-border" *ngFor="let tag of tags">
+        {{tag.value}}
       </mat-chip>
     </mat-chip-list>
   </div>

@@ -6,6 +6,7 @@ import {
   createTagsMutation,
   deleteTagsMutation,
   sermonTagsQuery,
+  tagsBySermonIdQuery,
   tagsQuery,
   updateTagsMutation,
 } from './tags.graphql';
@@ -24,13 +25,23 @@ export class TagsService {
         query: tagsQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view));
+      .pipe(map((res: ApolloQueryResult<any>) => res.data.tags));
   }
 
   allAttachedToSermons() {
     return this.apollo.query({
       query: sermonTagsQuery,
       fetchPolicy: 'network-only'
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view)
+    );
+  }
+
+  getTagsBySermonId(id: string) {
+    return this.apollo.query({
+      query: tagsBySermonIdQuery,
+      fetchPolicy: 'network-only',
+      variables: { id }
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view)
     );

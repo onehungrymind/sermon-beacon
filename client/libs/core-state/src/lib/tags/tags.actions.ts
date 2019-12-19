@@ -15,6 +15,11 @@ export const tagsLoaded = createAction(
   props<{ tags: Tag[] }>()
 );
 
+export const loadTagsBySermonId = createAction(
+  '[TAG] Load Tags By Sermon Id',
+  props<{ sermonId: string }>()
+);
+
 // Create Actions
 export const createTag = createAction(
   '[TAG] Create Tag',

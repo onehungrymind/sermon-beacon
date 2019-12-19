@@ -18,7 +18,7 @@ export class SermonsDetailsComponent implements OnInit {
   constructor(private speakersFacade: SpeakersFacade) { }
 
   ngOnInit() {
-    this.speakersFacade.loadAll();
+    this.speakersFacade.loadSpeakers();
   }
 
 }

@@ -5,6 +5,7 @@ import { DataPersistence } from '@nrwl/angular';
 import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
+import * as fromSpeakers from './speakers.reducer';
 import * as SpeakersActions from './speakers.actions';
 import { Speaker, SpeakersService } from '@sb/core-data';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
@@ -16,7 +17,7 @@ export class SpeakersEffects {
     this.dataPersistence.fetch(SpeakersActions.loadSpeakers, {
       run: (
         action: ReturnType<typeof SpeakersActions.loadSpeakers>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.all().pipe(
           map((speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
@@ -28,11 +29,27 @@ export class SpeakersEffects {
     })
   );
 
+  loadCurrentSermonSpeaker$ = createEffect(() => 
+    this.dataPersistence.fetch(SpeakersActions.loadSpeakersBySermonId, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>,
+        state: fromSpeakers.SpeakersPartialState
+      ) => {
+        return this.speakersService.getSpeakerBySermonId(action.sermonId).pipe(
+          map(( speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addSpeaker$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SpeakersActions.createSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.createSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.create(action.speaker).pipe(
           map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
@@ -48,7 +65,7 @@ export class SpeakersEffects {
     this.dataPersistence.pessimisticUpdate(SpeakersActions.updateSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.updateSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.update(action.speaker).pipe(
           map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
@@ -64,7 +81,7 @@ export class SpeakersEffects {
     this.dataPersistence.pessimisticUpdate(SpeakersActions.deleteSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.deleteSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
           switchMap((deleteConfirmed: boolean) =>

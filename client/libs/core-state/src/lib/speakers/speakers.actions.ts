@@ -15,6 +15,11 @@ export const speakersLoaded = createAction(
   props<{ speakers: Speaker[] }>()
 );
 
+export const loadSpeakersBySermonId = createAction(
+  '[SPEAKER] Load Speakers By Sermon Id',
+  props<{ sermonId: string }>()
+);
+
 // Create Actions
 export const createSpeaker = createAction(
   '[SPEAKER] Create Speaker',

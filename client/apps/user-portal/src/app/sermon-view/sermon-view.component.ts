@@ -14,17 +14,11 @@ import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core
 })
 export class SermonViewComponent implements OnInit {
   sermon$: Observable<Sermon> = this.sermonsFacade.selectedSermon$;
-  speaker$: Observable<Speaker> = this.speakersFacade.selectedSpeaker$;
-  media$: Observable<Media> = this.mediaFacade.selectedMedia$;
-  tags$: Observable<Tag> = this.tagsFacade.selectedTag$;
+  speaker$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
+  media$: Observable<Media[]> = this.mediaFacade.allMedia$;
+  tags$: Observable<Tag[]> = this.tagsFacade.allTags$;
 
-  actionButtons = [
-    { title: 'SAVE', icon: 'cloud_download' },
-    { title: 'LISTEN', icon: 'graphic_eq' },
-    { title: 'NOTES', icon: 'notes' }
-  ];
-  currentSermonId;
-  media;
+  embed = '<iframe src="https://player.vimeo.com/video/378141919" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
 
   constructor(
     private router: Router,
@@ -37,24 +31,28 @@ export class SermonViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // loads current sermon id
+    const currentSermonId = this.route.snapshot.params.id;
+    this.grabSermon(currentSermonId);
+
     this.sermonsFacade.loadSermons();
-    this.speakersFacade.loadAll();
-    this.mediaFacade.loadMedia();
-    this.tagsFacade.loadTags();
-    this.grabSermon();
-    this.media = this.mediaFacade.selectMedia(this.currentSermonId);
-    console.log(this.media$);
-    this.speakersFacade.selectSpeaker(this.currentSermonId);
-    this.tagsFacade.selectTag(this.currentSermonId);
+
+    // loads sermon details
+    this.speakersFacade.loadSpeakersBySermonId(currentSermonId);
+    this.mediaFacade.loadMediaBySermonId(currentSermonId);
+    this.tagsFacade.loadTagsBySermonId(currentSermonId);
   }
 
-  grabSermon() {
-    this.currentSermonId = this.route.snapshot.params.id;
-    this.sermonsFacade.selectSermon(this.currentSermonId);
+  grabSermon(currentSermonId: string) {
+    return this.sermonsFacade.selectSermon(currentSermonId);
   }
 
-  sanitizeUrl(url: string) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  sanitizeHtml(html: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  checkMediaType(mediaType: string) {
+    return mediaType === 'VIDEO';
   }
 
   goBack() {

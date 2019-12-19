@@ -39,8 +39,8 @@ export const sermonTagsQuery = gql`
   ${sermonTagsFragment}
 `;
 
-export const sermonTagsQuery = gql`
-  query sermonTagsQuery($id: uuid) {
+export const tagsBySermonIdQuery = gql`
+  query tagsBySermonIdQuery($id: uuid) {
     sermon_tags_view(where: {sermon_id: {_eq: $id}}) {
       ...sermonTagsFragment
     }
