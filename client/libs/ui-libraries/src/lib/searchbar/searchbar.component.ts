@@ -56,7 +56,7 @@ export class SearchbarComponent implements OnDestroy, OnInit {
 
   clear(formDirective: NgForm) {
     this.form.patchValue({ searchType: 'title' });
-    // formDirective.resetForm();
+    formDirective.resetForm();
   }
 
   private initForm() {

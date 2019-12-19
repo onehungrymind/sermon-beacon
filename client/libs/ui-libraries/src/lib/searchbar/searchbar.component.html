@@ -8,7 +8,7 @@
       <mat-datepicker #picker></mat-datepicker>
       <!-- Menu -->
       <div matSuffix class="d-flex base-text cursor-pointer">
-        <span [matMenuTriggerFor]="menu" class="fs-14 medium-text mt-1">Sermon {{form.get('searchType').value | titlecase}}</span>
+        <span [matMenuTriggerFor]="menu" class="align-self-center fs-14 medium-text">Sermon {{form.get('searchType').value | titlecase}}</span>
         <button mat-icon-button type="button" class="fs-22">
           <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
         </button>
