@@ -42,7 +42,7 @@ export class MediaEffects {
         this.notifyService.openSnackBar(error.message);
       }
     })
-  )
+  );
 
   addMedia$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(MediaActions.createMedia, {

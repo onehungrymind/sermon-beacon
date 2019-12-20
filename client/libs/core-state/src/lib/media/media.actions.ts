@@ -18,7 +18,7 @@ export const mediaLoaded = createAction(
 export const loadMediaBySermonId = createAction(
   '[MEDIA] Load Media By Sermon Id',
   props<{ sermonId: string }>()
-)
+);
 
 // Create Actions
 export const createMedia = createAction(

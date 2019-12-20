@@ -28,6 +28,22 @@ export class SermonsEffects {
     })
   );
 
+  loadSearchedSermons$ = createEffect(() =>
+    this.dataPersistence.fetch(SermonsActions.loadSearchedSermons, {
+      run: (
+        action: ReturnType<typeof SermonsActions.loadSearchedSermons>,
+        state: SermonsPartialState
+      ) => {
+        return this.sermonsService.all(action.query).pipe(
+          map((sermons: Sermon[]) => SermonsActions.searchedSermonsLoaded({ sermons }))
+        );
+      },
+      onError: (action: ReturnType<typeof SermonsActions.loadSearchedSermons>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addSermon$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SermonsActions.createSermon, {
       run: (

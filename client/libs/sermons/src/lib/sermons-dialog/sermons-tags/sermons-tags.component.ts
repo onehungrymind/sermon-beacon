@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatAutocomplete } from '@angular/material';
 
 import * as _ from 'lodash';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Tag } from '@sb/core-data';
 import { TagsFacade } from '@sb/core-state';

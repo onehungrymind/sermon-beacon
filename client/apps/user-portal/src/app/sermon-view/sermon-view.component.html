@@ -4,12 +4,12 @@
     <mat-icon class="back-arrow" color="accent">arrow_back</mat-icon>
   </button>
 
-  <div class="container-fluid">
-    <div class="d-flex justify-content-center" 
-      
-    >
-      <ng-container>
-        <div [innerHtml]="sanitizeHtml(embed)"></div>
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <ng-container *ngIf="media$ | async as media">
+        <div class="embed-responsive embed-responsive-16by9" *ngFor="let m of media">
+          <div *ngIf="m.embedCode" class="embed-responsive-item" [innerHtml]="m.embedCode"></div>
+        </div>
       </ng-container>
     </div>
   </div>
@@ -37,15 +37,12 @@
       </div>
 
       <div class="align-self-end base-text" *ngIf="media$ | async as media">
-        <span *ngFor="let media of media">
-          <!-- <button mat-button class="fs-10" *ngIf="checkMediaType(media.type)">
-            <mat-icon>cloud_download</mat-icon>
-            SAVE
-          </button> -->
-          <!-- <button mat-button class="fs-10" *ngFor="let media of media">
-            <mat-icon *ngIf="checkMediaType(media.type)" class="fs-24 mr-1">{{media.type !== 'AUDIO' ? 'graphic_eq': 'notes'}}</mat-icon>
-            {{media.type}}
-          </button> -->
+        
+        <span *ngFor="let mediaItem of media">
+          <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+            <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+            {{mediaItem.type}}
+          </button>
         </span>
       </div>
     </div>

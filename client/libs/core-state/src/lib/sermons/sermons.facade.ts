@@ -25,6 +25,10 @@ export class SermonsFacade {
     this.dispatch(SermonsActions.loadSermons());
   }
 
+  searchSermons(query?: {searchQuery: string, searchType: string}) {
+    this.dispatch(SermonsActions.loadSearchedSermons({ query }));
+  }
+
   createSermon(sermon: Sermon) {
     this.dispatch(SermonsActions.createSermon({ sermon }));
   }

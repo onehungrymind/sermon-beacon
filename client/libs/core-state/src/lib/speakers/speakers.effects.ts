@@ -29,7 +29,7 @@ export class SpeakersEffects {
     })
   );
 
-  loadCurrentSermonSpeaker$ = createEffect(() => 
+  loadCurrentSermonSpeaker$ = createEffect(() =>
     this.dataPersistence.fetch(SpeakersActions.loadSpeakersBySermonId, {
       run: (
         action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>,

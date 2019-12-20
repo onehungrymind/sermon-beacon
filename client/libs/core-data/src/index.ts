@@ -1,7 +1,9 @@
+import { MediaTypes } from './lib/media/media.model';
+
 export { CoreDataModule } from './lib/core-data.module';
 
 // Model
-export { Media, emptyMedia } from './lib/media/media.model';
+export { Media, MediaTypes, emptyMedia } from './lib/media/media.model';
 export { MediaType, emptyMediaType } from './lib/media-types/media-type.model';
 export { Sermon, emptySermon } from './lib/sermons/sermon.model';
 export { Speaker, emptySpeaker } from './lib/speakers/speaker.model';

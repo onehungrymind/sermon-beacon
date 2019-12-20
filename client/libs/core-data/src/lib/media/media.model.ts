@@ -4,13 +4,13 @@ import { Sermon } from '../sermons/sermon.model';
 export interface Media extends Base {
   sermon_id: string;
   type: MediaTypes;
-  embedCode?: string;
+  embedCode?: string | any;
   url?: string;
   sermon?: Sermon;
 }
 
 export enum MediaTypes {
-  VIDEO = 'Video',
+  VIDEO = 'VIDEO',
   AUDIO = 'AUDIO',
   PDF = 'PDF'
 }

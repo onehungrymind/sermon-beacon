@@ -4,8 +4,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 
-import { Media, Sermon, Speaker, Tag } from '@sb/core-data';
+import { Media, MediaTypes, Sermon, Speaker, Tag } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
+import { map } from 'rxjs/operators';
+import { NotifyService } from '@sb/ui-libraries';
 
 @Component({
   selector: 'app-sermon-view',
@@ -15,10 +17,14 @@ import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core
 export class SermonViewComponent implements OnInit {
   sermon$: Observable<Sermon> = this.sermonsFacade.selectedSermon$;
   speaker$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
-  media$: Observable<Media[]> = this.mediaFacade.allMedia$;
+  media$: Observable<Partial<Media[]>> = this.mediaFacade.allMedia$;
   tags$: Observable<Tag[]> = this.tagsFacade.allTags$;
 
-  embed = '<iframe src="https://player.vimeo.com/video/378141919" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+  test = 'AUDIO';
+
+  mediaType: string;
+  mediaActionToUse: string;
+  mediaIconToDisplay: string;
 
   constructor(
     private router: Router,
@@ -27,6 +33,7 @@ export class SermonViewComponent implements OnInit {
     private sermonsFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
     private mediaFacade: MediaFacade,
+    private notifyService: NotifyService,
     private tagsFacade: TagsFacade
   ) {}
 
@@ -41,6 +48,18 @@ export class SermonViewComponent implements OnInit {
     this.speakersFacade.loadSpeakersBySermonId(currentSermonId);
     this.mediaFacade.loadMediaBySermonId(currentSermonId);
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
+
+    this.media$ = this.media$.pipe(
+      map((media: Media[]) => this.santizeEmbedCode(media))
+    );
+}
+
+  santizeEmbedCode(media: Media[]) {
+    return media.map((m: Media) => {
+      const removePTags = m.embedCode.split('<p')[0];
+
+      return {...m, embedCode: this.sanitizeHtml(removePTags)};
+    });
   }
 
   grabSermon(currentSermonId: string) {
@@ -51,8 +70,50 @@ export class SermonViewComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
-  checkMediaType(mediaType: string) {
-    return mediaType === 'VIDEO';
+  handleMediaAction(media: Media) {
+    switch(media.type) {
+      case MediaTypes.AUDIO: {
+        return this.listenToAudio();
+      }
+      case MediaTypes.PDF: {
+        return this.downloadNotes();
+      }
+      case MediaTypes.VIDEO: {
+        return this.downloadVideo();
+      }
+      default: {
+        // Do nothing
+      }
+    }
+  }
+
+  getMediaIcon(media: Media) {
+    switch(media.type) {
+      case MediaTypes.AUDIO: {
+        return 'graphic_eq';
+      }
+      case MediaTypes.PDF: {
+        return 'notes';
+      }
+      case MediaTypes.VIDEO: {
+        return 'cloud_download';
+      }
+      default: {
+        return '';
+      }
+    }
+  }
+
+  downloadVideo() {
+    return this.notifyService.openSnackBar('The sermon is downloading!');
+  }
+
+  listenToAudio() {
+    return this.notifyService.openSnackBar('The sermon audio is playing!');
+  }
+
+  downloadNotes() {
+    return this.notifyService.openSnackBar('The sermon notes are downloading!');
   }
 
   goBack() {
