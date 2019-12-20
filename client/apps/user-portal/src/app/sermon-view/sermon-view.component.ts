@@ -82,7 +82,7 @@ export class SermonViewComponent implements OnInit {
         return this.downloadVideo();
       }
       default: {
-        // Do nothing
+        break;
       }
     }
   }
