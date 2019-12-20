@@ -20,10 +20,6 @@ export class SermonViewComponent implements OnInit {
   media$: Observable<Partial<Media[]>> = this.mediaFacade.allMedia$;
   tags$: Observable<Tag[]> = this.tagsFacade.allTags$;
 
-  mediaType: string;
-  mediaActionToUse: string;
-  mediaIconToDisplay: string;
-
   constructor(
     private router: Router,
     private sanitizer: DomSanitizer,
@@ -80,7 +76,7 @@ export class SermonViewComponent implements OnInit {
         return this.downloadVideo();
       }
       default: {
-        // Do nothing
+        break;
       }
     }
   }

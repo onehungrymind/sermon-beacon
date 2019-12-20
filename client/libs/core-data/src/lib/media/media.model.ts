@@ -1,10 +1,10 @@
 import { Base } from '../base.model';
 import { Sermon } from '../sermons/sermon.model';
-import { MediaType } from '../media-types/media-type.model';
+import { MediaTypes } from '../media-types/media-type.model';
 
 export interface Media extends Base {
   sermon_id: string;
-  type: MediaType;
+  type: MediaTypes;
   embedCode?: string | any;
   url?: string;
   sermon?: Sermon;
