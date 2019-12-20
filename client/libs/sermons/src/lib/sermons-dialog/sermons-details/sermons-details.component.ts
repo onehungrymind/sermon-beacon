@@ -9,6 +9,7 @@ import { SpeakersFacade } from '@sb/core-state';
 @Component({
   selector: 'sb-sermons-details',
   templateUrl: './sermons-details.component.html',
+  styleUrls: ['./sermons-details.component.scss']
 })
 export class SermonsDetailsComponent implements OnInit {
   @Input() detailsGroup: FormGroup;
