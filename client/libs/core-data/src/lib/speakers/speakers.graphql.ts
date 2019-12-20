@@ -27,6 +27,15 @@ export const sermonSpeakerFragment = gql`
 
 export const speakerQuery = gql`
   query speakerQuery {
+    speakers {
+      ...speakerFragment
+    }
+  }
+  ${speakerFragment}
+`;
+
+export const sermonSpeakersQuery = gql`
+  query speakerQuery {
     sermon_speakers_view {
       ...sermonSpeakerFragment
     }
