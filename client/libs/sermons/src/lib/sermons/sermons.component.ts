@@ -5,11 +5,11 @@ import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
-import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
+import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
+import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
 import { Router } from '@angular/router';
-import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 
   @Component({
   selector: 'sb-sermons',
