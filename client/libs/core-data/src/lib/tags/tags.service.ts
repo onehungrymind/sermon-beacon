@@ -24,7 +24,7 @@ export class TagsService {
         query: tagsQuery,
         fetchPolicy: 'network-only'
       })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.tags));
+      .pipe(map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view));
   }
 
   allAttachedToSermons() {

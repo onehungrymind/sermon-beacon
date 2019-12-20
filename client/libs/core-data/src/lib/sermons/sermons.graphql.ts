@@ -40,7 +40,7 @@ export const sermonQuery = gql`
       ...sermonFragment
     }
   }
-  ${sermonFragment}
+  ${speakerSermonFragment}
 `;
 
 export const speakerSermonQuery = gql`

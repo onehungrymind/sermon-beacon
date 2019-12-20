@@ -31,7 +31,7 @@ export class SermonsService {
           dateQuery: {_lte: !!query && query.searchType === 'date' ? moment(query.searchQuery).format('YYYY-MM-DD') : moment().format('YYYY-MM-DD')},
         }
       })
-      .pipe(map((response: ApolloQueryResult<any>) => response.data.sermons));
+      .pipe(map((response: ApolloQueryResult<any>) => response.data.speaker_sermons_view));
   }
 
   create(sermon: Partial<Sermon>) {
