@@ -1,5 +1,4 @@
-
-import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
@@ -17,7 +16,7 @@ import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.compone
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss']
 })
-export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SermonsComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @Output() deleted = new EventEmitter();
@@ -42,10 +41,6 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
-
-  ngOnInit() {
-    this.sermonFacade.loadSermons();
-  }
 
   ngAfterViewInit() {
     if (this.sort) {
