@@ -63,7 +63,7 @@ export class SermonViewComponent implements OnInit {
   }
 
   grabSermon(currentSermonId: string) {
-    return this.sermonsFacade.selectSermon(currentSermonId);
+    this.sermonsFacade.selectSermon(currentSermonId);
   }
 
   sanitizeHtml(html: string) {
