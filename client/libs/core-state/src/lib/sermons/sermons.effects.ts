@@ -32,7 +32,7 @@ export class SermonsEffects {
     this.dataPersistence.fetch(SermonsActions.loadSearchedSermons, {
       run: (
         action: ReturnType<typeof SermonsActions.loadSearchedSermons>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.all(action.query).pipe(
           map((sermons: Sermon[]) => SermonsActions.searchedSermonsLoaded({ sermons }))
