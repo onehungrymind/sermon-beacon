@@ -19,8 +19,12 @@ export class SpeakersFacade {
     this.dispatch(SpeakersActions.speakerSelected({ selectedSpeakerId }));
   }
 
-  loadAll() {
+  loadSpeakers() {
     this.dispatch(SpeakersActions.loadSpeakers());
+  }
+
+  loadSermonSpeakers() {
+    this.dispatch(SpeakersActions.loadSermonSpeakers());
   }
 
   createSpeaker(speaker: Speaker) {
