@@ -20,8 +20,6 @@ export class SermonViewComponent implements OnInit {
   media$: Observable<Partial<Media[]>> = this.mediaFacade.allMedia$;
   tags$: Observable<Tag[]> = this.tagsFacade.allTags$;
 
-  test = 'AUDIO';
-
   mediaType: string;
   mediaActionToUse: string;
   mediaIconToDisplay: string;
@@ -75,7 +73,7 @@ export class SermonViewComponent implements OnInit {
       case MediaTypes.AUDIO: {
         return this.listenToAudio();
       }
-      case MediaTypes.PDF: {
+      case MediaTypes.NOTES: {
         return this.downloadNotes();
       }
       case MediaTypes.VIDEO: {
@@ -92,7 +90,7 @@ export class SermonViewComponent implements OnInit {
       case MediaTypes.AUDIO: {
         return 'graphic_eq';
       }
-      case MediaTypes.PDF: {
+      case MediaTypes.NOTES: {
         return 'notes';
       }
       case MediaTypes.VIDEO: {
