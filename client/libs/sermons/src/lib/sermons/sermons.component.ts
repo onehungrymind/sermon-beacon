@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, Output, ViewChild } from '@angular/core';
+import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
-import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { Sermon, Speaker } from '@sb/core-data';
+import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
+import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
 
   @Component({
@@ -14,7 +15,7 @@ import { TableDataSource } from '@sb/material';
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss']
 })
-export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SermonsComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @Output() deleted = new EventEmitter();
@@ -33,11 +34,11 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
     { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
   ];
 
-  constructor(private sermonFacade: SermonsFacade, private speakerFacade: SpeakersFacade) { }
-
-  ngOnInit() {
-    this.sermonFacade.loadSermons();
-  }
+  constructor(
+    private sermonFacade: SermonsFacade,
+    private speakerFacade: SpeakersFacade,
+    @Inject(MatDialog) private dialog: MatDialog
+  ) { }
 
   ngAfterViewInit() {
     if (this.sort) {
@@ -55,14 +56,13 @@ export class SermonsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  selectSermon(sermon: Sermon) {
-    this.sermonFacade.selectSermon(sermon.id);
-  }
+  openSermonDialog(sermon?: Sermon) {
+    const ref = this.dialog.open(SermonsDialogComponent, {
+      minHeight: '400px',
+      data: {...sermon}
+    });
 
-  saveSermon(sermon: Sermon) {
-    sermon.id ?
-      this.sermonFacade.updateSermon(sermon) :
-      this.sermonFacade.createSermon(sermon);
+    return ref.afterClosed();
   }
 
   deleteSermon(sermon: Sermon) {

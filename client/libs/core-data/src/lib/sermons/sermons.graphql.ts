@@ -26,7 +26,25 @@ export const speakerSermonFragment = gql`
 `;
 
 export const sermonQuery = gql`
-  query sermonQuery {
+  query sermonQuery($titleQuery: String_comparison_exp, $speakerNameQuery: String_comparison_exp, $dateQuery: date_comparison_exp) {
+    sermons(where: {
+      _and: [
+        {date: $dateQuery},
+        {title: $titleQuery}
+      ],
+      _or: [
+        {sermon_speakers: {speaker: {first_name: $speakerNameQuery}}},
+        {sermon_speakers: {speaker: {last_name: $speakerNameQuery}}}
+      ]
+    }) {
+      ...sermonFragment
+    }
+  }
+  ${speakerSermonFragment}
+`;
+
+export const speakerSermonQuery = gql`
+  query speakerSermonQuery {
     speaker_sermons_view {
       ...speakerSermonFragment
     }

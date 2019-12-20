@@ -8,7 +8,7 @@ export const mediaSelected = createAction(
 );
 
 // Load Actions
-export const loadMedia = createAction('[Media] Load Media');
+export const loadMedia = createAction('[MEDIA] Load Media');
 
 export const mediaLoaded = createAction(
   '[MEDIA] Media Loaded',
