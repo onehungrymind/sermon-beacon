@@ -9,9 +9,10 @@ import { Speaker } from './speaker.model';
 import {
   createSpeakerMutation,
   deleteSpeakerMutation,
+  sermonSpeakersQuery,
   speakerBySermonIdQuery,
   speakerQuery,
-  updateSpeakerMutation
+  updateSpeakerMutation,
 } from './speakers.graphql';
 
 @Injectable({
@@ -37,6 +38,15 @@ export class SpeakersService {
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view)
     );
+  }
+
+  allSermonSpeakers(): Observable<Speaker[]> {
+    return this.apollo
+      .query({
+        query: sermonSpeakersQuery,
+        fetchPolicy: 'network-only'
+      })
+      .pipe(map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view));
   }
 
   create(speaker: Partial<Speaker>) {

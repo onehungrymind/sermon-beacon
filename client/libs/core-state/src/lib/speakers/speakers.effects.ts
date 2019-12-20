@@ -45,6 +45,22 @@ export class SpeakersEffects {
     })
   );
 
+  loadSermonSpeakers$ = createEffect(() =>
+    this.dataPersistence.fetch(SpeakersActions.loadSermonSpeakers, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.loadSermonSpeakers>,
+        state: SpeakersPartialState
+      ) => {
+        return this.speakersService.allSermonSpeakers().pipe(
+          map((speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.loadSermonSpeakers>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addSpeaker$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SpeakersActions.createSpeaker, {
       run: (
