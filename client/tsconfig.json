@@ -16,6 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": [
+        "apps/admin-portal/src/environments/*",
+        "apps/user-portal/src/environments/*"
+      ],
       "@sb/material": ["libs/material/src/index.ts"],
       "@sb/core-data": [
         "libs/core-data/src/lib/",

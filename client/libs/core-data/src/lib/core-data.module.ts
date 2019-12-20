@@ -5,7 +5,9 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const uri = 'http://0.0.0.0:8080/v1/graphql';
+import { environment } from '@env/environment';
+
+const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
   return {
