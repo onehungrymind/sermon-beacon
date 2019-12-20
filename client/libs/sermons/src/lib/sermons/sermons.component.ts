@@ -50,7 +50,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
         map(([sermons, speakers]) => this.mapSpeakersToSermons(sermons, speakers)),
         filter((sermons) => !!sermons.length),
         takeUntil(this.destroy$),
-      ).subscribe((sermons) =>
+      ).subscribe((sermons: Sermon[]) =>
         this.dataSource = new TableDataSource(sermons, this.sort, this.paginator)
       );
     }

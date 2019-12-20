@@ -5,25 +5,19 @@ export interface Speaker extends Base {
   first_name: string;
   last_name: string;
   church_name?: string;
-  speaker_sermons?: SpeakerSermon[];
+  sermon_id: string;
   position?: string;
-}
-
-export interface SpeakerSermon {
-  id?: string;
-  sermon?: Sermon;
-  sermon_id?: string;
-  speaker?: Speaker;
-  speaker_id?: string;
+  speaker_sermons?: Sermon[];
 }
 
 export const emptySpeaker: Speaker = {
   id: null,
-  church_name: '',
-  created_at: '',
   first_name: '',
   last_name: '',
+  church_name: '',
+  sermon_id: null,
   position: '',
-  updated_at: '',
-  speaker_sermons: []
+  speaker_sermons: [],
+  created_at: '',
+  updated_at: ''
 };
