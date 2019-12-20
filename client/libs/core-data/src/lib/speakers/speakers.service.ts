@@ -10,6 +10,7 @@ import {
   createSpeakerMutation,
   deleteSpeakerMutation,
   sermonSpeakersQuery,
+  speakerBySermonIdQuery,
   speakerQuery,
   updateSpeakerMutation,
 } from './speakers.graphql';
@@ -21,12 +22,22 @@ export class SpeakersService {
   constructor(private apollo: Apollo) {}
 
   all(): Observable<Speaker[]> {
-    return this.apollo
-      .query({
-        query: speakerQuery,
-        fetchPolicy: 'network-only'
-      })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.speakers));
+    return this.apollo.query({
+      query: speakerQuery,
+      fetchPolicy: 'network-only'
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view)
+    );
+  }
+
+  getSpeakerBySermonId(id: string) {
+    return this.apollo.query({
+      query: speakerBySermonIdQuery,
+      fetchPolicy: 'network-only',
+      variables: { id }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view)
+    );
   }
 
   allSermonSpeakers(): Observable<Speaker[]> {

@@ -23,6 +23,10 @@ export class MediaFacade {
     this.dispatch(MediaActions.loadMedia());
   }
 
+  loadMediaBySermonId(sermonId: string) {
+    this.dispatch(MediaActions.loadMediaBySermonId({ sermonId }));
+  }
+
   createMedia(media: Media) {
     this.dispatch(MediaActions.createMedia({ media }));
   }
