@@ -5,6 +5,7 @@ import { Media } from './media.model';
 import {
   createMediaMutation,
   deleteMediaMutation,
+  mediaBySermonIdQuery,
   mediaQuery,
   updateMediaMutation
 } from './media.graphql';
@@ -24,6 +25,16 @@ export class MediaService {
         fetchPolicy: 'network-only'
       })
       .pipe(map((res: ApolloQueryResult<any>) => res.data.media));
+  }
+
+  getMediaBySermonId(id: string) {
+    return this.apollo.query({
+      query: mediaBySermonIdQuery,
+      fetchPolicy: 'network-only',
+      variables: { id }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.media)
+    );
   }
 
   create(media: Partial<Media>) {

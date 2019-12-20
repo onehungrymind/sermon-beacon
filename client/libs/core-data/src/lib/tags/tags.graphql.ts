@@ -27,12 +27,21 @@ export const tagsQuery = gql`
       ...tagsFragment
     }
   }
-  ${tagsFragment}
+  ${sermonTagsFragment}
 `;
 
 export const sermonTagsQuery = gql`
   query sermonTagsQuery {
     sermon_tags_view {
+      ...sermonTagsFragment
+    }
+  }
+  ${sermonTagsFragment}
+`;
+
+export const tagsBySermonIdQuery = gql`
+  query tagsBySermonIdQuery($id: uuid) {
+    sermon_tags_view(where: {sermon_id: {_eq: $id}}) {
       ...sermonTagsFragment
     }
   }

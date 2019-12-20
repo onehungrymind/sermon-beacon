@@ -6,6 +6,12 @@ export interface MediaType {
   media?: Media[];
 }
 
+export enum MediaTypes {
+  AUDIO = 'AUDIO',
+  NOTES = 'NOTES',
+  VIDEO = 'VIDEO'
+}
+
 export const emptyMediaType = {
   name: '',
   description: '',

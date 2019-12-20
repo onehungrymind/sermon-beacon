@@ -1,20 +1,15 @@
-<div *ngIf="sermon$ | async as sermon">
+<div *ngIf="sermon$ | async as sermon"> 
   <button mat-icon-button (click)="goBack()" class="back-arrow-container">
     <mat-icon class="back-arrow" color="accent">arrow_back</mat-icon>
   </button>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="d-flex justify-content-center">
-      <iframe
-        [src]="getVideoUrl(sermon?.media)"
-        width="100%"
-        height="625"
-        frameborder="0"
-        [title]="sermon.title"
-        webkitallowfullscreen
-        mozallowfullscreen
-        allowfullscreen>
-      </iframe>
+      <ng-container *ngIf="media$ | async as media">
+        <div class="embed-responsive embed-responsive-16by9" *ngFor="let m of media">
+          <div *ngIf="m.embedCode" class="embed-responsive-item" [innerHTML]="m.embedCode"></div>
+        </div>
+      </ng-container>
     </div>
   </div>
 
@@ -29,29 +24,33 @@
   <div class="container">
     <div class="d-flex justify-content-between">
       <div class="align-self-center">
-        <mat-card-subtitle class="d-flex justify-content-between fs-20 m-0 base-text mb-2">
+        <mat-card-subtitle class="d-flex justify-content-between fs-20 m-0 base-text mb-2"
+          *ngIf="speaker$ | async as speakers">
 
-          <span *ngFor="let speaker of sermon.sermon_speakers">
-            {{speaker.speaker.first_name}} {{speaker.speaker.last_name}}
+          <span *ngFor="let speaker of speakers">
+            {{speaker.first_name}} {{speaker.last_name}}
           </span>
 
           <span class="font-weight-lighter">&nbsp;|&nbsp;</span> {{sermon.date | date: 'MMM dd, yyyy'}}
         </mat-card-subtitle>
       </div>
 
-      <div class="align-self-end base-text">
-        <button mat-button class="fs-10" *ngFor="let action of actionButtons">
-          <mat-icon class="fs-24 mr-1">{{action.icon}}</mat-icon>
-          {{action.title}}
-        </button>
+      <div class="align-self-end base-text" *ngIf="media$ | async as media">
+        
+        <span *ngFor="let mediaItem of media">
+          <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+            <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+            {{mediaItem.type}}
+          </button>
+        </span>
       </div>
     </div>
 
     <mat-divider class="mb-3"></mat-divider>
 
-    <mat-chip-list>
-      <mat-chip color="accent" selected class="primary-border" *ngFor="let sermonTag of sermon?.sermon_tags">
-        {{sermonTag.tag.value}}
+    <mat-chip-list *ngIf="tags$ | async as tags">
+      <mat-chip color="accent" selected class="primary-border" *ngFor="let tag of tags">
+        {{tag.value}}
       </mat-chip>
     </mat-chip-list>
   </div>
