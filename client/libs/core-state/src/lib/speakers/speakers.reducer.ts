@@ -40,7 +40,10 @@ const speakersReducer = createReducer(
       isLoading: false
     })
   ),
-  on(SpeakersActions.speakersLoaded, (state, { speakers }) =>
+  on(
+    SpeakersActions.speakersLoaded,
+    SpeakersActions.sermonSpeakersLoaded,
+    (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, loaded: true })
   ),
   on(SpeakersActions.speakerCreated, (state, { speaker }) =>

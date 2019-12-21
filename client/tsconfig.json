@@ -16,6 +16,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": [
+        "apps/admin-portal/src/environments/*",
+        "apps/user-portal/src/environments/*"
+      ],
       "@sb/material": ["libs/material/src/index.ts"],
       "@sb/core-data": [
         "libs/core-data/src/lib/",
@@ -23,7 +27,8 @@
       ],
       "@sb/core-state": ["libs/core-state/src/index.ts"],
       "@sb/sermons": ["libs/sermons/src/index.ts"],
-      "@sb/ui-libraries": ["libs/ui-libraries/src/index.ts"]
+      "@sb/ui-libraries": ["libs/ui-libraries/src/index.ts"],
+      "@sb/facades/*": ["libs/core-state/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

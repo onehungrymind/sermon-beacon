@@ -32,6 +32,15 @@ export const speakerQuery = gql`
   ${speakersFragment}
 `;
 
+export const speakerBySermonIdQuery = gql`
+  query speakerBySermonIdQuery($id: uuid) {
+    sermon_speakers_view(where: { sermon_id: {_eq: $id}}) {
+      ...sermonSpeakerFragment
+    }
+  }
+  ${sermonSpeakerFragment}
+`;
+
 export const createSpeakerMutation = gql`
   mutation createSpeakerMutation($objects: [speakers_insert_input!]!) {
     insert_speakers(objects: $objects) {

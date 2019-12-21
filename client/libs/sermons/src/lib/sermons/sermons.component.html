@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center my-3">
-  <sb-searchbar></sb-searchbar>
+  <sb-searchbar class="w-100"></sb-searchbar>
 </div>
 
 <div class="container w-100">
@@ -60,7 +60,7 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-list-option"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-list-option" (dblclick)="goToSermonView(row)"></tr>
     </table>
 
     <mat-paginator #paginator

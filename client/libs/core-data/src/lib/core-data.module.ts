@@ -5,11 +5,9 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { SermonsService } from './sermons/sermons.service';
-import { MediaService } from './media/media.service';
-import { SpeakersService } from './speakers/speakers.service';
+import { environment } from '@env/environment';
 
-const uri = 'http://0.0.0.0:8080/v1/graphql';
+const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
   return {
@@ -21,9 +19,6 @@ export function createApollo(httpLink: HttpLink) {
 @NgModule({
   imports: [HttpClientModule],
   providers: [
-    SermonsService,
-    MediaService,
-    SpeakersService,
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,

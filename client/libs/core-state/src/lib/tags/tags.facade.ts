@@ -23,6 +23,10 @@ export class TagsFacade {
     this.dispatch(TagsActions.loadTags());
   }
 
+  loadTagsBySermonId(sermonId: string) {
+    this.dispatch(TagsActions.loadTagsBySermonId({ sermonId }));
+  }
+
   createTag(tag: Tag) {
     this.dispatch(TagsActions.createTag({ tag }));
   }
