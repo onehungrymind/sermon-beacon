@@ -22,6 +22,6 @@ export class ManageComponent implements OnInit {
   constructor(private speakersFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade) { }
 
   ngOnInit() {
-    this.speakersFacade.loadAll();
+    this.speakersFacade.loadSpeakers();
   }
 }

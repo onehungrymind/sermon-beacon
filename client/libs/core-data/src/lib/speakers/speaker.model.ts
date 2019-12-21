@@ -14,8 +14,8 @@ export const emptySpeaker: Speaker = {
   church_name: '',
   created_at: '',
   name: '',
+  sermon_id: null,
   position: '',
   speaker_sermons: [],
-  created_at: '',
   updated_at: ''
 };

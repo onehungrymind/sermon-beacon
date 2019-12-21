@@ -9,7 +9,6 @@ import { Speaker } from './speaker.model';
 import {
   createSpeakerMutation,
   deleteSpeakerMutation,
-  sermonSpeakersQuery,
   speakerBySermonIdQuery,
   speakerQuery,
   updateSpeakerMutation,
@@ -43,7 +42,7 @@ export class SpeakersService {
   allSermonSpeakers(): Observable<Speaker[]> {
     return this.apollo
       .query({
-        query: sermonSpeakersQuery,
+        query: speakerQuery,
         fetchPolicy: 'network-only'
       })
       .pipe(map((res: ApolloQueryResult<any>) => res.data.speakers));

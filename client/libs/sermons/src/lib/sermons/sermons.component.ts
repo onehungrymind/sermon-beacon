@@ -87,7 +87,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   private displaySermonSpeakers(sermon: Sermon) {
     // TODO: display only one speaker, if multiple add ellipsis with a tooltip displaying all other speakers.
     return sermon.sermon_speakers
-      .map((speaker: Speaker) => `${speaker.first_name} ${speaker.last_name}`);
+      .map((speaker: Speaker) => speaker.name);
   }
 
   private mapSpeakersToSermons(sermons: Sermon[], speakers: Speaker[]) {
