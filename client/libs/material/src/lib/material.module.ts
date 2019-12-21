@@ -31,6 +31,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 const MODULES = [
@@ -59,7 +60,8 @@ const MODULES = [
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 ];
 
 const matChipsOptions: MatChipsDefaultOptions = {

@@ -104,6 +104,14 @@ export class SermonViewComponent implements OnInit {
     return this.notifyService.openSnackBar('The sermon notes are downloading!');
   }
 
+  speakerNames(speakers: Speaker[]) {
+    const speakerNames = speakers.map((speaker: Speaker) => `${speaker.first_name} ${speaker.last_name}`);
+
+    if (speakerNames.length === 1) return speakerNames.slice(0);
+
+    return `${speakerNames.slice(0, speakerNames.length -1).join(', ')} and ${speakerNames.slice(-1)}`;
+  }
+
   private santizeEmbedCode(media: Media[]) {
     return media.map((m: Media) => {
       const removePTags = !!m.embedCode ? m.embedCode.split('<p')[0] : '';
