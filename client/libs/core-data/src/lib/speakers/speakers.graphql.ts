@@ -1,10 +1,9 @@
 import gql from 'graphql-tag';
 
-export const speakerFragment = gql`
+export const speakersFragment = gql`
   fragment speakersFragment on speakers {
     id
-    first_name
-    last_name
+    name
     position
     church_name
     created_at
@@ -15,8 +14,7 @@ export const speakerFragment = gql`
 export const sermonSpeakerFragment = gql`
   fragment sermonSpeakerFragment on sermon_speakers_view {
     id
-    first_name
-    last_name
+    name
     position
     church_name
     sermon_id
@@ -27,11 +25,11 @@ export const sermonSpeakerFragment = gql`
 
 export const speakerQuery = gql`
   query speakerQuery {
-    sermon_speakers_view {
-      ...sermonSpeakerFragment
+    speakers {
+      ...speakersFragment
     }
   }
-  ${sermonSpeakerFragment}
+  ${speakersFragment}
 `;
 
 export const createSpeakerMutation = gql`
@@ -42,7 +40,7 @@ export const createSpeakerMutation = gql`
       }
     }
   }
-  ${speakerFragment}
+  ${speakersFragment}
 `;
 
 export const updateSpeakerMutation = gql`
@@ -53,7 +51,7 @@ export const updateSpeakerMutation = gql`
       }
     }
   }
-  ${speakerFragment}
+  ${speakersFragment}
 `;
 
 export const deleteSpeakerMutation = gql`
@@ -64,5 +62,5 @@ export const deleteSpeakerMutation = gql`
       }
     }
   }
-  ${speakerFragment}
+  ${speakersFragment}
 `;

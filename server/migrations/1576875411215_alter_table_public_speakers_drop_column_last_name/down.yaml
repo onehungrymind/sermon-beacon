@@ -1,0 +1,6 @@
+- args:
+    sql: ALTER TABLE "public"."speakers" ADD COLUMN "last_name" text
+  type: run_sql
+- args:
+    sql: ALTER TABLE "public"."speakers" ALTER COLUMN "last_name" DROP NOT NULL
+  type: run_sql

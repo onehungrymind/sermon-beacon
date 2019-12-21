@@ -1,9 +1,3 @@
-<div class="container d-flex justify-content-around mt-5">
-  <div class="table">
-    <sb-ui-table [speakers]="speaker$ | async" [tableColumns]="speakerColumns" [dynamicColumns]="dynamicColumns"></sb-ui-table>
-  </div>
-
-  <div class="table">
-    <sb-ui-table [mediaTypes]="mediaTypes$ | async" [tableColumns]="mediaColumns" [dynamicColumns]="dynamicMediaColumns"></sb-ui-table>
-  </div>
+<div class="container d-flex justify-content-center mt-5">
+    <sb-ui-table [data]="speakers$ | async" [tableColumns]="speakerColumns" [actionsEnabled]="true"></sb-ui-table>
 </div>

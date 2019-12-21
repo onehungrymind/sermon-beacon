@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { Subject } from 'rxjs';
-
-import { MediaType, Speaker } from '@sb/core-data';
-import { TableDataSource } from '@sb/material';
-import { FormGroup, FormBuilder } from '@angular/forms';
+interface UiTableColumn {
+  columnDef: string;
+  title: string;
+}
 
 @Component({
   selector: 'sb-ui-table',
@@ -13,66 +13,23 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./ui-table.component.scss']
 })
 
-export class UiTableComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() speakers?: Speaker[];
-  @Input() mediaTypes?: MediaType[];
-  @Input() tableColumns;
-  @Input() mediaColumns;
-  @Input() dynamicColumns;
-  @Output() editing = new EventEmitter();
-  @Output() deleted = new EventEmitter();
-  @Output() rename = new EventEmitter();
+export class UiTableComponent implements OnInit {
+  @Input() tableColumns: UiTableColumn[];
+  @Input() data: { [key: string]: string }[];
+  @Input() actionsEnabled: boolean;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+  editing: boolean;
   form: FormGroup;
-  dataSource: TableDataSource;
-  destroy$ = new Subject();
-  spacerColumns = ['create-action', 'space1', 'space2'];
-  enableEdit = false;
-  enableEditIndex = null;
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() {
-    if (this.speakers) {
-      this.spacerColumns.push('space3');
-    }
-    this.initForm();
+  ngOnInit() {}
+
+  mapTableColumnsToDisplyedColumns(tableColumns: UiTableColumn[], actionsEnabled: boolean): string[] {
+    const actionColumn = actionsEnabled ? ['actions'] : ['actions'];
+
+    return tableColumns && tableColumns.length ? [...tableColumns.map((column) => column.columnDef), ...actionColumn] : [];
   }
 
-  ngOnChanges() {
-    if (this.sort && this.speakers) {
-      this.dataSource = new TableDataSource(this.speakers, this.sort, this.paginator);
-    }
-    if (this.sort && this.mediaTypes) {
-      this.dataSource = new TableDataSource(this.mediaTypes, this.sort, this.paginator);
-    }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
-
-  enableEditMethod(i) {
-    this.enableEdit = true;
-    this.enableEditIndex = i;
-    console.log(i);
-  }
-
-  cancel() {
-    console.log('cancel');
-    this.enableEditIndex = null;
-  }
-
-  saveSegment() {
-    this.enableEditIndex = null;
-    console.log(this.form.value);
-  }
-
-  private initForm(): void {
-    this.form = this.fb.group({
-      name: ['']
-    });
-  }
 }
