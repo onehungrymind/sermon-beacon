@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { Media, MediaTypes, Sermon, Speaker, Tag } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
-import { map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { NotifyService } from '@sb/ui-libraries';
 
 @Component({
@@ -44,13 +44,15 @@ export class SermonViewComponent implements OnInit {
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
 
     this.media$ = this.media$.pipe(
+      filter((media: Media[]) => !!media.length),
+      take(1),
       map((media: Media[]) => this.santizeEmbedCode(media))
     );
 }
 
   santizeEmbedCode(media: Media[]) {
     return media.map((m: Media) => {
-      const removePTags = m.embedCode.split('<p')[0];
+      const removePTags = !!m.embedCode ? m.embedCode.split('<p')[0] : '';
 
       return {...m, embedCode: this.sanitizeHtml(removePTags)};
     });
