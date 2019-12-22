@@ -27,7 +27,7 @@
         <mat-card-subtitle *ngIf="speaker$ | async as speakers"
           class="d-flex justify-content-between fs-20 m-0 base-text mb-2">
           <span [matTooltip]="speakerNames(speakers)">
-            {{speakers[0]?.first_name}} {{speakers[0]?.last_name}}{{speakers?.length > 1 ? '...' : ''}}
+            {{speakers[0]?.name}}{{speakers?.length > 1 ? '...' : ''}}
           </span>
           <span class="font-weight-lighter">&nbsp;|&nbsp;</span>
           {{sermon.date | date: 'MMM dd, yyyy'}}

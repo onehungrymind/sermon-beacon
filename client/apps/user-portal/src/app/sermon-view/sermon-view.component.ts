@@ -105,7 +105,7 @@ export class SermonViewComponent implements OnInit {
   }
 
   speakerNames(speakers: Speaker[]) {
-    const speakerNames = speakers.map((speaker: Speaker) => `${speaker.first_name} ${speaker.last_name}`);
+    const speakerNames = speakers.map((speaker: Speaker) => `${speaker.name}`);
 
     if (speakerNames.length === 1) return speakerNames.slice(0);
 
