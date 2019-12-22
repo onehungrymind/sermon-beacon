@@ -18,15 +18,15 @@ export class UiTableComponent implements OnInit, OnChanges {
   @Input() data: { [key: string]: string }[];
   @Input() actionsEnabled: boolean;
 
-  @Output() create = new EventEmitter();
-  @Output() update = new EventEmitter();
-  @Output() delete = new EventEmitter();
+  @Output() created = new EventEmitter();
+  @Output() updated = new EventEmitter();
+  @Output() deleted = new EventEmitter();
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   editing: boolean;
-  editingIndex: null;
+  editingIndex: number;
   form: FormGroup;
   spacerColumns = ['create-action', 'space1', 'space2', 'space3'];
 
@@ -47,10 +47,10 @@ export class UiTableComponent implements OnInit, OnChanges {
   }
 
   createRow() {
-    this.create.emit();
+
   }
 
-  updateRow(row: { [key: string]: string }, i) {
+  updateRow(row: { [key: string]: string }, i: number) {
     this.editing = true;
     this.editingIndex = i;
     this.form.patchValue(row);
@@ -59,16 +59,21 @@ export class UiTableComponent implements OnInit, OnChanges {
   saveRow() {
     this.editing = false;
     this.editingIndex = null;
-    this.update = this.form.value.emit();
+    if (!!this.form.get('id').value) {
+      this.created.emit(this.form.value);
+
+      return;
+    }
+    this.updated.emit(this.form.value);
   }
 
-  deleteRow(i = 0) {
-    this.delete.emit(i);
+  deleteRow(feature: { [key: string]: string }) {
+    this.deleted.emit(feature);
   }
 
   private initForm(tableColumns: UiTableColumn[]) {
     const formGroup = tableColumns.reduce((acc, curr) => {
-      return curr ? { ...acc, [curr.columnDef]: [null] } : { ...acc };
+      return curr ? { ...acc, [curr.columnDef]: [null], id: null } : { ...acc };
     }, {});
     this.form = this.fb.group(formGroup);
   }
