@@ -1,3 +1,10 @@
 <div class="container d-flex justify-content-center mt-5">
-    <sb-ui-table [data]="speakers$ | async" [tableColumns]="speakerColumns" [actionsEnabled]="true"></sb-ui-table>
+    <sb-ui-table 
+    [data]="speakers$ | async" 
+    [tableColumns]="speakerColumns" 
+    [actionsEnabled]="true" 
+    (create)="createSpeaker($event)"
+    (update)="updateSpeaker($event)"
+    (delete)="deletSpeaker($event)"
+    ></sb-ui-table>
 </div>

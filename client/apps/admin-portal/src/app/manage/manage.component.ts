@@ -24,4 +24,17 @@ export class ManageComponent implements OnInit {
   ngOnInit() {
     this.speakersFacade.loadSpeakers();
   }
+
+  createSpeaker(i) {
+    this.speakersFacade.updateSpeaker(i);
+  }
+
+  updateSpeaker(i) {
+    this.speakersFacade.updateSpeaker(i);
+  }
+
+  deletSpeaker(i) {
+    this.speakersFacade.deleteSpeaker(i);
+  }
+
 }
