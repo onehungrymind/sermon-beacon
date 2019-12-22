@@ -8,6 +8,7 @@ export { Speaker, emptySpeaker } from './lib/speakers/speaker.model';
 export { Tag, emptyTag } from './lib/tags/tag.model';
 
 // Services
+export { BreakpointService } from './lib/common/breakpoint/breakpoint.service';
 export { MediaTypesService } from './lib/media-types/media-types.service';
 export { MediaService } from './lib/media/media.service';
 export { SermonsService } from './lib/sermons/sermons.service';
