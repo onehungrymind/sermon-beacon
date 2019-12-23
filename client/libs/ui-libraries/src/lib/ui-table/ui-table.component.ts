@@ -25,11 +25,11 @@ export class UiTableComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
+  creatingRow: boolean;
   editing: boolean;
   editingIndex: number;
   form: FormGroup;
   spacerColumns = ['create-action', 'space1', 'space2', 'space3'];
-
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() { }
@@ -47,7 +47,11 @@ export class UiTableComponent implements OnInit, OnChanges {
   }
 
   createRow() {
+    this.creatingRow = true;
+  }
 
+  createSpeaker(row: { [key: string]: string }) {
+    console.log('create row');
   }
 
   updateRow(row: { [key: string]: string }, i: number) {
