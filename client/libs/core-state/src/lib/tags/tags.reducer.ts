@@ -29,16 +29,9 @@ const tagsReducer = createReducer(
     Object.assign({}, state, { selectedTagId })
   ),
   on(
-    TagsActions.loadTags,
-    TagsActions.createTag,
-    TagsActions.updateTag,
-    TagsActions.deleteTag,
-    (state) => ({
-      ...state,
-      isLoading: false
-    })
-  ),
-  on(TagsActions.tagsLoaded, (state, { tags }) =>
+    TagsActions.tagsLoaded,
+    TagsActions.tagsBySermonIdLoaded,
+    (state, { tags }) =>
     tagsAdapter.addAll(tags, { ...state, isLoading: true })
   ),
   on(TagsActions.tagCreated, (state, { tag }) =>
@@ -49,6 +42,17 @@ const tagsReducer = createReducer(
   ),
   on(TagsActions.tagDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
+  ),
+  on(
+    TagsActions.loadTags,
+    TagsActions.loadTagsBySermonId,
+    TagsActions.createTag,
+    TagsActions.updateTag,
+    TagsActions.deleteTag,
+    (state) => ({
+      ...state,
+      isLoading: false
+    })
   )
 );
 

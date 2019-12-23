@@ -39,6 +39,15 @@ export const sermonTagsQuery = gql`
   ${sermonTagsFragment}
 `;
 
+export const tagsBySermonIdQuery = gql`
+  query tagsBySermonIdQuery($id: uuid) {
+    tags(where: {sermon_tags: {sermon_id: {_eq: $id}}}) {
+      ...tagsFragment
+    }
+  }
+  ${tagsFragment}
+`;
+
 export const createTagsMutation = gql`
   mutation createTagMutation($objects: [tags_insert_input!]!) {
     insert_tags(objects: $objects) {

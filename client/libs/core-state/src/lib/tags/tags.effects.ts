@@ -28,6 +28,22 @@ export class TagsEffects {
     })
   );
 
+  loadTagsBySermonId$ = createEffect(() =>
+    this.dataPersistence.fetch(TagsActions.loadTagsBySermonId, {
+      run: (
+        action: ReturnType<typeof TagsActions.loadTagsBySermonId>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.allBySermonId(action.sermonId).pipe(
+          map((tags: Tag[]) => TagsActions.tagsBySermonIdLoaded({ tags }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.loadTagsBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addTag$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(TagsActions.createTag, {
       run: (
