@@ -22,8 +22,8 @@ export const mediaQuery = gql`
 `;
 
 export const mediaBySermonIdQuery = gql`
-  query mediaQuery($id: uuid) {
-    media(where: {sermon_id: {_eq: $id}}) {
+  query mediaBySermonIdQuery($id: uuid) {
+    media(where: { sermon_id: {_eq: $id}}) {
       ...mediaFragment
     }
   }

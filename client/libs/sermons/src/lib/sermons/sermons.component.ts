@@ -9,6 +9,7 @@ import { Sermon, Speaker } from '@sb/core-data';
 import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
+import { Router } from '@angular/router';
 
   @Component({
   selector: 'sb-sermons',
@@ -37,6 +38,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor(
     private sermonFacade: SermonsFacade,
     private speakerFacade: SpeakersFacade,
+    private router: Router,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
 
@@ -59,6 +61,14 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  goToSermonView(sermon) {
+    this.router.navigateByUrl(sermon.id);
+  }
+
+  selectSermon(sermon: Sermon) {
+    this.sermonFacade.selectSermon(sermon.id);
   }
 
   openSermonDialog(sermon?: Sermon) {

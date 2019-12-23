@@ -1,9 +1,12 @@
 @import 'libs/theme/main';
 
+.embed-responsive.embed-responsive-16by9:nth-child(1) {
+  display: none !important;
+}
+
 .back-arrow {
-  font-size: 55px;
-  font-weight: bold;
-  margin: 40px 0 0 5px;
+  position: inherit;
+  // margin: 10px 0 10px 5px;
 }
 
 .mat-standard-chip {

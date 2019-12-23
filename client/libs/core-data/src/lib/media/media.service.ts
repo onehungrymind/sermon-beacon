@@ -41,6 +41,16 @@ export class MediaService {
     );
   }
 
+  getMediaBySermonId(id: string) {
+    return this.apollo.query({
+      query: mediaBySermonIdQuery,
+      fetchPolicy: 'network-only',
+      variables: { id }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.media)
+    );
+  }
+
   create(media: Partial<Media>) {
     delete (media as any).__typename;
     delete media.id;
