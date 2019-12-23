@@ -29,22 +29,6 @@ export class SpeakersEffects {
     })
   );
 
-  loadCurrentSermonSpeaker$ = createEffect(() =>
-    this.dataPersistence.fetch(SpeakersActions.loadSpeakersBySermonId, {
-      run: (
-        action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>,
-        state: fromSpeakers.SpeakersPartialState
-      ) => {
-        return this.speakersService.getSpeakerBySermonId(action.sermonId).pipe(
-          map(( speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
-        );
-      },
-      onError: (action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>, error) => {
-        this.notifyService.openSnackBar(error.message);
-      }
-    })
-  );
-
   loadSermonSpeakers$ = createEffect(() =>
     this.dataPersistence.fetch(SpeakersActions.loadSermonSpeakers, {
       run: (

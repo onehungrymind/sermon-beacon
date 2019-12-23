@@ -30,16 +30,6 @@ export class SpeakersService {
     );
   }
 
-  getSpeakerBySermonId(id: string) {
-    return this.apollo.query({
-      query: speakerBySermonIdQuery,
-      fetchPolicy: 'network-only',
-      variables: { id }
-    }).pipe(
-      map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view)
-    );
-  }
-
   allSermonSpeakers(): Observable<Speaker[]> {
     return this.apollo.query({
       query: sermonSpeakersQuery,
