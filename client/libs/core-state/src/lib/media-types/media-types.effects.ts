@@ -50,7 +50,7 @@ export class MediaTypesEffects {
         action: ReturnType<typeof MediaTypesActions.updateMediaType>,
         state: fromMediaTypes.MediaTypesPartialState
       ) => {
-        return this.mediaTypeService.update(action.mediaType).pipe(
+        return this.mediaTypeService.update(action.prevMediaTypeName, action.mediaType).pipe(
           map((mediaType: MediaType) => MediaTypesActions.mediaTypeUpdated({ mediaType }))
         );
       },

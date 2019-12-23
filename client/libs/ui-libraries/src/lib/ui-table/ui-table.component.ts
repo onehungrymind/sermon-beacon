@@ -73,18 +73,21 @@ export class UiTableComponent implements OnInit, OnChanges {
     this.creatingRow = false;
     if (!!this.form.get('id').value) {
       this.updated.emit(this.form.value);
+    } else {
+      const { id, ...payload } = this.form.value;
+      this.created.emit(payload);
     }
-    const { id, ...payload } = this.form.value;
-    this.created.emit(payload);
   }
 
   deleteRow(feature: { [key: string]: string }) {
-    if (this.editing) {
+    if (this.editing && this.creatingRow) {
       this.data = this.data.slice(1);
+    }
+
+    if (this.editing) {
       this.editing = false;
       this.editingIndex = null;
-    }
-    if (feature.id) {
+    } else if (feature.id) {
       this.deleted.emit(feature);
     }
   }

@@ -26,38 +26,39 @@ export class MediaTypesService {
       .pipe(map((res: ApolloQueryResult<any>) => res.data.media_types));
   }
 
-  create(mediaTypes: Partial<MediaType>) {
-    delete (mediaTypes as any).__typename;
+  create(mediaType: Partial<MediaType>) {
+    delete (mediaType as any).__typename;
 
     return this.apollo
       .mutate({
         mutation: createMediaTypesMutation,
         variables: {
-          objects: mediaTypes
+          objects: mediaType
         }
       })
       .pipe(
         map(
           (res: ApolloQueryResult<any>) =>
-            res.data.insert_media_type.returning[0]
+            res.data.insert_media_types.returning[0]
         )
       );
   }
 
-  update(mediaTypes: Partial<MediaType>) {
-    delete (mediaTypes as any).__typename;
+  update(oldMediaTypeName: string, mediaType: Partial<MediaType>) {
+    delete (mediaType as any).__typename;
 
     return this.apollo
       .mutate({
         mutation: updateMediaTypesMutation,
         variables: {
-          type: mediaTypes
+          name: oldMediaTypeName,
+          mediaType
         }
       })
       .pipe(
         map(
           (res: ApolloQueryResult<any>) =>
-            res.data.update_media_type.returning[0]
+            res.data.update_media_types.returning[0]
         )
       );
   }
@@ -67,13 +68,13 @@ export class MediaTypesService {
       .mutate({
         mutation: deleteMediaTypesMutation,
         variables: {
-          id: mediaType
+          name: mediaType.name
         }
       })
       .pipe(
         map(
           (res: ApolloQueryResult<any>) =>
-            res.data.delete_media_type.returning[0]
+            res.data.delete_media_types.returning[0]
         )
       );
   }

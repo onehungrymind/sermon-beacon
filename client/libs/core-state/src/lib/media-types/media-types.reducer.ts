@@ -30,16 +30,6 @@ const mediaTypesReducer = createReducer(
   on(MediaTypesActions.mediaTypeSelected, (state, { selectedMediaTypeId }) =>
     Object.assign({}, state, { selectedMediaTypeId })
   ),
-  on(
-    MediaTypesActions.loadMediaTypes,
-    MediaTypesActions.createMediaType,
-    MediaTypesActions.updateMediaType,
-    MediaTypesActions.deleteMediaType,
-    (state) => ({
-      ...state,
-      isLoading: true
-    })
-  ),
   on(MediaTypesActions.mediaTypeLoaded, (state, { mediaTypes }) =>
     mediaTypesAdapter.addAll(mediaTypes, { ...state, isLoading: false })
   ),
@@ -51,7 +41,17 @@ const mediaTypesReducer = createReducer(
   ),
   on(MediaTypesActions.mediaTypeDeleted, (state, { mediaType }) =>
     mediaTypesAdapter.removeOne(mediaType.name, { ...state, isLoading: false })
-  )
+  ),
+  on(
+    MediaTypesActions.loadMediaTypes,
+    MediaTypesActions.createMediaType,
+    MediaTypesActions.updateMediaType,
+    MediaTypesActions.deleteMediaType,
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
 );
 
 export function reducer(state: MediaTypeState | undefined, action: Action) {
