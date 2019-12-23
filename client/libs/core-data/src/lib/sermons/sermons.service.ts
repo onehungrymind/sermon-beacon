@@ -35,8 +35,6 @@ export class SermonsService {
   }
 
   create(sermon: Partial<Sermon>) {
-    delete sermon.id;
-    delete sermon.date;
     delete sermon.created_at;
     delete sermon.updated_at;
 

@@ -1,28 +1,32 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatTabGroup } from '@angular/material';
 
-import { combineLatest } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import * as moment from 'moment';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
-import { MediaFacade, SermonsFacade, TagsFacade } from '@sb/core-state';
-import { Sermon } from '@sb/core-data';
+import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
+import { Sermon, Tag } from '@sb/core-data';
 
 @Component({
   selector: 'sb-sermons-dialog',
   templateUrl: './sermons-dialog.component.html',
   styleUrls: ['./sermons-dialog.component.scss']
 })
-export class SermonsDialogComponent implements OnInit {
+export class SermonsDialogComponent implements OnDestroy, OnInit {
   form: FormGroup;
   sermon$ = this.sermonFacade.selectedSermon$;
   sermonMedia$ = this.mediaFacade.allMedia$;
-  sermonTags$ = this.tagsFacade.allTags$;
+  sermonSpeakers$ = this.speakersFacade.allSermonSpeakers$;
+  sermonTags$ = this.tagsFacade.allSermonTags$;
+  destroy$ = new Subject();
   @ViewChild(MatTabGroup, { static: true }) tabGroup: MatTabGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private sermonFacade: SermonsFacade,
+    private speakersFacade: SpeakersFacade,
     private mediaFacade: MediaFacade,
     private tagsFacade: TagsFacade,
     @Inject(MAT_DIALOG_DATA) public data: Sermon
@@ -34,9 +38,15 @@ export class SermonsDialogComponent implements OnInit {
     if (this.data && id) {
       this.sermonFacade.selectSermon(id);
       this.mediaFacade.loadMediaBySermonId(id);
+      this.speakersFacade.loadSpeakersBySermonId(id);
       this.tagsFacade.loadTagsBySermonId(id);
-      this.selectSermon$().subscribe();
+      this.selectSermon$().pipe(takeUntil(this.destroy$)).subscribe();
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(null);
+    this.destroy$.unsubscribe();
   }
 
   next() {
@@ -47,25 +57,63 @@ export class SermonsDialogComponent implements OnInit {
     this.tabGroup.selectedIndex = --this.tabGroup.selectedIndex;
   }
 
+  save() {
+    if (this.data.id) {
+      console.log('UPDATE');
+      // this.sermonFacade.updateSermon(this.buildQuery());
+
+      return;
+    }
+    console.log('CREATE');
+    this.sermonFacade.createSermon(this.buildCreateQuery());
+  }
+
   addMediaGroup() {
     const media = this.form.get('media') as FormArray;
     media.push(this.mediaGroup());
   }
 
-  selectSermon$() {
+  private selectSermon$() {
     return combineLatest([
       this.sermon$,
       this.sermonMedia$,
+      this.sermonSpeakers$,
       this.sermonTags$
     ]).pipe(
-      tap(([sermon, media, tags]) => {
+      tap(([sermon, media, speakers, tags]) => {
+        const details = {...sermon, speakers: speakers.map((speaker) => speaker.id)};
         this.form.patchValue({
-          details: sermon,
+          details,
           media,
           tags: { tags }
         });
       })
     );
+  }
+
+  updateSermonData() {
+
+  }
+
+  buildCreateQuery() {
+    const {speakers, ...sermonData} = this.form.get('details').value;
+    const [{id, ...mediaData}] = this.form.get('media').value;
+    const tagData = this.form.get('tags').value;
+
+    delete sermonData.id;
+
+    return {
+      ...sermonData,
+      sermon_speakers: {
+        data: speakers.map((speaker_id: string) => ({speaker_id}))
+      },
+      media: {
+        data: mediaData
+      },
+      sermon_tags: {
+        data: tagData.tags.map((tag: Tag) => ({tag_id: tag.id}))
+      }
+    };
   }
 
   private initForm() {
@@ -75,7 +123,7 @@ export class SermonsDialogComponent implements OnInit {
         title: ['', Validators.compose([Validators.required])],
         subject: [''],
         speakers: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
-        date: ['', Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
+        date: [moment().format('YYYY-MM-DD'), Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
       }),
       media: this.formBuilder.array([this.mediaGroup()], Validators.required),
       tags: this.formBuilder.group({
@@ -92,5 +140,4 @@ export class SermonsDialogComponent implements OnInit {
       embedCode: ['']
     });
   }
-
 }
