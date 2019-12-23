@@ -30,10 +30,11 @@ export class UiTableComponent implements OnInit, OnChanges {
   editingIndex: number;
   form: FormGroup;
   spacerColumns = ['createAction', 'space1', 'space2'];
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    if (this.data.length < 4) {
+    if (this.data.length < this.spacerColumns.length) {
       this.spacerColumns.push('space3');
     }
   }
@@ -72,8 +73,6 @@ export class UiTableComponent implements OnInit, OnChanges {
     this.creatingRow = false;
     if (!!this.form.get('id').value) {
       this.updated.emit(this.form.value);
-
-      return;
     }
     const { id, ...payload } = this.form.value;
     this.created.emit(payload);
@@ -81,17 +80,19 @@ export class UiTableComponent implements OnInit, OnChanges {
 
   deleteRow(feature: { [key: string]: string }) {
     if (this.editing) {
+      this.data = this.data.slice(1);
       this.editing = false;
       this.editingIndex = null;
-    } else {
+    }
+    if (feature.id) {
       this.deleted.emit(feature);
     }
   }
 
   private initForm(tableColumns: UiTableColumn[]) {
     const formGroup = tableColumns.reduce((acc, curr) => {
-      return curr ? { ...acc, [curr.columnDef]: [null], id: null } : { ...acc };
-    }, {});
+      return curr ? { ...acc, [curr.columnDef]: [null] } : { ...acc };
+    }, { id: null });
     this.form = this.fb.group(formGroup);
   }
 }
