@@ -10,6 +10,7 @@ import {
   createSpeakerMutation,
   deleteSermonSpeakersMutation,
   deleteSpeakerMutation,
+  sermonSpeakersQuery,
   speakerBySermonIdQuery,
   speakerQuery,
   updateSpeakerMutation,

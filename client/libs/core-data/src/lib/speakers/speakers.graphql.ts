@@ -32,6 +32,15 @@ export const speakerQuery = gql`
   ${speakersFragment}
 `;
 
+export const sermonSpeakersQuery = gql`
+  query speakerQuery {
+    sermon_speakers_view {
+      ...sermonSpeakerFragment
+    }
+  }
+  ${sermonSpeakerFragment}
+`;
+
 export const speakerBySermonIdQuery = gql`
   query speakerBySermonIdQuery($id: uuid) {
     speakers(where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
