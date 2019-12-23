@@ -7,7 +7,7 @@ import { combineLatest, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
-import { Sermon, Tag } from '@sb/core-data';
+import { Media, Sermon, Tag } from '@sb/core-data';
 
 @Component({
   selector: 'sb-sermons-dialog',
@@ -59,12 +59,10 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
 
   save() {
     if (this.data.id) {
-      console.log('UPDATE');
-      // this.sermonFacade.updateSermon(this.buildQuery());
+      this.updateSermonData();
 
       return;
     }
-    console.log('CREATE');
     this.sermonFacade.createSermon(this.buildCreateQuery());
   }
 
@@ -91,11 +89,23 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     );
   }
 
-  updateSermonData() {
+  private updateSermonData() {
+    const {speakers, ...sermonData} = this.form.get('details').value;
+    const media = this.form.get('media').value;
+    const tagData = this.form.get('tags').value;
+    // console.log(tagData);
 
+    this.sermonFacade.updateSermon(sermonData);
+    media.forEach((m: Media) => {
+      this.mediaFacade.updateMedia(m);
+    });
+    tagData.tags.forEach((tag: Tag) => {
+      const {__typename, ...payload} = tag;
+      this.tagsFacade.updateTagBySermonId(sermonData.id, payload);
+    });
   }
 
-  buildCreateQuery() {
+  private buildCreateQuery() {
     const {speakers, ...sermonData} = this.form.get('details').value;
     const [{id, ...mediaData}] = this.form.get('media').value;
     const tagData = this.form.get('tags').value;

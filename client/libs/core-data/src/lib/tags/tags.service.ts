@@ -11,6 +11,7 @@ import {
   sermonTagsQuery,
   tagsBySermonIdQuery,
   tagsQuery,
+  updateTagsBySermonIdMutation,
   updateTagsMutation,
 } from './tags.graphql';
 import { Tag } from './tag.model';
@@ -67,12 +68,22 @@ export class TagsService {
   }
 
   update(tags: Partial<Tag>) {
-    delete (tags as any).__typename;
-
     return this.apollo.mutate({
       mutation: updateTagsMutation,
       variables: {
         id: tags.id,
+        tags
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.update_tags.returning[0])
+    );
+  }
+
+  updateBySermonId(sermonId: string, tags: Partial<Tag>) {
+    return this.apollo.mutate({
+      mutation: updateTagsBySermonIdMutation,
+      variables: {
+        id: sermonId,
         tags
       }
     }).pipe(

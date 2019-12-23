@@ -76,6 +76,22 @@ export class TagsEffects {
     })
   );
 
+  updateTagBySermonId$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.updateTagBySermonId, {
+      run: (
+        action: ReturnType<typeof TagsActions.updateTagBySermonId>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.updateBySermonId(action.sermonId, action.tag).pipe(
+          map((tag: Tag) => TagsActions.tagBySermonIdUpdated({ tag }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.updateTagBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   deleteTag$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(TagsActions.deleteTag, {
       run: (

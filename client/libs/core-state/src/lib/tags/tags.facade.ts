@@ -36,6 +36,10 @@ export class TagsFacade {
     this.dispatch(TagsActions.updateTag({ tag }));
   }
 
+  updateTagBySermonId(sermonId: string, tag: Tag) {
+    this.dispatch(TagsActions.updateTagBySermonId({ sermonId, tag }));
+  }
+
   deleteTag(tag: Tag) {
     this.dispatch(TagsActions.deleteTag({ tag }));
   }

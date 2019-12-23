@@ -42,8 +42,18 @@ export const updateTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const updateTagBySermonId = createAction(
+  '[TAG] Update Tag By Sermon Id',
+  props<{ sermonId: string, tag: Tag }>()
+);
+
 export const tagUpdated = createAction(
   '[TAG] Tag Updated',
+  props<{ tag: Tag }>()
+);
+
+export const tagBySermonIdUpdated = createAction(
+  '[TAG] Tag By Sermon Id Updated',
   props<{ tag: Tag }>()
 );
 

@@ -43,7 +43,10 @@ const tagsReducer = createReducer(
   on(TagsActions.tagCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.tagUpdated, (state, { tag }) =>
+  on(
+    TagsActions.tagUpdated,
+    TagsActions.tagBySermonIdUpdated,
+    (state, { tag }) =>
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
   on(TagsActions.tagDeleted, (state, { tag }) =>
@@ -54,6 +57,7 @@ const tagsReducer = createReducer(
     TagsActions.loadTagsBySermonId,
     TagsActions.createTag,
     TagsActions.updateTag,
+    TagsActions.updateTagBySermonId,
     TagsActions.deleteTag,
     (state) => ({
       ...state,

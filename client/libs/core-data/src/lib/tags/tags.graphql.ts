@@ -70,6 +70,17 @@ export const updateTagsMutation = gql`
   ${tagsFragment}
 `;
 
+export const updateTagsBySermonIdMutation = gql`
+  mutation updateTagsBySermonIdMutation($id: uuid!, $tags: tags_set_input) {
+    update_tags(where: {sermon_tags: {sermon_id: {_eq: $id}}}, _set: $tags) {
+      returning {
+        ...tagsFragment
+      }
+    }
+  }
+  ${tagsFragment}
+`;
+
 export const deleteTagsMutation = gql`
   mutation deleteTagsMutation($id: uuid!) {
     delete_tags(where: {id: {_eq: $id}}) {
