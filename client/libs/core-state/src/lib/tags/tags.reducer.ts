@@ -8,6 +8,7 @@ export const TAGS_FEATURE_KEY = 'tags';
 
 export interface TagsState extends EntityState<Tag> {
   selectedTagId?: string | number; // which Tags record has been selected
+  selectedSermonTags?: Tag[]; // only tags for sermon
   isLoading: boolean; // has the Tags list been loaded
 }
 
@@ -20,6 +21,7 @@ export const tagsAdapter: EntityAdapter<Tag> = createEntityAdapter<Tag>();
 export const initialState: TagsState = tagsAdapter.getInitialState({
   // set initial required properties
   selectedTagId: null,
+  selectedSermonTags: [],
   isLoading: false
 });
 
@@ -28,27 +30,52 @@ const tagsReducer = createReducer(
   on(TagsActions.tagSelected, (state, { selectedTagId }) =>
     Object.assign({}, state, { selectedTagId })
   ),
-  on(
-    TagsActions.loadTags,
-    TagsActions.createTag,
-    TagsActions.updateTag,
-    TagsActions.deleteTag,
-    (state) => ({
+  on(TagsActions.tagsLoaded, (state, { tags }) =>
+    tagsAdapter.addAll(tags, { ...state, isLoading: false })
+  ),
+  on(TagsActions.tagsBySermonIdLoaded, (state, { tags }) =>
+    ({
       ...state,
+      selectedSermonTags: tags,
       isLoading: false
     })
-  ),
-  on(TagsActions.tagsLoaded, (state, { tags }) =>
-    tagsAdapter.addAll(tags, { ...state, isLoading: true })
   ),
   on(TagsActions.tagCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
-  on(TagsActions.tagUpdated, (state, { tag }) =>
+  on(TagsActions.sermonTagsCreated, (state, { tag }) =>
+    ({
+      ...state,
+      selectedSermonTags: [...state.selectedSermonTags, tag]
+    })
+  ),
+  on(
+    TagsActions.tagUpdated,
+    TagsActions.tagBySermonIdUpdated,
+    (state, { tag }) =>
     tagsAdapter.upsertOne(tag, { ...state, isLoading: false })
   ),
   on(TagsActions.tagDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
+  ),
+  on(TagsActions.sermonTagsDeleted, (state, { tags }) =>
+    ({
+      ...state,
+      selectedSermonTags: state.selectedSermonTags.filter((sermonTags) => !tags.includes(sermonTags))
+    })
+  ),
+  on(
+    TagsActions.loadTags,
+    TagsActions.loadTagsBySermonId,
+    TagsActions.createTag,
+    TagsActions.updateTag,
+    TagsActions.updateTagBySermonId,
+    TagsActions.deleteTag,
+    TagsActions.deleteSermonTags,
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
   )
 );
 

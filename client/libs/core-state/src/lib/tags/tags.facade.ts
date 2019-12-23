@@ -9,9 +9,10 @@ import { Tag } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class TagsFacade {
-  tagLoading$ = this.store.pipe(select(TagsSelectors.selectTagsLoading));
   allTags$ = this.store.pipe(select(TagsSelectors.selectAllTags));
+  allSermonTags$ = this.store.pipe(select(TagsSelectors.selectSermonTags));
   selectedTag$ = this.store.pipe(select(TagsSelectors.selectTag));
+  tagLoading$ = this.store.pipe(select(TagsSelectors.selectTagsLoading));
 
   constructor(private store: Store<fromTags.TagsPartialState>) {}
 
@@ -23,16 +24,32 @@ export class TagsFacade {
     this.dispatch(TagsActions.loadTags());
   }
 
+  loadTagsBySermonId(sermonId: string) {
+    this.dispatch(TagsActions.loadTagsBySermonId({ sermonId }));
+  }
+
   createTag(tag: Tag) {
     this.dispatch(TagsActions.createTag({ tag }));
+  }
+
+  createSermonTags(objects: {sermon_id: string, tag: {data: Partial<Tag>}}) {
+    this.dispatch(TagsActions.createSermonTags({ objects }));
   }
 
   updateTag(tag: Tag) {
     this.dispatch(TagsActions.updateTag({ tag }));
   }
 
+  updateTagBySermonId(sermonId: string, tag: Tag) {
+    this.dispatch(TagsActions.updateTagBySermonId({ sermonId, tag }));
+  }
+
   deleteTag(tag: Tag) {
     this.dispatch(TagsActions.deleteTag({ tag }));
+  }
+
+  deleteSermonTags(sermonId: string) {
+    this.dispatch(TagsActions.deleteSermonTags({ sermonId }));
   }
 
   private dispatch(action: Action) {

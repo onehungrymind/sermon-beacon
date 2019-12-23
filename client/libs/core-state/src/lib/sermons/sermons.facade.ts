@@ -1,21 +1,30 @@
 import { Injectable } from '@angular/core';
 
-import { Action, select, Store } from '@ngrx/store';
+import { Action, ActionsSubject, select, Store } from '@ngrx/store';
 
 import * as fromSermons from './sermons.reducer';
 import * as SermonsSelectors from './sermons.selectors';
 import * as SermonsActions from './sermons.actions';
 import { Sermon } from '@sb/core-data';
+import { filter } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class SermonsFacade {
-  sermonLoading$ = this.store.pipe(
-    select(SermonsSelectors.selectSermonsLoading)
-  );
+  sermonLoading$ = this.store.pipe(select(SermonsSelectors.selectSermonsLoading));
   allSermons$ = this.store.pipe(select(SermonsSelectors.selectAllSermons));
   selectedSermon$ = this.store.pipe(select(SermonsSelectors.selectSermon));
+  dispatchMutations$ = this.actions$.pipe(
+    filter((action) =>
+      action.type === SermonsActions.createSermon({} as any).type ||
+      action.type === SermonsActions.updateSermon({} as any).type ||
+      action.type === SermonsActions.deleteSermon({} as any).type
+    )
+  );
 
-  constructor(private store: Store<fromSermons.SermonsPartialState>) {}
+  constructor(
+    private store: Store<fromSermons.SermonsPartialState>,
+    private actions$: ActionsSubject
+  ) {}
 
   selectSermon(selectedSermonId: string) {
     this.dispatch(SermonsActions.sermonSelected({ selectedSermonId }));

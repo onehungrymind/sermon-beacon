@@ -21,6 +21,15 @@ export const mediaQuery = gql`
   ${mediaFragment}
 `;
 
+export const mediaBySermonIdQuery = gql`
+  query mediaBySermonIdQuery($id: uuid) {
+    media(where: { sermon_id: {_eq: $id}}) {
+      ...mediaFragment
+    }
+  }
+  ${mediaFragment}
+`;
+
 export const createMediaMutation = gql`
   mutation createMediaMutation($objects: [media_insert_input!]!) {
     insert_media(objects: $objects) {
@@ -46,6 +55,17 @@ export const updateMediaMutation = gql`
 export const deleteMediaMutation = gql`
   mutation deleteMediaMutation($id: uuid!) {
     delete_media(where: {id: {_eq: $id}}) {
+      returning {
+        ...mediaFragment
+      }
+    }
+  }
+  ${mediaFragment}
+`;
+
+export const deleteMediaBySermonIdMutation = gql`
+  mutation deleteMediaMutation($id: uuid!) {
+    delete_media(where: {sermon_id: {_eq: $id}}) {
       returning {
         ...mediaFragment
       }

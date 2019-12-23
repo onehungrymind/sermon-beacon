@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LayoutModule } from '@angular/cdk/layout';
 import {
   MAT_CHIPS_DEFAULT_OPTIONS,
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -30,10 +31,12 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 const MODULES = [
   BrowserAnimationsModule,
+  LayoutModule,
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -57,7 +60,8 @@ const MODULES = [
   MatSortModule,
   MatTableModule,
   MatTabsModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 ];
 
 const matChipsOptions: MatChipsDefaultOptions = {

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { EMPTY, iif, of } from 'rxjs';
+import { EMPTY, iif } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
+import * as fromSpeakers from './speakers.reducer';
 import * as SpeakersActions from './speakers.actions';
 import { Speaker, SpeakersService } from '@sb/core-data';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
@@ -16,7 +17,7 @@ export class SpeakersEffects {
     this.dataPersistence.fetch(SpeakersActions.loadSpeakers, {
       run: (
         action: ReturnType<typeof SpeakersActions.loadSpeakers>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.all().pipe(
           map((speakers: Speaker[]) => SpeakersActions.speakersLoaded({ speakers }))
@@ -44,17 +45,49 @@ export class SpeakersEffects {
     })
   );
 
+  loadSpeakersBySermonId$ = createEffect(() =>
+    this.dataPersistence.fetch(SpeakersActions.loadSpeakersBySermonId, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>,
+        state: SpeakersPartialState
+      ) => {
+        return this.speakersService.allBySermonId(action.sermonId).pipe(
+          map((speakers: Speaker[]) => SpeakersActions.speakersBySermonIdLoaded({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addSpeaker$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SpeakersActions.createSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.createSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.create(action.speaker).pipe(
-          map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
+          map((speaker: Speaker) => SpeakersActions.speakerCreated({ speaker }))
         );
       },
       onError: (action: ReturnType<typeof SpeakersActions.createSpeaker>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  addSermonSpeaker$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(SpeakersActions.createSermonSpeaker, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.createSermonSpeaker>,
+        state: fromSpeakers.SpeakersPartialState
+      ) => {
+        return this.speakersService.createSermonSpeaker(action.objects).pipe(
+          map((speaker: Speaker) => SpeakersActions.sermonSpeakerCreated({ speaker }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.createSermonSpeaker>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -64,7 +97,7 @@ export class SpeakersEffects {
     this.dataPersistence.pessimisticUpdate(SpeakersActions.updateSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.updateSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.update(action.speaker).pipe(
           map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
@@ -76,11 +109,27 @@ export class SpeakersEffects {
     })
   );
 
+  deleteSermonSpeakers$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(SpeakersActions.deleteSermonSpeakers, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.deleteSermonSpeakers>,
+        state: fromSpeakers.SpeakersPartialState
+      ) => {
+        return this.speakersService.deleteSermonSpeaker(action.sermonId).pipe(
+          map((speakers: Speaker[]) => SpeakersActions.sermonSpeakersDeleted({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.deleteSermonSpeakers>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   deleteSpeaker$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(SpeakersActions.deleteSpeaker, {
       run: (
         action: ReturnType<typeof SpeakersActions.deleteSpeaker>,
-        state: SpeakersPartialState
+        state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.dialogService.deleteDialog(action.speaker, 'speaker').pipe(
           switchMap((deleteConfirmed: boolean) =>

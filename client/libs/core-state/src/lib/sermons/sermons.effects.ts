@@ -5,10 +5,10 @@ import { DataPersistence } from '@nrwl/angular';
 import { EMPTY, iif, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
+import * as fromSermons from './sermons.reducer';
 import * as SermonsActions from './sermons.actions';
 import { Sermon, SermonsService } from '@sb/core-data';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
-import { SermonsPartialState } from './sermons.reducer';
 
 @Injectable()
 export class SermonsEffects {
@@ -16,7 +16,7 @@ export class SermonsEffects {
     this.dataPersistence.fetch(SermonsActions.loadSermons, {
       run: (
         action: ReturnType<typeof SermonsActions.loadSermons>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.all().pipe(
           map((sermons: Sermon[]) => SermonsActions.sermonsLoaded({ sermons }))
@@ -32,7 +32,7 @@ export class SermonsEffects {
     this.dataPersistence.fetch(SermonsActions.loadSearchedSermons, {
       run: (
         action: ReturnType<typeof SermonsActions.loadSearchedSermons>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.all(action.query).pipe(
           map((sermons: Sermon[]) => SermonsActions.searchedSermonsLoaded({ sermons }))
@@ -48,7 +48,7 @@ export class SermonsEffects {
     this.dataPersistence.pessimisticUpdate(SermonsActions.createSermon, {
       run: (
         action: ReturnType<typeof SermonsActions.createSermon>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.create(action.sermon).pipe(
           map((sermon: Sermon) => SermonsActions.sermonCreated({ sermon }))
@@ -64,7 +64,7 @@ export class SermonsEffects {
     this.dataPersistence.pessimisticUpdate(SermonsActions.updateSermon, {
       run: (
         action: ReturnType<typeof SermonsActions.updateSermon>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.update(action.sermon).pipe(
           map((sermon: Sermon) => SermonsActions.sermonUpdated({ sermon }))
@@ -80,7 +80,7 @@ export class SermonsEffects {
     this.dataPersistence.pessimisticUpdate(SermonsActions.deleteSermon, {
       run: (
         action: ReturnType<typeof SermonsActions.deleteSermon>,
-        state: SermonsPartialState
+        state: fromSermons.SermonsPartialState
       ) => {
         return this.dialogService.deleteDialog(action.sermon, 'sermon').pipe(
           switchMap((deleteConfirmed: boolean) =>
@@ -101,7 +101,7 @@ export class SermonsEffects {
 
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<SermonsPartialState>,
+    private dataPersistence: DataPersistence<fromSermons.SermonsPartialState>,
     private sermonsService: SermonsService,
     private dialogService: DialogService,
     private notifyService: NotifyService
