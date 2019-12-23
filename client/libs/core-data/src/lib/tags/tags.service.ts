@@ -5,7 +5,6 @@ import { ApolloQueryResult } from 'apollo-client';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { Tag } from './tag.model';
 import {
   createTagsMutation,
   deleteTagsMutation,
@@ -14,6 +13,7 @@ import {
   tagsQuery,
   updateTagsMutation,
 } from './tags.graphql';
+import { Tag } from './tag.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,12 @@ export class TagsService {
   constructor(private apollo: Apollo) {}
 
   all(): Observable<Tag[]> {
-    return this.apollo
-      .query({
-        query: tagsQuery,
-        fetchPolicy: 'network-only'
-      })
-      .pipe(map((res: ApolloQueryResult<any>) => res.data.tags));
+    return this.apollo.query({
+      query: tagsQuery,
+      fetchPolicy: 'network-only'
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.tags)
+    );
   }
 
   allAttachedToSermons() {

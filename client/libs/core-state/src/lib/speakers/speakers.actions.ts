@@ -10,6 +10,11 @@ export const speakerSelected = createAction(
 // Load Actions
 export const loadSpeakers = createAction('[SPEAKER] Load Speakers');
 
+export const loadSpeakersBySermonId = createAction(
+  '[SPEAKER] Load Speakers By Sermon Id',
+  props<{ sermonId: string }>()
+);
+
 export const loadSermonSpeakers = createAction(
   '[SPEAKER] Load Sermon Speakers'
 );
@@ -21,6 +26,11 @@ export const speakersLoaded = createAction(
 
 export const sermonSpeakersLoaded = createAction(
   '[SPEAKER] Sermon Speakers Loaded',
+  props<{ speakers: Speaker[] }>()
+);
+
+export const speakersBySermonIdLoaded = createAction(
+  '[SPEAKER] Speakers By Sermon Id Loaded',
   props<{ speakers: Speaker[] }>()
 );
 

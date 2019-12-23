@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { EMPTY, iif, of } from 'rxjs';
+import { EMPTY, iif } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import * as SpeakersActions from './speakers.actions';
@@ -39,6 +39,22 @@ export class SpeakersEffects {
         );
       },
       onError: (action: ReturnType<typeof SpeakersActions.loadSermonSpeakers>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  loadSpeakersBySermonId$ = createEffect(() =>
+    this.dataPersistence.fetch(SpeakersActions.loadSpeakersBySermonId, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>,
+        state: SpeakersPartialState
+      ) => {
+        return this.speakersService.allBySermonId(action.sermonId).pipe(
+          map((speakers: Speaker[]) => SpeakersActions.speakersBySermonIdLoaded({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.loadSpeakersBySermonId>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
