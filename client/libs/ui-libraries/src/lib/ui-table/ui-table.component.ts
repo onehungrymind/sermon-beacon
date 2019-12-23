@@ -29,15 +29,20 @@ export class UiTableComponent implements OnInit, OnChanges {
   editing: boolean;
   editingIndex: number;
   form: FormGroup;
-  spacerColumns = ['create-action', 'space1', 'space2', 'space3'];
+  spacerColumns = ['createAction', 'space1', 'space2'];
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.data.length < 4) {
+      this.spacerColumns.push('space3');
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.tableColumns && changes.tableColumns.currentValue) {
       this.initForm(this.tableColumns);
     }
+    this.form.reset();
   }
 
   mapTableColumnsToDisplyedColumns(tableColumns: UiTableColumn[], actionsEnabled: boolean): string[] {
@@ -48,10 +53,11 @@ export class UiTableComponent implements OnInit, OnChanges {
 
   createRow() {
     this.creatingRow = true;
-  }
-
-  createSpeaker(row: { [key: string]: string }) {
-    console.log('create row');
+    this.data = [{}, ...this.data];
+    if (this.creatingRow) {
+      this.editing = true;
+      this.editingIndex = 0;
+    }
   }
 
   updateRow(row: { [key: string]: string }, i: number) {
@@ -63,16 +69,23 @@ export class UiTableComponent implements OnInit, OnChanges {
   saveRow() {
     this.editing = false;
     this.editingIndex = null;
+    this.creatingRow = false;
     if (!!this.form.get('id').value) {
-      this.created.emit(this.form.value);
+      this.updated.emit(this.form.value);
 
       return;
     }
-    this.updated.emit(this.form.value);
+    const { id, ...payload } = this.form.value;
+    this.created.emit(payload);
   }
 
   deleteRow(feature: { [key: string]: string }) {
-    this.deleted.emit(feature);
+    if (this.editing) {
+      this.editing = false;
+      this.editingIndex = null;
+    } else {
+      this.deleted.emit(feature);
+    }
   }
 
   private initForm(tableColumns: UiTableColumn[]) {

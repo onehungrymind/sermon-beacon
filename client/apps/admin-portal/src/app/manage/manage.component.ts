@@ -18,15 +18,20 @@ export class ManageComponent implements OnInit {
     { columnDef: 'church_name', title: 'Church' },
     { columnDef: 'position', title: 'Position' },
   ];
+  mediaColumns = [
+    { columnDef: 'name', title: 'Name' },
+    { columnDef: 'description', title: 'Description' }
+  ];
 
   constructor(private speakersFacade: SpeakersFacade, private mediaTypeFacade: MediaTypesFacade) { }
 
   ngOnInit() {
     this.speakersFacade.loadSpeakers();
+    this.mediaTypeFacade.loadMediaTypes();
   }
 
   createSpeaker(i) {
-    this.speakersFacade.updateSpeaker(i);
+    this.speakersFacade.createSpeaker(i);
   }
 
   updateSpeaker(i) {
@@ -37,4 +42,15 @@ export class ManageComponent implements OnInit {
     this.speakersFacade.deleteSpeaker(i);
   }
 
+  createMedia(i) {
+    this.mediaTypeFacade.createMediaType(i);
+  }
+
+  updateMedia(i) {
+    this.mediaTypeFacade.updateMediaType(i);
+  }
+
+  deletMedia(i) {
+    this.mediaTypeFacade.deleteMediaType(i);
+  }
 }
