@@ -103,9 +103,16 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     media.forEach((m: Media) => {
       this.mediaFacade.updateMedia(m);
     });
+    this.updateTags(tagData, sermonData);
+  }
+
+  private updateTags(tagData: any, sermonData: any) {
+    if (tagData.tags.length) {
+      this.tagsFacade.deleteSermonTags(sermonData.id);
+    }
     tagData.tags.forEach((tag: Tag) => {
-      const {__typename, ...payload} = tag;
-      this.tagsFacade.updateTagBySermonId(sermonData.id, payload);
+      const { __typename, id, ...payload } = tag;
+      this.tagsFacade.createSermonTags({ sermon_id: sermonData.id, tag: { data: payload } });
     });
   }
 

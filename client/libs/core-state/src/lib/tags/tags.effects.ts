@@ -60,6 +60,22 @@ export class TagsEffects {
     })
   );
 
+  addSermonTags$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.createSermonTags, {
+      run: (
+        action: ReturnType<typeof TagsActions.createSermonTags>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.createSermonTags(action.objects).pipe(
+          map((tag: Tag) => TagsActions.sermonTagsCreated({ tag }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.createSermonTags>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   updateTag$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(TagsActions.updateTag, {
       run: (
@@ -87,6 +103,22 @@ export class TagsEffects {
         );
       },
       onError: (action: ReturnType<typeof TagsActions.updateTagBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  deleteSermonTag$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.deleteSermonTags, {
+      run: (
+        action: ReturnType<typeof TagsActions.deleteSermonTags>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.deleteSermonTag(action.sermonId).pipe(
+          map((tags: Tag[]) => TagsActions.sermonTagsDeleted({ tags }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.deleteSermonTags>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })

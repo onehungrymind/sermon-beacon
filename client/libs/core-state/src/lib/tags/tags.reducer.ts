@@ -31,7 +31,7 @@ const tagsReducer = createReducer(
     Object.assign({}, state, { selectedTagId })
   ),
   on(TagsActions.tagsLoaded, (state, { tags }) =>
-    tagsAdapter.addAll(tags, { ...state, isLoading: true })
+    tagsAdapter.addAll(tags, { ...state, isLoading: false })
   ),
   on(TagsActions.tagsBySermonIdLoaded, (state, { tags }) =>
     ({
@@ -43,6 +43,12 @@ const tagsReducer = createReducer(
   on(TagsActions.tagCreated, (state, { tag }) =>
     tagsAdapter.addOne(tag, { ...state, isLoading: false })
   ),
+  on(TagsActions.sermonTagsCreated, (state, { tag }) =>
+    ({
+      ...state,
+      selectedSermonTags: [...state.selectedSermonTags, tag]
+    })
+  ),
   on(
     TagsActions.tagUpdated,
     TagsActions.tagBySermonIdUpdated,
@@ -52,6 +58,12 @@ const tagsReducer = createReducer(
   on(TagsActions.tagDeleted, (state, { tag }) =>
     tagsAdapter.removeOne(tag.id, { ...state, isLoading: false })
   ),
+  on(TagsActions.sermonTagsDeleted, (state, { tags }) =>
+    ({
+      ...state,
+      selectedSermonTags: state.selectedSermonTags.filter((sermonTags) => !tags.includes(sermonTags))
+    })
+  ),
   on(
     TagsActions.loadTags,
     TagsActions.loadTagsBySermonId,
@@ -59,9 +71,10 @@ const tagsReducer = createReducer(
     TagsActions.updateTag,
     TagsActions.updateTagBySermonId,
     TagsActions.deleteTag,
+    TagsActions.deleteSermonTags,
     (state) => ({
       ...state,
-      isLoading: false
+      isLoading: true
     })
   )
 );

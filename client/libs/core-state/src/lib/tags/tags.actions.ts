@@ -31,7 +31,17 @@ export const createTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const createSermonTags = createAction(
+  '[TAG] Create Sermon Tags',
+  props<{ objects: {sermon_id: string, tag: {data: Partial<Tag>}} }>()
+);
+
 export const tagCreated = createAction(
+  '[TAG] Tag Created',
+  props<{ tag: Tag }>()
+);
+
+export const sermonTagsCreated = createAction(
   '[TAG] Tag Created',
   props<{ tag: Tag }>()
 );
@@ -63,7 +73,17 @@ export const deleteTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const deleteSermonTags = createAction(
+  '[TAG] Delete Sermon Tags',
+  props<{ sermonId: string }>()
+);
+
 export const tagDeleted = createAction(
   '[TAG] Tag Deleted',
   props<{ tag: Tag }>()
+);
+
+export const sermonTagsDeleted = createAction(
+  '[TAG] Sermon Tags Deleted',
+  props<{ tags: Tag[] }>()
 );

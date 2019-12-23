@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import {
+  createSermonTagsMutation,
   createTagsMutation,
+  deleteSermonTagsMutation,
   deleteTagsMutation,
   sermonTagsQuery,
   tagsBySermonIdQuery,
@@ -67,6 +69,17 @@ export class TagsService {
     );
   }
 
+  createSermonTags(objects: {sermon_id: string, tag: {data: Partial<Tag>}}) {
+    return this.apollo.mutate({
+      mutation: createSermonTagsMutation,
+      variables: {
+        objects
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.insert_sermon_tags.returning[0].tag)
+    );
+  }
+
   update(tags: Partial<Tag>) {
     return this.apollo.mutate({
       mutation: updateTagsMutation,
@@ -99,6 +112,17 @@ export class TagsService {
       }
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.delete_tags.returning[0])
+    );
+  }
+
+  deleteSermonTag(sermonId: string) {
+    return this.apollo.mutate({
+      mutation: deleteSermonTagsMutation,
+      variables: {
+        sermonId
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.delete_sermon_tags.returning.map((t: {tag: Tag}) => t.tag))
     );
   }
 }

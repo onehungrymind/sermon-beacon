@@ -32,6 +32,10 @@ export class TagsFacade {
     this.dispatch(TagsActions.createTag({ tag }));
   }
 
+  createSermonTags(objects: {sermon_id: string, tag: {data: Partial<Tag>}}) {
+    this.dispatch(TagsActions.createSermonTags({ objects }));
+  }
+
   updateTag(tag: Tag) {
     this.dispatch(TagsActions.updateTag({ tag }));
   }
@@ -42,6 +46,10 @@ export class TagsFacade {
 
   deleteTag(tag: Tag) {
     this.dispatch(TagsActions.deleteTag({ tag }));
+  }
+
+  deleteSermonTags(sermonId: string) {
+    this.dispatch(TagsActions.deleteSermonTags({ sermonId }));
   }
 
   private dispatch(action: Action) {
