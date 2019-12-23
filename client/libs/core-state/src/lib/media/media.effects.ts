@@ -99,6 +99,22 @@ export class MediaEffects {
     })
   );
 
+  deleteMediaBySermonId$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(MediaActions.deleteMediaBySermonId, {
+      run: (
+        action: ReturnType<typeof MediaActions.deleteMediaBySermonId>,
+        state: fromMedia.MediaPartialState
+      ) => {
+        return this.mediaService.deleteBySermonId(action.sermonId).pipe(
+          map((media: Media) => MediaActions.mediaBySermonIdDeleted({ media }))
+        );
+      },
+      onError: (action: ReturnType<typeof MediaActions.deleteMediaBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<fromMedia.MediaPartialState>,

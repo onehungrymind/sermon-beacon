@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Media } from './media.model';
 import {
   createMediaMutation,
+  deleteMediaBySermonIdMutation,
   deleteMediaMutation,
   mediaBySermonIdQuery,
   mediaQuery,
@@ -86,6 +87,17 @@ export class MediaService {
       mutation: deleteMediaMutation,
       variables: {
         id: media.id
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.delete_media.returning[0])
+    );
+  }
+
+  deleteBySermonId(id: string) {
+    return this.apollo.mutate({
+      mutation: deleteMediaBySermonIdMutation,
+      variables: {
+        id
       }
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.delete_media.returning[0])

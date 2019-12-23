@@ -39,6 +39,10 @@ export class MediaFacade {
     this.dispatch(MediaActions.deleteMedia({ media }));
   }
 
+  deleteMediaBySermonId(sermonId: string) {
+    this.dispatch(MediaActions.deleteMediaBySermonId({ sermonId }));
+  }
+
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }

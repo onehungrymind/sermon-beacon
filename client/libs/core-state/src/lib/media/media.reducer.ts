@@ -40,7 +40,10 @@ const mediaReducer = createReducer(
   on(MediaActions.mediaUpdated, (state, { media }) =>
     mediaAdapter.upsertOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.mediaDeleted, (state, { media }) =>
+  on(
+    MediaActions.mediaDeleted,
+    MediaActions.mediaBySermonIdDeleted,
+    (state, { media }) =>
     mediaAdapter.removeOne(media.id, { ...state, isLoading: false })
   ),
   on(
@@ -49,6 +52,7 @@ const mediaReducer = createReducer(
     MediaActions.createMedia,
     MediaActions.updateMedia,
     MediaActions.deleteMedia,
+    MediaActions.deleteMediaBySermonId,
     (state) => ({
       ...state,
       isLoading: true

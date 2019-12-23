@@ -53,7 +53,17 @@ export const deleteMedia = createAction(
   props<{ media: Media }>()
 );
 
+export const deleteMediaBySermonId = createAction(
+  '[MEDIA] Delete Media By Sermon Id',
+  props<{ sermonId: string }>()
+);
+
 export const mediaDeleted = createAction(
   '[MEDIA] Media Deleted',
+  props<{ media: Media }>()
+);
+
+export const mediaBySermonIdDeleted = createAction(
+  '[MEDIA] Media By Sermon Id Deleted',
   props<{ media: Media }>()
 );
