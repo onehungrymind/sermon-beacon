@@ -68,10 +68,26 @@ export class SpeakersEffects {
         state: fromSpeakers.SpeakersPartialState
       ) => {
         return this.speakersService.create(action.speaker).pipe(
-          map((speaker: Speaker) => SpeakersActions.speakerUpdated({ speaker }))
+          map((speaker: Speaker) => SpeakersActions.speakerCreated({ speaker }))
         );
       },
       onError: (action: ReturnType<typeof SpeakersActions.createSpeaker>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  addSermonSpeaker$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(SpeakersActions.createSermonSpeaker, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.createSermonSpeaker>,
+        state: fromSpeakers.SpeakersPartialState
+      ) => {
+        return this.speakersService.createSermonSpeaker(action.objects).pipe(
+          map((speaker: Speaker) => SpeakersActions.sermonSpeakerCreated({ speaker }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.createSermonSpeaker>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })
@@ -88,6 +104,22 @@ export class SpeakersEffects {
         );
       },
       onError: (action: ReturnType<typeof SpeakersActions.updateSpeaker>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  deleteSermonSpeakers$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(SpeakersActions.deleteSermonSpeakers, {
+      run: (
+        action: ReturnType<typeof SpeakersActions.deleteSermonSpeakers>,
+        state: fromSpeakers.SpeakersPartialState
+      ) => {
+        return this.speakersService.deleteSermonSpeaker(action.sermonId).pipe(
+          map((speakers: Speaker[]) => SpeakersActions.sermonSpeakersDeleted({ speakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof SpeakersActions.deleteSermonSpeakers>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })

@@ -36,12 +36,20 @@ export class SpeakersFacade {
     this.dispatch(SpeakersActions.createSpeaker({ speaker }));
   }
 
+  createSermonSpeaker(objects: {sermon_id: string, speaker_id: string}) {
+    this.dispatch(SpeakersActions.createSermonSpeaker({ objects }));
+  }
+
   updateSpeaker(speaker: Speaker) {
     this.dispatch(SpeakersActions.updateSpeaker({ speaker }));
   }
 
   deleteSpeaker(speaker: Speaker) {
     this.dispatch(SpeakersActions.deleteSpeaker({ speaker }));
+  }
+
+  deleteSermonSpeakers(sermonId: string) {
+    this.dispatch(SpeakersActions.deleteSermonSpeakers({ sermonId }));
   }
 
   private dispatch(action: Action) {

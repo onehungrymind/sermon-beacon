@@ -40,8 +40,18 @@ export const createSpeaker = createAction(
   props<{ speaker: Speaker }>()
 );
 
+export const createSermonSpeaker = createAction(
+  '[SPEAKER] Create Sermon Speaker',
+  props<{ objects: {sermon_id: string, speaker_id: string} }>()
+);
+
 export const speakerCreated = createAction(
   '[SPEAKER] Speaker Created',
+  props<{ speaker: Speaker }>()
+);
+
+export const sermonSpeakerCreated = createAction(
+  '[SPEAKER] Sermon Speaker Created',
   props<{ speaker: Speaker }>()
 );
 
@@ -62,7 +72,17 @@ export const deleteSpeaker = createAction(
   props<{ speaker: Speaker }>()
 );
 
+export const deleteSermonSpeakers = createAction(
+  '[SPEAKER] Delete Sermon Speakers',
+  props<{ sermonId: string }>()
+);
+
 export const speakerDeleted = createAction(
   '[SPEAKER] Speaker Deleted',
   props<{ speaker: Speaker }>()
+);
+
+export const sermonSpeakersDeleted = createAction(
+  '[SPEAKER] Sermon Speakers Deleted',
+  props<{ speakers: Speaker[] }>()
 );

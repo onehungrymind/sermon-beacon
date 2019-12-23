@@ -63,6 +63,19 @@ export const createSpeakerMutation = gql`
   ${speakersFragment}
 `;
 
+export const createSermonSpeakerMutation = gql`
+  mutation createSermonSpeakerMutation($objects: [speaker_sermons_insert_input!]!) {
+    insert_speaker_sermons(objects: $objects) {
+      returning {
+        speaker {
+          ...speakersFragment
+        }
+      }
+    }
+  }
+  ${speakersFragment}
+`;
+
 export const updateSpeakerMutation = gql`
   mutation updateSpeakerMutation($id: uuid!, $speaker: speakers_set_input) {
     update_speakers(where: {id: {_eq: $id}}, _set: $speaker) {
@@ -79,6 +92,19 @@ export const deleteSpeakerMutation = gql`
     delete_speakers(where: {id: {_eq: $id}}) {
       returning {
         ...speakersFragment
+      }
+    }
+  }
+  ${speakersFragment}
+`;
+
+export const deleteSermonSpeakersMutation = gql`
+  mutation deleteSermonSpeakersMutation($sermonId: uuid) {
+    delete_speaker_sermons(where: {sermon_id: {_eq: $sermonId}}) {
+      returning {
+        speaker {
+          ...speakersFragment
+        }
       }
     }
   }

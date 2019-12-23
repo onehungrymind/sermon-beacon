@@ -35,7 +35,7 @@ const speakersReducer = createReducer(
     SpeakersActions.speakersLoaded,
     SpeakersActions.sermonSpeakersLoaded,
     (state, { speakers }) =>
-    speakersAdapter.addAll(speakers, { ...state, loaded: true })
+    speakersAdapter.addAll(speakers, { ...state, isLoading: false })
   ),
   on(SpeakersActions.speakersBySermonIdLoaded, (state, { speakers }) =>
     ({
@@ -47,11 +47,23 @@ const speakersReducer = createReducer(
   on(SpeakersActions.speakerCreated, (state, { speaker }) =>
     speakersAdapter.addOne(speaker, { ...state, isLoading: false })
   ),
+  on(SpeakersActions.sermonSpeakerCreated, (state, { speaker }) =>
+    ({
+      ...state,
+      selectedSermonSpeakers: [...state.selectedSermonSpeakers, speaker]
+    })
+  ),
   on(SpeakersActions.speakerUpdated, (state, { speaker }) =>
     speakersAdapter.upsertOne(speaker, { ...state, isLoading: false })
   ),
   on(SpeakersActions.speakerDeleted, (state, { speaker }) =>
     speakersAdapter.removeOne(speaker.id, { ...state, isLoading: false })
+  ),
+  on(SpeakersActions.sermonSpeakersDeleted, (state, { speakers }) =>
+    ({
+      ...state,
+      selectedSermonSpeakers: state.selectedSermonSpeakers.filter((sermonSpeaker) => !speakers.includes(sermonSpeaker))
+    })
   ),
   on(
     SpeakersActions.loadSpeakers,
@@ -60,9 +72,10 @@ const speakersReducer = createReducer(
     SpeakersActions.createSpeaker,
     SpeakersActions.updateSpeaker,
     SpeakersActions.deleteSpeaker,
+    SpeakersActions.deleteSermonSpeakers,
     (state) => ({
       ...state,
-      isLoading: false
+      isLoading: true
     })
   )
 );

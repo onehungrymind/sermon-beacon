@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import {
+  createSermonSpeakerMutation,
   createSpeakerMutation,
+  deleteSermonSpeakersMutation,
   deleteSpeakerMutation,
   sermonSpeakersQuery,
   speakerBySermonIdQuery,
@@ -66,6 +68,17 @@ export class SpeakersService {
     );
   }
 
+  createSermonSpeaker(objects: {sermon_id: string, speaker_id: string}) {
+    return this.apollo.mutate({
+      mutation: createSermonSpeakerMutation,
+      variables: {
+        objects
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.insert_speaker_sermons.returning[0].speaker)
+    );
+  }
+
   update(speaker: Partial<Speaker>) {
     delete (speaker as any).__typename;
 
@@ -88,6 +101,17 @@ export class SpeakersService {
       }
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.delete_speakers.returning[0])
+    );
+  }
+
+  deleteSermonSpeaker(sermonId: string) {
+    return this.apollo.mutate({
+      mutation: deleteSermonSpeakersMutation,
+      variables: {
+        sermonId
+      }
+    }).pipe(
+      map((res: ApolloQueryResult<any>) => res.data.delete_speaker_sermons.returning.map((s: {speaker: Speaker}) => s.speaker))
     );
   }
 }

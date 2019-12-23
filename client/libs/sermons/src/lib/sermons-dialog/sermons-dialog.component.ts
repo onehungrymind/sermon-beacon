@@ -104,6 +104,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
       this.mediaFacade.updateMedia(m);
     });
     this.updateTags(tagData, sermonData);
+    this.updateSpeakers(speakers, sermonData);
   }
 
   private updateTags(tagData: any, sermonData: any) {
@@ -113,6 +114,15 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     tagData.tags.forEach((tag: Tag) => {
       const { __typename, id, ...payload } = tag;
       this.tagsFacade.createSermonTags({ sermon_id: sermonData.id, tag: { data: payload } });
+    });
+  }
+
+  private updateSpeakers(speakers: string[], sermonData: Sermon) {
+    if (speakers.length) {
+      this.speakersFacade.deleteSermonSpeakers(sermonData.id);
+    }
+    speakers.forEach((speakerId: string) => {
+      this.speakersFacade.createSermonSpeaker({sermon_id: sermonData.id, speaker_id: speakerId });
     });
   }
 
