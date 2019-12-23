@@ -9,9 +9,9 @@ import { Media } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class MediaFacade {
-  mediaLoading$ = this.store.pipe(select(MediaSelectors.selectMediaLoading));
   allMedia$ = this.store.pipe(select(MediaSelectors.selectAllMedia));
   selectedMedia$ = this.store.pipe(select(MediaSelectors.selectMedia));
+  mediaLoading$ = this.store.pipe(select(MediaSelectors.selectMediaLoading));
 
   constructor(private store: Store<fromMedia.MediaPartialState>) {}
 
@@ -21,6 +21,10 @@ export class MediaFacade {
 
   loadMedia() {
     this.dispatch(MediaActions.loadMedia());
+  }
+
+  loadMediaBySermonId(sermonId: string) {
+    this.dispatch(MediaActions.loadMediaBySermonId({ sermonId }));
   }
 
   createMedia(media: Media) {

@@ -21,6 +21,15 @@ export const mediaQuery = gql`
   ${mediaFragment}
 `;
 
+export const mediaBySermonIdQuery = gql`
+  query mediaQuery($id: uuid) {
+    media(where: {sermon_id: {_eq: $id}}) {
+      ...mediaFragment
+    }
+  }
+  ${mediaFragment}
+`;
+
 export const createMediaMutation = gql`
   mutation createMediaMutation($objects: [media_insert_input!]!) {
     insert_media(objects: $objects) {
