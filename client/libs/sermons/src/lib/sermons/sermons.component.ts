@@ -36,10 +36,10 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   ];
 
   constructor(
-    private sermonFacade: SermonsFacade,
-    private speakerFacade: SpeakersFacade,
     private mediaFacade: MediaFacade,
     private router: Router,
+    private sermonFacade: SermonsFacade,
+    private speakerFacade: SpeakersFacade,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
 

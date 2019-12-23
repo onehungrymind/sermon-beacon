@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatTabGroup } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
 import * as moment from 'moment';
 import { combineLatest, Subject } from 'rxjs';
@@ -29,6 +29,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     private speakersFacade: SpeakersFacade,
     private mediaFacade: MediaFacade,
     private tagsFacade: TagsFacade,
+    private dialogRef: MatDialogRef<SermonsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Sermon
   ) {}
 
@@ -58,12 +59,16 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   save() {
-    if (this.data.id) {
-      this.updateSermonData();
+    if (this.form.valid) {
+      if (this.data.id) {
+        this.updateSermonData();
+        this.dialogRef.close();
 
-      return;
+        return;
+      }
+      this.sermonFacade.createSermon(this.buildCreateQuery());
+      this.dialogRef.close();
     }
-    this.sermonFacade.createSermon(this.buildCreateQuery());
   }
 
   addMediaGroup() {
@@ -93,7 +98,6 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     const {speakers, ...sermonData} = this.form.get('details').value;
     const media = this.form.get('media').value;
     const tagData = this.form.get('tags').value;
-    // console.log(tagData);
 
     this.sermonFacade.updateSermon(sermonData);
     media.forEach((m: Media) => {
@@ -137,7 +141,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
       }),
       media: this.formBuilder.array([this.mediaGroup()], Validators.required),
       tags: this.formBuilder.group({
-        tags: [[], Validators.compose([Validators.required])]
+        tags: [[]]
       })
     });
   }
