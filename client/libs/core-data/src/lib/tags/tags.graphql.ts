@@ -27,7 +27,7 @@ export const tagsQuery = gql`
       ...tagsFragment
     }
   }
-  ${sermonTagsFragment}
+  ${tagsFragment}
 `;
 
 export const sermonTagsQuery = gql`
@@ -41,11 +41,11 @@ export const sermonTagsQuery = gql`
 
 export const tagsBySermonIdQuery = gql`
   query tagsBySermonIdQuery($id: uuid) {
-    sermon_tags_view(where: {sermon_id: {_eq: $id}}) {
-      ...sermonTagsFragment
+    tags(where: {sermon_tags: {sermon_id: {_eq: $id}}}) {
+      ...tagsFragment
     }
   }
-  ${sermonTagsFragment}
+  ${tagsFragment}
 `;
 
 export const createTagsMutation = gql`
@@ -53,6 +53,19 @@ export const createTagsMutation = gql`
     insert_tags(objects: $objects) {
       returning {
         ...tagsFragment
+      }
+    }
+  }
+  ${tagsFragment}
+`;
+
+export const createSermonTagsMutation = gql`
+  mutation createSermonTagsMutation($objects: [sermon_tags_insert_input!]!) {
+    insert_sermon_tags(objects: $objects) {
+      returning {
+        tag {
+          ...tagsFragment
+        }
       }
     }
   }
@@ -70,11 +83,35 @@ export const updateTagsMutation = gql`
   ${tagsFragment}
 `;
 
+export const updateTagsBySermonIdMutation = gql`
+  mutation updateTagsBySermonIdMutation($id: uuid!, $tags: tags_set_input) {
+    update_tags(where: {sermon_tags: {sermon_id: {_eq: $id}}}, _set: $tags) {
+      returning {
+        ...tagsFragment
+      }
+    }
+  }
+  ${tagsFragment}
+`;
+
 export const deleteTagsMutation = gql`
   mutation deleteTagsMutation($id: uuid!) {
     delete_tags(where: {id: {_eq: $id}}) {
       returning {
         ...tagsFragment
+      }
+    }
+  }
+  ${tagsFragment}
+  `;
+
+export const deleteSermonTagsMutation = gql`
+  mutation deleteSermonTagsMutation($sermonId: uuid!) {
+    delete_sermon_tags(where: {sermon_id: {_eq: $sermonId}}) {
+      returning {
+        tag {
+          ...tagsFragment
+        }
       }
     }
   }

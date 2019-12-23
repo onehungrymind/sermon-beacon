@@ -29,16 +29,9 @@ const mediaReducer = createReducer(
     Object.assign({}, state, { selectedMediaId })
   ),
   on(
-    MediaActions.loadMedia,
-    MediaActions.createMedia,
-    MediaActions.updateMedia,
-    MediaActions.deleteMedia,
-    (state) => ({
-      ...state,
-      isLoading: true
-    })
-  ),
-  on(MediaActions.mediaLoaded, (state, { media }) =>
+    MediaActions.mediaLoaded,
+    MediaActions.mediaBySermonIdLoaded,
+    (state, { media }) =>
     mediaAdapter.addAll(media, { ...state, isLoading: false })
   ),
   on(MediaActions.mediaCreated, (state, { media }) =>
@@ -47,9 +40,24 @@ const mediaReducer = createReducer(
   on(MediaActions.mediaUpdated, (state, { media }) =>
     mediaAdapter.upsertOne(media, { ...state, isLoading: false })
   ),
-  on(MediaActions.mediaDeleted, (state, { media }) =>
+  on(
+    MediaActions.mediaDeleted,
+    MediaActions.mediaBySermonIdDeleted,
+    (state, { media }) =>
     mediaAdapter.removeOne(media.id, { ...state, isLoading: false })
-  )
+  ),
+  on(
+    MediaActions.loadMedia,
+    MediaActions.loadMediaBySermonId,
+    MediaActions.createMedia,
+    MediaActions.updateMedia,
+    MediaActions.deleteMedia,
+    MediaActions.deleteMediaBySermonId,
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
 );
 
 export function reducer(state: MediaState | undefined, action: Action) {

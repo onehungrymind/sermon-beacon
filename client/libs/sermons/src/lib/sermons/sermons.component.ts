@@ -7,7 +7,7 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 
 import { Sermon, Speaker } from '@sb/core-data';
 import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
-import { SermonsFacade, SpeakersFacade } from '@sb/core-state';
+import { MediaFacade, SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
 import { Router } from '@angular/router';
 
@@ -42,6 +42,8 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   ];
 
   constructor(
+    private mediaFacade: MediaFacade,
+    private router: Router,
     private sermonFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
     private router: Router,
@@ -89,6 +91,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   deleteSermon(sermon: Sermon) {
     this.sermonFacade.deleteSermon(sermon);
+    this.mediaFacade.deleteMediaBySermonId(sermon.id);
   }
 
   createSpeaker(speaker: Speaker) {

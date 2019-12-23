@@ -25,6 +25,11 @@ export const selectAllTags = createSelector(
   (state: TagsState) => selectAll(state)
 );
 
+export const selectSermonTags = createSelector(
+  selectTagsState,
+  (state: TagsState) => state.selectedSermonTags
+);
+
 export const selectTagsEntities = createSelector(
   selectTagsState,
   (state: TagsState) => selectEntities(state)

@@ -34,11 +34,11 @@ export const speakerQuery = gql`
 
 export const speakerBySermonIdQuery = gql`
   query speakerBySermonIdQuery($id: uuid) {
-    sermon_speakers_view(where: { sermon_id: {_eq: $id}}) {
-      ...sermonSpeakerFragment
+    speakers(where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
+      ...speakersFragment
     }
   }
-  ${sermonSpeakerFragment}
+  ${speakersFragment}
 `;
 
 export const createSpeakerMutation = gql`
@@ -46,6 +46,19 @@ export const createSpeakerMutation = gql`
     insert_speakers(objects: $objects) {
       returning {
         ...speakersFragment
+      }
+    }
+  }
+  ${speakersFragment}
+`;
+
+export const createSermonSpeakerMutation = gql`
+  mutation createSermonSpeakerMutation($objects: [speaker_sermons_insert_input!]!) {
+    insert_speaker_sermons(objects: $objects) {
+      returning {
+        speaker {
+          ...speakersFragment
+        }
       }
     }
   }
@@ -68,6 +81,19 @@ export const deleteSpeakerMutation = gql`
     delete_speakers(where: {id: {_eq: $id}}) {
       returning {
         ...speakersFragment
+      }
+    }
+  }
+  ${speakersFragment}
+`;
+
+export const deleteSermonSpeakersMutation = gql`
+  mutation deleteSermonSpeakersMutation($sermonId: uuid) {
+    delete_speaker_sermons(where: {sermon_id: {_eq: $sermonId}}) {
+      returning {
+        speaker {
+          ...speakersFragment
+        }
       }
     }
   }

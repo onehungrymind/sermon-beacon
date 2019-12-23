@@ -18,8 +18,8 @@ export class SermonViewComponent implements OnInit {
   isMobile = this.breakpointService.isMobile();
   isTablet = this.breakpointService.isTablet();
   sermon$: Observable<Sermon> = this.sermonsFacade.selectedSermon$;
-  speaker$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
-  tags$: Observable<Tag[]> = this.tagsFacade.allTags$;
+  speaker$: Observable<Speaker[]> = this.speakersFacade.allSermonSpeakers$;
+  tags$: Observable<Tag[]> = this.tagsFacade.allSermonTags$;
   media$: Observable<Partial<Media[]>> = this.mediaFacade.allMedia$.pipe(
     filter((media: Media[]) => !!media.length),
     take(1),
@@ -107,7 +107,7 @@ export class SermonViewComponent implements OnInit {
   speakerNames(speakers: Speaker[]) {
     const speakerNames = speakers.map((speaker: Speaker) => `${speaker.name}`);
 
-    if (speakerNames.length === 1) return speakerNames.slice(0);
+    if (speakerNames.length === 1) return speakerNames[0];
 
     return `${speakerNames.slice(0, speakerNames.length -1).join(', ')} and ${speakerNames.slice(-1)}`;
   }

@@ -10,14 +10,19 @@ export const tagSelected = createAction(
 // Load Actions
 export const loadTags = createAction('[TAG] Load Tags');
 
+export const loadTagsBySermonId = createAction(
+  '[TAG] Load Tags By Sermon Id',
+  props<{ sermonId: string }>()
+);
+
 export const tagsLoaded = createAction(
   '[TAG] Tags Loaded',
   props<{ tags: Tag[] }>()
 );
 
-export const loadTagsBySermonId = createAction(
-  '[TAG] Load Tags By Sermon Id',
-  props<{ sermonId: string }>()
+export const tagsBySermonIdLoaded = createAction(
+  '[TAG] Tags By Sermon Id Loaded',
+  props<{ tags: Tag[] }>()
 );
 
 // Create Actions
@@ -26,7 +31,17 @@ export const createTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const createSermonTags = createAction(
+  '[TAG] Create Sermon Tags',
+  props<{ objects: {sermon_id: string, tag: {data: Partial<Tag>}} }>()
+);
+
 export const tagCreated = createAction(
+  '[TAG] Tag Created',
+  props<{ tag: Tag }>()
+);
+
+export const sermonTagsCreated = createAction(
   '[TAG] Tag Created',
   props<{ tag: Tag }>()
 );
@@ -37,8 +52,18 @@ export const updateTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const updateTagBySermonId = createAction(
+  '[TAG] Update Tag By Sermon Id',
+  props<{ sermonId: string, tag: Tag }>()
+);
+
 export const tagUpdated = createAction(
   '[TAG] Tag Updated',
+  props<{ tag: Tag }>()
+);
+
+export const tagBySermonIdUpdated = createAction(
+  '[TAG] Tag By Sermon Id Updated',
   props<{ tag: Tag }>()
 );
 
@@ -48,7 +73,17 @@ export const deleteTag = createAction(
   props<{ tag: Tag }>()
 );
 
+export const deleteSermonTags = createAction(
+  '[TAG] Delete Sermon Tags',
+  props<{ sermonId: string }>()
+);
+
 export const tagDeleted = createAction(
   '[TAG] Tag Deleted',
   props<{ tag: Tag }>()
+);
+
+export const sermonTagsDeleted = createAction(
+  '[TAG] Sermon Tags Deleted',
+  props<{ tags: Tag[] }>()
 );

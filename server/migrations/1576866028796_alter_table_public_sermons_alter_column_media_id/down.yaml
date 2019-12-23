@@ -1,0 +1,6 @@
+- args:
+    sql: ALTER TABLE "public"."sermons" ALTER COLUMN "media_id" SET NOT NULL;
+  type: run_sql
+- args:
+    sql: COMMENT ON COLUMN "public"."sermons"."media_id" IS E'null'
+  type: run_sql
