@@ -43,7 +43,6 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   constructor(
     private mediaFacade: MediaFacade,
-    private router: Router,
     private sermonFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
     private router: Router,
