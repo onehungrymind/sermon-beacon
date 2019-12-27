@@ -7,6 +7,7 @@ import { SermonViewComponent } from './sermon-view/sermon-view.component';
 const routes: Routes = [
   {
     path: '',
+    data: {isAdmin: false},
     children: [
       { path: '', redirectTo: 'sermons', pathMatch: 'full' },
       { path: 'sermons', component: SermonsComponent },

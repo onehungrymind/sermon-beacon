@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
@@ -9,7 +9,7 @@ import { Sermon, Speaker } from '@sb/core-data';
 import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 import { MediaFacade, SermonsFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'sb-sermons',
@@ -19,33 +19,31 @@ import { Router } from '@angular/router';
 export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @Output() deleted = new EventEmitter();
+  isAdmin: boolean = this.route.snapshot.data.isAdmin;
   sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   dataSource: TableDataSource;
   destroy$ = new Subject();
-  actionEnabled: boolean;
+  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
+  spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
+  sermonColumns = [
+    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
+    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
+    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => this.displaySermonSpeakers(sermon) },
+    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
+  ];
   speakerColumns = [
     { columnDef: 'name', title: 'Name' },
     { columnDef: 'church_name', title: 'Church' },
     { columnDef: 'position', title: 'Position' },
   ];
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
-  spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
-  dynamicColumns = [
-    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
-    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
-    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => this.displaySermonSpeakers(sermon) },
-    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
-  ];
-
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private mediaFacade: MediaFacade,
     private sermonFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
-    private router: Router,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
 
@@ -71,12 +69,8 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
     this.destroy$.unsubscribe();
   }
 
-  goToSermonView(sermon) {
-    this.router.navigate(['sermon', sermon.id]);
-  }
-
-  selectSermon(sermon: Sermon) {
-    this.sermonFacade.selectSermon(sermon.id);
+  goToSermonView(sermonId: string) {
+    this.router.navigate(['sermon', sermonId]);
   }
 
   openSermonDialog(sermon?: Sermon) {
@@ -92,6 +86,10 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
     this.sermonFacade.deleteSermon(sermon);
     this.mediaFacade.deleteMediaBySermonId(sermon.id);
   }
+
+  //---------------------------------------
+  // SPEAKERS
+  //---------------------------------------
 
   createSpeaker(speaker: Speaker) {
     this.speakersFacade.createSpeaker(speaker);
