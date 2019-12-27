@@ -6,3 +6,4 @@ export { NotifyService } from './lib/ui-services/notify/notify.service';
 export { SearchbarComponent } from './lib/searchbar/searchbar.component';
 export { ToolbarComponent } from './lib/toolbar/toolbar.component';
 export { UiModalComponent } from './lib/ui-modal/ui-modal.component';
+export { UiTableComponent } from './lib/ui-table/ui-table.component';

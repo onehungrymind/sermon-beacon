@@ -3,8 +3,7 @@ import gql from 'graphql-tag';
 export const speakersFragment = gql`
   fragment speakersFragment on speakers {
     id
-    first_name
-    last_name
+    name
     position
     church_name
     created_at
@@ -15,8 +14,7 @@ export const speakersFragment = gql`
 export const sermonSpeakerFragment = gql`
   fragment sermonSpeakerFragment on sermon_speakers_view {
     id
-    first_name
-    last_name
+    name
     position
     church_name
     sermon_id

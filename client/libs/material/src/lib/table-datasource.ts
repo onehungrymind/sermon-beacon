@@ -62,11 +62,12 @@ export class TableDataSource extends DataSource<TableTypes> {
         case 'actions': return;
 
         // Speakers
-        case 'first_name': return compare(a.first_name, b.first_name, isAsc);
-        case 'last_name': return compare(a.last_name, b.last_name, isAsc);
+        case 'first_name': return compare(a.name, b.name, isAsc);
+        // case 'last_name': return compare(a.last_name, b.last_name, isAsc);
         case 'church_name': return compare(a.church_name, b.church_name, isAsc);
-        case 'speaker_sermons': return compare(a.speaker_sermons, b.speaker_sermons, isAsc);
+        // case 'speaker_sermons': return compare(a.speaker_sermons, b.speaker_sermons, isAsc);
         case 'position': return compare(a.position, b.position, isAsc);
+        case 'actions': return;
 
         // Tags
         case 'value': return compare(a.value, b.value, isAsc);

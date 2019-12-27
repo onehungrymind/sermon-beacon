@@ -23,7 +23,7 @@ export class UiModalComponent {
     if (this.type === 'media') return `"${this.media.type}"`;
     if (this.type === 'mediaType') return `"${this.mediaType.name}"`;
     if (this.type === 'sermon') return `"${this.sermon.title}" ?`;
-    if (this.type === 'speaker') return `"${this.speaker.first_name} ${this.speaker.last_name}" ?`;
+    if (this.type === 'speaker') return `"${this.speaker.name}" ?`;
     if (this.type === 'tag') return `"${this.tag.property}" ?`;
   }
 

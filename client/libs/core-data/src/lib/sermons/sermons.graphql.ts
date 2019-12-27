@@ -33,8 +33,7 @@ export const sermonQuery = gql`
         {title: $titleQuery}
       ],
       _or: [
-        {sermon_speakers: {speaker: {first_name: $speakerNameQuery}}},
-        {sermon_speakers: {speaker: {last_name: $speakerNameQuery}}}
+        {sermon_speakers: {speaker: {name: $speakerNameQuery}}}
       ]
     }) {
       ...sermonFragment
