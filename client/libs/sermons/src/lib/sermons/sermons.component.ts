@@ -20,6 +20,8 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   isAdmin: boolean = this.route.snapshot.data.isAdmin;
+  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
+  speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
   sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   dataSource: TableDataSource;

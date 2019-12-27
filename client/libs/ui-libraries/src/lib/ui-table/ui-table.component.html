@@ -71,7 +71,7 @@
       <tr mat-row *matRowDef="let row; columns: mapTableColumnsToDisplyedColumns(tableColumns, actionsEnabled)"></tr>
 
     </table>
-
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
     <mat-paginator #paginator [length]="data?.length" [pageIndex]="0" [pageSize]="10"
       [pageSizeOptions]="[25, 50, 100, 250]">
     </mat-paginator>

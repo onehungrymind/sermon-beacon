@@ -17,6 +17,7 @@ export class UiTableComponent implements OnInit, OnChanges {
   @Input() tableColumns: UiTableColumn[];
   @Input() data: { [key: string]: string }[];
   @Input() actionsEnabled: boolean;
+  @Input() isLoading: boolean;
 
   @Output() created = new EventEmitter();
   @Output() updated = new EventEmitter();

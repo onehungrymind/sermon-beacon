@@ -62,7 +62,7 @@
       <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-list-option" (dblclick)="goToSermonView(row.id)"></tr>
     </table>
-
+    <mat-progress-bar *ngIf="sermonsLoading$ | async" mode="indeterminate"></mat-progress-bar>
     <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"
@@ -76,6 +76,7 @@
   <sb-ui-table [data]="speakers$ | async"
                 [tableColumns]="speakerColumns"
                 [actionsEnabled]="true"
+                [isLoading]="speakersLoading$ | async"
                 (created)="createSpeaker($event)"
                 (updated)="updateSpeaker($event)"
                 (deleted)="deletSpeaker($event)">
