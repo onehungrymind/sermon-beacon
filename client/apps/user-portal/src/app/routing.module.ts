@@ -8,10 +8,12 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', component: SermonsComponent },
-      { path: ':id', component: SermonViewComponent }
+      { path: '', redirectTo: 'sermons', pathMatch: 'full' },
+      { path: 'sermons', component: SermonsComponent },
+      { path: 'sermon/:id', component: SermonViewComponent }
     ]
-  }
+  },
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({

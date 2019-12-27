@@ -72,7 +72,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   goToSermonView(sermon) {
-    this.router.navigateByUrl(sermon.id);
+    this.router.navigate(['sermon', sermon.id]);
   }
 
   selectSermon(sermon: Sermon) {
