@@ -10,10 +10,12 @@ import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
 import { SermonViewComponent } from './sermon-view/sermon-view.component';
-import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
-  declarations: [AppComponent, SermonViewComponent],
+  declarations: [
+    AppComponent,
+    SermonViewComponent
+  ],
   imports: [
     BrowserModule,
     CoreDataModule,
@@ -21,10 +23,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MaterialModule,
     SermonsModule,
     UiLibrariesModule,
-    RoutingModule,
-    LayoutModule
+    RoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -54,7 +54,6 @@ export class SpeakersService {
   }
 
   create(speaker: Partial<Speaker>) {
-    delete speaker.id;
     delete speaker.created_at;
     delete speaker.updated_at;
 

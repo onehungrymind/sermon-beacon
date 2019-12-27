@@ -33,8 +33,8 @@ export class MediaTypesFacade {
     this.dispatch(MediaTypesActions.createMediaType({ mediaType }));
   }
 
-  updateMediaType(mediaType: MediaType) {
-    this.dispatch(MediaTypesActions.updateMediaType({ mediaType }));
+  updateMediaType(prevMediaTypeName: string, mediaType: MediaType) {
+    this.dispatch(MediaTypesActions.updateMediaType({ prevMediaTypeName, mediaType }));
   }
 
   deleteMediaType(mediaType: MediaType) {

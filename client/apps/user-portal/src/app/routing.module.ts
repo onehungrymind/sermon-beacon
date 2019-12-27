@@ -7,11 +7,14 @@ import { SermonViewComponent } from './sermon-view/sermon-view.component';
 const routes: Routes = [
   {
     path: '',
+    data: {isAdmin: false},
     children: [
-      { path: '', component: SermonsComponent },
-      { path: ':id', component: SermonViewComponent }
+      { path: '', redirectTo: 'sermons', pathMatch: 'full' },
+      { path: 'sermons', component: SermonsComponent },
+      { path: 'sermon/:id', component: SermonViewComponent }
     ]
-  }
+  },
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({
