@@ -67,13 +67,13 @@ export class SermonViewComponent implements OnInit {
   handleMediaAction(media: Media) {
     switch(media.type) {
       case MediaTypes.AUDIO: {
-        return this.listenToAudio();
+        return this.getSermonAudio(media.url);
       }
       case MediaTypes.NOTES: {
-        return this.downloadNotes();
+        return this.downloadSermonNotes(media.url);
       }
       case MediaTypes.VIDEO: {
-        return this.downloadVideo();
+        return this.downloadSermonVideo(media.url);
       }
       default: {
         break;
@@ -98,16 +98,48 @@ export class SermonViewComponent implements OnInit {
     }
   }
 
-  downloadVideo() {
+  downloadSermonVideo(mediaUrl: string) {
+    this.routeToVimeo(mediaUrl);
+
     return this.notifyService.openSnackBar('The sermon is downloading!');
   }
 
-  listenToAudio() {
+  downloadSermonAudio(mediaUrl: string) {
+    this.getSermonAudio(mediaUrl);
+
     return this.notifyService.openSnackBar('The sermon audio is playing!');
   }
 
-  downloadNotes() {
+  downloadSermonNotes(mediaUrl: string) {
+    this.routeToSermonNotes(mediaUrl);
+
     return this.notifyService.openSnackBar('The sermon notes are downloading!');
+  }
+
+  getSermonAudio(url: string) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'sermonaudio.mp4');
+    document.getElementsByTagName('body')[0].appendChild(link);
+    // Firefox
+    if (document.createEvent) {
+      const event = document.createEvent('MouseEvents');
+      event.initEvent('click', true, true);
+      link.dispatchEvent(event);
+    }
+    // IE
+    else if (link.click) {
+      link.click();
+    }
+    link.parentNode.removeChild(link);
+  }
+
+  routeToSermonNotes(mediaUrl: string) {
+    window.location.href = mediaUrl;
+  }
+
+  routeToVimeo(mediaUrl: string) {
+    window.location.href = mediaUrl;
   }
 
   goBack() {
