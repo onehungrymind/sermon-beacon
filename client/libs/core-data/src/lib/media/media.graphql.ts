@@ -62,3 +62,14 @@ export const deleteMediaMutation = gql`
   }
   ${mediaFragment}
 `;
+
+export const deleteMediaBySermonIdMutation = gql`
+  mutation deleteMediaMutation($id: uuid!) {
+    delete_media(where: {sermon_id: {_eq: $id}}) {
+      returning {
+        ...mediaFragment
+      }
+    }
+  }
+  ${mediaFragment}
+`;

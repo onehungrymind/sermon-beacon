@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { Router } from '@angular/router';
+
+import { BreakpointService } from '@sb/core-data';
 
 @Component({
   selector: 'sb-toolbar',
@@ -10,15 +11,8 @@ import { Router } from '@angular/router';
 })
 
 export class ToolbarComponent {
-  title = 'SermonBeacon';
-  @Input() links: any[];
-  @Input() isAdmin: boolean;
+  isMobile = this.breakpointService.isMobile();
   @ViewChild(MatSidenav, {static: false}) sidenav: MatSidenav;
 
-  constructor(private router: Router) { }
-
-  navigateToPath(path: string) {
-    this.router.navigate([path]);
-    this.sidenav.close();
-  }
+  constructor(private breakpointService: BreakpointService) { }
 }

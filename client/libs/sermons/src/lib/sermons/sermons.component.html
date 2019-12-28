@@ -34,7 +34,7 @@
       </ng-container>
 
       <!-- Table data for Sermons -->
-      <ng-container *ngFor="let data of dynamicColumns; let i = index" [matColumnDef]="data.column">
+      <ng-container *ngFor="let data of sermonColumns; let i = index" [matColumnDef]="data.column">
         <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
           {{data.title}}
         </th>
@@ -60,9 +60,9 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-list-option" (dblclick)="goToSermonView(row)"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-list-option" (dblclick)="goToSermonView(row.id)"></tr>
     </table>
-
+    <mat-progress-bar *ngIf="sermonsLoading$ | async" mode="indeterminate"></mat-progress-bar>
     <mat-paginator #paginator
       [length]="dataSource?.data.length"
       [pageIndex]="0"
@@ -70,4 +70,15 @@
       [pageSizeOptions]="[25, 50, 100, 250]">
     </mat-paginator>
   </div>
+</div>
+
+<div class="mt-5" *ngIf="isAdmin">
+  <sb-ui-table [data]="speakers$ | async"
+                [tableColumns]="speakerColumns"
+                [actionsEnabled]="true"
+                [isLoading]="speakersLoading$ | async"
+                (created)="createSpeaker($event)"
+                (updated)="updateSpeaker($event)"
+                (deleted)="deletSpeaker($event)">
+  </sb-ui-table>
 </div>

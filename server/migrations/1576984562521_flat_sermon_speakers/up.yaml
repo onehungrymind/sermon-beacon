@@ -1,0 +1,12 @@
+- args:
+    cascade: false
+    sql: |-
+      CREATE VIEW sermon_speakers_view AS
+        SELECT sermon_id, speakers.*
+          FROM speaker_sermons LEFT JOIN speakers
+            ON speaker_sermons.speaker_id = speakers.id;
+  type: run_sql
+- args:
+    name: sermon_speakers_view
+    schema: public
+  type: add_existing_table_or_view

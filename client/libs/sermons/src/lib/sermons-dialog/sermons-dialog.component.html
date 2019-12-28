@@ -9,12 +9,12 @@
 
 <form [formGroup]="form">
   <mat-dialog-content class="mat-typography">
-    <mat-tab-group mat-align-tabs="start">
+    <mat-tab-group mat-align-tabs="start" (selectedIndexChange)="selectedIndex = $event">
       <mat-tab label="Sermon Details">
         <sb-sermons-details [detailsGroup]="form.get('details')">
         </sb-sermons-details>
       </mat-tab>
-      <mat-tab label="Sermon Media">
+      <mat-tab label="Sermon Media" [disabled]="this.form.get('details').invalid">
         <div formArrayName="media">
           <!-- Sermon Media Inputs -->
           <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls"
@@ -38,9 +38,10 @@
 
   <mat-dialog-actions align="end">
     <button mat-button color="warn" mat-dialog-close>Cancel</button>
-    <button *ngIf="tabGroup?.selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
-    <button mat-button color="primary" (click)="next()">
-      {{ tabGroup?.selectedIndex === 2 ? 'Submit' : 'Next' }}
+    <button *ngIf="selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
+    <button mat-button color="primary" (click)="selectedIndex === 1 ? save() : next()">
+      {{ selectedIndex === 2 ? 'Submit' : 'Next' }}
     </button>
   </mat-dialog-actions>
 </form>
+

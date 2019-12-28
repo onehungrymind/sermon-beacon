@@ -15,7 +15,7 @@
     <mat-label>Choose Speaker</mat-label>
     <mat-select multiple formControlName="speakers">
       <mat-option *ngFor="let speaker of speakers" [value]="speaker.id">
-        {{speaker.first_name}} {{speaker.last_name}}
+        {{speaker.name}}
       </mat-option>
     </mat-select>
     <mat-hint>You may select multiple speakers.</mat-hint>

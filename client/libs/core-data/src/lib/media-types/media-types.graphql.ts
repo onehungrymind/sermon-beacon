@@ -28,18 +28,18 @@ export const createMediaTypesMutation = gql`
 `;
 
 export const updateMediaTypesMutation = gql`
-  mutation updateMediaTypesMutation($id: uuid!, $media: media_types_set_input) {
-    update_media_types(where: {name: {_eq: $name}}) {
+  mutation updateMediaTypesMutation($name: String, $mediaType: media_types_set_input) {
+    update_media_types(where: {name: {_eq: $name}}, _set: $mediaType) {
       returning {
-        ...mediaFragment
+        name
+        description
       }
     }
   }
-  ${mediaTypesFragment}
 `;
 
 export const deleteMediaTypesMutation = gql`
-  mutation deleteMediaTypesMutation($id: uuid!) {
+  mutation deleteMediaTypesMutation($name: String!) {
     delete_media_types(where: {name: {_eq: $name}}) {
       returning {
         ...mediaTypesFragment
