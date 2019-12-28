@@ -16,6 +16,7 @@ import { Media, Sermon, Tag } from '@sb/core-data';
 })
 export class SermonsDialogComponent implements OnDestroy, OnInit {
   form: FormGroup;
+  selectedIndex = 0;
   sermon$ = this.sermonFacade.selectedSermon$;
   sermonMedia$ = this.mediaFacade.allMedia$;
   sermonSpeakers$ = this.speakersFacade.allSermonSpeakers$;
@@ -51,7 +52,9 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   next() {
-    this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
+    if (this.formIsValid()) {
+      this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
+    }
   }
 
   back() {
@@ -161,6 +164,10 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         tags: [[]]
       })
     });
+  }
+
+  private formIsValid() {
+    return this.form.get('details').valid || this.form.get('media').valid;
   }
 
   private mediaGroup() {
