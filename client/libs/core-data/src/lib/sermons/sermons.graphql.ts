@@ -12,19 +12,6 @@ export const sermonFragment = gql`
   }
 `;
 
-export const speakerSermonFragment = gql`
-  fragment speakerSermonFragment on speaker_sermons_view {
-    id
-    title
-    subject
-    date
-    speaker_id
-    media_id
-    created_at
-    updated_at
-  }
-`;
-
 export const sermonQuery = gql`
   query sermonQuery($titleQuery: String_comparison_exp, $speakerNameQuery: String_comparison_exp, $dateQuery: date_comparison_exp) {
     sermons(where: {
@@ -40,15 +27,6 @@ export const sermonQuery = gql`
     }
   }
   ${sermonFragment}
-`;
-
-export const speakerSermonQuery = gql`
-  query speakerSermonQuery {
-    speaker_sermons_view {
-      ...speakerSermonFragment
-    }
-  }
-  ${speakerSermonFragment}
 `;
 
 export const createSermonMutation = gql`

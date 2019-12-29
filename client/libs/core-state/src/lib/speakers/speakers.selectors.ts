@@ -25,9 +25,9 @@ export const selectAllSpeakers = createSelector(
   (state: SpeakersState) => selectAll(state)
 );
 
-export const selectedSermonSpeakers = createSelector(
+export const selectedSpeakers = createSelector(
   selectSpeakersState,
-  (state: SpeakersState) => state.selectedSermonSpeakers
+  (state: SpeakersState) => state.selectedSpeakers
 );
 
 export const selectSpeakersEntities = createSelector(

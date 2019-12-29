@@ -10,7 +10,6 @@ import {
   createTagsMutation,
   deleteSermonTagsMutation,
   deleteTagsMutation,
-  sermonTagsQuery,
   tagsBySermonIdQuery,
   tagsQuery,
   updateTagsBySermonIdMutation,
@@ -30,15 +29,6 @@ export class TagsService {
       fetchPolicy: 'network-only'
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.tags)
-    );
-  }
-
-  allAttachedToSermons() {
-    return this.apollo.query({
-      query: sermonTagsQuery,
-      fetchPolicy: 'network-only'
-    }).pipe(
-      map((res: ApolloQueryResult<any>) => res.data.sermon_tags_view)
     );
   }
 

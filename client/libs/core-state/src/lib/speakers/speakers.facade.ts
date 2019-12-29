@@ -10,7 +10,7 @@ import { Speaker } from '@sb/core-data';
 @Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
   allSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectAllSpeakers));
-  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectedSermonSpeakers));
+  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectedSpeakers));
   selectedSpeaker$ = this.store.pipe(select(SpeakersSelectors.selectSpeaker));
   speakerLoading$ = this.store.pipe(select(SpeakersSelectors.selectSpeakersLoading));
 

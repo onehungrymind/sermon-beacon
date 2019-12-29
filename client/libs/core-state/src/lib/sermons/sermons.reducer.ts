@@ -30,7 +30,7 @@ const sermonsReducer = createReducer(
   ),
   on(
     SermonsActions.sermonsLoaded,
-    SermonsActions.searchedSermonsLoaded
+    SermonsActions.sermonsSearched
     , (state, { sermons }) =>
     sermonsAdapter.addAll(sermons, { ...state, isLoading: false })
   ),
@@ -45,6 +45,7 @@ const sermonsReducer = createReducer(
   ),
   on(
     SermonsActions.loadSermons,
+    SermonsActions.searchSermons,
     SermonsActions.createSermon,
     SermonsActions.updateSermon,
     SermonsActions.deleteSermon,
