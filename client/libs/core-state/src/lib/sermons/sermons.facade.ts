@@ -5,12 +5,15 @@ import { Action, ActionsSubject, select, Store } from '@ngrx/store';
 import * as fromSermons from './sermons.reducer';
 import * as SermonsSelectors from './sermons.selectors';
 import * as SermonsActions from './sermons.actions';
+import { selectAggregatedSermon, selectSermonWithSpeakers } from '..';
 import { Sermon } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class SermonsFacade {
   allSermons$ = this.store.pipe(select(SermonsSelectors.selectAllSermons));
   selectedSermon$ = this.store.pipe(select(SermonsSelectors.selectSermon));
+  sermonsWithSpeakers$ = this.store.pipe(select(selectSermonWithSpeakers));
+  aggregatedSermon$ = this.store.pipe(select(selectAggregatedSermon));
   sermonLoading$ = this.store.pipe(select(SermonsSelectors.selectSermonsLoading));
 
   constructor(

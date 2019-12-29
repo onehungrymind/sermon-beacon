@@ -22,7 +22,7 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   isAdmin: boolean = this.route.snapshot.data.isAdmin;
   sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
-  sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
+  sermons$: Observable<Sermon[]> = this.sermonFacade.sermonsWithSpeakers$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   sermonSpeakers$: Observable<Speaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
   dataSource: TableDataSource;
@@ -58,9 +58,8 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   ngAfterViewInit() {
     if (this.sort) {
-      combineLatest([this.sermons$, this.sermonSpeakers$]).pipe(
-        map(([sermons, speakers]) => this.mapSpeakersToSermons(sermons, speakers)),
-        filter((sermons) => !!sermons.length),
+      this.sermons$.pipe(
+        filter((sermons) => !!sermons),
         takeUntil(this.destroy$),
         ).subscribe((sermons: Sermon[]) =>
         setTimeout(() => {
@@ -113,13 +112,5 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
     // TODO: display only one speaker, if multiple add ellipsis with a tooltip displaying all other speakers.
     return sermon.sermon_speakers
       .map((speaker: Speaker) => speaker.name);
-  }
-
-  private mapSpeakersToSermons(sermons: Sermon[], speakers: Speaker[]) {
-    return sermons.map((sermon) => {
-      const sermon_speakers = speakers.filter((speaker) => sermon.id === speaker.sermon_id);
-
-      return { ...sermon, sermon_speakers };
-    });
   }
 }

@@ -13,7 +13,7 @@ export const sermonSpeakerFragment = gql`
 `;
 
 export const sermonSpeakersQuery = gql`
-  query speakerQuery {
+  query sermonSpeakersQuery {
     sermon_speakers_view {
       ...sermonSpeakerFragment
     }

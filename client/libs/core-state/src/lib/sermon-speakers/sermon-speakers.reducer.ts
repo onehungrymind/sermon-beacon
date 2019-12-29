@@ -4,7 +4,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as sermonSpeakersActions from './sermon-speakers.actions';
 import { SermonSpeaker } from '@sb/core-data';
 
-export const SERMONSPEAKERS_FEATURE_KEY = 'sermonSpeakers';
+export const SERMONSPEAKERS_FEATURE_KEY = 'sermon_speakers';
 
 export interface SermonSpeakersState extends EntityState<SermonSpeaker> {
   selectedSermonSpeakerId?: string | number;
