@@ -10,7 +10,6 @@ import {
   createSpeakerMutation,
   deleteSermonSpeakersMutation,
   deleteSpeakerMutation,
-  sermonSpeakersQuery,
   speakerBySermonIdQuery,
   speakerQuery,
   updateSpeakerMutation,
@@ -29,15 +28,6 @@ export class SpeakersService {
       fetchPolicy: 'network-only'
     }).pipe(
       map((res: ApolloQueryResult<any>) => res.data.speakers)
-    );
-  }
-
-  allSermonSpeakers(): Observable<Speaker[]> {
-    return this.apollo.query({
-      query: sermonSpeakersQuery,
-      fetchPolicy: 'network-only'
-    }).pipe(
-      map((res: ApolloQueryResult<any>) => res.data.sermon_speakers_view)
     );
   }
 

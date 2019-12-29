@@ -31,10 +31,7 @@ const speakersReducer = createReducer(
   on(SpeakersActions.speakerSelected, (state, { selectedSpeakerId }) =>
     Object.assign({}, state, { selectedSpeakerId })
   ),
-  on(
-    SpeakersActions.speakersLoaded,
-    SpeakersActions.sermonSpeakersLoaded,
-    (state, { speakers }) =>
+  on(SpeakersActions.speakersLoaded, (state, { speakers }) =>
     speakersAdapter.addAll(speakers, { ...state, isLoading: false })
   ),
   on(SpeakersActions.speakersBySermonIdLoaded, (state, { speakers }) =>
@@ -67,7 +64,6 @@ const speakersReducer = createReducer(
   ),
   on(
     SpeakersActions.loadSpeakers,
-    SpeakersActions.loadSermonSpeakers,
     SpeakersActions.loadSpeakersBySermonId,
     SpeakersActions.createSpeaker,
     SpeakersActions.updateSpeaker,
