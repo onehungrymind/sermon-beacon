@@ -19,7 +19,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   selectedIndex = 0;
   sermon$ = this.sermonFacade.selectedSermon$;
   sermonMedia$ = this.mediaFacade.allMedia$;
-  sermonSpeakers$ = this.speakersFacade.allSermonSpeakers$;
+  sermonSpeakers$ = this.speakersFacade.selectedSpeakers$;
   sermonTags$ = this.tagsFacade.allSermonTags$;
   destroy$ = new Subject();
   @ViewChild(MatTabGroup, { static: true }) tabGroup: MatTabGroup;
