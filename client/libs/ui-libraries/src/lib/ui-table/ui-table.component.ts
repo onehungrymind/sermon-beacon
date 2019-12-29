@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { MatPaginator, MatSort } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { TableDataSource } from '@sb/material';
+
 interface UiTableColumn {
   columnDef: string;
   title: string;
@@ -31,6 +33,7 @@ export class UiTableComponent implements OnInit, OnChanges {
   editingIndex: number;
   form: FormGroup;
   spacerColumns = ['createAction', 'space1', 'space2'];
+  dataSource: TableDataSource;
 
   constructor(private fb: FormBuilder) { }
 
@@ -43,6 +46,9 @@ export class UiTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.tableColumns && changes.tableColumns.currentValue) {
       this.initForm(this.tableColumns);
+    }
+    if (this.sort) {
+      this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
     }
     this.form.reset();
   }

@@ -1,8 +1,7 @@
 <div class="container w-100">
   <div class="mat-elevation-z1">
 
-    <table [dataSource]="data" mat-table class="w-100" matSort matSortActive="title" matSortDirection="asc"
-      matSortDisableClear>
+    <table [dataSource]="dataSource" mat-table class="w-100" matSort matSortActive="created_at" matSortDirection="asc">
 
       <!-- Create Action Header -->
       <ng-container [matColumnDef]="spacer" *ngFor="let spacer of spacerColumns; index as i">

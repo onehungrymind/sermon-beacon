@@ -45,7 +45,7 @@
 
       <!-- Create and Delete Column -->
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary sb-border-bottom"></th>
+        <th mat-header-cell *matHeaderCellDef class="bg-primary sb-border-bottom"></th>
         <td mat-cell *matCellDef="let row" class="pr-0">
           <div class="d-flex action-container justify-content-between mr-0 mx-4">
             <button mat-button class="px-0 mw-25"  (click)="openSermonDialog(row)">
@@ -72,7 +72,7 @@
   </div>
 </div>
 
-<div class="mt-5" *ngIf="isAdmin">
+<div class="my-5" *ngIf="isAdmin">
   <sb-ui-table [data]="speakers$ | async"
                 [tableColumns]="speakerColumns"
                 [actionsEnabled]="true"
