@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
@@ -12,7 +12,8 @@ import { Media, Sermon, Tag } from '@sb/core-data';
 @Component({
   selector: 'sb-sermons-dialog',
   templateUrl: './sermons-dialog.component.html',
-  styleUrls: ['./sermons-dialog.component.scss']
+  styleUrls: ['./sermons-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SermonsDialogComponent implements OnDestroy, OnInit {
   form: FormGroup;

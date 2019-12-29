@@ -46,7 +46,8 @@ const tagsReducer = createReducer(
   on(TagsActions.sermonTagsCreated, (state, { tag }) =>
     ({
       ...state,
-      selectedTags: [...state.selectedTags, tag]
+      selectedTags: [...state.selectedTags, tag],
+      isLoading: false
     })
   ),
   on(
@@ -61,7 +62,8 @@ const tagsReducer = createReducer(
   on(TagsActions.sermonTagsDeleted, (state, { tags }) =>
     ({
       ...state,
-      selectedSermonTags: state.selectedTags.filter((sermonTags) => !tags.includes(sermonTags))
+      selectedSermonTags: state.selectedTags.filter((sermonTags) => !tags.includes(sermonTags)),
+      isLoading: false
     })
   ),
   on(
