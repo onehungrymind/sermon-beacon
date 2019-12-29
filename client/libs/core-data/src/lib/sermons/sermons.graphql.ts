@@ -14,7 +14,7 @@ export const sermonFragment = gql`
 
 export const sermonQuery = gql`
   query sermonQuery($titleQuery: String_comparison_exp, $speakerNameQuery: String_comparison_exp, $dateQuery: date_comparison_exp) {
-    sermons(where: {
+    sermons(order_by: {date: asc}, where: {
       _and: [
         {date: $dateQuery},
         {title: $titleQuery}
