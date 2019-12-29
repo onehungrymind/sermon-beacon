@@ -7,7 +7,7 @@ import { combineLatest, Observable, Subject } from 'rxjs';
 
 import { Sermon, Speaker } from '@sb/core-data';
 import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
-import { MediaFacade, SermonsFacade, SpeakersFacade } from '@sb/core-state';
+import { MediaFacade, SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
 import { TableDataSource } from '@sb/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,8 +20,11 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   isAdmin: boolean = this.route.snapshot.data.isAdmin;
-  sermons$: Observable<Sermon[]> = this.sermonFacade.allSermons$;
+  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
+  speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
+  sermons$: Observable<Sermon[]> = this.sermonFacade.sermonsWithSpeakers$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
+  sermonSpeakers$: Observable<Speaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
   dataSource: TableDataSource;
   destroy$ = new Subject();
   displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
@@ -43,23 +46,25 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
     private route: ActivatedRoute,
     private mediaFacade: MediaFacade,
     private sermonFacade: SermonsFacade,
+    private sermonSpeakersFacade: SermonSpeakersFacade,
     private speakersFacade: SpeakersFacade,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.speakersFacade.loadSermonSpeakers();
     this.speakersFacade.loadSpeakers();
+    this.sermonSpeakersFacade.loadSermonSpeakers();
   }
 
   ngAfterViewInit() {
     if (this.sort) {
-      combineLatest([this.sermons$, this.speakers$]).pipe(
-        map(([sermons, speakers]) => this.mapSpeakersToSermons(sermons, speakers)),
-        filter((sermons) => !!sermons.length),
+      this.sermons$.pipe(
+        filter((sermons) => !!sermons),
         takeUntil(this.destroy$),
-      ).subscribe((sermons: Sermon[]) =>
-        this.dataSource = new TableDataSource(sermons, this.sort, this.paginator)
+        ).subscribe((sermons: Sermon[]) =>
+        setTimeout(() => {
+          this.dataSource = new TableDataSource(sermons, this.sort, this.paginator);
+        })
       );
     }
   }
@@ -107,13 +112,5 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
     // TODO: display only one speaker, if multiple add ellipsis with a tooltip displaying all other speakers.
     return sermon.sermon_speakers
       .map((speaker: Speaker) => speaker.name);
-  }
-
-  private mapSpeakersToSermons(sermons: Sermon[], speakers: Speaker[]) {
-    return sermons.map((sermon) => {
-      const sermon_speakers = speakers.filter((speaker) => sermon.id === speaker.sermon_id);
-
-      return { ...sermon, sermon_speakers };
-    });
   }
 }

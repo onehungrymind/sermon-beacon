@@ -1,6 +1,7 @@
 import { Base } from '../base.model';
 import { Speaker } from '../speakers/speaker.model';
 import { Tag } from '../tags/tag.model';
+import { Media } from '../media/media.model';
 
 export interface Sermon extends Base {
   title: string;
@@ -9,6 +10,7 @@ export interface Sermon extends Base {
   media_id: string;
   speaker_id?: string;
   tag_id?: string;
+  sermon_media?: Media[];
   sermon_speakers?: Speaker[];
   sermon_tags?: Tag[];
 }
@@ -23,6 +25,7 @@ export const emptySermon: Sermon = {
   tag_id: null,
   created_at: '',
   updated_at: '',
+  sermon_media: [],
   sermon_speakers: [],
   sermon_tags: []
 };

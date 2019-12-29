@@ -10,7 +10,7 @@ import { Tag } from '@sb/core-data';
 @Injectable({ providedIn: 'root' })
 export class TagsFacade {
   allTags$ = this.store.pipe(select(TagsSelectors.selectAllTags));
-  allSermonTags$ = this.store.pipe(select(TagsSelectors.selectSermonTags));
+  selectedTags$ = this.store.pipe(select(TagsSelectors.selectedTags));
   selectedTag$ = this.store.pipe(select(TagsSelectors.selectTag));
   tagLoading$ = this.store.pipe(select(TagsSelectors.selectTagsLoading));
 

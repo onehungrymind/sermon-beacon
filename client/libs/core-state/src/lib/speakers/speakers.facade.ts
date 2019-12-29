@@ -10,7 +10,7 @@ import { Speaker } from '@sb/core-data';
 @Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
   allSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectAllSpeakers));
-  allSermonSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectSermonSpeakers));
+  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectedSpeakers));
   selectedSpeaker$ = this.store.pipe(select(SpeakersSelectors.selectSpeaker));
   speakerLoading$ = this.store.pipe(select(SpeakersSelectors.selectSpeakersLoading));
 
@@ -22,10 +22,6 @@ export class SpeakersFacade {
 
   loadSpeakers() {
     this.dispatch(SpeakersActions.loadSpeakers());
-  }
-
-  loadSermonSpeakers() {
-    this.dispatch(SpeakersActions.loadSermonSpeakers());
   }
 
   loadSpeakersBySermonId(sermonId: string) {

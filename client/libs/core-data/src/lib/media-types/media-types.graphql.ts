@@ -31,11 +31,11 @@ export const updateMediaTypesMutation = gql`
   mutation updateMediaTypesMutation($name: String, $mediaType: media_types_set_input) {
     update_media_types(where: {name: {_eq: $name}}, _set: $mediaType) {
       returning {
-        name
-        description
+        ...mediaTypesFragment
       }
     }
   }
+  ${mediaTypesFragment}
 `;
 
 export const deleteMediaTypesMutation = gql`

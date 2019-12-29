@@ -8,7 +8,7 @@ export const TAGS_FEATURE_KEY = 'tags';
 
 export interface TagsState extends EntityState<Tag> {
   selectedTagId?: string | number; // which Tags record has been selected
-  selectedSermonTags?: Tag[]; // only tags for sermon
+  selectedTags?: Tag[]; // only tags for sermon
   isLoading: boolean; // has the Tags list been loaded
 }
 
@@ -21,7 +21,7 @@ export const tagsAdapter: EntityAdapter<Tag> = createEntityAdapter<Tag>();
 export const initialState: TagsState = tagsAdapter.getInitialState({
   // set initial required properties
   selectedTagId: null,
-  selectedSermonTags: [],
+  selectedTags: [],
   isLoading: false
 });
 
@@ -36,7 +36,7 @@ const tagsReducer = createReducer(
   on(TagsActions.tagsBySermonIdLoaded, (state, { tags }) =>
     ({
       ...state,
-      selectedSermonTags: tags,
+      selectedTags: tags,
       isLoading: false
     })
   ),
@@ -46,7 +46,7 @@ const tagsReducer = createReducer(
   on(TagsActions.sermonTagsCreated, (state, { tag }) =>
     ({
       ...state,
-      selectedSermonTags: [...state.selectedSermonTags, tag]
+      selectedTags: [...state.selectedTags, tag]
     })
   ),
   on(
@@ -61,7 +61,7 @@ const tagsReducer = createReducer(
   on(TagsActions.sermonTagsDeleted, (state, { tags }) =>
     ({
       ...state,
-      selectedSermonTags: state.selectedSermonTags.filter((sermonTags) => !tags.includes(sermonTags))
+      selectedSermonTags: state.selectedTags.filter((sermonTags) => !tags.includes(sermonTags))
     })
   ),
   on(

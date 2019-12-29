@@ -15,17 +15,8 @@ export const loadSpeakersBySermonId = createAction(
   props<{ sermonId: string }>()
 );
 
-export const loadSermonSpeakers = createAction(
-  '[SPEAKER] Load Sermon Speakers'
-);
-
 export const speakersLoaded = createAction(
   '[SPEAKER] Speakers Loaded',
-  props<{ speakers: Speaker[] }>()
-);
-
-export const sermonSpeakersLoaded = createAction(
-  '[SPEAKER] Sermon Speakers Loaded',
   props<{ speakers: Speaker[] }>()
 );
 

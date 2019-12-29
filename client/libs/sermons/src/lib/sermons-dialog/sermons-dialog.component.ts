@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
 import * as moment from 'moment';
-import { combineLatest, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
@@ -16,10 +16,8 @@ import { Media, Sermon, Tag } from '@sb/core-data';
 })
 export class SermonsDialogComponent implements OnDestroy, OnInit {
   form: FormGroup;
-  sermon$ = this.sermonFacade.selectedSermon$;
-  sermonMedia$ = this.mediaFacade.allMedia$;
-  sermonSpeakers$ = this.speakersFacade.allSermonSpeakers$;
-  sermonTags$ = this.tagsFacade.allSermonTags$;
+  selectedIndex = 0;
+  sermon$ = this.sermonFacade.aggregatedSermon$;
   destroy$ = new Subject();
   @ViewChild(MatTabGroup, { static: true }) tabGroup: MatTabGroup;
 
@@ -51,7 +49,9 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   next() {
-    this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
+    if (this.formIsValid()) {
+      this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
+    }
   }
 
   back() {
@@ -77,18 +77,13 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   private selectSermon$() {
-    return combineLatest([
-      this.sermon$,
-      this.sermonMedia$,
-      this.sermonSpeakers$,
-      this.sermonTags$
-    ]).pipe(
-      tap(([sermon, media, speakers, tags]) => {
-        const details = {...sermon, speakers: speakers.map((speaker) => speaker.id)};
+    return this.sermon$.pipe(
+      tap((sermon) => {
+        const details = {...sermon, speakers: sermon.sermon_speakers.map((speaker) => speaker.id)};
         this.form.patchValue({
           details,
-          media,
-          tags: { tags }
+          media: sermon.sermon_media,
+          tags: { tags: sermon.sermon_tags }
         });
       })
     );
@@ -161,6 +156,10 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         tags: [[]]
       })
     });
+  }
+
+  private formIsValid() {
+    return this.form.get('details').valid || this.form.get('media').valid;
   }
 
   private mediaGroup() {
