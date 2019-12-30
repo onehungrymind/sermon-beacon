@@ -7,4 +7,18 @@
       BEACON
     </span>
   </div>
+
+  <div>
+    <div *ngIf="isLoggedIn$ | async as isLoggedIn; else anonUser">
+      <span>{{(loggedInUser$ | async)?.name}}</span>
+      <button mat-mini-fab color="accent" (click)="logout()">
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+    <ng-template #anonUser>
+      <button mat-mini-fab color="accent" (click)="login()">
+        <mat-icon>person</mat-icon>
+      </button>
+    </ng-template>
+  </div>
 </mat-toolbar>
