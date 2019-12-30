@@ -53,11 +53,11 @@
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-header-row *matHeaderRowDef="isAuthenticated ? adminColumns : displayedColumns; sticky: true"></tr>
     <ng-container *ngIf="isAuthenticated">
       <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
     </ng-container>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+    <tr mat-row *matRowDef="let row; columns: isAuthenticated ? adminColumns : displayedColumns;"
       class="mat-list-option">
     </tr>
   </table>

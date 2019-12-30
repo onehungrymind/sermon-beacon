@@ -26,6 +26,7 @@ export class SermonTableComponent implements OnChanges {
 
   dataSource: TableDataSource;
   displayedColumns = ['title', 'subject', 'speakers', 'date'];
+  adminColumns = [...this.displayedColumns, 'actions'];
   spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
   sermonColumns = [
     { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
@@ -39,9 +40,6 @@ export class SermonTableComponent implements OnChanges {
   ngOnChanges() {
     if (this.sort) {
       this.dataSource = new TableDataSource(this.sermons, this.sort, this.paginator);
-    }
-    if (this.isAuthenticated) {
-      this.displayedColumns = [...this.displayedColumns, 'actions'];
     }
   }
 
