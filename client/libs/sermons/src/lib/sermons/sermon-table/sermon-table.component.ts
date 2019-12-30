@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
@@ -33,7 +34,7 @@ export class SermonTableComponent implements OnChanges {
     { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
   ];
 
-  constructor () { }
+  constructor (private router: Router) { }
 
   ngOnChanges() {
     if (this.sort) {
@@ -50,6 +51,10 @@ export class SermonTableComponent implements OnChanges {
 
   openSermonDialog(sermon?: Sermon) {
     this.dialogOpened.emit(sermon);
+  }
+
+  viewSermon(sermonId: string) {
+    this.router.navigate(['sermon', sermonId]);
   }
 
   private displaySermonSpeakers(sermon: Sermon) {
