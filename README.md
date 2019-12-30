@@ -29,15 +29,13 @@ For local development, run the following make commands:
 make install
 
 # Starting the server
-$ make start-server # starts up hasura and applies migrations
+- make start-server # starts up hasura and applies migrations
 # Open a new terminal
-$ cd server
-$ hasura console # if this is not opening up hasura, then please refer to the "Getting Started" section.
+- cd server
+- hasura console # This step is only required if you need access to the database. You can also find the GQL playground here, which may be helpful during development.
 
-# Starting the client applications
-$ make start-all # This will start the admin app
-$ make start-admin # This will start the admin app
-$ make start-user # This will start the user app
+# Starting the client application
+- make start-admin # This will start the admin app
 
 # Run this to start clean versions of the applications
 make start-clean
@@ -56,14 +54,11 @@ If for some reason you are running into any issues, try running `make start-clea
 Below are all the available Make targets (copied from running `make help`).
 
 ```sh
-Available targets:
 docker-clean                   Clean up the last containers for this project
 help                           Help documentation
 init                           Install required tools for local environment on macOS
 install                        Install dependencies for frontend application
-start-admin                    Start admin app locally (http://localhost:4200)
-start-all                      Start admin and user apps locally (http://localhost:4200 | http://localhost:4300)
 start-clean                    Clean the docker containers then start
+start-client                   Start admin app locally (http://localhost:4200)
 start-server                   Start the containers
-start-user                     Start user app locally (http://localhost:4300)
 ```
