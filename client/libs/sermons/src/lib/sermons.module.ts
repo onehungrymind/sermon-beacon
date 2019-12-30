@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@sb/material';
 import { UiLibrariesModule } from '@sb/ui-libraries';
 
+import { SermonTableComponent } from './sermons/sermon-table/sermon-table.component';
 import { SermonsComponent } from './sermons/sermons.component';
 import { SermonsDialogComponent } from './sermons-dialog/sermons-dialog.component';
 import { SermonsDetailsComponent } from './sermons-dialog/sermons-details/sermons-details.component';
@@ -12,6 +13,7 @@ import { SermonsMediaComponent } from './sermons-dialog/sermons-media/sermons-me
 import { SermonsTagsComponent } from './sermons-dialog/sermons-tags/sermons-tags.component';
 
 const COMPONENTS = [
+  SermonTableComponent,
   SermonsComponent,
   SermonsDialogComponent,
   SermonsDetailsComponent,
