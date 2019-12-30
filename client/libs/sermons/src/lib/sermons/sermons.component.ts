@@ -1,7 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthService, Sermon, Speaker } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
@@ -12,14 +12,13 @@ import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.compone
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss']
 })
-export class SermonsComponent implements OnDestroy, OnInit {
+export class SermonsComponent implements OnInit {
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
   sermons$: Observable<Sermon[]> = this.sermonFacade.sermonsWithSpeakers$;
   sermonSpeakers$: Observable<Speaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
   sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
-  destroy$ = new Subject();
   speakerColumns = [
     { columnDef: 'name', title: 'Name' },
     { columnDef: 'church_name', title: 'Church' },
@@ -38,11 +37,6 @@ export class SermonsComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.speakersFacade.loadSpeakers();
     this.sermonSpeakersFacade.loadSermonSpeakers();
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
   }
 
   openSermonDialog(sermon?: Sermon) {

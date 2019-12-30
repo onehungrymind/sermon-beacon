@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort } from '@angular/material';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
 
@@ -14,6 +14,7 @@ import { TableDataSource } from '@sb/material';
 })
 export class SermonTableComponent implements OnChanges {
   @Input() sermons: Sermon[];
+  @Input() isAuthenticated: boolean;
   @Input() isLoading: boolean;
 
   @Output() deleted = new EventEmitter();
@@ -23,7 +24,7 @@ export class SermonTableComponent implements OnChanges {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   dataSource: TableDataSource;
-  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
+  displayedColumns = ['title', 'subject', 'speakers', 'date'];
   spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
   sermonColumns = [
     { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
@@ -37,6 +38,9 @@ export class SermonTableComponent implements OnChanges {
   ngOnChanges() {
     if (this.sort) {
       this.dataSource = new TableDataSource(this.sermons, this.sort, this.paginator);
+    }
+    if (this.isAuthenticated) {
+      this.displayedColumns = [...this.displayedColumns, 'actions'];
     }
   }
 
