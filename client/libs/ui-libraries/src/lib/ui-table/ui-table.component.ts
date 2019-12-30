@@ -46,7 +46,9 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
     if (this.sort && this.data) {
-      this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
+      setTimeout(() => {
+        this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
+      });
     }
   }
 
