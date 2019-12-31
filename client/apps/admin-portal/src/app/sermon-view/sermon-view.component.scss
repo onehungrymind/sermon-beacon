@@ -1,0 +1,13 @@
+@import 'libs/theme/main';
+
+.mat-standard-chip {
+  min-height: 30px;
+}
+
+mat-card-title {
+  line-height: 1.5;
+}
+
+mat-divider {
+  border-top-color: $text-base;
+}

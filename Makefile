@@ -21,12 +21,6 @@ start-server: ## Start the containers
 
 start-clean: docker-clean start-server ## Clean the docker containers then start
 
-start-all: ## Start admin and user apps locally (http://localhost:4200 | http://localhost:4300)
-	@(cd client && yarn start:all)
-
-start-admin: ## Start admin app locally (http://localhost:4200)
+start-client: ## Start admin app locally (http://localhost:4200)
 	@(cd client && yarn start:admin)
-
-start-user: ## Start user app locally (http://localhost:4300)
-	@(cd client && yarn start:user)
 

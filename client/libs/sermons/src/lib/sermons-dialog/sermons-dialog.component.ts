@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
@@ -12,13 +12,14 @@ import { Media, Sermon, Tag } from '@sb/core-data';
 @Component({
   selector: 'sb-sermons-dialog',
   templateUrl: './sermons-dialog.component.html',
-  styleUrls: ['./sermons-dialog.component.scss']
+  styleUrls: ['./sermons-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SermonsDialogComponent implements OnDestroy, OnInit {
   form: FormGroup;
   selectedIndex = 0;
+  destroy$ = new Subject;
   sermon$ = this.sermonFacade.aggregatedSermon$;
-  destroy$ = new Subject();
   @ViewChild(MatTabGroup, { static: true }) tabGroup: MatTabGroup;
 
   constructor(
@@ -39,7 +40,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
       this.mediaFacade.loadMediaBySermonId(id);
       this.speakersFacade.loadSpeakersBySermonId(id);
       this.tagsFacade.loadTagsBySermonId(id);
-      this.selectSermon$().pipe(takeUntil(this.destroy$)).subscribe();
+      this.selectSermon();
     }
   }
 
@@ -49,13 +50,16 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   next() {
-    if (this.formIsValid()) {
-      this.tabGroup.selectedIndex = ++this.tabGroup.selectedIndex;
+    if (
+      this.isFormGroupValid('details') && this.selectedIndex === 0 ||
+      this.isFormGroupValid('media') && this.selectedIndex === 1
+    ) {
+      this.tabGroup.selectedIndex = ++this.selectedIndex;
     }
   }
 
   back() {
-    this.tabGroup.selectedIndex = --this.tabGroup.selectedIndex;
+    this.tabGroup.selectedIndex = --this.selectedIndex;
   }
 
   save() {
@@ -76,33 +80,38 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     media.push(this.mediaGroup());
   }
 
-  private selectSermon$() {
+  cancel() {
+    this.sermonFacade.cancelSermonMutation();
+  }
+
+  private selectSermon() {
     return this.sermon$.pipe(
       tap((sermon) => {
-        const details = {...sermon, speakers: sermon.sermon_speakers.map((speaker) => speaker.id)};
+        const details = {...sermon, speakerIds: sermon.sermon_speakers.map((speaker) => speaker.id)};
         this.form.patchValue({
           details,
           media: sermon.sermon_media,
           tags: { tags: sermon.sermon_tags }
         });
-      })
-    );
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
   }
 
   private updateSermonData() {
-    const {speakers, ...sermonData} = this.form.get('details').value;
-    const media = this.form.get('media').value;
-    const tagData = this.form.get('tags').value;
+    const {speakerIds, ...sermonData} = this.formValue('details');
+    const media = this.formValue('media');
+    const tagData = this.formValue('tags');
 
     this.sermonFacade.updateSermon(sermonData);
     media.forEach((m: Media) => {
       this.mediaFacade.updateMedia(m);
     });
     this.updateTags(tagData, sermonData);
-    this.updateSpeakers(speakers, sermonData);
+    this.updateSpeakers(speakerIds, sermonData);
   }
 
-  private updateTags(tagData: any, sermonData: any) {
+  private updateTags(tagData: {tags: Tag[]}, sermonData: Sermon) {
     if (tagData.tags.length) {
       this.tagsFacade.deleteSermonTags(sermonData.id);
     }
@@ -112,26 +121,26 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     });
   }
 
-  private updateSpeakers(speakers: string[], sermonData: Sermon) {
-    if (speakers.length) {
+  private updateSpeakers(speakerIds: string[], sermonData: Sermon) {
+    if (speakerIds.length) {
       this.speakersFacade.deleteSermonSpeakers(sermonData.id);
     }
-    speakers.forEach((speakerId: string) => {
+    speakerIds.forEach((speakerId: string) => {
       this.speakersFacade.createSermonSpeaker({sermon_id: sermonData.id, speaker_id: speakerId });
     });
   }
 
   private buildCreateQuery() {
-    const {speakers, ...sermonData} = this.form.get('details').value;
-    const [{id, ...mediaData}] = this.form.get('media').value;
-    const tagData = this.form.get('tags').value;
+    const {speakerIds, ...sermonData} = this.formValue('details');
+    const [{id, ...mediaData}] = this.formValue('media');
+    const tagData = this.formValue('tags');
 
     delete sermonData.id;
 
     return {
       ...sermonData,
       sermon_speakers: {
-        data: speakers.map((speaker_id: string) => ({speaker_id}))
+        data: speakerIds.map((speaker_id: string) => ({speaker_id}))
       },
       media: {
         data: mediaData
@@ -148,7 +157,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         id: null,
         title: ['', Validators.compose([Validators.required])],
         subject: [''],
-        speakers: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
+        speakerIds: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
         date: [moment().format('YYYY-MM-DD'), Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
       }),
       media: this.formBuilder.array([this.mediaGroup()], Validators.required),
@@ -158,8 +167,12 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     });
   }
 
-  private formIsValid() {
-    return this.form.get('details').valid || this.form.get('media').valid;
+  private formValue(group: string) {
+    return this.form.get(group).value;
+  }
+
+  private isFormGroupValid(group: string) {
+    return this.form.get(group).valid;
   }
 
   private mediaGroup() {

@@ -43,6 +43,10 @@ const sermonsReducer = createReducer(
   on(SermonsActions.sermonDeleted, (state, { sermon }) =>
     sermonsAdapter.removeOne(sermon.id, { ...state, isLoading: false })
   ),
+  on(SermonsActions.sermonMutationCancelled, (state) => ({
+    ...state,
+    isLoading: false
+  })),
   on(
     SermonsActions.loadSermons,
     SermonsActions.searchSermons,

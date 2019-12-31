@@ -57,3 +57,9 @@ export const sermonDeleted = createAction(
   '[SERMON] Sermon Deleted',
   props<{ sermon: Sermon }>()
 );
+
+// Other Actions
+
+export const sermonMutationCancelled = createAction(
+  '[SERMON] Sermon Mutation Cancelled'
+);

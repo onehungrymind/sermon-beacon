@@ -47,7 +47,8 @@ const speakersReducer = createReducer(
   on(SpeakersActions.sermonSpeakerCreated, (state, { speaker }) =>
     ({
       ...state,
-      selectedSpeakers: [...state.selectedSpeakers, speaker]
+      selectedSpeakers: [...state.selectedSpeakers, speaker],
+      isLoading: false
     })
   ),
   on(SpeakersActions.speakerUpdated, (state, { speaker }) =>
@@ -59,7 +60,8 @@ const speakersReducer = createReducer(
   on(SpeakersActions.sermonSpeakersDeleted, (state, { speakers }) =>
     ({
       ...state,
-      selectedSermonSpeakers: state.selectedSpeakers.filter((sermonSpeaker) => !speakers.includes(sermonSpeaker))
+      selectedSermonSpeakers: state.selectedSpeakers.filter((sermonSpeaker) => !speakers.includes(sermonSpeaker)),
+      isLoading: false
     })
   ),
   on(

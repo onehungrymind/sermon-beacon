@@ -1,0 +1,31 @@
+@import 'libs/theme/main.scss';
+@import 'libs/theme/fonts';
+@import 'libs/theme/variables';
+
+#sermon-table-component {
+  .mat-column-date {
+    text-align: right !important;
+    > .mat-sort-header-container {
+      justify-content: flex-end !important;
+    }
+  }
+
+  .actions-container {
+    max-width: 3.1rem !important;
+  }
+
+  .create-btn {
+    min-width: 1.4rem !important;
+  }
+
+  .create-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .mw-25 {
+    min-width: 1.5rem !important;
+  }
+}
+

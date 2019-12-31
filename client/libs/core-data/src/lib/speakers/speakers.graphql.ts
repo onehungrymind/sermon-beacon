@@ -13,7 +13,7 @@ export const speakersFragment = gql`
 
 export const speakerQuery = gql`
   query speakerQuery {
-    speakers {
+    speakers(order_by: {created_at: asc}) {
       ...speakersFragment
     }
   }
@@ -22,7 +22,7 @@ export const speakerQuery = gql`
 
 export const speakerBySermonIdQuery = gql`
   query speakerBySermonIdQuery($id: uuid) {
-    speakers(where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
+    speakers(order_by: {created_at: asc}, where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
       ...speakersFragment
     }
   }

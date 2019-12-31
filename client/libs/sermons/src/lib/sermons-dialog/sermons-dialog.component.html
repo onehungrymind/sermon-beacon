@@ -1,9 +1,9 @@
 <span mat-dialog-title>
-  <h6 *ngIf="data.id; else updateSermonTitle" class="font-weight-normal base-text fs-24">
+  <h6 *ngIf="data.id; else createSermonTitle" class="font-weight-normal text-base fs-24">
     Updating "{{data.title}}"
   </h6>
-  <ng-template #updateSermonTitle>
-    <h6 class="font-weight-normal base-text fs-24">Create Sermon</h6>
+  <ng-template #createSermonTitle>
+    <h6 class="font-weight-normal text-base fs-24">Create Sermon</h6>
   </ng-template>
 </span>
 
@@ -14,7 +14,7 @@
         <sb-sermons-details [detailsGroup]="form.get('details')">
         </sb-sermons-details>
       </mat-tab>
-      <mat-tab label="Sermon Media" [disabled]="this.form.get('details').invalid">
+      <mat-tab label="Sermon Media" [disabled]="!isFormGroupValid('details')">
         <div formArrayName="media">
           <!-- Sermon Media Inputs -->
           <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls"
@@ -25,11 +25,11 @@
             <button mat-icon-button color="primary" (click)="addMediaGroup()">
               <mat-icon>add</mat-icon>
             </button>
-            <span class="base-text font-weight-light align-self-center">Add more Media Types.</span>
+            <span class="text-base font-weight-light align-self-center">Add more Media Types.</span>
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Sermon Tags (optional)">
+      <mat-tab label="Sermon Tags (optional)" [disabled]="!isFormGroupValid('media')">
         <sb-sermons-tags [tagsGroup]="form.get('tags')">
         </sb-sermons-tags>
       </mat-tab>
@@ -37,9 +37,9 @@
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
-    <button mat-button color="warn" mat-dialog-close>Cancel</button>
+    <button mat-button color="warn" mat-dialog-close (click)="cancel()">Cancel</button>
     <button *ngIf="selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
-    <button mat-button color="primary" (click)="selectedIndex === 1 ? save() : next()">
+    <button mat-button color="primary" (click)="selectedIndex === 2 ? save() : next()">
       {{ selectedIndex === 2 ? 'Submit' : 'Next' }}
     </button>
   </mat-dialog-actions>

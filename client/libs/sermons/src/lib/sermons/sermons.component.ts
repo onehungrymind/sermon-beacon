@@ -1,40 +1,24 @@
-import { AfterViewInit, Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
-import * as moment from 'moment';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { Sermon, Speaker } from '@sb/core-data';
-import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
+import { AuthService, Sermon, Speaker } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
-import { TableDataSource } from '@sb/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 
 @Component({
   selector: 'sb-sermons',
   templateUrl: './sermons.component.html',
   styleUrls: ['./sermons.component.scss']
 })
-export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
-  isAdmin: boolean = this.route.snapshot.data.isAdmin;
-  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
-  speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
+export class SermonsComponent implements OnInit {
+  isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
   sermons$: Observable<Sermon[]> = this.sermonFacade.sermonsWithSpeakers$;
-  speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   sermonSpeakers$: Observable<Speaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
-  dataSource: TableDataSource;
-  destroy$ = new Subject();
-  displayedColumns = ['title', 'subject', 'speakers', 'date', 'actions'];
-  spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
-  sermonColumns = [
-    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
-    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
-    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => this.displaySermonSpeakers(sermon) },
-    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
-  ];
+  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
+  speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
+  speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
   speakerColumns = [
     { columnDef: 'name', title: 'Name' },
     { columnDef: 'church_name', title: 'Church' },
@@ -42,40 +26,17 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
   ];
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private mediaFacade: MediaFacade,
     private sermonFacade: SermonsFacade,
-    private sermonSpeakersFacade: SermonSpeakersFacade,
     private speakersFacade: SpeakersFacade,
+    private sermonSpeakersFacade: SermonSpeakersFacade,
     @Inject(MatDialog) private dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.speakersFacade.loadSpeakers();
     this.sermonSpeakersFacade.loadSermonSpeakers();
-  }
-
-  ngAfterViewInit() {
-    if (this.sort) {
-      this.sermons$.pipe(
-        filter((sermons) => !!sermons),
-        takeUntil(this.destroy$),
-        ).subscribe((sermons: Sermon[]) =>
-        setTimeout(() => {
-          this.dataSource = new TableDataSource(sermons, this.sort, this.paginator);
-        })
-      );
-    }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
-
-  goToSermonView(sermonId: string) {
-    this.router.navigate(['sermon', sermonId]);
   }
 
   openSermonDialog(sermon?: Sermon) {
@@ -89,7 +50,6 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   deleteSermon(sermon: Sermon) {
     this.sermonFacade.deleteSermon(sermon);
-    this.mediaFacade.deleteMediaBySermonId(sermon.id);
   }
 
   //---------------------------------------
@@ -106,11 +66,5 @@ export class SermonsComponent implements AfterViewInit, OnDestroy, OnInit {
 
   deletSpeaker(speaker: Speaker) {
     this.speakersFacade.deleteSpeaker(speaker);
-  }
-
-  private displaySermonSpeakers(sermon: Sermon) {
-    // TODO: display only one speaker, if multiple add ellipsis with a tooltip displaying all other speakers.
-    return sermon.sermon_speakers
-      .map((speaker: Speaker) => speaker.name);
   }
 }

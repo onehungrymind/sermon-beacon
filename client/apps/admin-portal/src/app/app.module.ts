@@ -10,6 +10,7 @@ import { UiLibrariesModule } from '@sb/ui-libraries';
 import { RoutingModule } from './routing.module';
 
 import { AppComponent } from './app.component';
+import { SermonViewComponent } from './sermon-view/sermon-view.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     RoutingModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, SermonViewComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

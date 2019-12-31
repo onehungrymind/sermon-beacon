@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Actions, createEffect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/angular';
-import { EMPTY, iif, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { iif, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import * as fromSermons from './sermons.reducer';
 import * as SermonsActions from './sermons.actions';
 import { Sermon, SermonsService } from '@sb/core-data';
+import { deleteMediaBySermonId } from '../media/media.actions';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
 
 @Injectable()
@@ -86,9 +87,10 @@ export class SermonsEffects {
           switchMap((deleteConfirmed: boolean) =>
             iif(() => deleteConfirmed,
               this.sermonsService.delete(action.sermon).pipe(
+                tap((sermon: Sermon) => deleteMediaBySermonId({ sermonId: sermon.id })),
                 map((sermon: Sermon) => SermonsActions.sermonDeleted({ sermon }))
               ),
-              EMPTY
+              of(SermonsActions.sermonMutationCancelled())
             )
           )
         );
