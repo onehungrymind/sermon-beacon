@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="d-flex position-relative toolbar-wrapper sb-border-bottom">
-  <div class="d-flex flex-grow-1" [class.justify-content-center]="isMobile">
+  <div class="d-flex flex-grow-1">
     <span class="fs-28 font-weight-light">
       SERMON
     </span>
@@ -9,7 +9,7 @@
   </div>
 
   <div *ngIf="isLoggedIn$ | async as isLoggedIn; else anonUser">
-    <span class="mr-2">{{(loggedInUser$ | async)?.name}}</span>
+    <span *ngIf="!isMobile" class="mr-2">{{(loggedInUser$ | async)?.name}}</span>
     <button mat-mini-fab color="accent" (click)="logout()" matTooltip="You are Logged In">
       <mat-icon>person</mat-icon>
     </button>
