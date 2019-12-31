@@ -38,6 +38,9 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
+    setTimeout(() => {
+      this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
+    });
     if (changes.tableColumns && changes.tableColumns.currentValue) {
       this.initForm(this.tableColumns);
     }
@@ -45,11 +48,6 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
-    if (this.sort && this.data) {
-      setTimeout(() => {
-        this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
-      });
-    }
   }
 
   mapTableColumnsToDisplyedColumns(tableColumns: UiTableColumn[], actionsEnabled: boolean): string[] {
