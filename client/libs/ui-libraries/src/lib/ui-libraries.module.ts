@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '@sb/material';
 
+import { CallbackComponent } from './callback/callback.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { UiModalComponent } from './ui-modal/ui-modal.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
 import { UiTableComponent } from './ui-table/ui-table.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
+
+const COMPONENTS = [
+  UiModalComponent,
+  ToolbarComponent,
+  SearchbarComponent,
+  UiTableComponent,
+  CallbackComponent
+];
 
 @NgModule({
   imports: [
@@ -19,13 +25,10 @@ import { MatSortModule } from '@angular/material/sort';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MaterialModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule
+    MaterialModule
   ],
   entryComponents: [UiModalComponent],
-  declarations: [UiModalComponent, ToolbarComponent, SearchbarComponent, UiTableComponent],
-  exports: [UiModalComponent, ToolbarComponent, SearchbarComponent, UiTableComponent]
+  declarations: COMPONENTS,
+  exports: COMPONENTS
 })
 export class UiLibrariesModule {}

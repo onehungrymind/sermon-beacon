@@ -64,7 +64,7 @@ export const deleteMediaMutation = gql`
 `;
 
 export const deleteMediaBySermonIdMutation = gql`
-  mutation deleteMediaMutation($id: uuid!) {
+  mutation deleteMediaBySermonIdMutation($id: uuid!) {
     delete_media(where: {sermon_id: {_eq: $id}}) {
       returning {
         ...mediaFragment

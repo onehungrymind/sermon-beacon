@@ -1,7 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 
-import { BreakpointService } from '@sb/core-data';
+import { AuthService, BreakpointService } from '@sb/core-data';
 
 @Component({
   selector: 'sb-toolbar',
@@ -12,7 +12,20 @@ import { BreakpointService } from '@sb/core-data';
 
 export class ToolbarComponent {
   isMobile = this.breakpointService.isMobile();
+  isLoggedIn$ = this.authService.isAuthenticated$;
+  loggedInUser$ = this.authService.getUser$();
   @ViewChild(MatSidenav, {static: false}) sidenav: MatSidenav;
 
-  constructor(private breakpointService: BreakpointService) { }
+  constructor(
+    private authService: AuthService,
+    private breakpointService: BreakpointService
+  ) { }
+
+  login() {
+    this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

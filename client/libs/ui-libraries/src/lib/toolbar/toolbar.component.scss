@@ -1,33 +1,5 @@
 @import 'libs/theme/variables';
 
-mat-sidenav {
-  width: $sidenav-width;
-}
-
-.mat-sidenav-container {
-  background: #F4F5FA;;
-  flex: 1;
-  height: calc(100vh - $toolbar-height);
-}
-
 .toolbar-wrapper {
   height: $toolbar-height !important;
-  z-index: 99;
-
-  &--toolbar-title {
-    letter-spacing: 3px;
-  }
-
-  &--nav-link {
-    color: $grey-light;
-    display: flex;
-    align-items: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  .mat-icon {
-    height: 40px;
-    width: 40px;
-  }
 }

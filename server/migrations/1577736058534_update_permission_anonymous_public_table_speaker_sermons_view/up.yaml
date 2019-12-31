@@ -1,0 +1,19 @@
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - speaker_id
+      - id
+      - title
+      - subject
+      - date
+      - created_at
+      - updated_at
+      - media_id
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: speaker_sermons_view
+      schema: public
+  type: create_select_permission

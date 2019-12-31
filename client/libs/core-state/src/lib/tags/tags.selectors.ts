@@ -3,15 +3,11 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   TAGS_FEATURE_KEY,
   tagsAdapter,
-  TagsPartialState,
   TagsState
 } from './tags.reducer';
 
 // Lookup the 'Tags' feature state managed by NgRx
-export const selectTagsState = createFeatureSelector<
-  TagsPartialState,
-  TagsState
->(TAGS_FEATURE_KEY);
+export const selectTagsState = createFeatureSelector<TagsState>(TAGS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = tagsAdapter.getSelectors();
 
@@ -25,9 +21,9 @@ export const selectAllTags = createSelector(
   (state: TagsState) => selectAll(state)
 );
 
-export const selectSermonTags = createSelector(
+export const selectedTags = createSelector(
   selectTagsState,
-  (state: TagsState) => state.selectedSermonTags
+  (state: TagsState) => state.selectedTags
 );
 
 export const selectTagsEntities = createSelector(

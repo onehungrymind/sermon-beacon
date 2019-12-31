@@ -8,11 +8,12 @@ import { RootStoreConfig, StoreModule } from '@ngrx/store';
 
 import { CoreDataModule } from '@sb/core-data';
 import { MediaEffects } from './media/media.effects';
+import { MediaTypesEffects } from './media-types/media-types.effects';
 import { reducers } from '.';
 import { SermonsEffects } from './sermons/sermons.effects';
+import { SermonSpeakersEffects } from './sermon-speakers/sermon-speakers.effects';
 import { SpeakersEffects } from './speakers/speakers.effects';
 import { TagsEffects } from './tags/tags.effects';
-import { MediaTypesEffects } from './media-types/media-types.effects';
 
 const storeConfig: RootStoreConfig<any> = {
   runtimeChecks: {
@@ -27,11 +28,12 @@ const storeConfig: RootStoreConfig<any> = {
     CoreDataModule,
     StoreModule.forRoot(reducers, storeConfig),
     EffectsModule.forRoot([
+      MediaEffects,
+      MediaTypesEffects,
       SermonsEffects,
+      SermonSpeakersEffects,
       SpeakersEffects,
       TagsEffects,
-      MediaEffects,
-      MediaTypesEffects
     ]),
     StoreDevtoolsModule.instrument({ name: 'SermonBeacon Store' })
   ],

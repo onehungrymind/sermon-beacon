@@ -1,0 +1,19 @@
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - tag_id
+      - id
+      - title
+      - subject
+      - date
+      - created_at
+      - updated_at
+      - media_id
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: tag_sermons_view
+      schema: public
+  type: create_select_permission

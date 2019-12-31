@@ -1,0 +1,18 @@
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - url
+      - embedCode
+      - created_at
+      - updated_at
+      - type
+      - sermon_id
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: media
+      schema: public
+  type: create_select_permission

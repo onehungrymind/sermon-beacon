@@ -11,39 +11,18 @@ export const speakersFragment = gql`
   }
 `;
 
-export const sermonSpeakerFragment = gql`
-  fragment sermonSpeakerFragment on sermon_speakers_view {
-    id
-    name
-    position
-    church_name
-    sermon_id
-    created_at
-    updated_at
-  }
-`;
-
 export const speakerQuery = gql`
   query speakerQuery {
-    speakers {
+    speakers(order_by: {created_at: asc}) {
       ...speakersFragment
     }
   }
   ${speakersFragment}
 `;
 
-export const sermonSpeakersQuery = gql`
-  query speakerQuery {
-    sermon_speakers_view {
-      ...sermonSpeakerFragment
-    }
-  }
-  ${sermonSpeakerFragment}
-`;
-
 export const speakerBySermonIdQuery = gql`
   query speakerBySermonIdQuery($id: uuid) {
-    speakers(where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
+    speakers(order_by: {created_at: asc}, where: {speaker_sermons: {sermon_id: {_eq: $id}}}) {
       ...speakersFragment
     }
   }
