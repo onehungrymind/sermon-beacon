@@ -19,9 +19,7 @@ export class ToolbarComponent {
   constructor(
     private authService: AuthService,
     private breakpointService: BreakpointService
-  ) {
-    this.authService.handleAuthCallback();
-  }
+  ) { }
 
   login() {
     this.authService.login();

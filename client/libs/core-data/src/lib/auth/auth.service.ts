@@ -80,7 +80,6 @@ export class AuthService {
   handleAuthCallback() {
     let targetRoute: string;
     const authComplete$ = this.auth0Client$.pipe(
-      // tap((res) => localStorage.setItem('accessToken', res)),
       concatMap(() => this.handleRedirectCallback$),
       tap((cbRes) => {
         targetRoute = cbRes.appState && cbRes.appState.target ? cbRes.appState.target : '/';
