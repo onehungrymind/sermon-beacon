@@ -1,11 +1,11 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { BreakpointService, Media, MediaTypes, Sermon, Speaker, Tag } from '@sb/core-data';
+import { BreakpointService, Media, MediaTypes, Sermon, Speaker } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
 import { NotifyService } from '@sb/ui-libraries';
 
@@ -27,7 +27,6 @@ export class SermonViewComponent implements OnInit {
     private mediaFacade: MediaFacade,
     private notifyService: NotifyService,
     private route: ActivatedRoute,
-    private router: Router,
     private sanitizer: DomSanitizer,
     private sermonsFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
@@ -44,10 +43,6 @@ export class SermonViewComponent implements OnInit {
     this.speakersFacade.loadSpeakersBySermonId(currentSermonId);
     this.mediaFacade.loadMediaBySermonId(currentSermonId);
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
-  }
-
-  goBack() {
-    this.router.navigateByUrl('/');
   }
 
   handleMediaAction(media: Media) {
@@ -105,14 +100,7 @@ export class SermonViewComponent implements OnInit {
   }
 
   private santizeEmbedCode(media: Media[]) {
-    return media.map((m: Media) => {
-      const removePTags = !!m.embedCode ? m.embedCode.split('<p')[0] : '';
-
-      return {...m, embedCode: this.sanitizeHtml(removePTags)};
-    });
-  }
-
-  private sanitizeHtml(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+    return media.map((m: Media) =>
+      ({...m, embedCode: this.sanitizer.bypassSecurityTrustHtml(m && m.embedCode)}));
   }
 }
