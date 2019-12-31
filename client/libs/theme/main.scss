@@ -1,14 +1,14 @@
 // Project styles
 @import './material.scss';
 
+// Third Party Styles
+@import '~bootstrap-utilities';
+@import '~bootstrap-4-grid';
+
 // Project Partials (Note: Be carefull to accidentally overwrite styles)
 @import './fonts';
 @import './utilities';
 @import './variables';
-
-// Third Party Styles
-@import '~bootstrap-utilities';
-@import '~bootstrap-4-grid';
 
 html,
 body {

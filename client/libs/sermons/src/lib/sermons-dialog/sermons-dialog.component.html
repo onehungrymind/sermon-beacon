@@ -1,9 +1,9 @@
 <span mat-dialog-title>
-  <h6 *ngIf="data.id; else updateSermonTitle" class="font-weight-normal base-text fs-24">
+  <h6 *ngIf="data.id; else updateSermonTitle" class="font-weight-normal text-base fs-24">
     Updating "{{data.title}}"
   </h6>
   <ng-template #updateSermonTitle>
-    <h6 class="font-weight-normal base-text fs-24">Create Sermon</h6>
+    <h6 class="font-weight-normal text-base fs-24">Create Sermon</h6>
   </ng-template>
 </span>
 
@@ -25,7 +25,7 @@
             <button mat-icon-button color="primary" (click)="addMediaGroup()">
               <mat-icon>add</mat-icon>
             </button>
-            <span class="base-text font-weight-light align-self-center">Add more Media Types.</span>
+            <span class="text-base font-weight-light align-self-center">Add more Media Types.</span>
           </div>
         </div>
       </mat-tab>
