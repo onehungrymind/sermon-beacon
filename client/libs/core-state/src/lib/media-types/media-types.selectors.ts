@@ -3,15 +3,11 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   MEDIATYPES_FEATURE_KEY,
   mediaTypesAdapter,
-  MediaTypesPartialState,
   MediaTypeState
 } from './media-types.reducer';
 
 // Lookup the 'MediaTypes' feature state managed by NgRx
-export const selectMediaTypesState = createFeatureSelector<
-  MediaTypesPartialState,
-  MediaTypeState
->(MEDIATYPES_FEATURE_KEY);
+export const selectMediaTypesState = createFeatureSelector<MediaTypeState>(MEDIATYPES_FEATURE_KEY);
 
 const { selectAll, selectEntities } = mediaTypesAdapter.getSelectors();
 

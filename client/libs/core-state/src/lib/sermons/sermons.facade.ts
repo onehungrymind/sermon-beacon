@@ -45,6 +45,10 @@ export class SermonsFacade {
     this.dispatch(SermonsActions.deleteSermon({ sermon }));
   }
 
+  cancelSermonMutation() {
+    this.dispatch(SermonsActions.sermonMutationCancelled());
+  }
+
   private dispatch(action: Action) {
     this.store.dispatch(action);
   }

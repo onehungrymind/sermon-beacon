@@ -1,5 +1,5 @@
 <div class="searchbar-component">
-  <form [formGroup]="form" #formDirective="ngForm" (submit)="search()" class="d-flex justify-content-center w-100 mt-3">
+  <form [formGroup]="form" #formDirective="ngForm" (submit)="search()" class="d-flex justify-content-center w-100 mt-1">
     <mat-form-field appearance="legacy" floatLabel="never" [class]="isMobile ? 'w-100' : 'w-50'">
       <!-- Input -->
       <input matInput type="text" placeholder="Search..." class="fs-22 py-3 pr-2" formControlName="searchQuery" />
@@ -7,8 +7,8 @@
       <input [matDatepicker]="picker" type="hidden">
       <mat-datepicker #picker></mat-datepicker>
       <!-- Menu -->
-      <div matSuffix class="d-flex base-text cursor-pointer">
-        <span class="align-self-center fs-14 medium-text">Sermon {{form.get('searchType').value | titlecase}}</span>
+      <div matSuffix class="d-flex text-base cursor-pointer">
+        <span class="align-self-center fs-14 text-medium">Sermon {{form.get('searchType').value | titlecase}}</span>
         <button mat-icon-button type="button" class="fs-22" #matMenuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu" (click)="matMenuTrigger.openMenu()">
           <mat-icon>keyboard_arrow_down</mat-icon>

@@ -3,15 +3,11 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   SERMONS_FEATURE_KEY,
   sermonsAdapter,
-  SermonsPartialState,
   SermonsState
 } from './sermons.reducer';
 
 // Lookup the 'Sermons' feature state managed by NgRx
-export const selectSermonsState = createFeatureSelector<
-  SermonsPartialState,
-  SermonsState
->(SERMONS_FEATURE_KEY);
+export const selectSermonsState = createFeatureSelector<SermonsState>(SERMONS_FEATURE_KEY);
 
 const { selectAll, selectEntities } = sermonsAdapter.getSelectors();
 

@@ -77,6 +77,10 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     media.push(this.mediaGroup());
   }
 
+  cancel() {
+    this.sermonFacade.cancelSermonMutation();
+  }
+
   private selectSermon$() {
     return this.sermon$.pipe(
       tap((sermon) => {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -15,7 +15,7 @@ interface UiTableColumn {
   styleUrls: ['./ui-table.component.scss']
 })
 
-export class UiTableComponent implements OnInit, OnChanges {
+export class UiTableComponent implements AfterViewInit, OnChanges {
   @Input() tableColumns: UiTableColumn[];
   @Input() data: { [key: string]: string }[];
   @Input() actionsEnabled: boolean;
@@ -32,25 +32,22 @@ export class UiTableComponent implements OnInit, OnChanges {
   editing: boolean;
   editingIndex: number;
   form: FormGroup;
-  spacerColumns = ['createAction', 'space1', 'space2'];
+  spacerColumns = ['createAction', 'space1', 'space2', 'space3'];
   dataSource: TableDataSource;
 
-  constructor(private fb: FormBuilder) { }
-
-  ngOnInit() {
-    if (this.data.length < this.spacerColumns.length) {
-      this.spacerColumns.push('space3');
-    }
-  }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
+    setTimeout(() => {
+      this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
+    });
     if (changes.tableColumns && changes.tableColumns.currentValue) {
       this.initForm(this.tableColumns);
     }
-    if (this.sort) {
-      this.dataSource = new TableDataSource(this.data, this.sort, this.paginator);
-    }
     this.form.reset();
+  }
+
+  ngAfterViewInit() {
   }
 
   mapTableColumnsToDisplyedColumns(tableColumns: UiTableColumn[], actionsEnabled: boolean): string[] {
@@ -103,6 +100,6 @@ export class UiTableComponent implements OnInit, OnChanges {
     const formGroup = tableColumns.reduce((acc, curr) => {
       return curr ? { ...acc, [curr.columnDef]: [null] } : { ...acc };
     }, { id: null });
-    this.form = this.fb.group(formGroup);
+    this.form = this.formBuilder.group(formGroup);
   }
 }
