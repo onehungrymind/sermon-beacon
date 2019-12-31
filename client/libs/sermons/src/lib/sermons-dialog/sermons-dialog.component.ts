@@ -84,6 +84,14 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     this.sermonFacade.cancelSermonMutation();
   }
 
+  formValue(group: string) {
+    return this.form.get(group).value;
+  }
+
+  isFormGroupValid(group: string) {
+    return this.form.get(group).valid;
+  }
+
   private selectSermon() {
     return this.sermon$.pipe(
       tap((sermon) => {
@@ -165,14 +173,6 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         tags: [[]]
       })
     });
-  }
-
-  private formValue(group: string) {
-    return this.form.get(group).value;
-  }
-
-  private isFormGroupValid(group: string) {
-    return this.form.get(group).valid;
   }
 
   private mediaGroup() {
