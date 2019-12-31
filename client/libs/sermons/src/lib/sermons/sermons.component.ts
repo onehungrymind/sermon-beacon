@@ -50,7 +50,6 @@ export class SermonsComponent implements OnInit {
 
   deleteSermon(sermon: Sermon) {
     this.sermonFacade.deleteSermon(sermon);
-    this.mediaFacade.deleteMediaBySermonId(sermon.id);
   }
 
   //---------------------------------------

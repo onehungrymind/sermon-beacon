@@ -7,7 +7,7 @@ import { Media, MediaType, Sermon, Speaker, Tag } from '@sb/core-data';
   selector: 'sb-ui-modal',
   templateUrl: './ui-modal.component.html',
   styleUrls: ['./ui-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None // All modals should have all the same styles.
+  encapsulation: ViewEncapsulation.None
 })
 export class UiModalComponent {
   @Input() type: string;

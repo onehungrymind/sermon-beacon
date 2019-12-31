@@ -1,6 +1,7 @@
 <div id="ui-modal-component">
   <h2 mat-dialog-title class="text-center text-base fs-28">
-    <span>Remove {{type}} <br /> {{composeTitle() | titlecase}}</span>
+    <span>Remove {{type}} <br *ngIf="type !== 'sermon'" /> {{composeTitle() | titlecase}}</span> <br />
+    <span *ngIf="type === 'sermon'" class="fs-20 text-medium">Doing so will delete all attached media.</span>
   </h2>
 
   <div mat-dialog-actions class="d-flex justify-content-between w-100">
