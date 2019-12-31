@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@sb/core-data';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,5 @@ import { AuthService } from '@sb/core-data';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {
-    authService.handleAuthCallback();
-  }
+  constructor() {}
 }
