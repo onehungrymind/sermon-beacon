@@ -1,8 +1,8 @@
 <span mat-dialog-title>
-  <h6 *ngIf="data.id; else updateSermonTitle" class="font-weight-normal text-base fs-24">
+  <h6 *ngIf="data.id; else createSermonTitle" class="font-weight-normal text-base fs-24">
     Updating "{{data.title}}"
   </h6>
-  <ng-template #updateSermonTitle>
+  <ng-template #createSermonTitle>
     <h6 class="font-weight-normal text-base fs-24">Create Sermon</h6>
   </ng-template>
 </span>
@@ -14,7 +14,7 @@
         <sb-sermons-details [detailsGroup]="form.get('details')">
         </sb-sermons-details>
       </mat-tab>
-      <mat-tab label="Sermon Media" [disabled]="this.form.get('details').invalid">
+      <mat-tab label="Sermon Media" [disabled]="!isFormGroupValid('details')">
         <div formArrayName="media">
           <!-- Sermon Media Inputs -->
           <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls"
@@ -29,7 +29,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Sermon Tags (optional)">
+      <mat-tab label="Sermon Tags (optional)" [disabled]="!isFormGroupValid('media')">
         <sb-sermons-tags [tagsGroup]="form.get('tags')">
         </sb-sermons-tags>
       </mat-tab>

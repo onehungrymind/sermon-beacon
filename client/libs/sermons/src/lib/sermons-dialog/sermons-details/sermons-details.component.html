@@ -13,7 +13,7 @@
 
   <mat-form-field class="w-100" *ngIf="speakers$ | async as speakers">
     <mat-label>Choose Speaker</mat-label>
-    <mat-select multiple formControlName="speakers">
+    <mat-select multiple formControlName="speakerIds">
       <mat-option *ngFor="let speaker of speakers" [value]="speaker.id">
         {{speaker.name}}
       </mat-option>
