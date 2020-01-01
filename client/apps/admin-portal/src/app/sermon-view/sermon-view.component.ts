@@ -24,8 +24,8 @@ export class SermonViewComponent implements OnInit {
   constructor(
     private breakpointService: BreakpointService,
     private mediaFacade: MediaFacade,
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private sermonsFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
@@ -82,14 +82,7 @@ export class SermonViewComponent implements OnInit {
   }
 
   private santizeEmbedCode(media: Media[]) {
-    return media.map((m: Media) => {
-      const removePTags = !!m.embedCode ? m.embedCode.split('<p')[0] : '';
-
-      return {...m, embedCode: this.sanitizeHtml(removePTags)};
-    });
-  }
-
-  private sanitizeHtml(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+    return media.map((m: Media) =>
+      ({...m, embedCode: this.sanitizer.bypassSecurityTrustHtml(m && m.embedCode)}));
   }
 }
