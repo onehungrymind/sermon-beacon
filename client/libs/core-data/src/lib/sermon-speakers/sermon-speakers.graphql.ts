@@ -19,8 +19,21 @@ export const sermonSpeakerFragment = gql`
 `;
 
 export const sermonSpeakersQuery = gql`
-  query sermonSpeakersQuery {
-    speaker_sermons(distinct_on: sermon_id) {
+  query sermonSpeakersQuery($titleQuery: String_comparison_exp, $speakerNameQuery: String_comparison_exp, $dateQuery: date_comparison_exp) {
+    speaker_sermons(
+      distinct_on: sermon_id,
+      where: {
+        sermon: {
+          _and: [
+            {date: $dateQuery},
+            {title: $titleQuery}
+          ],
+          _or: [
+            {sermon_speakers: {speaker: {name: $speakerNameQuery}}}
+          ]
+        }
+      }
+    ) {
       ...sermonSpeakerFragment
     }
   }

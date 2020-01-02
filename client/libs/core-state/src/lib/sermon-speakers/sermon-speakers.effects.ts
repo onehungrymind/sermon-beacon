@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import * as sermonSpeakersActions from './sermon-speakers.actions';
 import { SermonSpeaker, SermonSpeakersService } from '@sb/core-data';
 import { SermonSpeakersPartialState } from './sermon-speakers.reducer';
+import { NotifyService } from '@sb/ui-libraries';
 
 @Injectable()
 export class SermonSpeakersEffects {
@@ -22,6 +23,22 @@ export class SermonSpeakersEffects {
       },
       onError: (action: ReturnType<typeof sermonSpeakersActions.loadSermonSpeakers>, error) => {
         console.log('Effect Error:', error);
+      }
+    })
+  );
+
+  searchSermons$ = createEffect(() =>
+    this.dataPersistence.fetch(sermonSpeakersActions.searchSermons, {
+      run: (
+        action: ReturnType<typeof sermonSpeakersActions.searchSermons>,
+        state: SermonSpeakersPartialState
+      ) => {
+        return this.sermonSpeakersService.all(action.query).pipe(
+          map((sermonSpeakers: SermonSpeaker[]) => sermonSpeakersActions.sermonsSearched({ sermonSpeakers }))
+        );
+      },
+      onError: (action: ReturnType<typeof sermonSpeakersActions.searchSermons>, error) => {
+        this.notifyService.openSnackBar(error.message);
       }
     })
   );
@@ -79,6 +96,7 @@ export class SermonSpeakersEffects {
   constructor(
     private actions$: Actions,
     private dataPersistence: DataPersistence<SermonSpeakersPartialState>,
-    private sermonSpeakersService: SermonSpeakersService
+    private sermonSpeakersService: SermonSpeakersService,
+    private notifyService: NotifyService
   ) {}
 }
