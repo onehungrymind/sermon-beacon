@@ -34,7 +34,12 @@
         {{data.title}}
       </th>
       <td mat-cell *matCellDef="let row" (click)="viewSermon(row.id)" class="fs-20">
-        {{data.cell(row)}}
+        <span *ngIf="data.column !== 'speakers'; else speakerCol">{{data.cell(row)}}</span>
+        <ng-template #speakerCol>
+          <ng-container *ngFor="let sermonSpeaker of data.cell(row); last as last" >
+            {{sermonSpeaker.speaker.name}}{{last ? '' : ','}}
+          </ng-container>
+        </ng-template>
       </td>
     </ng-container>
 

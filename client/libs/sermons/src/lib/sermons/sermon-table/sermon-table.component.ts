@@ -4,7 +4,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
 
-import { Sermon, SermonSpeaker, Speaker } from '@sb/core-data';
+import { Sermon, SermonSpeaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
 
 @Component({
@@ -31,7 +31,7 @@ export class SermonTableComponent implements OnChanges {
   sermonColumns = [
     { column: 'title', title: 'Title', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.title },
     { column: 'subject', title: 'Subject', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.subject },
-    { column: 'speakers', title: 'Speakers', cell: (sermonSpeaker: SermonSpeaker) => this.displaySermonSpeakers(sermonSpeaker.sermon.sermon_speakers) },
+    { column: 'speakers', title: 'Speakers', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.sermon_speakers },
     { column: 'date', title: 'Date', cell: (sermonSpeaker: SermonSpeaker) => moment(sermonSpeaker.sermon.date).format('MMM DD, YYYY') },
   ];
 
@@ -53,10 +53,5 @@ export class SermonTableComponent implements OnChanges {
 
   viewSermon(sermonId: string) {
     this.router.navigate(['sermon', sermonId]);
-  }
-
-  private displaySermonSpeakers(sermonSpeakers: Speaker[]) {
-    return sermonSpeakers
-      .map((sermonSpeaker: Speaker) => sermonSpeaker.speaker.name);
   }
 }
