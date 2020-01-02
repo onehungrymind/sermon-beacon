@@ -16,7 +16,9 @@ export function createApollo(httpLink: HttpLink) {
   const auth = setContext((operation, context) => ({
     headers: token ? {
       Authorization:  `Bearer ${token}`
-    } : {},
+    } : {
+      'X-Hasura-Role': 'anonymous',
+    },
   }));
 
   return {
