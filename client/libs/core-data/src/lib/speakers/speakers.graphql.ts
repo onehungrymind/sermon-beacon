@@ -13,7 +13,7 @@ export const speakersFragment = gql`
 
 export const speakerQuery = gql`
   query speakerQuery {
-    speakers(order_by: {created_at: asc}) {
+    speakers(order_by: {updated_at: desc}) {
       ...speakersFragment
     }
   }
