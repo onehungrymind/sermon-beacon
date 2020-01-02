@@ -25,6 +25,10 @@ export class SermonSpeakersFacade {
     this.dispatch(sermonSpeakersActions.loadSermonSpeakers());
   }
 
+  searchSermons(query?: {searchQuery: string, searchType: string}) {
+    this.dispatch(sermonSpeakersActions.searchSermons({ query }));
+  }
+
   createSermonSpeaker(sermonSpeaker: SermonSpeaker) {
     this.dispatch(sermonSpeakersActions.createSermonSpeaker({ sermonSpeaker }));
   }

@@ -28,7 +28,10 @@ const sermonSpeakersReducer = createReducer(
   on(sermonSpeakersActions.sermonSpeakerSelected, (state, { selectedSermonSpeakerId }) =>
     Object.assign({}, state, { selectedSermonSpeakerId })
   ),
-  on(sermonSpeakersActions.sermonSpeakersLoaded, (state, { sermonSpeakers }) =>
+  on(
+    sermonSpeakersActions.sermonSpeakersLoaded,
+    sermonSpeakersActions.sermonsSearched,
+    (state, { sermonSpeakers }) =>
     sermonSpeakersAdapter.addAll(sermonSpeakers, { ...state, isLoading: false })
   ),
   on(sermonSpeakersActions.sermonSpeakerCreated, (state, { sermonSpeaker }) =>
@@ -42,6 +45,7 @@ const sermonSpeakersReducer = createReducer(
   ),
   on(
     sermonSpeakersActions.loadSermonSpeakers,
+    sermonSpeakersActions.searchSermons,
     sermonSpeakersActions.createSermonSpeaker,
     sermonSpeakersActions.updateSermonSpeaker,
     sermonSpeakersActions.deleteSermonSpeaker,
