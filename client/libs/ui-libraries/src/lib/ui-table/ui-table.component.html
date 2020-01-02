@@ -1,78 +1,85 @@
-<div class="container w-100">
-  <div class="mat-elevation-z1">
+<div id="ui-table-component">
+  <div class="container w-100">
+    <div class="mat-elevation-z1">
 
-    <table [dataSource]="dataSource" mat-table class="w-100" matSort matSortActive="created_at" matSortDirection="asc">
+      <table [dataSource]="dataSource" mat-table class="w-100" matSort matSortActive="updated_at"
+        matSortDirection="desc">
 
-      <!-- Create Action Header -->
-      <ng-container [matColumnDef]="spacer" *ngFor="let spacer of spacerColumns; index as i">
-        <th mat-header-cell *matHeaderCellDef class="p-0">
-          <div class="d-flex" *ngIf="i === 0">
-            <button mat-button class="px-1 create-btn" (click)="createRow()" [disabled]="editing && creatingRow">
-              <mat-icon class="text-accent">add</mat-icon>
-            </button>
-            <p class="text-medium fs-16">Click here to add a new Sermon...</p>
-          </div>
-        </th>
-      </ng-container>
+        <!-- Create Action Header -->
+        <ng-container [matColumnDef]="spacer" *ngFor="let spacer of spacerColumns; index as i">
+          <th mat-header-cell *matHeaderCellDef class="p-0">
+            <div class="d-flex" *ngIf="i === 0">
+              <button mat-button class="px-1 create-btn" (click)="createRow()" [disabled]="editing && creatingRow">
+                <mat-icon class="text-accent">add</mat-icon>
+              </button>
+              <p class="text-medium fs-16">Click here to add a new Sermon...</p>
+            </div>
+          </th>
+        </ng-container>
 
-      <!-- data -->
-      <ng-container *ngFor="let column of tableColumns; let first = first; let last = last"
-        [matColumnDef]="column.columnDef">
+        <!-- data -->
+        <ng-container *ngFor="let column of tableColumns; let first = first; let last = last"
+          [matColumnDef]="column.columnDef">
 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
-          {{column.title}}
-        </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
+            {{column.title}}
+          </th>
 
-        <td mat-cell *matCellDef="let row; let i = index" class="px-2 fs-20" [ngClass]="{'pl-4': first, 'pr-4': last}">
-          <span *ngIf="editingIndex !== i; else edit">
-            {{row[column.columnDef]}}
-          </span>
+          <td mat-cell *matCellDef="let row; let i = index" class="px-2 fs-20"
+            [ngClass]="{'pl-4': first, 'pr-4': last}">
+            <span *ngIf="editingIndex !== i; else edit">
+              {{row[column.columnDef]}}
+            </span>
 
-          <ng-template #edit>
-            <form [formGroup]="form">
-              <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && !creatingRow" class="editing fs-20"
-                placeholder={{row[column.columnDef]}}>
-                <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && creatingRow" class="editing fs-20"
-                placeholder="Type here...">
-            </form>
-          </ng-template>
+            <ng-template #edit>
+              <form [formGroup]="form">
+                <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && !creatingRow"
+                  class="editing fs-20" placeholder={{row[column.columnDef]}}>
+                <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && creatingRow"
+                  class="editing fs-20" placeholder="Type here...">
+              </form>
+            </ng-template>
 
-        </td>
-      </ng-container>
+          </td>
+        </ng-container>
 
-      <!-- actions btn -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary sb-border-bottom"></th>
-        <td mat-cell *matCellDef="let row; let i = index" class="pr-0">
-          <div class="d-flex action-container justify-content-between mr-0 mx-4">
+        <!-- actions btn -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary sb-border-bottom"></th>
+          <td mat-cell *matCellDef="let row; let i = index" class="pr-0">
+            <div class="d-flex action-container justify-content-between mr-0 mx-4">
 
-            <div></div> <!-- Keep edit button to right -->
+              <div></div> <!-- Keep edit button to right -->
 
-            <button mat-button class="px-0 mw-25" *ngIf="i != editingIndex && editingIndex == null" (click)="updateRow(row, i)">
-              <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
-            </button>
+              <button mat-button class="px-0 mw-25" *ngIf="i != editingIndex && editingIndex == null"
+                (click)="updateRow(row, i)">
+                <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
+              </button>
 
-            <button mat-button class="px-0 mw-25" *ngIf="editing && editingIndex == i" (click)="saveRow()">
-              <mat-icon class="material-icons-outlined mw-25 text-accent px-0">save</mat-icon>
-            </button>
+              <button mat-button class="px-0 mw-25" *ngIf="editing && editingIndex == i" (click)="saveRow()">
+                <mat-icon class="material-icons-outlined mw-25 text-accent px-0">save</mat-icon>
+              </button>
 
-            <button mat-button class="px-0 delete-btn mw-25" (click)="deleteRow(row)">
-              <mat-icon class="material-icons-outlined mw-25 text-secondary px-0" >close</mat-icon>
-            </button>
+              <button mat-button class="px-0 delete-btn mw-25" (click)="deleteRow(row)">
+                <mat-icon class="material-icons-outlined mw-25 text-secondary px-0">close</mat-icon>
+              </button>
 
-          </div>
-        </td>
-      </ng-container>
+            </div>
+          </td>
+        </ng-container>
 
-      <tr mat-header-row
-        *matHeaderRowDef="mapTableColumnsToDisplyedColumns(tableColumns, actionsEnabled); sticky: true" class="table-row-height"></tr>
-      <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true" class="table-row-height"></tr>
-      <tr mat-row *matRowDef="let row; columns: mapTableColumnsToDisplyedColumns(tableColumns, actionsEnabled)"></tr>
+        <tr mat-header-row
+          *matHeaderRowDef="mapTableColumnsToDisplyedColumns(tableColumns, actionsEnabled); sticky: true"
+          class="table-row-height"></tr>
+        <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true" class="table-row-height"></tr>
+        <tr mat-row *matRowDef="let row; columns: mapTableColumnsToDisplyedColumns(tableColumns, actionsEnabled)"></tr>
 
-    </table>
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-    <mat-paginator #paginator [length]="data?.length" [pageIndex]="0" [pageSize]="10"
-      [pageSizeOptions]="[25, 50, 100, 250]">
-    </mat-paginator>
+      </table>
+      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <mat-paginator #paginator [length]="data?.length" [pageIndex]="0" [pageSize]="10"
+        [pageSizeOptions]="[25, 50, 100, 250]">
+      </mat-paginator>
+    </div>
   </div>
+
 </div>
