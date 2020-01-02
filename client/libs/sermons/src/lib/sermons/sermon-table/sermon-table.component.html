@@ -58,7 +58,7 @@
       <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
     </ng-container>
     <tr mat-row *matRowDef="let row; columns: isAuthenticated ? adminColumns : displayedColumns;"
-      class="mat-list-option">
+      class="mat-list-option cursor-pointer">
     </tr>
   </table>
 
