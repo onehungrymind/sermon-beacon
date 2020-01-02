@@ -10,8 +10,18 @@ export const sermonSpeakerSelected = createAction(
 // Load Actions
 export const loadSermonSpeakers = createAction('[SERMONSPEAKER] Load SermonSpeakers');
 
+export const searchSermons = createAction(
+  '[SERMON] Search Sermons',
+  props<{ query?: {searchQuery: string, searchType: string} }>()
+);
+
 export const sermonSpeakersLoaded = createAction(
   '[SERMONSPEAKER] SermonSpeakers Loaded',
+  props<{ sermonSpeakers: SermonSpeaker[] }>()
+);
+
+export const sermonsSearched = createAction(
+  '[SERMON] Searched Sermons Loaded',
   props<{ sermonSpeakers: SermonSpeaker[] }>()
 );
 

@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-import { BreakpointService, Media, MediaTypes, Sermon, Speaker } from '@sb/core-data';
+import { BreakpointService, Media, MediaTypes, Sermon } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
 
 @Component({
@@ -65,20 +65,12 @@ export class SermonViewComponent implements OnInit {
     }
   }
 
-  routeToMediaUrl(mediaUrl: string) {
+  handleMediaAction(mediaUrl: string) {
     window.open(mediaUrl, '_blank');
   }
 
   goBack() {
     this.router.navigateByUrl('/');
-  }
-
-  speakerNames(speakers: Speaker[]) {
-    const speakerNames = speakers.map((speaker: Speaker) => `${speaker.name}`);
-
-    if (speakerNames.length === 1) return speakerNames[0];
-
-    return `${speakerNames.slice(0, speakerNames.length -1).join(', ')} and ${speakerNames.slice(-1)}`;
   }
 
   private santizeEmbedCode(media: Media[]) {

@@ -10,18 +10,8 @@ export const sermonSelected = createAction(
 // Load Actions
 export const loadSermons = createAction('[SERMON] Load Sermons');
 
-export const searchSermons = createAction(
-  '[SERMON] Search Sermons',
-  props<{ query?: {searchQuery: string, searchType: string} }>()
-);
-
 export const sermonsLoaded = createAction(
   '[SERMON] Sermons Loaded',
-  props<{ sermons: Sermon[] }>()
-);
-
-export const sermonsSearched = createAction(
-  '[SERMON] Searched Sermons Loaded',
   props<{ sermons: Sermon[] }>()
 );
 

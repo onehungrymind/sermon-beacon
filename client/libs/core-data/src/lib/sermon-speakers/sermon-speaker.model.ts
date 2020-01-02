@@ -1,10 +1,13 @@
-import { emptySpeaker, Speaker } from '../speakers/speaker.model';
+import { emptySermon, Sermon } from '../sermons/sermon.model';
 
-export interface SermonSpeaker extends Speaker {
-  sermon_id: string;
+export interface SermonSpeaker {
+  id: string;
+  sermon: Sermon;
 }
 
 export const emptySermonSpeaker: SermonSpeaker = {
-  ...emptySpeaker,
-  sermon_id: null
+  id: null,
+  sermon: {
+    ...emptySermon
+  }
 };
