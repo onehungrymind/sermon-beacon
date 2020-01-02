@@ -21,6 +21,11 @@ export class SermonViewComponent implements OnInit {
     map((sermon) => ({...sermon, sermon_media: this.santizeEmbedCode(sermon.sermon_media)}))
   );
 
+  tests = [
+    { url: 'https://s3-us-west-2.amazonaws.com/test.sermonbeacon.mediabuttons/AUDIO/_flip-_--_Skyrim_Theme_Remix_-_DASH.mp3', type: 'AUDIO' },
+    { url: 'https://s3-us-west-2.amazonaws.com/test.sermonbeacon.mediabuttons/PDF/BK-AGES+An+Exposition+Of+The+Seven+Church+Ages+VGR.pdf', type: 'NOTES' }
+  ];
+
   constructor(
     private breakpointService: BreakpointService,
     private mediaFacade: MediaFacade,
@@ -65,8 +70,8 @@ export class SermonViewComponent implements OnInit {
     }
   }
 
-  handleMediaAction(mediaUrl: string) {
-    window.open(mediaUrl, '_blank');
+  handleMediaAction(mediaItemUrl: string) {
+    window.open(mediaItemUrl, '_blank');
   }
 
   goBack() {
