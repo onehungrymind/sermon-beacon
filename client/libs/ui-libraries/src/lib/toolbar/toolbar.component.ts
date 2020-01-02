@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { Router } from '@angular/router';
+
+import { AuthService, BreakpointService } from '@sb/core-data';
 
 @Component({
   selector: 'sb-toolbar',
@@ -10,15 +11,21 @@ import { Router } from '@angular/router';
 })
 
 export class ToolbarComponent {
-  title = 'SermonBeacon';
-  @Input() links: any[];
-  @Input() isAdmin: boolean;
+  isMobile = this.breakpointService.isMobile();
+  isLoggedIn$ = this.authService.isAuthenticated$;
+  loggedInUser$ = this.authService.getUser$();
   @ViewChild(MatSidenav, {static: false}) sidenav: MatSidenav;
 
-  constructor(private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private breakpointService: BreakpointService
+  ) { }
 
-  navigateToPath(path: string) {
-    this.router.navigate([path]);
-    this.sidenav.close();
+  login() {
+    this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

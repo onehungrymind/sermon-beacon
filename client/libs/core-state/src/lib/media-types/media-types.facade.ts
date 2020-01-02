@@ -9,15 +9,9 @@ import { MediaType } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class MediaTypesFacade {
-  mediaTypeLoading$ = this.store.pipe(
-    select(MediaTypesSelectors.selectMediaTypesLoading)
-  );
-  allMediaTypes$ = this.store.pipe(
-    select(MediaTypesSelectors.selectAllMediaTypes)
-  );
-  selectedMediaType$ = this.store.pipe(
-    select(MediaTypesSelectors.selectMediaType)
-  );
+  allMediaTypes$ = this.store.pipe(select(MediaTypesSelectors.selectAllMediaTypes));
+  selectedMediaType$ = this.store.pipe(select(MediaTypesSelectors.selectMediaType));
+  mediaTypeLoading$ = this.store.pipe(select(MediaTypesSelectors.selectMediaTypesLoading));
 
   constructor(private store: Store<fromMediaTypes.MediaTypesPartialState>) {}
 
@@ -33,8 +27,8 @@ export class MediaTypesFacade {
     this.dispatch(MediaTypesActions.createMediaType({ mediaType }));
   }
 
-  updateMediaType(mediaType: MediaType) {
-    this.dispatch(MediaTypesActions.updateMediaType({ mediaType }));
+  updateMediaType(prevMediaTypeName: string, mediaType: MediaType) {
+    this.dispatch(MediaTypesActions.updateMediaType({ prevMediaTypeName, mediaType }));
   }
 
   deleteMediaType(mediaType: MediaType) {

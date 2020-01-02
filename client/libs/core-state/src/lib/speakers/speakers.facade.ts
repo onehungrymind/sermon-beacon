@@ -9,9 +9,10 @@ import { Speaker } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class SpeakersFacade {
-  speakerLoading$ = this.store.pipe(select(SpeakersSelectors.selectSpeakersLoading));
   allSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectAllSpeakers));
+  selectedSpeakers$ = this.store.pipe(select(SpeakersSelectors.selectedSpeakers));
   selectedSpeaker$ = this.store.pipe(select(SpeakersSelectors.selectSpeaker));
+  speakerLoading$ = this.store.pipe(select(SpeakersSelectors.selectSpeakersLoading));
 
   constructor(private store: Store<fromSpeakers.SpeakersPartialState>) {}
 
@@ -23,12 +24,16 @@ export class SpeakersFacade {
     this.dispatch(SpeakersActions.loadSpeakers());
   }
 
-  loadSermonSpeakers() {
-    this.dispatch(SpeakersActions.loadSermonSpeakers());
+  loadSpeakersBySermonId(sermonId: string) {
+    this.dispatch(SpeakersActions.loadSpeakersBySermonId({ sermonId }));
   }
 
   createSpeaker(speaker: Speaker) {
     this.dispatch(SpeakersActions.createSpeaker({ speaker }));
+  }
+
+  createSermonSpeaker(objects: {sermon_id: string, speaker_id: string}) {
+    this.dispatch(SpeakersActions.createSermonSpeaker({ objects }));
   }
 
   updateSpeaker(speaker: Speaker) {
@@ -37,6 +42,10 @@ export class SpeakersFacade {
 
   deleteSpeaker(speaker: Speaker) {
     this.dispatch(SpeakersActions.deleteSpeaker({ speaker }));
+  }
+
+  deleteSermonSpeakers(sermonId: string) {
+    this.dispatch(SpeakersActions.deleteSermonSpeakers({ sermonId }));
   }
 
   private dispatch(action: Action) {

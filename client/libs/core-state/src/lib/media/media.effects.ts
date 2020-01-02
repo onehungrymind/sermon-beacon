@@ -28,6 +28,22 @@ export class MediaEffects {
     })
   );
 
+  loadMediaBySermonId$ = createEffect(() =>
+    this.dataPersistence.fetch(MediaActions.loadMediaBySermonId, {
+      run: (
+        action: ReturnType<typeof MediaActions.loadMediaBySermonId>,
+        state: fromMedia.MediaPartialState
+      ) => {
+        return this.mediaService.allBySermonId(action.sermonId).pipe(
+          map((media: Media[]) => MediaActions.mediaBySermonIdLoaded({ media }))
+        );
+      },
+      onError: (action: ReturnType<typeof MediaActions.loadMediaBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addMedia$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(MediaActions.createMedia, {
       run: (
@@ -78,6 +94,22 @@ export class MediaEffects {
         );
       },
       onError: (action: ReturnType<typeof MediaActions.deleteMedia>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  deleteMediaBySermonId$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(MediaActions.deleteMediaBySermonId, {
+      run: (
+        action: ReturnType<typeof MediaActions.deleteMediaBySermonId>,
+        state: fromMedia.MediaPartialState
+      ) => {
+        return this.mediaService.deleteBySermonId(action.sermonId).pipe(
+          map((media: Media) => MediaActions.mediaBySermonIdDeleted({ media }))
+        );
+      },
+      onError: (action: ReturnType<typeof MediaActions.deleteMediaBySermonId>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })

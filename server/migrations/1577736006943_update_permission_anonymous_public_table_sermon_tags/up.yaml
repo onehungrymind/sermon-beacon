@@ -1,0 +1,14 @@
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - sermon_id
+      - tag_id
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: sermon_tags
+      schema: public
+  type: create_select_permission

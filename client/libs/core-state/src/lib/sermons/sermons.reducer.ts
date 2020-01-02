@@ -29,18 +29,8 @@ const sermonsReducer = createReducer(
     Object.assign({}, state, { selectedSermonId })
   ),
   on(
-    SermonsActions.loadSermons,
-    SermonsActions.createSermon,
-    SermonsActions.updateSermon,
-    SermonsActions.deleteSermon,
-    (state) => ({
-      ...state,
-      isLoading: true
-    })
-  ),
-  on(
     SermonsActions.sermonsLoaded,
-    SermonsActions.searchedSermonsLoaded
+    SermonsActions.sermonsSearched
     , (state, { sermons }) =>
     sermonsAdapter.addAll(sermons, { ...state, isLoading: false })
   ),
@@ -52,7 +42,22 @@ const sermonsReducer = createReducer(
   ),
   on(SermonsActions.sermonDeleted, (state, { sermon }) =>
     sermonsAdapter.removeOne(sermon.id, { ...state, isLoading: false })
-  )
+  ),
+  on(SermonsActions.sermonMutationCancelled, (state) => ({
+    ...state,
+    isLoading: false
+  })),
+  on(
+    SermonsActions.loadSermons,
+    SermonsActions.searchSermons,
+    SermonsActions.createSermon,
+    SermonsActions.updateSermon,
+    SermonsActions.deleteSermon,
+    (state) => ({
+      ...state,
+      isLoading: true
+    })
+  ),
 );
 
 export function reducer(state: SermonsState | undefined, action: Action) {

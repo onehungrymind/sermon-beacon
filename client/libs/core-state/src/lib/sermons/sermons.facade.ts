@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 
-import { Action, select, Store } from '@ngrx/store';
+import { Action, ActionsSubject, select, Store } from '@ngrx/store';
 
 import * as fromSermons from './sermons.reducer';
 import * as SermonsSelectors from './sermons.selectors';
 import * as SermonsActions from './sermons.actions';
+import { selectAggregatedSermon, selectSermonWithSpeakers } from '..';
 import { Sermon } from '@sb/core-data';
 
 @Injectable({ providedIn: 'root' })
 export class SermonsFacade {
-  sermonLoading$ = this.store.pipe(
-    select(SermonsSelectors.selectSermonsLoading)
-  );
   allSermons$ = this.store.pipe(select(SermonsSelectors.selectAllSermons));
   selectedSermon$ = this.store.pipe(select(SermonsSelectors.selectSermon));
+  sermonsWithSpeakers$ = this.store.pipe(select(selectSermonWithSpeakers));
+  aggregatedSermon$ = this.store.pipe(select(selectAggregatedSermon));
+  sermonLoading$ = this.store.pipe(select(SermonsSelectors.selectSermonsLoading));
 
-  constructor(private store: Store<fromSermons.SermonsPartialState>) {}
+  constructor(
+    private store: Store<fromSermons.SermonsPartialState>,
+    private actions$: ActionsSubject
+  ) {}
 
   selectSermon(selectedSermonId: string) {
     this.dispatch(SermonsActions.sermonSelected({ selectedSermonId }));
@@ -26,7 +30,7 @@ export class SermonsFacade {
   }
 
   searchSermons(query?: {searchQuery: string, searchType: string}) {
-    this.dispatch(SermonsActions.loadSearchedSermons({ query }));
+    this.dispatch(SermonsActions.searchSermons({ query }));
   }
 
   createSermon(sermon: Sermon) {
@@ -39,6 +43,10 @@ export class SermonsFacade {
 
   deleteSermon(sermon: Sermon) {
     this.dispatch(SermonsActions.deleteSermon({ sermon }));
+  }
+
+  cancelSermonMutation() {
+    this.dispatch(SermonsActions.sermonMutationCancelled());
   }
 
   private dispatch(action: Action) {

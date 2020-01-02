@@ -7,6 +7,7 @@ import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { SermonsFacade } from '@sb/facades/sermons/sermons.facade';
+import { BreakpointService } from '@sb/core-data';
 
 @Component({
   selector: 'sb-searchbar',
@@ -18,6 +19,7 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   @ViewChild('picker', { static: false }) datePicker: MatDatepicker<any>;
   form: FormGroup;
   destroy$ = new Subject;
+  isMobile: boolean = this.breakpointService.isMobile();
   categoryOptions = [
     { name: 'title' },
     { name: 'speaker' },
@@ -26,7 +28,8 @@ export class SearchbarComponent implements OnDestroy, OnInit {
 
   constructor (
     private formBuilder: FormBuilder,
-    private sermonsFacade: SermonsFacade
+    private sermonsFacade: SermonsFacade,
+    private breakpointService: BreakpointService
   ) { }
 
   ngOnInit() {

@@ -1,18 +1,13 @@
 import { Base } from '../base.model';
 import { Sermon } from '../sermons/sermon.model';
+import { MediaTypes } from '../media-types/media-type.model';
 
 export interface Media extends Base {
   sermon_id: string;
   type: MediaTypes;
-  embedCode?: string;
+  embedCode?: string | any;
   url?: string;
   sermon?: Sermon;
-}
-
-export enum MediaTypes {
-  VIDEO = 'Video',
-  AUDIO = 'AUDIO',
-  PDF = 'PDF'
 }
 
 export const emptyMedia = {

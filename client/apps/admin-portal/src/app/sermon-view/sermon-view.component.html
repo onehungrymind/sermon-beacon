@@ -1,0 +1,59 @@
+<ng-container *ngIf="sermon$ | async as sermon">
+
+  <div class="container mt-5">
+    <!-- Sermon Video Embed -->
+    <ng-container *ngFor="let media of sermon.sermon_media">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div *ngIf="!!media.embedCode.changingThisBreaksApplicationSecurity; else noVideo"
+          class="embed-responsive-item" [innerHTML]="media.embedCode">
+        </div>
+        <ng-template #noVideo>
+          <div class="embed-responsive-item">
+            <sb-no-video></sb-no-video>
+          </div>
+        </ng-template>
+      </div>
+    </ng-container>
+
+    <!-- Sermon Title -->
+    <div class="d-flex align-items-start">
+      <mat-card-title class="text-primary mt-1">
+        {{sermon.title}}
+      </mat-card-title>
+    </div>
+
+    <!-- Sermon Details -->
+    <div class="d-flex justify-content-between" [class.flex-column]="isMobile">
+      <div [class.align-self-start]="isMobile">
+        <mat-card-subtitle
+          class="d-flex justify-content-between fs-20 m-0 text-base mb-2">
+          <span [matTooltip]="speakerNames(sermon.sermon_speakers)">
+            {{sermon.sermon_speakers[0]?.name}}{{sermon.sermon_speakers?.length > 1 ? '...' : ''}}
+          </span>
+          <span class="font-weight-lighter">&nbsp;|&nbsp;</span>
+          {{sermon.date | date: 'MMM dd, yyyy'}}
+        </mat-card-subtitle>
+      </div>
+
+      <div class="align-self-end text-base">
+        <span *ngFor="let mediaItem of sermon.sermon_media">
+          <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+            <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+            {{mediaItem.type}}
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <mat-divider class="mb-3"></mat-divider>
+
+    <!-- Sermon Tags -->
+    <div class="d-flex" [class.justify-content-center]="isMobile">
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of sermon.sermon_tags" color="accent" selected class="sb-primary-border">
+          {{tag.value}}
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</ng-container>

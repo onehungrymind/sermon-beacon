@@ -28,6 +28,22 @@ export class TagsEffects {
     })
   );
 
+  loadTagsBySermonId$ = createEffect(() =>
+    this.dataPersistence.fetch(TagsActions.loadTagsBySermonId, {
+      run: (
+        action: ReturnType<typeof TagsActions.loadTagsBySermonId>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.allBySermonId(action.sermonId).pipe(
+          map((tags: Tag[]) => TagsActions.tagsBySermonIdLoaded({ tags }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.loadTagsBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   addTag$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(TagsActions.createTag, {
       run: (
@@ -44,6 +60,22 @@ export class TagsEffects {
     })
   );
 
+  addSermonTags$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.createSermonTags, {
+      run: (
+        action: ReturnType<typeof TagsActions.createSermonTags>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.createSermonTags(action.objects).pipe(
+          map((tag: Tag) => TagsActions.sermonTagsCreated({ tag }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.createSermonTags>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
   updateTag$ = createEffect(() =>
     this.dataPersistence.pessimisticUpdate(TagsActions.updateTag, {
       run: (
@@ -55,6 +87,38 @@ export class TagsEffects {
         );
       },
       onError: (action: ReturnType<typeof TagsActions.updateTag>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  updateTagBySermonId$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.updateTagBySermonId, {
+      run: (
+        action: ReturnType<typeof TagsActions.updateTagBySermonId>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.updateBySermonId(action.sermonId, action.tag).pipe(
+          map((tag: Tag) => TagsActions.tagBySermonIdUpdated({ tag }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.updateTagBySermonId>, error) => {
+        this.notifyService.openSnackBar(error.message);
+      }
+    })
+  );
+
+  deleteSermonTag$ = createEffect(() =>
+    this.dataPersistence.pessimisticUpdate(TagsActions.deleteSermonTags, {
+      run: (
+        action: ReturnType<typeof TagsActions.deleteSermonTags>,
+        state: fromTags.TagsPartialState
+      ) => {
+        return this.tagsService.deleteSermonTag(action.sermonId).pipe(
+          map((tags: Tag[]) => TagsActions.sermonTagsDeleted({ tags }))
+        );
+      },
+      onError: (action: ReturnType<typeof TagsActions.deleteSermonTags>, error) => {
         this.notifyService.openSnackBar(error.message);
       }
     })

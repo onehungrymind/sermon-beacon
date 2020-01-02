@@ -13,7 +13,6 @@
 
       <input matInput placeholder="Please select a tag or create"
               #tagsInput
-              formControlName="value"
               [multiple]="true"
               [matAutocomplete]="auto"
               [matChipInputFor]="chipList"
@@ -23,7 +22,7 @@
 
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="add($event)">
       <mat-option *ngFor="let tag of tags$ | async" [value]="tag">
-        <strong class="primary-text">{{tag.property}}</strong>: {{tag.value}}
+        <strong class="text-primary">{{tag.property}}</strong>: {{tag.value}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

@@ -17,8 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@env/*": [
-        "apps/admin-portal/src/environments/*",
-        "apps/user-portal/src/environments/*"
+        "apps/admin-portal/src/environments/*"
       ],
       "@sb/material": ["libs/material/src/index.ts"],
       "@sb/core-data": [

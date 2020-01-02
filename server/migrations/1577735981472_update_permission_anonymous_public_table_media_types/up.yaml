@@ -1,0 +1,13 @@
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - name
+      - description
+      filter: {}
+      limit: null
+    role: anonymous
+    table:
+      name: media_types
+      schema: public
+  type: create_select_permission

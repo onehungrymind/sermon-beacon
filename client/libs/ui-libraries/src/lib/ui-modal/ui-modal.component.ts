@@ -7,7 +7,7 @@ import { Media, MediaType, Sermon, Speaker, Tag } from '@sb/core-data';
   selector: 'sb-ui-modal',
   templateUrl: './ui-modal.component.html',
   styleUrls: ['./ui-modal.component.scss'],
-  encapsulation: ViewEncapsulation.None // All modals should have all the same styles.
+  encapsulation: ViewEncapsulation.None
 })
 export class UiModalComponent {
   @Input() type: string;
@@ -23,7 +23,7 @@ export class UiModalComponent {
     if (this.type === 'media') return `"${this.media.type}"`;
     if (this.type === 'mediaType') return `"${this.mediaType.name}"`;
     if (this.type === 'sermon') return `"${this.sermon.title}" ?`;
-    if (this.type === 'speaker') return `"${this.speaker.first_name} ${this.speaker.last_name}" ?`;
+    if (this.type === 'speaker') return `"${this.speaker.name}" ?`;
     if (this.type === 'tag') return `"${this.tag.property}" ?`;
   }
 
