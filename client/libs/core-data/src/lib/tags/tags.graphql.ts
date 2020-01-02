@@ -16,7 +16,7 @@ export const tagsQuery = gql`
       ...tagsFragment
     }
   }
-  ${sermonTagsFragment}
+  ${tagsFragment}
 `;
 
 export const tagsBySermonIdQuery = gql`

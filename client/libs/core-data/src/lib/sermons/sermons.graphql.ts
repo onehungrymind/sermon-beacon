@@ -26,7 +26,7 @@ export const sermonQuery = gql`
       ...sermonFragment
     }
   }
-  ${speakerSermonFragment}
+  ${sermonFragment}
 `;
 
 export const createSermonMutation = gql`
