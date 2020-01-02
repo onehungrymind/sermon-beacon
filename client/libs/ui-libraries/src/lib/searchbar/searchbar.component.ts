@@ -6,8 +6,8 @@ import * as moment from 'moment';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { SermonsFacade } from '@sb/facades/sermons/sermons.facade';
 import { BreakpointService } from '@sb/core-data';
+import { SermonSpeakersFacade } from '@sb/facades/sermon-speakers/sermon-speakers.facade';
 
 @Component({
   selector: 'sb-searchbar',
@@ -28,13 +28,13 @@ export class SearchbarComponent implements OnDestroy, OnInit {
 
   constructor (
     private formBuilder: FormBuilder,
-    private sermonsFacade: SermonsFacade,
+    private sermonSpeakersFacade: SermonSpeakersFacade,
     private breakpointService: BreakpointService
   ) { }
 
   ngOnInit() {
     this.initForm();
-    this.sermonsFacade.loadSermons();
+    this.sermonSpeakersFacade.loadSermonSpeakers();
   }
 
   ngOnDestroy() {
@@ -43,7 +43,7 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   }
 
   search() {
-    this.sermonsFacade.searchSermons(this.form.value);
+    this.sermonSpeakersFacade.searchSermons(this.form.value);
   }
 
   selectCustom(searchType: string, index = 0) {
@@ -81,6 +81,6 @@ export class SearchbarComponent implements OnDestroy, OnInit {
   }
 
   private searchSermons() {
-    this.sermonsFacade.searchSermons(this.form.value);
+    this.sermonSpeakersFacade.searchSermons(this.form.value);
   }
 }

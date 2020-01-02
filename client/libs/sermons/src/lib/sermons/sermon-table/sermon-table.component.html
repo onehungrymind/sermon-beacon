@@ -1,6 +1,6 @@
 <div id="sermon-table-component">
   <table mat-table class="w-100" [dataSource]="dataSource"
-    matSort matSortActive="date" matSortDirection="asc" matSortDisableClear>
+    matSort matSortActive="date" matSortDirection="desc" matSortDisableClear>
 
     <!-- Create Action Header -->
     <ng-container matColumnDef="create-action">
@@ -33,8 +33,13 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
         {{data.title}}
       </th>
-      <td mat-cell *matCellDef="let row" (click)="viewSermon(row.id)" class="fs-20">
-        {{data.cell(row)}}
+      <td mat-cell *matCellDef="let row" (click)="viewSermon(row.sermon.id)" class="fs-20">
+        <span *ngIf="data.column !== 'speakers'; else speakerCol">{{data.cell(row)}}</span>
+        <ng-template #speakerCol>
+          <ng-container *ngFor="let sermonSpeaker of data.cell(row); last as last" >
+            {{sermonSpeaker.speaker.name}}{{last ? '' : ','}}
+          </ng-container>
+        </ng-template>
       </td>
     </ng-container>
 

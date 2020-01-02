@@ -1,30 +1,34 @@
 @import 'libs/theme/main.scss';
-@import 'libs/theme/fonts';
-@import 'libs/theme/variables';
 
-.actions-container {
-  max-width: 3.1rem !important;
-}
+#ui-table-component {
+  .mat-sort-header-arrow {
+    color: $text-light;
+  }
 
-.create-btn {
-  min-width: 1.4rem !important;
-}
+  .actions-container {
+    max-width: 3.1rem !important;
+  }
 
-.create-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1.5rem;
-}
+  .create-btn {
+    min-width: 1.4rem !important;
+  }
 
-.mw-25 {
-  min-width: 1.5rem !important;
-}
+  .create-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+  }
 
-.table-row-height {
-  height: 50px;
-}
+  .mw-25 {
+    min-width: 1.5rem !important;
+  }
 
-.editing {
-  outline: none;
-  border: none;
+  .table-row-height {
+    height: 50px;
+  }
+
+  .editing {
+    outline: none;
+    border: none;
+  }
 }
