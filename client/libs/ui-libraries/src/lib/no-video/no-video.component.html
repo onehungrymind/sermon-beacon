@@ -1,6 +1,17 @@
-<div class="d-flex justify-content-center h-100 bg-primary rounded">
-  <div class="d-flex flex-column my-auto">
-    <h1 class="text-light m-0">No video uploaded for this Sermon</h1>
-    <p class="text-medium m-0">Please contact your church administrator.</p>
+<ng-container *ngIf="isMobile; else normalView">
+  <div class="d-flex justify-content-center h-100 bg-primary rounded p-4" [class.p-4]="isMobile">
+    <div class="d-flex flex-column my-auto">
+      <h1 class="text-light fs-18 m-0" [class.fs-18]="isMobile">No video uploaded for this Sermon</h1>
+      <p class="text-medium fs-14 m-0" [class.fs-14]="isMobile">Please contact your church administrator.</p>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #normalView>
+  <div class="d-flex justify-content-center h-100 bg-primary rounded p-4">
+    <div class="d-flex flex-column my-auto">
+      <h1 class="text-light m-0">No video uploaded for this Sermon</h1>
+      <p class="text-medium m-0">Please contact your church administrator.</p>
+    </div>
+  </div>
+</ng-template>
