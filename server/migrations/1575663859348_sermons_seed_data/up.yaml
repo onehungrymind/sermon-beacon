@@ -1,7 +1,0 @@
-- args:
-    cascade: false
-    sql: INSERT INTO sermons VALUES('4c6638d0-820b-41a9-8b1f-553a9b1f86b1','First
-      Sermon','First Sermon Subject','05/1/2018',DEFAULT,DEFAULT, '9965bdac-185b-11ea-8d71-362b9e155667'),('d44a430e-1854-11ea-8d71-362b9e155667','Second
-      Sermon','Second Sermon Subject','08/27/2019',DEFAULT,DEFAULT, '35d2df28-1855-11ea-8d71-362b9e155667'),('d44a4584-1854-11ea-8d71-362b9e155667','Third
-      Sermon','Third Sermon Subject','07/31/2019',DEFAULT,DEFAULT, '35d2dba4-1855-11ea-8d71-362b9e155667');
-  type: run_sql

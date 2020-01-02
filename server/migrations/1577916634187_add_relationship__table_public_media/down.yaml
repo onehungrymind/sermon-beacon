@@ -1,0 +1,6 @@
+- args:
+    relationship: sermons
+    table:
+      name: media
+      schema: public
+  type: drop_relationship

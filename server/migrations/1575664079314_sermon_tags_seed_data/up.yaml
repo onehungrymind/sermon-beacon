@@ -1,5 +1,0 @@
-- args:
-    cascade: false
-    sql: INSERT INTO sermon_tags VALUES(DEFAULT, '4c6638d0-820b-41a9-8b1f-553a9b1f86b1',
-      '20f2c646-1e22-44e9-b52d-7659a83db911');
-  type: run_sql

@@ -1,3 +1,0 @@
-- args:
-    sql: ALTER TABLE "public"."media" DROP COLUMN "sermon_id";
-  type: run_sql

@@ -1,6 +1,0 @@
-- args:
-    sql: ALTER TABLE "public"."media" ADD COLUMN "sermon_id" int4
-  type: run_sql
-- args:
-    sql: ALTER TABLE "public"."media" ALTER COLUMN "sermon_id" DROP NOT NULL
-  type: run_sql
