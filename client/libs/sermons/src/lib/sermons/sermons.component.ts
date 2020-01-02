@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material';
 
 import { Observable } from 'rxjs';
 
-import { AuthService, Sermon, Speaker } from '@sb/core-data';
-import { MediaFacade, SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
+import { AuthService, Sermon, SermonSpeaker, Speaker } from '@sb/core-data';
+import { SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
 import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.component';
 
 @Component({
@@ -14,10 +14,9 @@ import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.compone
 })
 export class SermonsComponent implements OnInit {
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
-  sermons$: Observable<Sermon[]> = this.sermonFacade.sermonsWithSpeakers$;
-  sermonSpeakers$: Observable<Speaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
-  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
+  sermonSpeakers$: Observable<SermonSpeaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
+  sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
   speakerColumns = [
     { columnDef: 'name', title: 'Name' },
@@ -27,7 +26,6 @@ export class SermonsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private mediaFacade: MediaFacade,
     private sermonFacade: SermonsFacade,
     private speakersFacade: SpeakersFacade,
     private sermonSpeakersFacade: SermonSpeakersFacade,

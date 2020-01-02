@@ -4,7 +4,7 @@
 
 <div class="container w-100">
   <div class="mat-elevation-z1">
-    <sb-sermon-table [sermons]="sermons$ | async"
+    <sb-sermon-table [sermons]="sermonSpeakers$ | async"
                       [isAuthenticated]="isAuthenticated$ | async"
                       [isLoading]="sermonsLoading$ | async"
                       (dialogOpened)="openSermonDialog($event)"
