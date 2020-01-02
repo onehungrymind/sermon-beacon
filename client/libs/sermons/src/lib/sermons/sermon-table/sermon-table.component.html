@@ -33,7 +33,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
         {{data.title}}
       </th>
-      <td mat-cell *matCellDef="let row" (click)="viewSermon(row.id)" class="fs-20">
+      <td mat-cell *matCellDef="let row" (click)="viewSermon(row.sermon.id)" class="fs-20">
         <span *ngIf="data.column !== 'speakers'; else speakerCol">{{data.cell(row)}}</span>
         <ng-template #speakerCol>
           <ng-container *ngFor="let sermonSpeaker of data.cell(row); last as last" >
