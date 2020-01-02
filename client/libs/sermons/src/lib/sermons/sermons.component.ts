@@ -33,14 +33,15 @@ export class SermonsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.sermonFacade.loadSermons();
     this.speakersFacade.loadSpeakers();
     this.sermonSpeakersFacade.loadSermonSpeakers();
   }
 
-  openSermonDialog(sermon?: Sermon) {
+  openSermonDialog(sermonSpeaker?: SermonSpeaker) {
     const ref = this.dialog.open(SermonsDialogComponent, {
       minHeight: '400px',
-      data: { ...sermon }
+      data: { ...sermonSpeaker.sermon }
     });
 
     return ref.afterClosed();
