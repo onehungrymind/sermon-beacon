@@ -23,24 +23,30 @@
     </div>
 
     <!-- Sermon Details -->
-    <div class="d-flex justify-content-between" [class.flex-column]="isMobile">
-      <div [class.align-self-start]="isMobile">
-        <mat-card-subtitle
-          class="d-flex justify-content-between fs-20 m-0 text-base mb-2">
-          <span [matTooltip]="speakerNames(sermon.sermon_speakers)">
-            {{sermon.sermon_speakers[0]?.name}}{{sermon.sermon_speakers?.length > 1 ? '...' : ''}}
+    <div class="d-flex justify-content-between">
+      <mat-card-subtitle class="d-flex text-base mb-2" [class.fs-20]="!isMobile">
+        <div class="text-wrap">
+          <span *ngFor="let speaker of sermon.sermon_speakers; last as last; first as first">
+              {{last && !first ? 'and ' : ''}}
+              {{speaker.name}}{{!last ? ',&nbsp;' : ''}}
           </span>
-          <span class="font-weight-lighter">&nbsp;|&nbsp;</span>
-          {{sermon.date | date: 'MMM dd, yyyy'}}
-        </mat-card-subtitle>
-      </div>
+          <span *ngIf="!isMobile; else breakNewLine" class="font-weight-lighter">&nbsp;|&nbsp;</span>
+          <ng-template #breakNewLine><br/></ng-template>
+          <span>{{sermon.date | date: 'MMM dd, yyyy'}}</span>
+        </div>
+      </mat-card-subtitle>
 
       <div class="align-self-end text-base">
         <span *ngFor="let mediaItem of sermon.sermon_media">
-          <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+          <button *ngIf="isMobile; else normalView" mat-button (click)="handleMediaAction(mediaItem)" class="mw-38 p-0 fs-10">
             <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
-            {{mediaItem.type}}
           </button>
+          <ng-template #normalView>
+            <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+              <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+              {{mediaItem.type}}
+            </button>
+          </ng-template>
         </span>
       </div>
     </div>

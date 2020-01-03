@@ -7,6 +7,7 @@ export interface Speaker extends Base {
   sermon_id: string;
   position?: string;
   speaker_sermons?: Sermon[];
+  speaker?: Speaker;
 }
 
 export const emptySpeaker: Speaker = {
