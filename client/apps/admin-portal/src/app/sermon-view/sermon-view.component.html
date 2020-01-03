@@ -1,5 +1,11 @@
 <ng-container *ngIf="sermon$ | async as sermon">
 
+  <div>
+    <button mat-icon-button (click)="goBack()" class="back-arrow-position">
+      <mat-icon class="fs-55 font-weight-bold" color="accent">arrow_back</mat-icon>
+    </button>
+  </div>
+
   <div class="container mt-5">
     <!-- Sermon Video Embed -->
     <ng-container *ngFor="let media of sermon.sermon_media">
@@ -38,11 +44,11 @@
 
       <div class="align-self-end text-base">
         <span *ngFor="let mediaItem of sermon.sermon_media">
-          <button *ngIf="isMobile; else normalView" mat-button (click)="handleMediaAction(mediaItem)" class="mw-38 p-0 fs-10">
+          <button *ngIf="isMobile; else normalView" mat-button (click)="handleMediaAction(mediaItem.url)" class="mw-38 p-0 fs-10">
             <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
           </button>
           <ng-template #normalView>
-            <button mat-button (click)="handleMediaAction(mediaItem)" class="fs-10">
+            <button mat-button (click)="handleMediaAction(mediaItem.url)" class="fs-10">
               <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
               {{mediaItem.type}}
             </button>
