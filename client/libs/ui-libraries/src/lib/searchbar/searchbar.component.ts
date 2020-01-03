@@ -56,10 +56,15 @@ export class SearchbarComponent implements OnDestroy, OnInit {
     }
   }
 
-  clear(formDirective: NgForm) {
+  clear(formDirective: NgForm, event: MouseEvent) {
     formDirective.resetForm();
     this.form.patchValue({ searchType: 'title', searchQuery: '' });
     this.searchSermons();
+    this.stopEventBubbling(event);
+  }
+
+  stopEventBubbling(event: MouseEvent) {
+    event.stopImmediatePropagation();
   }
 
   private initForm() {
