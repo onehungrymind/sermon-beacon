@@ -8,13 +8,23 @@
 
   <div class="container mt-5">
     <!-- Sermon Video Embed -->
+    
+    <ng-template class="sb-loading-shade" *ngIf="">
+      <mat-spinner></mat-spinner>
+    </ng-template>
+
     <ng-container *ngFor="let media of sermon.sermon_media">
       <div class="embed-responsive embed-responsive-16by9">
         <div *ngIf="!!media.embedCode.changingThisBreaksApplicationSecurity; else noVideo"
           class="embed-responsive-item" [innerHTML]="media.embedCode">
         </div>
+        <ng-container>
+          <ng-template class="sb-loading-shade" *ngIf="">
+            <mat-spinner></mat-spinner>
+          </ng-template>
+        </ng-container>
         <ng-template #noVideo>
-          <div class="embed-responsive-item sb-loading-shade">
+          <div class="embed-responsive-item">
             <sb-no-video></sb-no-video>
           </div>
         </ng-template>

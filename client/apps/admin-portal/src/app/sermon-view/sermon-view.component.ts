@@ -16,6 +16,7 @@ import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core
 export class SermonViewComponent implements OnInit {
   isMobile = this.breakpointService.isMobile();
   isTablet = this.breakpointService.isTablet();
+  isLoadingMedia$ = this.mediaFacade.mediaLoading$;
   sermon$: Observable<Sermon> = this.sermonsFacade.aggregatedSermon$.pipe(
     filter((sermon) => !!sermon && !!sermon.sermon_media.length),
     map((sermon) => ({...sermon, sermon_media: this.santizeEmbedCode(sermon.sermon_media)}))
@@ -39,6 +40,7 @@ export class SermonViewComponent implements OnInit {
 
     // loads sermon details
     this.sermonsFacade.loadSermons();
+    console.log(this.isLoadingMedia$);
     this.speakersFacade.loadSpeakersBySermonId(currentSermonId);
     this.mediaFacade.loadMediaBySermonId(currentSermonId);
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
