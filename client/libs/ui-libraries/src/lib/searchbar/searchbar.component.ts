@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatDatepicker } from '@angular/material';
 
 import * as moment from 'moment';
-import { map, takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 
 import { BreakpointService } from '@sb/core-data';
 import { SermonSpeakersFacade } from '@sb/facades/sermon-speakers/sermon-speakers.facade';
@@ -15,16 +14,11 @@ import { SermonSpeakersFacade } from '@sb/facades/sermon-speakers/sermon-speaker
   styleUrls: ['./searchbar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SearchbarComponent implements OnDestroy, OnInit {
+export class SearchbarComponent implements OnInit {
   @ViewChild('picker', { static: false }) datePicker: MatDatepicker<any>;
+
   form: FormGroup;
-  destroy$ = new Subject;
   isMobile: boolean = this.breakpointService.isMobile();
-  categoryOptions = [
-    { name: 'title' },
-    { name: 'speaker' },
-    { name: 'date', icon: 'calendar_today' }
-  ];
 
   constructor (
     private formBuilder: FormBuilder,
@@ -37,34 +31,26 @@ export class SearchbarComponent implements OnDestroy, OnInit {
     this.sermonSpeakersFacade.loadSermonSpeakers();
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
-  }
-
-  search() {
+  searchSermons() {
     this.sermonSpeakersFacade.searchSermons(this.form.value);
   }
 
-  selectCustom(searchType: string, index = 0) {
+  selectCustom({ searchType, index }) {
     const datepickerOption = 2;
-
-    this.form.patchValue({ searchType });
 
     if (index === datepickerOption) {
       this.patchSelectedDate();
+
+      return;
     }
+
+    this.form.patchValue({ searchType });
   }
 
-  clear(formDirective: NgForm, event: MouseEvent) {
+  clear(formDirective: NgForm) {
     formDirective.resetForm();
     this.form.patchValue({ searchType: 'title', searchQuery: '' });
     this.searchSermons();
-    this.stopEventBubbling(event);
-  }
-
-  stopEventBubbling(event: MouseEvent) {
-    event.stopImmediatePropagation();
   }
 
   private initForm() {
@@ -78,14 +64,9 @@ export class SearchbarComponent implements OnDestroy, OnInit {
     this.datePicker.open();
     this.datePicker.closedStream.pipe(
       map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
-      map((formattedDate: string) => ({formattedDate, searchQueryGroup: this.form.get('searchQuery')})),
-      tap(({formattedDate, searchQueryGroup}) => searchQueryGroup.patchValue(formattedDate)),
+      tap((formattedDate) => this.form.get('searchQuery').patchValue(formattedDate)),
       tap(() => this.searchSermons()),
-      takeUntil(this.destroy$)
+      take(1)
     ).subscribe();
-  }
-
-  private searchSermons() {
-    this.sermonSpeakersFacade.searchSermons(this.form.value);
   }
 }

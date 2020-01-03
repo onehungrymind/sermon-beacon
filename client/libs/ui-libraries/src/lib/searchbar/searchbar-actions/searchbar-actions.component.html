@@ -1,0 +1,25 @@
+<div class="d-flex text-base cursor-pointer">
+  <span class="align-self-center fs-14 text-medium">Sermon {{group.get('searchType').value | titlecase}}</span>
+  <!-- Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let category of categoryOptions; index as i;" (click)="select(category.name, i, $event)">
+      {{category.name | titlecase}}
+      <mat-icon *ngIf="category.icon">
+        {{category.icon}}
+      </mat-icon>
+    </button>
+  </mat-menu>
+
+  <!-- Menu Trigger -->
+  <button mat-icon-button type="button" [matMenuTriggerFor]="menu" (click)="stopEventBubbling($event)">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+
+  <!-- Action Buttons -->
+  <button mat-icon-button type="submit" (click)="stopEventBubbling($event)">
+    <mat-icon>search</mat-icon>
+  </button>
+  <button mat-icon-button (click)="clear($event)">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>

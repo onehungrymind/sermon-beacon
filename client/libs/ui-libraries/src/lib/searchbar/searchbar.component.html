@@ -1,38 +1,17 @@
 <div class="searchbar-component">
-  <form [formGroup]="form" #formDirective="ngForm" (submit)="search()" class="d-flex justify-content-center w-100 mt-1">
+  <form [formGroup]="form" #formDirective="ngForm" (submit)="searchSermons()" class="d-flex justify-content-center w-100 mt-1">
     <mat-form-field appearance="legacy" floatLabel="never" [class]="isMobile ? 'w-100' : 'w-50'">
-      <!-- Input -->
       <input matInput type="text" placeholder="Search..." class="fs-22 py-3 pr-2" formControlName="searchQuery" />
-      <!-- Date Picker -->
+
       <input [matDatepicker]="picker" type="hidden">
       <mat-datepicker #picker></mat-datepicker>
 
-      <div matSuffix class="d-flex text-base cursor-pointer">
-        <span class="align-self-center fs-14 text-medium">Sermon {{form.get('searchType').value | titlecase}}</span>
-        <!-- Menu -->
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item *ngFor="let category of categoryOptions; index as i;"
-            (click)="selectCustom(category.name, i)">
-            {{category.name | titlecase}}
-            <mat-icon *ngIf="category.icon">
-              {{category.icon}}
-            </mat-icon>
-          </button>
-        </mat-menu>
 
-        <!-- Menu Trigger -->
-        <button mat-icon-button type="button" class="fs-22" [matMenuTriggerFor]="menu" (click)="stopEventBubbling($event)">
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        </button>
-
-        <!-- Action Buttons -->
-        <button mat-icon-button type="submit" class="fs-22" (click)="stopEventBubbling($event)">
-          <mat-icon>search</mat-icon>
-        </button>
-        <button mat-icon-button class="fs-22" (click)="clear(formDirective, $event)">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </div>
+      <sb-searchbar-actions matSuffix
+                            [group]="form"
+                            (selected)="selectCustom($event)"
+                            (cleared)="clear(formDirective)">
+      </sb-searchbar-actions>
     </mat-form-field>
   </form>
 </div>
