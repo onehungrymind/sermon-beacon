@@ -8,11 +8,12 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { environment } from '@env/environment';
+import { token_name } from './auth/auth.service';
 
 const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem(token_name);
   const auth = setContext((operation, context) => ({
     headers: token ? {
       Authorization:  `Bearer ${token}`
