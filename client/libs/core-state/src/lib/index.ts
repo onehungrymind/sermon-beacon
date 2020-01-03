@@ -51,13 +51,3 @@ export const selectAggregatedSermon = createSelector(
   selectedTags,
   buildAggregatedSermon
 );
-
-export const selectSermonWithSpeakers = createSelector(
-  selectAllSermons,
-  selectAllSermonSpeakers,
-  (sermons, speakers) => sermons.map((sermon) => {
-    const sermon_speakers = speakers.filter((speaker) => sermon.id === speaker.sermon_id);
-
-    return { ...sermon, sermon_speakers };
-  })
-);

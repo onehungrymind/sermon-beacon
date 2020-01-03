@@ -4,7 +4,7 @@ import { MatPaginator, MatSort } from '@angular/material';
 
 import * as moment from 'moment';
 
-import { Sermon, Speaker } from '@sb/core-data';
+import { Sermon, SermonSpeaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
 
 @Component({
@@ -14,7 +14,7 @@ import { TableDataSource } from '@sb/material';
   encapsulation: ViewEncapsulation.None
 })
 export class SermonTableComponent implements OnChanges {
-  @Input() sermons: Sermon[];
+  @Input() sermons: SermonSpeaker[];
   @Input() isAuthenticated: boolean;
   @Input() isLoading: boolean;
 
@@ -29,10 +29,10 @@ export class SermonTableComponent implements OnChanges {
   adminColumns = [...this.displayedColumns, 'actions'];
   spacerColumns = ['create-action', 'space1', 'space2', 'space3', 'space4'];
   sermonColumns = [
-    { column: 'title', title: 'Title', cell: (sermon: Sermon) => sermon.title },
-    { column: 'subject', title: 'Subject', cell: (sermon: Sermon) => sermon.subject },
-    { column: 'speakers', title: 'Speakers', cell: (sermon: Sermon) => this.displaySermonSpeakers(sermon) },
-    { column: 'date', title: 'Date', cell: (sermon: Sermon) => moment(sermon.date).format('MMM DD, YYYY') },
+    { column: 'title', title: 'Title', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.title },
+    { column: 'subject', title: 'Subject', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.subject },
+    { column: 'speakers', title: 'Speakers', cell: (sermonSpeaker: SermonSpeaker) => sermonSpeaker.sermon.sermon_speakers },
+    { column: 'date', title: 'Date', cell: (sermonSpeaker: SermonSpeaker) => moment(sermonSpeaker.sermon.date).format('MMM DD, YYYY') },
   ];
 
   constructor (private router: Router) { }
@@ -53,11 +53,5 @@ export class SermonTableComponent implements OnChanges {
 
   viewSermon(sermonId: string) {
     this.router.navigate(['sermon', sermonId]);
-  }
-
-  private displaySermonSpeakers(sermon: Sermon) {
-    // TODO: display only one speaker, if multiple add ellipsis with a tooltip displaying all other speakers.
-    return sermon.sermon_speakers
-      .map((speaker: Speaker) => speaker.name);
   }
 }

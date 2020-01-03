@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreakpointService } from '@sb/core-data';
 
 @Component({
   selector: 'sb-no-video',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./no-video.component.scss']
 })
 export class NoVideoComponent implements OnInit {
+  isMobile: boolean = this.breakpointService.isMobile();
 
-  constructor() { }
+  constructor(private breakpointService: BreakpointService) { }
 
   ngOnInit() {
   }

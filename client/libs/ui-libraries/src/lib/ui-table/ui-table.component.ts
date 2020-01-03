@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -12,7 +12,8 @@ interface UiTableColumn {
 @Component({
   selector: 'sb-ui-table',
   templateUrl: './ui-table.component.html',
-  styleUrls: ['./ui-table.component.scss']
+  styleUrls: ['./ui-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class UiTableComponent implements AfterViewInit, OnChanges {
