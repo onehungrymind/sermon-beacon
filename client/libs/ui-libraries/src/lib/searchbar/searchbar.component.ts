@@ -64,7 +64,7 @@ export class SearchbarComponent implements OnInit {
     this.datePicker.open();
     this.datePicker.closedStream.pipe(
       map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
-      tap((formattedDate) => this.form.get('searchQuery').patchValue(formattedDate)),
+      tap((formattedDate) => this.form.patchValue({searchType: 'date', searchQuery: formattedDate})),
       tap(() => this.searchSermons()),
       take(1)
     ).subscribe();
