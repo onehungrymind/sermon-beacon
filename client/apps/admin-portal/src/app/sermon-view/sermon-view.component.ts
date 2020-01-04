@@ -16,11 +16,12 @@ import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core
 export class SermonViewComponent implements OnInit {
   isMobile = this.breakpointService.isMobile();
   isTablet = this.breakpointService.isTablet();
-  isLoadingMedia$ = this.mediaFacade.mediaLoading$;
-  sermon$: Observable<Sermon> = this.sermonsFacade.aggregatedSermon$.pipe(
-    filter((sermon) => !!sermon && !!sermon.sermon_media.length),
-    map((sermon) => ({...sermon, sermon_media: this.santizeEmbedCode(sermon.sermon_media)}))
+  sermon$: Observable<Sermon> = this.sermonsFacade.aggregatedSermon$;
+  video$: Observable<Media> = this.mediaFacade.videoMedia$.pipe(
+    filter((media) => media && media.embedCode),
+    map((media) => ({...media, embedCode: this.sanitizer.bypassSecurityTrustHtml(media.embedCode)}))
   );
+  videoLoading$: Observable<Boolean> = this.mediaFacade.mediaLoading$;
 
   constructor(
     private breakpointService: BreakpointService,
@@ -40,7 +41,6 @@ export class SermonViewComponent implements OnInit {
 
     // loads sermon details
     this.sermonsFacade.loadSermons();
-    console.log(this.isLoadingMedia$);
     this.speakersFacade.loadSpeakersBySermonId(currentSermonId);
     this.mediaFacade.loadMediaBySermonId(currentSermonId);
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
@@ -69,10 +69,5 @@ export class SermonViewComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl('/');
-  }
-
-  private santizeEmbedCode(media: Media[]) {
-    return media.map((m: Media) =>
-      ({...m, embedCode: this.sanitizer.bypassSecurityTrustHtml(m && m.embedCode)}));
   }
 }

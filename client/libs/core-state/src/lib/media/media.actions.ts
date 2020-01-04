@@ -10,6 +10,8 @@ export const mediaSelected = createAction(
 // Load Actions
 export const loadMedia = createAction('[MEDIA] Load Media');
 
+export const loadVideo = createAction('[MEDIA] Load Video');
+
 export const loadMediaBySermonId = createAction(
   '[MEDIA] Load Media By Sermon Id',
   props<{ sermonId: string }>()
