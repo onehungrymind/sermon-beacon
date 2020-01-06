@@ -5,6 +5,7 @@ import {
   mediaAdapter,
   MediaState
 } from './media.reducer';
+import { MediaTypes } from '@sb/core-data';
 
 // Lookup the 'Media' feature state managed by NgRx
 export const selectMediaState = createFeatureSelector<MediaState>(MEDIA_FEATURE_KEY);
@@ -19,6 +20,11 @@ export const selectMediaLoading = createSelector(
 export const selectAllMedia = createSelector(
   selectMediaState,
   (state: MediaState) => selectAll(state)
+);
+
+export const selectVideoMedia = createSelector(
+  selectAllMedia,
+  (media) => media.find((m) => m.type === MediaTypes.VIDEO)
 );
 
 export const selectMediaEntities = createSelector(
