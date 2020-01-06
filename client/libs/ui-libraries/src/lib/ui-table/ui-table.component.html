@@ -81,7 +81,7 @@
       </table>
       <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
       <mat-paginator #paginator [length]="data?.length" [pageIndex]="0" [pageSize]="10"
-        [pageSizeOptions]="[2, 4, 6, 50, 100, 250]">
+        [pageSizeOptions]="[25, 50, 100, 250]">
       </mat-paginator>
     </div>
   </div>
