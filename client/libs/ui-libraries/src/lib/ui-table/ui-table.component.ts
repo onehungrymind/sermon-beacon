@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { TableDataSource } from '@sb/material';
-import { NotifyService } from '@sb/ui-libraries';
 
 interface UiTableColumn {
   columnDef: string;
@@ -29,7 +28,6 @@ export class UiTableComponent implements OnChanges {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  @ViewChild('saveBtn', { static: true }) saveBtn;
 
   creatingRow: boolean;
   editing: boolean;
@@ -39,7 +37,7 @@ export class UiTableComponent implements OnChanges {
   spacerColumns = ['createAction', 'space1', 'space2', 'space3'];
   dataSource: TableDataSource;
 
-  constructor(private formBuilder: FormBuilder, private notifyService: NotifyService) { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges) {
     setTimeout(() => {
@@ -89,13 +87,8 @@ export class UiTableComponent implements OnChanges {
     if (this.form.controls['name'].value === '') {
       this.isDisabled = true;
     } else {
-      console.log('sad');
       this.isDisabled = false;
     }
-    console.log(this.form.controls['name'].value, 'VALUE');
-    console.log('DIRTY?', this.form.dirty);
-    console.log('PRISTINE', this.form.pristine);
-    console.log('STATUS', this.form.status);
   }
 
   deleteRow(feature: { [key: string]: string }) {
@@ -116,7 +109,7 @@ export class UiTableComponent implements OnChanges {
   private initForm(tableColumns: UiTableColumn[]) {
     const formGroup = tableColumns.reduce((acc, curr) => {
       return curr ? { ...acc, [curr.columnDef]: [null] } : { ...acc };
-    }, {id: null});
+    }, { id: null });
     this.form = this.formBuilder.group(formGroup);
   }
 }
