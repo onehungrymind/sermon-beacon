@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -7,7 +7,6 @@ import { filter, map } from 'rxjs/operators';
 
 import { BreakpointService, Media, MediaTypes, Sermon } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
-import { NotifyService } from '@sb/ui-libraries';
 
 @Component({
   selector: 'app-sermon-view',
@@ -25,7 +24,7 @@ export class SermonViewComponent implements OnInit {
   constructor(
     private breakpointService: BreakpointService,
     private mediaFacade: MediaFacade,
-    private notifyService: NotifyService,
+    private router: Router,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private sermonsFacade: SermonsFacade,
@@ -45,23 +44,6 @@ export class SermonViewComponent implements OnInit {
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
   }
 
-  handleMediaAction(media: Media) {
-    switch(media.type) {
-      case MediaTypes.AUDIO: {
-        return this.listenToAudio();
-      }
-      case MediaTypes.NOTES: {
-        return this.downloadNotes();
-      }
-      case MediaTypes.VIDEO: {
-        return this.downloadVideo();
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
   getMediaIcon(media: Media) {
     switch(media.type) {
       case MediaTypes.AUDIO: {
@@ -79,16 +61,12 @@ export class SermonViewComponent implements OnInit {
     }
   }
 
-  downloadVideo() {
-    return this.notifyService.openSnackBar('The sermon is downloading!');
+  handleMediaAction(mediaItemUrl: string) {
+    window.open(mediaItemUrl, '_blank');
   }
 
-  listenToAudio() {
-    return this.notifyService.openSnackBar('The sermon audio is playing!');
-  }
-
-  downloadNotes() {
-    return this.notifyService.openSnackBar('The sermon notes are downloading!');
+  goBack() {
+    this.router.navigateByUrl('/');
   }
 
   private santizeEmbedCode(media: Media[]) {

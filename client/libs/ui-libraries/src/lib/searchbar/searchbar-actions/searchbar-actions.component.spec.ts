@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SermonsDialogComponent } from './sermons-dialog.component';
+import { SearchbarActionsComponent } from './searchbar-actions.component';
 
-describe('SermonsDialogComponent', () => {
-  let component: SermonsDialogComponent;
-  let fixture: ComponentFixture<SermonsDialogComponent>;
+describe('SearchbarActionsComponent', () => {
+  let component: SearchbarActionsComponent;
+  let fixture: ComponentFixture<SearchbarActionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SermonsDialogComponent ]
+      declarations: [ SearchbarActionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SermonsDialogComponent);
+    fixture = TestBed.createComponent(SearchbarActionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
