@@ -57,7 +57,7 @@
                 <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
               </button>
 
-              <button mat-button [disabled]="isDisabled" class="px-0 mw-25" *ngIf="editing && editingIndex == i"
+              <button mat-button [disabled]="isDisabled" class="px-0 mw-25" *ngIf="editing && editingIndex === i"
                 (click)="saveRow()">
                 <mat-icon class="material-icons-outlined mw-25 text-accent px-0">save</mat-icon>
               </button>

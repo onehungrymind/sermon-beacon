@@ -84,7 +84,7 @@ export class UiTableComponent implements OnChanges {
   }
 
   checkIfInputIsEmpty() {
-    if (this.form.controls['name'].value === '') {
+    if (!this.form.get('name').value) {
       this.isDisabled = true;
     } else {
       this.isDisabled = false;
