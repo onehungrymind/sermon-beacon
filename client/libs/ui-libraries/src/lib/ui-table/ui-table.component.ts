@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { TableDataSource } from '@sb/material';
+import { NotifyService } from '@sb/ui-libraries';
 
 interface UiTableColumn {
   columnDef: string;
@@ -16,7 +17,7 @@ interface UiTableColumn {
   encapsulation: ViewEncapsulation.None
 })
 
-export class UiTableComponent implements AfterViewInit, OnChanges {
+export class UiTableComponent implements OnChanges {
   @Input() tableColumns: UiTableColumn[];
   @Input() data: { [key: string]: string }[];
   @Input() actionsEnabled: boolean;
@@ -28,15 +29,17 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild('saveBtn', { static: true }) saveBtn;
 
   creatingRow: boolean;
   editing: boolean;
   editingIndex: number;
+  isDisabled: boolean;
   form: FormGroup;
   spacerColumns = ['createAction', 'space1', 'space2', 'space3'];
   dataSource: TableDataSource;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private notifyService: NotifyService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     setTimeout(() => {
@@ -48,9 +51,6 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
     this.form.reset();
   }
 
-  ngAfterViewInit() {
-  }
-
   mapTableColumnsToDisplyedColumns(tableColumns: UiTableColumn[], actionsEnabled: boolean): string[] {
     const actionColumn = actionsEnabled ? ['actions'] : [];
 
@@ -59,11 +59,12 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
 
   createRow() {
     this.creatingRow = true;
-    this.data = [{}, ...this.data];
-    if (this.creatingRow) {
-      this.editing = true;
-      this.editingIndex = 0;
-    }
+    this.data = [...this.data, {}];
+    this.dataSource.data = this.data;
+    this.editing = true;
+    this.editingIndex = 0;
+    this.paginator._changePageSize(this.paginator.pageSize);
+    this.isDisabled = true;
   }
 
   updateRow(row: { [key: string]: string }, i: number) {
@@ -84,9 +85,23 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  checkIfInputIsEmpty() {
+    if (this.form.controls['name'].value === '') {
+      this.isDisabled = true;
+    } else {
+      console.log('sad');
+      this.isDisabled = false;
+    }
+    console.log(this.form.controls['name'].value, 'VALUE');
+    console.log('DIRTY?', this.form.dirty);
+    console.log('PRISTINE', this.form.pristine);
+    console.log('STATUS', this.form.status);
+  }
+
   deleteRow(feature: { [key: string]: string }) {
     if (this.editing && this.creatingRow) {
-      this.data = this.data.slice(1);
+      this.data.pop();
+      this.paginator._changePageSize(this.paginator.pageSize);
     }
 
     if (this.editing) {
@@ -95,12 +110,13 @@ export class UiTableComponent implements AfterViewInit, OnChanges {
     } else if (feature.id) {
       this.deleted.emit(feature);
     }
+    this.form.reset();
   }
 
   private initForm(tableColumns: UiTableColumn[]) {
     const formGroup = tableColumns.reduce((acc, curr) => {
       return curr ? { ...acc, [curr.columnDef]: [null] } : { ...acc };
-    }, { id: null });
+    }, {id: null});
     this.form = this.formBuilder.group(formGroup);
   }
 }
