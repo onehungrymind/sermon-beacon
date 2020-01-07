@@ -48,7 +48,7 @@
     "@ngrx/router-store": "^8.5.2",
     "@ngrx/store": "^8.5.2",
     "@ngrx/store-devtools": "^8.5.2",
-    "@nrwl/angular": "8.9.0",
+    "@nrwl/angular": "8.10.1",
     "apollo-angular": "^1.8.0",
     "apollo-angular-link-http": "^1.9.0",
     "apollo-cache-inmemory": "^1.6.3",
@@ -76,19 +76,19 @@
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@ngrx/schematics": "^8.5.2",
-    "@nrwl/cypress": "8.9.0",
-    "@nrwl/jest": "8.9.0",
-    "@nrwl/workspace": "8.9.0",
+    "@nrwl/cypress": "8.10.1",
+    "@nrwl/jest": "8.10.1",
+    "@nrwl/workspace": "8.10.1",
     "@types/jest": "24.0.9",
     "@types/lodash": "^4.14.149",
     "@types/node": "~8.9.4",
     "codelyzer": "~5.0.1",
-    "cypress": "3.4.1",
+    "cypress": "3.6.1",
     "dotenv": "6.2.0",
     "eslint": "6.1.0",
     "husky": "^3.1.0",
     "jest": "24.1.0",
-    "jest-preset-angular": "7.0.0",
+    "jest-preset-angular": "8.0.0",
     "prettier": "1.18.2",
     "pretty-quick": "^2.0.1",
     "prompt-cli": "^0.2.1",
@@ -102,9 +102,5 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "ng lint"
     }
-  },
-  "resolutions": {
-    "braces": "^2.3.1",
-    "serialize-javascript": "^2.1.1"
   }
 }

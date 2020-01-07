@@ -12,6 +12,7 @@ export class MediaFacade {
   allMedia$ = this.store.pipe(select(MediaSelectors.selectAllMedia));
   selectedMedia$ = this.store.pipe(select(MediaSelectors.selectMedia));
   mediaLoading$ = this.store.pipe(select(MediaSelectors.selectMediaLoading));
+  videoMedia$ = this.store.pipe(select(MediaSelectors.selectVideoMedia));
 
   constructor(private store: Store<fromMedia.MediaPartialState>) {}
 
