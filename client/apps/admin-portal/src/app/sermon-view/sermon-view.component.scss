@@ -1,5 +1,17 @@
 @import 'libs/theme/main';
 
+.back-arrow-position {
+  position: fixed;
+}
+
+@media only screen and (max-width: 1252px) {
+
+  .back-arrow-position {
+    position: static;
+    padding-top: 15px;
+  }
+}
+
 .mat-standard-chip {
   min-height: 30px;
 }
