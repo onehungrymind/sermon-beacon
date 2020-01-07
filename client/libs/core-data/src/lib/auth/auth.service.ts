@@ -8,8 +8,11 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 const config = {
   domain: 'helpq.auth0.com',
   client_id: '5cv0V1XciTFKSQ9b4qc7JMgcjjyD97zK',
-  redirect_uri: `${window.location.origin}/callback`
+  redirect_uri: `${window.location.origin}/callback`,
+  token_name: 'auth0:id_token'
 };
+
+export const { token_name } = config;
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +45,7 @@ export class AuthService {
 
   getUser$(options?): Observable<any> {
     return this.auth0Client$.pipe(
-      tap((res: any) => localStorage.setItem('accessToken', res.cache.cache['default::openid profile email'].id_token)),
+      tap((res: any) => localStorage.setItem(config.token_name, res.cache.cache['default::openid profile email'].id_token)),
       concatMap((client: Auth0Client) => from(client.getUser(options))),
     );
   }
@@ -104,6 +107,7 @@ export class AuthService {
         client_id: config.client_id,
         returnTo: `${window.location.origin}`
       });
+      localStorage.removeItem(config.token_name);
     });
   }
 }

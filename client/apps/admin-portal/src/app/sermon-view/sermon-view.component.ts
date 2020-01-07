@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -7,7 +7,6 @@ import { filter, map } from 'rxjs/operators';
 
 import { BreakpointService, Media, MediaTypes, Sermon } from '@sb/core-data';
 import { MediaFacade, SermonsFacade, SpeakersFacade, TagsFacade } from '@sb/core-state';
-import { NotifyService } from '@sb/ui-libraries';
 
 @Component({
   selector: 'app-sermon-view',
@@ -17,15 +16,17 @@ import { NotifyService } from '@sb/ui-libraries';
 export class SermonViewComponent implements OnInit {
   isMobile = this.breakpointService.isMobile();
   isTablet = this.breakpointService.isTablet();
-  sermon$: Observable<Sermon> = this.sermonsFacade.aggregatedSermon$.pipe(
-    filter((sermon) => !!sermon && !!sermon.sermon_media.length),
-    map((sermon) => ({...sermon, sermon_media: this.santizeEmbedCode(sermon.sermon_media)}))
+  sermon$: Observable<Sermon> = this.sermonsFacade.aggregatedSermon$;
+  video$: Observable<Media> = this.mediaFacade.videoMedia$.pipe(
+    filter((media) => media && media.embedCode),
+    map((media) => ({...media, embedCode: this.sanitizer.bypassSecurityTrustHtml(media.embedCode)}))
   );
+  videoLoading$: Observable<Boolean> = this.mediaFacade.mediaLoading$;
 
   constructor(
     private breakpointService: BreakpointService,
     private mediaFacade: MediaFacade,
-    private notifyService: NotifyService,
+    private router: Router,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private sermonsFacade: SermonsFacade,
@@ -45,23 +46,6 @@ export class SermonViewComponent implements OnInit {
     this.tagsFacade.loadTagsBySermonId(currentSermonId);
   }
 
-  handleMediaAction(media: Media) {
-    switch(media.type) {
-      case MediaTypes.AUDIO: {
-        return this.listenToAudio();
-      }
-      case MediaTypes.NOTES: {
-        return this.downloadNotes();
-      }
-      case MediaTypes.VIDEO: {
-        return this.downloadVideo();
-      }
-      default: {
-        break;
-      }
-    }
-  }
-
   getMediaIcon(media: Media) {
     switch(media.type) {
       case MediaTypes.AUDIO: {
@@ -79,20 +63,11 @@ export class SermonViewComponent implements OnInit {
     }
   }
 
-  downloadVideo() {
-    return this.notifyService.openSnackBar('The sermon is downloading!');
+  handleMediaAction(mediaItemUrl: string) {
+    window.open(mediaItemUrl, '_blank');
   }
 
-  listenToAudio() {
-    return this.notifyService.openSnackBar('The sermon audio is playing!');
-  }
-
-  downloadNotes() {
-    return this.notifyService.openSnackBar('The sermon notes are downloading!');
-  }
-
-  private santizeEmbedCode(media: Media[]) {
-    return media.map((m: Media) =>
-      ({...m, embedCode: this.sanitizer.bypassSecurityTrustHtml(m && m.embedCode)}));
+  goBack() {
+    this.router.navigateByUrl('/');
   }
 }
