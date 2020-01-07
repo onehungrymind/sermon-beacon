@@ -6,14 +6,18 @@
       "attribute",
       "sb",
       "camelCase",
-      { "exclude": "./src/app/app.component.ts" }
+      {
+        "exclude": "./src/app/app.component.ts"
+      }
     ],
     "component-selector": [
       true,
       "element",
       "sb",
       "kebab-case",
-      { "exclude": "./src/app/app.component.ts" }
+      {
+        "exclude": "./src/app/app.component.ts"
+      }
     ]
   }
 }
