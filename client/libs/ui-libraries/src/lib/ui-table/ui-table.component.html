@@ -9,7 +9,8 @@
         <ng-container [matColumnDef]="spacer" *ngFor="let spacer of spacerColumns; index as i">
           <th mat-header-cell *matHeaderCellDef class="p-0">
             <div class="d-flex" *ngIf="i === 0">
-              <button mat-button class="px-1 create-btn" (click)="createRow()" [disabled]="editing && creatingRow">
+              <button mat-button class="px-1 create-btn" (click)="createRow()"
+                [disabled]="editing && creatingRow || editing">
                 <mat-icon class="text-accent">add</mat-icon>
               </button>
               <p class="text-medium fs-16">Click here to add a new Sermon...</p>
@@ -36,7 +37,7 @@
                 <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && !creatingRow"
                   class="editing fs-20" placeholder={{row[column.columnDef]}}>
                 <input [formControlName]="[column.columnDef]" *ngIf="editing && editingIndex === i && creatingRow"
-                  class="editing fs-20" placeholder="Type here...">
+                  class="editing fs-20" placeholder="Type here..." (keyup)="checkIfInputIsEmpty()" (blur)="checkIfInputIsEmpty()">
               </form>
             </ng-template>
 
@@ -56,11 +57,14 @@
                 <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
               </button>
 
-              <button mat-button class="px-0 mw-25" *ngIf="editing && editingIndex == i" (click)="saveRow()">
+              <button mat-button [disabled]="isDisabled" class="px-0 mw-25" *ngIf="editing && editingIndex === i"
+                (click)="saveRow()">
                 <mat-icon class="material-icons-outlined mw-25 text-accent px-0">save</mat-icon>
               </button>
 
-              <button mat-button class="px-0 delete-btn mw-25" (click)="deleteRow(row)">
+              <button mat-button class="px-0 delete-btn mw-25"
+                *ngIf="i != editingIndex && editingIndex == null || editingIndex == i && editing"
+                (click)="deleteRow(row)">
                 <mat-icon class="material-icons-outlined mw-25 text-secondary px-0">close</mat-icon>
               </button>
 
