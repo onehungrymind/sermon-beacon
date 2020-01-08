@@ -44,11 +44,7 @@ export class SermonsComponent implements OnInit {
       data: { ...sermonSpeaker.sermon }
     });
 
-    return ref.afterClosed().subscribe(() => {
-      this.sermonFacade.loadSermons();
-      this.speakersFacade.loadSpeakers();
-      this.sermonSpeakersFacade.loadSermonSpeakers();
-    });
+    return ref.afterClosed();
   }
 
   deleteSermon(sermon: Sermon) {
@@ -67,7 +63,7 @@ export class SermonsComponent implements OnInit {
     this.speakersFacade.updateSpeaker(speaker);
   }
 
-  deletSpeaker(speaker: Speaker) {
+  deleteSpeaker(speaker: Speaker) {
     this.speakersFacade.deleteSpeaker(speaker);
   }
 }
