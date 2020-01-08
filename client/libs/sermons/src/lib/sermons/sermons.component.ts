@@ -63,7 +63,7 @@ export class SermonsComponent implements OnInit {
     this.speakersFacade.updateSpeaker(speaker);
   }
 
-  deletSpeaker(speaker: Speaker) {
+  deleteSpeaker(speaker: Speaker) {
     this.speakersFacade.deleteSpeaker(speaker);
   }
 }

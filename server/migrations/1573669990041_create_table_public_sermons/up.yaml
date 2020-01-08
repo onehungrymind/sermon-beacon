@@ -3,7 +3,7 @@
   type: run_sql
 - args:
     sql: "CREATE TABLE \"public\".\"sermons\"(\"id\" uuid NOT NULL DEFAULT gen_random_uuid(),
-      \"title\" text NOT NULL, \"subject\" text, \"date\" date, \"created_at\" timestamptz
+      \"title\" text NOT NULL, \"subject\" text, \"date\" timestamptz, \"created_at\" timestamptz
       NOT NULL DEFAULT now(), \"updated_at\" timestamptz NOT NULL DEFAULT now(), PRIMARY
       KEY (\"id\") );\nCREATE OR REPLACE FUNCTION \"public\".\"set_current_timestamp_updated_at\"()\nRETURNS
       TRIGGER AS $$\nDECLARE\n  _new record;\nBEGIN\n  _new := NEW;\n  _new.\"updated_at\"
