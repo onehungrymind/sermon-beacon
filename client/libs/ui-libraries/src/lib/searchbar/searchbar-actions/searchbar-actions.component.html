@@ -11,15 +11,15 @@
   </mat-menu>
 
   <!-- Menu Trigger -->
-  <button mat-icon-button type="button" class="fs-22" [matMenuTriggerFor]="menu" (click)="stopEventBubbling($event)">
+  <button mat-icon-button type="button" class="fs-22" [matMenuTriggerFor]="menu">
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
 
   <!-- Action Buttons -->
-  <button mat-icon-button type="submit" class="fs-22" (click)="stopEventBubbling($event)">
+  <button mat-icon-button type="submit" class="fs-22">
     <mat-icon>search</mat-icon>
   </button>
-  <button mat-icon-button class="fs-22" (click)="clear($event)">
+  <button mat-icon-button class="fs-22" (click)="clear()">
     <mat-icon>clear</mat-icon>
   </button>
 </div>
