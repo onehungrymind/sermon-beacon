@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit, ViewChil
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatTabGroup } from '@angular/material';
 
-import * as moment from 'moment';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
@@ -166,7 +165,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         title: ['', Validators.compose([Validators.required])],
         subject: [''],
         speakerIds: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
-        date: [moment().format('YYYY-MM-DD'), Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
+        date: [new Date(), Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
       }),
       media: this.formBuilder.array([this.mediaGroup()], Validators.required),
       tags: this.formBuilder.group({

@@ -48,6 +48,7 @@ export class SearchbarComponent implements OnInit {
   }
 
   clear(formDirective: NgForm) {
+    this.datePicker.select('');
     formDirective.resetForm();
     this.form.patchValue({ searchType: 'title', searchQuery: '' });
     this.searchSermons();
@@ -64,7 +65,9 @@ export class SearchbarComponent implements OnInit {
     this.datePicker.open();
     this.datePicker.closedStream.pipe(
       map(() => moment(this.datePicker._selected).format('MM/DD/YYYY')),
-      tap((formattedDate) => this.form.patchValue({searchType: 'date', searchQuery: formattedDate})),
+      tap((formattedDate) => {
+        formattedDate === 'Invalid date' ? formattedDate = null : this.form.patchValue({ searchType: 'date', searchQuery: formattedDate });
+      }),
       tap(() => this.searchSermons()),
       take(1)
     ).subscribe();

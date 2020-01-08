@@ -20,18 +20,12 @@ export class SearchbarActionsComponent {
 
   constructor() {}
 
-  select(searchType: string, index = 0, event: MouseEvent) {
+  select(searchType: string, index = 0) {
+    this.group.get('searchType').patchValue(searchType);
     this.selected.emit({ searchType, index });
-    this.stopEventBubbling(event);
   }
 
-  clear(event: MouseEvent) {
+  clear() {
     this.cleared.emit();
-    this.stopEventBubbling(event);
   }
-
-  stopEventBubbling(event: MouseEvent) {
-    event.stopImmediatePropagation();
-  }
-
 }
