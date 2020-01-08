@@ -10,6 +10,8 @@ import * as SermonsActions from './sermons.actions';
 import { Sermon, SermonsService } from '@sb/core-data';
 import { deleteMediaBySermonId } from '../media/media.actions';
 import { DialogService, NotifyService } from '@sb/ui-libraries';
+import { SermonsFacade } from './sermons.facade';
+import { SermonSpeakersFacade } from '../sermon-speakers/sermon-speakers.facade';
 
 @Injectable()
 export class SermonsEffects {
@@ -36,7 +38,8 @@ export class SermonsEffects {
         state: fromSermons.SermonsPartialState
       ) => {
         return this.sermonsService.create(action.sermon).pipe(
-          map((sermon: Sermon) => SermonsActions.sermonCreated({ sermon }))
+          map((sermon: Sermon) => SermonsActions.sermonCreated({ sermon })),
+          tap(() => this.sermonSpeakersFacade.loadSermonSpeakers())
         );
       },
       onError: (action: ReturnType<typeof SermonsActions.createSermon>, error) => {
@@ -72,7 +75,8 @@ export class SermonsEffects {
             iif(() => deleteConfirmed,
               this.sermonsService.delete(action.sermon).pipe(
                 tap((sermon: Sermon) => deleteMediaBySermonId({ sermonId: sermon.id })),
-                map((sermon: Sermon) => SermonsActions.sermonDeleted({ sermon }))
+                map((sermon: Sermon) => SermonsActions.sermonDeleted({ sermon })),
+                tap(() => this.sermonSpeakersFacade.loadSermonSpeakers())
               ),
               of(SermonsActions.sermonMutationCancelled())
             )
@@ -90,6 +94,7 @@ export class SermonsEffects {
     private dataPersistence: DataPersistence<fromSermons.SermonsPartialState>,
     private sermonsService: SermonsService,
     private dialogService: DialogService,
-    private notifyService: NotifyService
+    private notifyService: NotifyService,
+    private sermonSpeakersFacade: SermonSpeakersFacade
   ) {}
 }
