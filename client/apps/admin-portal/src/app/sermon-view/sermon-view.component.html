@@ -26,6 +26,8 @@
           
     </ng-container>
 
+    <div class="d-flex justify-content-between">
+    <div class="d-flex flex-column">
     <!-- Sermon Title -->
       <div class="d-flex align-items-start">
         <mat-card-title class="text-primary mt-1">
@@ -35,35 +37,34 @@
 
     <!-- Sermon Details -->
       <div class="d-flex justify-content-between">
-        <mat-card-subtitle class="d-flex text-base mb-2" [class.fs-20]="!isMobile">
-          <div class="align-self-center text-wrap">
-            <span *ngFor="let speaker of sermon.sermon_speakers; last as last; first as first">
-                {{last && !first ? 'and ' : ''}}
-                {{speaker.name}}{{!last ? ',&nbsp;' : ''}}
-            </span>
-            <span *ngIf="!isMobile; else breakNewLine" class="font-weight-lighter">&nbsp;|&nbsp;</span>
-            <ng-template #breakNewLine><br/></ng-template>
-            <span>{{sermon.date | date: 'MMM dd, yyyy'}}</span>
-          </div>
-        </mat-card-subtitle>
-
-    <!-- Media Buttons -->
-        <div class="text-base mb-2">
-          <span *ngFor="let mediaItem of sermon.sermon_media">
-            <button *ngIf="isMobile; else normalView" mat-button (click)="handleMediaAction(mediaItem.url)" class="mw-38 p-0 fs-10">
-              <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
-            </button>
-            <ng-template #normalView>
-              <button mat-button (click)="handleMediaAction(mediaItem.url)" class="fs-10">
-                <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
-                {{mediaItem.type}}
-              </button>
-            </ng-template>
+      <mat-card-subtitle class="d-flex text-base mb-2" [class.fs-20]="!isMobile">
+        <div class="text-wrap">
+          <span *ngFor="let speaker of sermon.sermon_speakers; last as last; first as first">
+              {{last && !first ? 'and ' : ''}}
+              {{speaker.name}}{{!last ? ',&nbsp;' : ''}}
           </span>
-        </div>      
+          <span *ngIf="!isMobile; else breakNewLine" class="font-weight-lighter">&nbsp;|&nbsp;</span>
+          <ng-template #breakNewLine><br/></ng-template>
+          <span>{{sermon.date | date: 'MMM dd, yyyy'}}</span>
+        </div>
+      </mat-card-subtitle>      
       </div>
+    </div>
     
-    
+    <div class="align-self-center text-base">
+        <span *ngFor="let mediaItem of sermon.sermon_media">
+          <button *ngIf="isMobile; else normalView" mat-button (click)="handleMediaAction(mediaItem.url)" class="mw-38 p-0 fs-10">
+            <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+          </button>
+          <ng-template #normalView>
+            <button mat-button (click)="handleMediaAction(mediaItem.url)" class="fs-10">
+              <mat-icon class="fs-24 mr-1">{{ getMediaIcon(mediaItem) }}</mat-icon>
+              {{mediaItem.type}}
+            </button>
+          </ng-template>
+        </span>
+    </div>
+  </div>
 
     <mat-divider class="mb-3"></mat-divider>
 
