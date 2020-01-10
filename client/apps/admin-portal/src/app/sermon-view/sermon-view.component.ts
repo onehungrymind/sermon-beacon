@@ -51,7 +51,7 @@ export class SermonViewComponent implements OnInit {
       case MediaTypes.AUDIO: {
         return 'graphic_eq';
       }
-      case MediaTypes.NOTES: {
+      case MediaTypes.PDF: {
         return 'notes';
       }
       case MediaTypes.VIDEO: {
