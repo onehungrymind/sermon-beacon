@@ -62,12 +62,9 @@
       </div>
     </div>
 
-    <mat-divider class="mb-3"></mat-divider>
-
     <!-- Sermon Tags -->
     <mat-chip-list [class.mat-chip-list-stacked]="isMobile">
-      <mat-chip *ngFor="let tag of sermon.sermon_tags" color="accent" [class.width0]="isMobile"
-        selected class="sb-primary-border">
+      <mat-chip *ngFor="let tag of sermon.sermon_tags" color="accent" selected class="sb-primary-border">
         {{tag.value}}
       </mat-chip>
     </mat-chip-list>
