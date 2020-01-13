@@ -55,7 +55,7 @@ export class SermonViewComponent implements OnInit {
         return 'notes';
       }
       case MediaTypes.VIDEO: {
-        return 'cloud_download';
+        return 'ondemand_video';
       }
       default: {
         return '';
