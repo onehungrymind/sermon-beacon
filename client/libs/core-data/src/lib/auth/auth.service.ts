@@ -9,7 +9,7 @@ const config = {
   domain: 'helpq.auth0.com',
   client_id: '5cv0V1XciTFKSQ9b4qc7JMgcjjyD97zK',
   redirect_uri: `${window.location.origin}/callback`,
-  token_name: 'auth0:id_token'
+  token_name: 'auth0:SermonBeacon::id_token'
 };
 
 export const { token_name } = config;
@@ -45,7 +45,7 @@ export class AuthService {
 
   getUser$(options?): Observable<any> {
     return this.auth0Client$.pipe(
-      tap((res: any) => localStorage.setItem(config.token_name, res.cache.cache['default::openid profile email'].id_token)),
+      tap((res: any) => this.setToken(res.cache.cache['default::openid profile email'].id_token)),
       concatMap((client: Auth0Client) => from(client.getUser(options))),
     );
   }
@@ -107,7 +107,19 @@ export class AuthService {
         client_id: config.client_id,
         returnTo: `${window.location.origin}`
       });
-      localStorage.removeItem(config.token_name);
+      this.removeToken();
     });
+  }
+
+  getToken() {
+    return localStorage.getItem(config.token_name);
+  }
+
+  private setToken(token: string) {
+    localStorage.setItem(config.token_name, token);
+  }
+
+  private removeToken() {
+    localStorage.removeItem(config.token_name);
   }
 }
