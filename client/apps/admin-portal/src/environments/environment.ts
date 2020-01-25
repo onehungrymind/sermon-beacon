@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  Auth0: {
+    domain: 'helpq.auth0.com',
+    client_id: '5cv0V1XciTFKSQ9b4qc7JMgcjjyD97zK',
+    redirect_uri: `${window.location.origin}/callback`,
+    token_name: 'auth0:SermonBeacon::id_token'
+  }
 };
 
 /*
