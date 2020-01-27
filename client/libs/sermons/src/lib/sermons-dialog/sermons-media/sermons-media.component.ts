@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs';
@@ -12,13 +12,22 @@ import { MediaTypesFacade } from '@sb/core-state';
   styleUrls: ['./sermons-media.component.scss']
 })
 export class SermonsMediaComponent implements OnInit {
+  @Input() index: number;
   @Input() mediaGroup: FormGroup;
+  @Input() mediaArrayLength: number;
+
+  @Output() removedAt = new EventEmitter();
+
   mediaTypes$: Observable<MediaType[]> = this.mediaTypesFacade.allMediaTypes$;
 
   constructor(private mediaTypesFacade: MediaTypesFacade) { }
 
   ngOnInit() {
     this.mediaTypesFacade.loadMediaTypes();
+  }
+
+  removeMediaGroup() {
+    this.removedAt.emit(this.index);
   }
 
 }

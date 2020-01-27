@@ -15,18 +15,19 @@
         </sb-sermons-details>
       </mat-tab>
       <mat-tab label="Sermon Media" [disabled]="!isFormGroupValid('details')">
-        <div formArrayName="media">
-          <!-- Sermon Media Inputs -->
-          <sb-sermons-media *ngFor="let mediaGroup of form.get('media')?.controls"
-                            [mediaGroup]="mediaGroup">
-          </sb-sermons-media>
-          <!-- Add media section -->
-          <div class="d-flex flex-row-reverse">
-            <button mat-icon-button color="primary" (click)="addMediaGroup()">
-              <mat-icon>add</mat-icon>
-            </button>
-            <span class="text-base font-weight-light align-self-center">Add more Media Types.</span>
-          </div>
+        <!-- Sermon Media Inputs -->
+        <sb-sermons-media *ngFor="let mediaGroup of getMediaGroups(); index as i;"
+                          [index]="i"
+                          [mediaArrayLength]="getMediaGroups()?.length"
+                          [mediaGroup]="mediaGroup"
+                          (removedAt)="removeMediaGroup($event)">
+        </sb-sermons-media>
+        <!-- Add media section -->
+        <div class="d-flex flex-row-reverse">
+          <button mat-icon-button color="primary" [disabled]="getMediaGroups()?.length === 3" (click)="addMediaGroup()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <span class="text-base font-weight-light align-self-center">Add more Media Types.</span>
         </div>
       </mat-tab>
       <mat-tab label="Sermon Tags (optional)" [disabled]="!isFormGroupValid('media')">
