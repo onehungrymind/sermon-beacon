@@ -2,8 +2,9 @@
   <sb-searchbar class="w-100"></sb-searchbar>
 </div>
 
-<div class="container w-100">
-  <div class="mat-elevation-z1">
+<div class="container w-100 mb-5">
+  <h2 class="mb-2">Sermons</h2>
+  <div class="mat-elevation-z1">  
     <sb-sermon-table [sermons]="sermonSpeakers$ | async"
                       [isAuthenticated]="isAuthenticated$ | async"
                       [isLoading]="sermonsLoading$ | async"
@@ -13,13 +14,18 @@
   </div>
 </div>
 
-<div class="my-5" *ngIf="isAuthenticated$ | async">
-  <sb-ui-table [data]="speakers$ | async"
-                [tableColumns]="speakerColumns"
-                [actionsEnabled]="true"
-                [isLoading]="speakersLoading$ | async"
-                (created)="createSpeaker($event)"
-                (updated)="updateSpeaker($event)"
-                (deleted)="deleteSpeaker($event)">
-  </sb-ui-table>
+<div class="container w-100">  
+  <h2 class="mb-2">Speakers</h2>
+  <div class="mat-elevation-z1">  
+    <div *ngIf="isAuthenticated$ | async">
+      <sb-ui-table [data]="speakers$ | async"
+        [tableColumns]="speakerColumns"
+        [actionsEnabled]="true"
+        [isLoading]="speakersLoading$ | async"
+        (created)="createSpeaker($event)"
+        (updated)="updateSpeaker($event)"
+        (deleted)="deleteSpeaker($event)">
+      </sb-ui-table>
+    </div>
+  </div>
 </div>
