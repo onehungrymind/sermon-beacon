@@ -9,7 +9,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { environment } from '@env/environment';
 import { TokenInterceptor } from './auth/token.interceptor';
 
-const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://127.0.0.1:8080/v1/graphql';
+const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
   return {
