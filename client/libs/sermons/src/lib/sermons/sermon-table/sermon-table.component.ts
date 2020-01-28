@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatPaginator, MatSort } from '@angular/material';
+import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 
-import { Sermon, SermonSpeaker } from '@sb/core-data';
 import { TableDataSource } from '@sb/material';
+import { Sermon, SermonSpeaker } from '@sb/core-data';
 
 @Component({
   selector: 'sb-sermon-table',
