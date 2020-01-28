@@ -1,29 +1,19 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { ApolloLink } from 'apollo-link';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
-import { setContext } from 'apollo-link-context';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { environment } from '@env/environment';
-import { token_name } from './auth/auth.service';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 const uri = environment.production ? 'https://server-beacon.herokuapp.com/v1/graphql' : 'http://0.0.0.0:8080/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
-  const token = localStorage.getItem(token_name);
-  const auth = setContext((operation, context) => ({
-    headers: token ? {
-      Authorization:  `Bearer ${token}`
-    } : {
-      'X-Hasura-Role': 'anonymous',
-    },
-  }));
-
   return {
-    link: ApolloLink.from([auth, httpLink.create({ uri })]),
+    link: httpLink.create({ uri }),
     cache: new InMemoryCache()
   };
 }
@@ -31,6 +21,11 @@ export function createApollo(httpLink: HttpLink) {
 @NgModule({
   imports: [HttpClientModule],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,

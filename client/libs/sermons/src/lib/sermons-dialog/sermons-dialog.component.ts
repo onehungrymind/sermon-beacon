@@ -79,6 +79,14 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
     media.push(this.mediaGroup());
   }
 
+  removeMediaGroup(mediaGroupIndex: number) {
+    (<FormArray>this.form.get('media')).removeAt(mediaGroupIndex);
+  }
+
+  getMediaGroups() {
+    return (<FormArray>this.form.get('media')).controls;
+  }
+
   cancel() {
     this.sermonFacade.cancelSermonMutation();
   }
@@ -159,6 +167,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
   }
 
   private initForm() {
+    const maxMediaGroups = 3;
     this.form = this.formBuilder.group({
       details: this.formBuilder.group({
         id: null,
@@ -167,7 +176,7 @@ export class SermonsDialogComponent implements OnDestroy, OnInit {
         speakerIds: [[], Validators.compose([Validators.required])],  // Note: Not required for the backend, just frontend
         date: [new Date(), Validators.compose([Validators.required])] // Note: Not required for the backend, just frontend
       }),
-      media: this.formBuilder.array([this.mediaGroup()], Validators.required),
+      media: this.formBuilder.array([this.mediaGroup()], Validators.compose([Validators.required, Validators.maxLength(maxMediaGroups)])),
       tags: this.formBuilder.group({
         tags: [[]]
       })

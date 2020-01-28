@@ -8,7 +8,7 @@ export interface MediaType {
 
 export enum MediaTypes {
   AUDIO = 'AUDIO',
-  NOTES = 'NOTES',
+  PDF = 'PDF',
   VIDEO = 'VIDEO'
 }
 

@@ -1,6 +1,6 @@
 <div class="searchbar-component">
   <form [formGroup]="form" #formDirective="ngForm" (submit)="searchSermons()" class="d-flex justify-content-center w-100 mt-1">
-    <mat-form-field appearance="legacy" floatLabel="never" [class]="isMobile ? 'w-100' : 'w-50'">
+    <mat-form-field appearance="legacy" floatLabel="never" [class]="isMobile ? 'w-75' : 'w-50'">
       <input (blur)="searchSermons()" matInput type="text" placeholder="Search..." class="fs-22 py-3 pr-2" formControlName="searchQuery" />
 
       <input [matDatepicker]="picker" type="hidden">
