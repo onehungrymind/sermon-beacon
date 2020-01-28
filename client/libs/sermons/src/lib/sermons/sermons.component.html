@@ -2,16 +2,12 @@
   <sb-searchbar class="w-100"></sb-searchbar>
 </div>
 
-<div class="container w-100">
-  <div class="mat-elevation-z1">
-    <sb-sermon-table [sermons]="sermonSpeakers$ | async"
+<sb-sermon-table [sermons]="sermonSpeakers$ | async"
                       [isAuthenticated]="isAuthenticated$ | async"
                       [isLoading]="sermonsLoading$ | async"
                       (dialogOpened)="openSermonDialog($event)"
                       (deleted)="deleteSermon($event)">
-    </sb-sermon-table>
-  </div>
-</div>
+</sb-sermon-table>
 
 <div class="my-5" *ngIf="isAuthenticated$ | async">
   <sb-ui-table [data]="speakers$ | async"
