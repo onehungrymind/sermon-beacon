@@ -1,4 +1,4 @@
-<div [formGroup]="tagsGroup">
+<div [formGroup]="tagsGroup" class="d-flex">
   <mat-form-field class="w-100 mt-3">
     <mat-label>Tags</mat-label>
 
@@ -26,4 +26,11 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
+
+  <mat-icon
+      class="align-self-center text-medium"
+      matTooltip="To create a new tag follow this format, property : value ie. Time : Sunday Morning"
+      matTooltipPosition="below"
+      >info
+  </mat-icon>
 </div>
