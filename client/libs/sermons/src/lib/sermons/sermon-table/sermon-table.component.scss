@@ -1,8 +1,7 @@
 @import 'libs/theme/main.scss';
 
 #sermon-table-component {
-  overflow: scroll;
-
+  
   .mat-column-date {
     text-align: right !important;
     > .mat-sort-header-container {
@@ -32,4 +31,3 @@
     min-width: 1.5rem !important;
   }
 }
-
