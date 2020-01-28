@@ -14,10 +14,9 @@
   </div>
 </div>
 
-<div class="container w-100">  
-  <h2 class="mb-2 font-weight-light">Speakers</h2>
-  <div class="mat-elevation-z1">  
+<div class="container w-100">
     <div *ngIf="isAuthenticated$ | async">
+      <h2 class="mb-2 font-weight-light">Speakers</h2>
       <sb-ui-table [data]="speakers$ | async"
         [tableColumns]="speakerColumns"
         [actionsEnabled]="true"
@@ -27,5 +26,4 @@
         (deleted)="deleteSpeaker($event)">
       </sb-ui-table>
     </div>
-  </div>
 </div>
