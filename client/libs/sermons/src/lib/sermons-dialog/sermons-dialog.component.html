@@ -40,9 +40,8 @@
   <mat-dialog-actions align="end">
     <button mat-button color="warn" mat-dialog-close (click)="cancel()">Cancel</button>
     <button *ngIf="selectedIndex !== 0" mat-button color="accent" (click)="back()">Back</button>
-    <button mat-button color="primary" (click)="selectedIndex === 2 ? save() : next()">
-      {{ selectedIndex === 2 ? 'Submit' : 'Next' }}
-    </button>
+    <button mat-button color="primary" (click)="next()">Next</button>
+    <button mat-button color="primary" [disabled]="form.invalid" (click)="save()">Submit</button>
   </mat-dialog-actions>
 </form>
 
