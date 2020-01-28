@@ -1,78 +1,82 @@
 <div id="sermon-table-component">
-  <table mat-table class="w-100" [dataSource]="dataSource"
-    matSort matSortActive="date" matSortDirection="desc" matSortDisableClear>
+  <div class="container w-100">
+    <div class="mat-elevation-z1">
+      <table mat-table class="w-100" [dataSource]="dataSource"
+        matSort matSortActive="date" matSortDirection="desc" matSortDisableClear>
 
-    <!-- Create Action Header -->
-    <ng-container matColumnDef="create-action">
-      <th mat-header-cell *matHeaderCellDef class="p-0">
-        <div class="d-flex">
-          <button mat-button class="px-1 pl-2 create-btn" (click)="openSermonDialog({})">
-            <mat-icon class="text-accent">add</mat-icon>
-          </button>
-          <p class="text-medium fs-16">Click here to add a new Sermon...</p>
-        </div>
-      </th>
-    </ng-container>
+        <!-- Create Action Header -->
+        <ng-container matColumnDef="create-action">
+          <th mat-header-cell *matHeaderCellDef class="p-0">
+            <div class="d-flex">
+              <button mat-button class="px-1 pl-2 create-btn" (click)="openSermonDialog({})">
+                <mat-icon class="text-accent">add</mat-icon>
+              </button>
+              <p class="text-medium fs-16">Click here to add a new Sermon...</p>
+            </div>
+          </th>
+        </ng-container>
 
-    <!-- spacing for Create Action -->
-    <ng-container matColumnDef="space1">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-    <ng-container matColumnDef="space2">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-    <ng-container matColumnDef="space3">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-    <ng-container matColumnDef="space4">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
+        <!-- spacing for Create Action -->
+        <ng-container matColumnDef="space1">
+          <th mat-header-cell *matHeaderCellDef></th>
+        </ng-container>
+        <ng-container matColumnDef="space2">
+          <th mat-header-cell *matHeaderCellDef></th>
+        </ng-container>
+        <ng-container matColumnDef="space3">
+          <th mat-header-cell *matHeaderCellDef></th>
+        </ng-container>
+        <ng-container matColumnDef="space4">
+          <th mat-header-cell *matHeaderCellDef></th>
+        </ng-container>
 
-    <!-- Table data for Sermons -->
-    <ng-container *ngFor="let data of sermonColumns; let i = index" [matColumnDef]="data.column">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
-        {{data.title}}
-      </th>
-      <td mat-cell *matCellDef="let row" (click)="viewSermon(row.sermon.id)" class="fs-20">
-        <span *ngIf="data.column !== 'speakers'; else speakerCol">{{data.cell(row)}}</span>
-        <ng-template #speakerCol>
-          <ng-container *ngFor="let sermonSpeaker of data.cell(row); last as last" >
-            {{sermonSpeaker.speaker.name}}{{last ? '' : ','}}
-          </ng-container>
-        </ng-template>
-      </td>
-    </ng-container>
+        <!-- Table data for Sermons -->
+        <ng-container *ngFor="let data of sermonColumns; let i = index" [matColumnDef]="data.column">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-primary text-white fs-28 sb-border-bottom">
+            {{data.title}}
+          </th>
+          <td mat-cell *matCellDef="let row" (click)="viewSermon(row.sermon.id)" class="fs-20">
+            <span *ngIf="data.column !== 'speakers'; else speakerCol">{{data.cell(row)}}</span>
+            <ng-template #speakerCol>
+              <ng-container *ngFor="let sermonSpeaker of data.cell(row); last as last" >
+                {{sermonSpeaker.speaker.name}}{{last ? '' : ','}}
+              </ng-container>
+            </ng-template>
+          </td>
+        </ng-container>
 
-    <!-- Create and Delete Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef class="bg-primary sb-border-bottom"></th>
-      <td mat-cell *matCellDef="let row" class="pr-0">
-        <div class="d-flex action-container justify-content-between mr-0 mx-4">
-          <button mat-button class="px-0 mw-25" (click)="openSermonDialog(row)">
-            <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
-          </button>
-          <button mat-button class="px-0 delete-btn mw-25" (click)="deleteSermon(row.sermon)">
-            <mat-icon class="material-icons-outlined mw-25 text-secondary px-0">close</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
+        <!-- Create and Delete Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="bg-primary sb-border-bottom"></th>
+          <td mat-cell *matCellDef="let row" class="pr-0">
+            <div class="d-flex action-container justify-content-between mr-0 mx-4">
+              <button mat-button class="px-0 mw-25" (click)="openSermonDialog(row)">
+                <mat-icon class="material-icons-outlined mw-25 text-accent px-0">create</mat-icon>
+              </button>
+              <button mat-button class="px-0 delete-btn mw-25" (click)="deleteSermon(row.sermon)">
+                <mat-icon class="material-icons-outlined mw-25 text-secondary px-0">close</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="isAuthenticated ? adminColumns : displayedColumns; sticky: true"></tr>
-    <ng-container *ngIf="isAuthenticated">
-      <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
-    </ng-container>
-    <tr mat-row *matRowDef="let row; columns: isAuthenticated ? adminColumns : displayedColumns;"
-      class="mat-list-option cursor-pointer">
-    </tr>
-  </table>
+        <tr mat-header-row *matHeaderRowDef="isAuthenticated ? adminColumns : displayedColumns; sticky: true"></tr>
+        <ng-container *ngIf="isAuthenticated">
+          <tr mat-header-row *matHeaderRowDef="spacerColumns; sticky: true"></tr>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: isAuthenticated ? adminColumns : displayedColumns;"
+          class="mat-list-option cursor-pointer">
+        </tr>
+      </table>
 
-  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+      <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 
-  <mat-paginator #paginator
-                  [length]="dataSource?.data.length"
-                  [pageIndex]="0"
-                  [pageSize]="10"
-                  [pageSizeOptions]="[25, 50, 100, 250]">
-  </mat-paginator>
+      <mat-paginator #paginator
+                      [length]="dataSource?.data.length"
+                      [pageIndex]="0"
+                      [pageSize]="10"
+                      [pageSizeOptions]="[25, 50, 100, 250]">
+      </mat-paginator>
+    </div>
+  </div>
 </div>

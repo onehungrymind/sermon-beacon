@@ -1,6 +1,8 @@
 @import 'libs/theme/main.scss';
 
 #ui-table-component {
+  overflow: scroll;
+
   .mat-sort-header-arrow {
     color: $text-light;
   }
