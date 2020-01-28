@@ -2,20 +2,32 @@
   <sb-searchbar class="w-100"></sb-searchbar>
 </div>
 
+<<<<<<< HEAD
 <sb-sermon-table [sermons]="sermonSpeakers$ | async"
+=======
+<div class="container w-100 mb-5">
+  <h2 class="mb-2 font-weight-light">Sermons</h2>
+  <div class="mat-elevation-z1">  
+    <sb-sermon-table [sermons]="sermonSpeakers$ | async"
+>>>>>>> f73e82730dfe58bd744fdcfbbec2efaef4090f37
                       [isAuthenticated]="isAuthenticated$ | async"
                       [isLoading]="sermonsLoading$ | async"
                       (dialogOpened)="openSermonDialog($event)"
                       (deleted)="deleteSermon($event)">
 </sb-sermon-table>
 
-<div class="my-5" *ngIf="isAuthenticated$ | async">
-  <sb-ui-table [data]="speakers$ | async"
-                [tableColumns]="speakerColumns"
-                [actionsEnabled]="true"
-                [isLoading]="speakersLoading$ | async"
-                (created)="createSpeaker($event)"
-                (updated)="updateSpeaker($event)"
-                (deleted)="deleteSpeaker($event)">
-  </sb-ui-table>
+<div class="container w-100">  
+  <h2 class="mb-2 font-weight-light">Speakers</h2>
+  <div class="mat-elevation-z1">  
+    <div *ngIf="isAuthenticated$ | async">
+      <sb-ui-table [data]="speakers$ | async"
+        [tableColumns]="speakerColumns"
+        [actionsEnabled]="true"
+        [isLoading]="speakersLoading$ | async"
+        (created)="createSpeaker($event)"
+        (updated)="updateSpeaker($event)"
+        (deleted)="deleteSpeaker($event)">
+      </sb-ui-table>
+    </div>
+  </div>
 </div>
