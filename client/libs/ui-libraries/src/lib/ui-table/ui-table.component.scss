@@ -33,13 +33,3 @@
     border: none;
   }
 }
-
-.hide-scroll {
-  overflow-x: scroll;
-  -ms-overflow-style: none;
-}
-
-.hide-scroll::-webkit-scrollbar {
-  display: none;
-}
-

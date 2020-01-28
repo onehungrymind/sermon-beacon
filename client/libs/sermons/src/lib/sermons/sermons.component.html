@@ -2,12 +2,17 @@
   <sb-searchbar class="w-100"></sb-searchbar>
 </div>
 
-<sb-sermon-table [sermons]="sermonSpeakers$ | async"
-                      [isAuthenticated]="isAuthenticated$ | async"
-                      [isLoading]="sermonsLoading$ | async"
-                      (dialogOpened)="openSermonDialog($event)"
-                      (deleted)="deleteSermon($event)">
-</sb-sermon-table>
+<div class="container w-100">
+  <h2 class="mb-2 font-weight-light">Sermons</h2>
+  <div class="mat-elevation-z1">
+    <sb-sermon-table [sermons]="sermonSpeakers$ | async"
+                          [isAuthenticated]="isAuthenticated$ | async"
+                          [isLoading]="sermonsLoading$ | async"
+                          (dialogOpened)="openSermonDialog($event)"
+                          (deleted)="deleteSermon($event)">
+    </sb-sermon-table>
+  </div>
+</div>
 
 <div class="container w-100">
     <div *ngIf="isAuthenticated$ | async">

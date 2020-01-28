@@ -31,12 +31,3 @@
     min-width: 1.5rem !important;
   }
 }
-
-.hide-scroll {
-  overflow-x: scroll;
-  -ms-overflow-style: none;
-}
-
-.hide-scroll::-webkit-scrollbar {
-  display: none;
-}
