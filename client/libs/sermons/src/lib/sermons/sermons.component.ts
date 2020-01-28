@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthService, Sermon, SermonSpeaker, Speaker } from '@sb/core-data';
 import { SermonsFacade, SermonSpeakersFacade, SpeakersFacade } from '@sb/core-state';
@@ -15,7 +16,9 @@ import { SermonsDialogComponent } from '../sermons-dialog/sermons-dialog.compone
 export class SermonsComponent implements OnInit {
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
-  sermonSpeakers$: Observable<SermonSpeaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$;
+  sermonSpeakers$: Observable<SermonSpeaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$.pipe(
+    map((sermonSpeakers: SermonSpeaker[]) => sermonSpeakers.length === 0 ? [{id: 0, sermon: {title: 'No search results found', date: Date.now()}}] as any[] : sermonSpeakers)
+  );
   sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
   speakerColumns = [
