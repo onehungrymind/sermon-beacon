@@ -11,7 +11,7 @@
   <div *ngIf="isLoggedIn$ | async as isLoggedIn; else anonUser">
     <span *ngIf="!isMobile" class="mr-2">{{(loggedInUser$ | async)?.name}}</span>
     <button mat-mini-fab color="accent" (click)="logout()" matTooltip="You are Logged In">
-      <mat-icon>person</mat-icon>
+      <mat-icon>input</mat-icon>
     </button>
   </div>
   <ng-template #anonUser>
