@@ -17,7 +17,7 @@ export class SermonsComponent implements OnInit {
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
   speakers$: Observable<Speaker[]> = this.speakersFacade.allSpeakers$;
   sermonSpeakers$: Observable<SermonSpeaker[]> = this.sermonSpeakersFacade.allSermonSpeakers$.pipe(
-    map((sermonSpeakers: SermonSpeaker[]) => sermonSpeakers.length === 0 ? [{id: 0, sermon: {title: 'No search results found', date: Date.now()}}] as any[] : sermonSpeakers)
+    map((sermonSpeakers: SermonSpeaker[]) => !sermonSpeakers.length ? [{id: 0, sermon: {title: 'No search results found', date: Date.now()}}] as any[] : sermonSpeakers)
   );
   sermonsLoading$: Observable<boolean> = this.sermonFacade.sermonLoading$;
   speakersLoading$: Observable<boolean> = this.speakersFacade.speakerLoading$;
