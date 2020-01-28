@@ -55,10 +55,10 @@ export class TableDataSource extends DataSource<TableTypes> {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
         // Sermons
-        case 'title': return compare(a.title, b.title, isAsc);
-        case 'subject': return compare(a.subject, b.subject, isAsc);
-        case 'speakers': return compare(a.speakers, b.speakers, isAsc);
-        case 'date': return compare(a.date, b.date, isAsc);
+        case 'title': return compare(a.sermon.title, b.sermon.title, isAsc);
+        case 'subject': return compare(a.sermon.subject, b.sermon.subject, isAsc);
+        case 'speakers': return compare(a.sermon.sermon_speakers.map((res) => res.speaker.name), b.sermon.sermon_speakers.map((res) => res.speaker.name), isAsc);
+        case 'date': return compare(a.sermon.date, b.sermon.date, isAsc);
         case 'actions': return;
 
         // Speakers
